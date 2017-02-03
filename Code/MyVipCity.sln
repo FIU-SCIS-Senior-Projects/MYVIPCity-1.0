@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.Mailing.Contracts
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.Mailing.Sendgrid", "MyVipCity.Mailing.Sendgrid\MyVipCity.Mailing.Sendgrid.csproj", "{3B95DEF5-A340-4584-BC07-29137B674654}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingConsoleApp", "TestingConsoleApp\TestingConsoleApp.csproj", "{DDA8694A-445D-41FF-84DE-FCC049C3010F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{3B95DEF5-A340-4584-BC07-29137B674654}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B95DEF5-A340-4584-BC07-29137B674654}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B95DEF5-A340-4584-BC07-29137B674654}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DDA8694A-445D-41FF-84DE-FCC049C3010F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDA8694A-445D-41FF-84DE-FCC049C3010F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DDA8694A-445D-41FF-84DE-FCC049C3010F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DDA8694A-445D-41FF-84DE-FCC049C3010F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
