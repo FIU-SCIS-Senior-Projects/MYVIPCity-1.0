@@ -1,8 +1,8 @@
 using System.Configuration;
 using MyVipCity.CompositionRoot;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyVipCity.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MyVipCity.App_Start.NinjectWebCommon), "Stop")]
+// [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyVipCity.App_Start.NinjectWebCommon), "Start")]
+// [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MyVipCity.App_Start.NinjectWebCommon), "Stop")]
 
 namespace MyVipCity.App_Start
 {

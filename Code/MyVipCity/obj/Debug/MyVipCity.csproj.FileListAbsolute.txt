@@ -288,3 +288,13 @@ C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\MyVipCity.Mailing.S
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\SendGrid.dll
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\SendGrid.CSharp.HTTP.Client.dll
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\MyVipCity.Mailing.Sendgrid.pdb
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Extensions.ContextPreservation.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Extensions.NamedScope.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Web.Common.OwinHost.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Web.WebApi.OwinHost.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\System.Web.Http.Owin.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Extensions.ContextPreservation.xml
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Extensions.NamedScope.xml
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Web.Common.OwinHost.xml
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Web.WebApi.OwinHost.xml
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\System.Web.Http.Owin.xml
