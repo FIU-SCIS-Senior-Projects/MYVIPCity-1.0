@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using MyVipCity.Mailing.Contracts;
+using Ninject;
 
 namespace MyVipCity.Controllers {
 
