@@ -267,7 +267,6 @@ C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Microsoft.Owin.Secu
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\obj\Debug\MyVipCity.csprojResolveAssemblyReference.cache
-C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\obj\Debug\MyVipCity.Migrations.Initial.resources
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\obj\Debug\MyVipCity.csproj.GenerateResource.Cache
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\obj\Debug\MyVipCity.dll
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\obj\Debug\MyVipCity.pdb
@@ -298,3 +297,4 @@ C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Extensions.
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Web.Common.OwinHost.xml
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Web.WebApi.OwinHost.xml
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\System.Web.Http.Owin.xml
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\obj\Debug\MyVipCity.Migrations.BinariesTable.resources

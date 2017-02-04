@@ -9,11 +9,13 @@ namespace MyVipCity.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-        }
+			AutomaticMigrationsEnabled = true;
+			AutomaticMigrationDataLossAllowed = true;
+		}
 
         protected override void Seed(MyVipCity.Models.ApplicationDbContext context)
         {
+			
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
