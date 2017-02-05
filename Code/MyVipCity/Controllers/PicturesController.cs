@@ -1,5 +1,7 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Permissions;
@@ -25,7 +27,21 @@ namespace MyVipCity.Controllers {
 		[HttpPost]
 		[Authorize]
 		[Route("")]
-		public async Task<IHttpActionResult> Upload() {
+		public async Task<IHttpActionResult> UploadImage() {
+			var imageContentTypes = new List<string> {
+				"image/png",
+				"image/gif",
+				"image/ief",
+				"image/jpeg"
+			};
+			return await Upload(imageContentTypes);
+		}
+
+		private async Task<IHttpActionResult> Upload() {
+			return await Upload(null);
+		}
+
+		private async Task<IHttpActionResult> Upload(List<string> allowedContentTypes) {
 			// make sure the request is a multipart/form-data
 			if (!Request.Content.IsMimeMultipartContent())
 				return StatusCode(HttpStatusCode.UnsupportedMediaType);
@@ -33,37 +49,70 @@ namespace MyVipCity.Controllers {
 			var tempDir = Path.GetTempPath();
 			// create a file stream provider
 			var provider = new MultipartFormDataStreamProvider(tempDir);
-			await Request.Content.ReadAsMultipartAsync(provider).ContinueWith<IHttpActionResult>(
-				task => {
-					// check for task cancelation or exception
-					if (task.IsCanceled || task.IsFaulted) {
-						// check if there is an exception for the task
-						if (task.Exception != null) {
-							// TODO: Log the exception
-							return InternalServerError(task.Exception.InnerException ?? task.Exception);
+			return await Request.Content
+				.ReadAsMultipartAsync(provider)
+				.ContinueWith<IHttpActionResult>(
+					task => {
+						// check for task cancelation or exception
+						if (task.IsCanceled || task.IsFaulted) {
+							// check if there is an exception for the task
+							if (task.Exception != null) {
+								// TODO: Log the exception
+								return InternalServerError(task.Exception.InnerException ?? task.Exception);
+							}
+							// TODO: Log the fact that there was an unknown error
+							return InternalServerError();
 						}
-						// TODO: Log the fact that there was an unknown error
-						return InternalServerError();
-					}
-
-					var loopIndex = 0;
-					var tasks = new Task[task.Result.FileData.Count];
-					foreach (var multipartFileData in task.Result.FileData) {
-						tasks[loopIndex++] = Task.Factory.StartNew(f => ProcessFile((MultipartFileData)f), multipartFileData);
-					}
-					return Task<IHttpActionResult>.Factory.ContinueWhenAll(tasks, tasks1 => { return Ok(); }).Result;
-				});
-			return Ok();
+						// check if there is a list of allowed content types
+						if (allowedContentTypes != null) {
+							// check if there is a file data whose content type is not in the allowed list
+							if (task.Result.FileData.Any(multipartFileData => !allowedContentTypes.Contains(multipartFileData.Headers.ContentType.MediaType))) {
+								return StatusCode(HttpStatusCode.UnsupportedMediaType);
+							}
+						}
+						var loopIndex = 0;
+						// create tasks to process the file data
+						var tasks = new Task<UploadedFileDto>[task.Result.FileData.Count];
+						foreach (var multipartFileData in task.Result.FileData) {
+							tasks[loopIndex++] = Task<UploadedFileDto>.Factory.StartNew(f => ProcessFile((MultipartFileData)f), multipartFileData);
+						}
+						return Task<IHttpActionResult>.Factory.ContinueWhenAll(tasks, ProcessDataSavedResults).Result;
+					});
 		}
 
-		private void ProcessFile(MultipartFileData fileData) {
-			var fileName = fileData.Headers.ContentDisposition.FileName.Replace("\\", "");
+		private UploadedFileDto ProcessFile(MultipartFileData fileData) {
+			var fileName = fileData.Headers.ContentDisposition.FileName.Replace("\\\"", "");
 			var createdBy = User.Identity.GetUserName();
+			var contentType = fileData.Headers.ContentType.MediaType;
+			int binaryDataId = -1;
 			using (var stream = TryOpenFileStream(fileData.LocalFileName, 5, 200)) {
 				// store file in database
-				DbContext.SaveBinaryData(stream, 0, createdBy, fileData.Headers.ContentType.MediaType);
+				binaryDataId = DbContext.SaveBinaryData(stream, 0, createdBy, contentType);
 			}
 			File.Delete(fileData.LocalFileName);
+			var result = new UploadedFileDto {
+				ContentType = contentType,
+				FileName = fileName,
+				BinaryDataId = binaryDataId
+			};
+			return result;
+		}
+
+		private IHttpActionResult ProcessDataSavedResults(Task<UploadedFileDto>[] tasks) {
+			var uploadedFiles = new List<UploadedFileDto>(tasks.Length);
+			foreach (var task in tasks) {
+				if (task.IsFaulted || task.IsCanceled) {
+					// check we have an exception
+					if (task.Exception != null) {
+						// TODO: log error
+						var exception = task.Exception.InnerException ?? task.Exception;
+						return InternalServerError(exception);
+					}
+					return InternalServerError();
+				}
+				uploadedFiles.Add(task.Result);
+			}
+			return Ok(uploadedFiles);
 		}
 
 		private Stream TryOpenFileStream(string fileName, int retries, int delayMilliseconds) {

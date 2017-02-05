@@ -18,7 +18,15 @@ namespace MyVipCity.Models {
 			return new ApplicationDbContext();
 		}
 
-		public void SaveBinaryData(Stream stream, int binaryDataId, string createdBy, string contentType) {
+		/// <summary>
+		/// Save binary data in the Binaries table.
+		/// </summary>
+		/// <param name="stream">The stream of data to be saved.</param>
+		/// <param name="binaryDataId">If provided value is 0 a new entry will be stored, otherwise the data will be appended to an existing binary data entry.</param>
+		/// <param name="createdBy">Specifies the creator.</param>
+		/// <param name="contentType">Specifies the content type.</param>
+		/// <returns>Returns the id in the database of the saved binary data (-1 if an error occurs).</returns>
+		public int SaveBinaryData(Stream stream, int binaryDataId, string createdBy, string contentType) {
 			using (var transaction = Database.BeginTransaction()) {
 				// 1 MB buffer
 				var buffer = new byte[1024 * 1000];
@@ -59,17 +67,19 @@ namespace MyVipCity.Models {
 						idParam.Value = binaryDataId;
 					// execute stored procedure to insert the binary data
 					try {
+						// insert the data
 						Database.ExecuteSqlCommand("spInsertBinaryData @id OUTPUT, @binaryData, @createdBy, @contentType", idParam, binaryDataParam, createdByParam, contentTypeParam);
+						// get the id in the database
 						binaryDataId = (int)idParam.Value;
 					}
-					catch (Exception e) {
+					catch (Exception) {
 						transaction.Rollback();
-						break;
+						return -1;
 					}
 				}
-
 				transaction.Commit();
 			}
+			return binaryDataId;
 		}
 	}
 }

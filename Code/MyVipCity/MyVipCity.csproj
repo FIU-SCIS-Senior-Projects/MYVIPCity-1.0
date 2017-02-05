@@ -232,11 +232,16 @@
     <Compile Include="Migrations\201702040422494_BinariesTable.Designer.cs">
       <DependentUpon>201702040422494_BinariesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702050207392_InsertBinaryDataStoredProcedure.cs" />
+    <Compile Include="Migrations\201702050207392_InsertBinaryDataStoredProcedure.Designer.cs">
+      <DependentUpon>201702050207392_InsertBinaryDataStoredProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UploadedFileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -326,6 +331,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702040422494_BinariesTable.resx">
       <DependentUpon>201702040422494_BinariesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702050207392_InsertBinaryDataStoredProcedure.resx">
+      <DependentUpon>201702050207392_InsertBinaryDataStoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
