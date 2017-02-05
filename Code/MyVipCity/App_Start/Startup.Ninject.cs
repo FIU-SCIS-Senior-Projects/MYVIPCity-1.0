@@ -1,7 +1,9 @@
 ﻿using System.Configuration;
 using System.Web.Http;
 using MyVipCity.CompositionRoot;
+using MyVipCity.Models;
 using Ninject;
+using Ninject.Web.Common;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi;
 using Owin;
@@ -31,6 +33,7 @@ namespace MyVipCity {
 		}
 
 		private void RegisterServices(StandardKernel kernel) {
+			kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
 			BindingsManager.SetBindings(kernel, ConfigurationManager.AppSettings);
 		}
 	}
