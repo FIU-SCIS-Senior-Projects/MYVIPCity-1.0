@@ -236,6 +236,10 @@
     <Compile Include="Migrations\201702050207392_InsertBinaryDataStoredProcedure.Designer.cs">
       <DependentUpon>201702050207392_InsertBinaryDataStoredProcedure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702051841071_ReadBinaryDataStoredProcedure.cs" />
+    <Compile Include="Migrations\201702051841071_ReadBinaryDataStoredProcedure.Designer.cs">
+      <DependentUpon>201702051841071_ReadBinaryDataStoredProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -244,6 +248,7 @@
     <Compile Include="Models\UploadedFileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\SqlDataReaderReadOnlyStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -334,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702050207392_InsertBinaryDataStoredProcedure.resx">
       <DependentUpon>201702050207392_InsertBinaryDataStoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702051841071_ReadBinaryDataStoredProcedure.resx">
+      <DependentUpon>201702051841071_ReadBinaryDataStoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

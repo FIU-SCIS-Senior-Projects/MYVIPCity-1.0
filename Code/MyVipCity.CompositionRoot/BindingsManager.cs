@@ -7,7 +7,7 @@ namespace MyVipCity.CompositionRoot {
 
 	public static class BindingsManager {
 		public static void SetBindings(IKernel kernel, NameValueCollection appSettings) {
-			kernel.Bind<IEmailService>().To<SendGridEmailService>().WithConstructorArgument("sendGridApiKey", appSettings["myvipcity:send-grid-api"]);
+			kernel.Bind<IEmailService>().To<SendGridEmailService>().InSingletonScope().WithConstructorArgument("sendGridApiKey", appSettings["myvipcity:send-grid-api"]);
 		}
 	}
 }

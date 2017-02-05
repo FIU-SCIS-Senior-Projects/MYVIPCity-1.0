@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Permissions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,6 +37,25 @@ namespace MyVipCity.Controllers {
 				"image/jpeg"
 			};
 			return await Upload(imageContentTypes);
+		}
+
+		[HttpGet]
+		[Route("{id:int}")]
+		public async Task<IHttpActionResult> DownloadImage(int id) {
+			// get the stream for the requested picture
+			var stream = DbContext.GetBinaryData(id);
+			// create a HTTP response
+			var result = Request.CreateResponse(HttpStatusCode.OK);
+			result.Content = new StreamContent(stream);
+			result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("inline");
+			result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+			result.Content.Headers.ContentLength = stream.Length;
+			result.Content.Headers.Expires = DateTimeOffset.Now.AddDays(365);
+			result.Headers.CacheControl = new CacheControlHeaderValue {
+				Public = true,
+				// MaxAge = TimeSpan.FromSeconds(31536000)
+			};
+			return ResponseMessage(result);
 		}
 
 		private async Task<IHttpActionResult> Upload() {
@@ -76,7 +97,7 @@ namespace MyVipCity.Controllers {
 						foreach (var multipartFileData in task.Result.FileData) {
 							tasks[loopIndex++] = Task<UploadedFileDto>.Factory.StartNew(f => ProcessFile((MultipartFileData)f), multipartFileData);
 						}
-						return Task<IHttpActionResult>.Factory.ContinueWhenAll(tasks, ProcessDataSavedResults).Result;
+						return Task<IHttpActionResult>.Factory.ContinueWhenAll(tasks, ProcessSavedDataResults).Result;
 					});
 		}
 
@@ -84,12 +105,14 @@ namespace MyVipCity.Controllers {
 			var fileName = fileData.Headers.ContentDisposition.FileName.Replace("\\\"", "");
 			var createdBy = User.Identity.GetUserName();
 			var contentType = fileData.Headers.ContentType.MediaType;
-			int binaryDataId = -1;
+			int binaryDataId = 0;
 			using (var stream = TryOpenFileStream(fileData.LocalFileName, 5, 200)) {
 				// store file in database
-				binaryDataId = DbContext.SaveBinaryData(stream, 0, createdBy, contentType);
+				binaryDataId = DbContext.SaveBinaryData(stream, binaryDataId, createdBy, contentType);
 			}
+			// delete file
 			File.Delete(fileData.LocalFileName);
+			// return result
 			var result = new UploadedFileDto {
 				ContentType = contentType,
 				FileName = fileName,
@@ -98,7 +121,7 @@ namespace MyVipCity.Controllers {
 			return result;
 		}
 
-		private IHttpActionResult ProcessDataSavedResults(Task<UploadedFileDto>[] tasks) {
+		private IHttpActionResult ProcessSavedDataResults(Task<UploadedFileDto>[] tasks) {
 			var uploadedFiles = new List<UploadedFileDto>(tasks.Length);
 			foreach (var task in tasks) {
 				if (task.IsFaulted || task.IsCanceled) {
@@ -116,10 +139,8 @@ namespace MyVipCity.Controllers {
 		}
 
 		private Stream TryOpenFileStream(string fileName, int retries, int delayMilliseconds) {
-			// wait for stream to be ready
 			while (true) {
 				try {
-					// create filestream
 					return new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
 				}
 				catch (IOException ex) {

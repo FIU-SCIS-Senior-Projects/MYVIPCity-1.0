@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Data;
-using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MyVipCity.Utils;
 
 namespace MyVipCity.Models {
 
@@ -80,6 +79,36 @@ namespace MyVipCity.Models {
 				transaction.Commit();
 			}
 			return binaryDataId;
+		}
+
+		/// <summary>
+		/// Retrieves the binary data with the specified id in the form of a Stream.
+		/// </summary>
+		/// <param name="id">Id of the binary data.</param>
+		/// <returns>Stream of data.</returns>
+		public Stream GetBinaryData(int id) {
+			// create a connection to the database
+			var connection = new SqlConnection(Database.Connection.ConnectionString);
+			// create a new command
+			var command = connection.CreateCommand();
+			// set command to Stored Procedure
+			command.CommandType = CommandType.StoredProcedure;
+			// set the text of the command
+			command.CommandText = "spReadBinaryData";
+			// build the id parameter for the stored procedure
+			var idParam = command.CreateParameter();
+			idParam.ParameterName = "id";
+			idParam.DbType = DbType.Int32;
+			idParam.Direction = ParameterDirection.Input;
+			idParam.Value = id;
+			// add the parameter to the sp command
+			command.Parameters.Add(idParam);
+			// open the connection
+			connection.Open();
+			// create a reader with sequential access (to stream data)
+			var reader = command.ExecuteReader(CommandBehavior.SequentialAccess);
+			// execute read on the reader
+			return reader.Read() ? new SqlDataReaderReadOnlyStream(reader, connection, 0) : Stream.Null;
 		}
 	}
 }
