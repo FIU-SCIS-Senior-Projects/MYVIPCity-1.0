@@ -1,0 +1,1 @@
+﻿REMOVE bower_components folder from project as it can be retrieved with a "bower install" command
