@@ -3,6 +3,7 @@ using System.Web.Http;
 using MyVipCity.CompositionRoot;
 using MyVipCity.Models;
 using Ninject;
+using Ninject.Extensions.Logging.Log4net;
 using Ninject.Web.Common;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi;

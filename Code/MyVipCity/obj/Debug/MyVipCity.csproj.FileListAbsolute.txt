@@ -300,3 +300,9 @@ C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\System.Web.Http.Owi
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\obj\Debug\MyVipCity.Migrations.BinariesTable.resources
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\obj\Debug\MyVipCity.Migrations.InsertBinaryDataStoredProcedure.resources
 C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\obj\Debug\MyVipCity.Migrations.ReadBinaryDataStoredProcedure.resources
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\log4net.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Extensions.Logging.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Extensions.Logging.Log4Net.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\log4net.xml
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Extensions.Logging.xml
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\bin\Ninject.Extensions.Logging.Log4Net.xml
