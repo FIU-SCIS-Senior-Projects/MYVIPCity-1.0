@@ -4729,6 +4729,9 @@
     <Content Include="Scripts\vendors\bower_components\Waves\src\sass\waves.sass" />
     <Content Include="Scripts\vendors\bower_components\Waves\src\scss\waves.scss" />
     <Content Include="Scripts\vendors\bower_components\Waves\src\stylus\waves.styl" />
+    <Content Include="Views\Account\_LoginFormPartial.cshtml" />
+    <Content Include="Views\Account\_RegisterFormPartial.cshtml" />
+    <Content Include="Views\Account\_LoginOrLogOffPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

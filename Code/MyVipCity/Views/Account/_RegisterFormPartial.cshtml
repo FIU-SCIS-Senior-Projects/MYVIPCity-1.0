@@ -1,0 +1,26 @@
+﻿@using MyVipCity.Models
+
+@using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "stop-propagate" })) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Email Address" name="Email">
+        <i class="form-group__bar"></i>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" name="Password">
+        <i class="form-group__bar"></i>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="Confirm Password" name="ConfirmPassword">
+        <i class="form-group__bar"></i>
+    </div>
+    <p>
+        <small>By Signing up with MyVIPCity, you're agreeing to our <a href="">terms and conditions</a>.</small>
+    </p>
+    <button class="btn btn-primary btn-block m-t-10 m-b-10" type="submit">Register</button>
+    <div class="text-center">
+        <small><a href="">Are you a Promoter?</a></small>
+    </div>
+}
+@Html.Partial("../Account/_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })

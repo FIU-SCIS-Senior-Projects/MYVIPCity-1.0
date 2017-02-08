@@ -1,0 +1,42 @@
+﻿@using MyVipCity.Models
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "tab-pane active in fade", id = "top-nav-login" })) {
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Email Address" name="Email">
+        <i class="form-group__bar"></i>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" name="Password">
+        <i class="form-group__bar"></i>
+    </div>
+    <div class="form-group">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" class="form-control" name="RememberMe" value="true">
+                <i class="input-helper"></i>
+                Remember Me
+            </label>
+        </div>
+    </div>
+
+    <button class="btn btn-primary btn-block m-t-10 m-b-10" type="submit">Login</button>
+    <div class="text-center">
+        <a href="#top-nav-forgot-password" data-toggle="tab"><small>Forgot password?</small></a>
+    </div>
+}
+@* Enable this once you have account confirmation enabled for password reset functionality
+    <p>
+        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+    </p>*@
+@Html.Partial("../Account/_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+@* TODO: Setup Forgot password *@
+<form class="tab-pane fade forgot-password" id="top-nav-forgot-password">
+    <a href="#top-nav-login" class="top-nav__back" data-toggle="tab"></a>
+    <p>Please enter your email address and we will send you a reset link.</p>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Email Address">
+        <i class="form-group__bar"></i>
+    </div>
+    <button class="btn btn-warning btn-block">Reset Password</button>
+</form>

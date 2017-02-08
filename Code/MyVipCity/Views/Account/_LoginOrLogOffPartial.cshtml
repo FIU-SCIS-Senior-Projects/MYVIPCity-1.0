@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated) {
+    <li class="dropdown top-nav__guest">
+        <a data-toggle="dropdown" href="">Hello, @User.Identity.GetUserName()</a>
+        <ul class="dropdown-menu">
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+                @Html.AntiForgeryToken()
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+}
+        </ul>
+    </li>
+}
+else {
+    <li class="dropdown top-nav__guest">
+        <a data-toggle="dropdown" href="">Register</a>
+        <div class="dropdown-menu">
+            <div class="tab-content">
+                @Html.Partial("../Account/_RegisterFormPartial")
+            </div>
+        </div>
+    </li>
+    <li class="dropdown top-nav__guest">
+        <a data-toggle="dropdown" href="" data-rmd-action="switch-login">Login</a>
+        <div class="dropdown-menu">
+            <div class="tab-content">
+                @Html.Partial("../Account/_LoginFormPartial")
+            </div>
+        </div>
+    </li>
+}
