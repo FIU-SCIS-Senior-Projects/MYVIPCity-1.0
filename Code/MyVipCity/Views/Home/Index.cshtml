@@ -1,4 +1,5 @@
-﻿@{
+﻿@using MyVipCity.Models
+@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -17,6 +18,7 @@
     <!-- Site -->
     <link rel="stylesheet" href="~/Content/css/app_1.min.css">
     <link rel="stylesheet" href="~/Content/css/app_2.min.css">
+    <link rel="stylesheet" href="~/Content/css/custom.css">
     <!-- Page Loader JS -->
     <script src="~/Scripts/app/page-loader.min.js" async></script>
 </head>
@@ -32,36 +34,32 @@
                 <ul class="top-nav">
                     <li class="dropdown top-nav__guest">
                         <a data-toggle="dropdown" href="">Register</a>
-                        <form class="dropdown-menu stop-propagate">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Email Address">
-                                <i class="form-group__bar"></i>
+                        <div class="dropdown-menu">
+                            <div class="tab-content">
+                                <form class="stop-propagate">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email Address">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Password">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Confirm Password">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                    <p>
+                                        <small>By Signing up with MyVIPCity, you're agreeing to our <a href="">terms and conditions</a>.</small>
+                                    </p>
+                                    <button class="btn btn-primary btn-block m-t-10 m-b-10">Register</button>
+                                    <div class="text-center">
+                                        <small><a href="">Are you a Promoter?</a></small>
+                                    </div>
+                                </form>
+                                @Html.Partial("../Account/_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password">
-                                <i class="form-group__bar"></i>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Confirm Password">
-                                <i class="form-group__bar"></i>
-                            </div>
-                            <p><small>By Signing up with MyVIPCity, you're agreeing to our <a href="">terms and conditions</a>.</small></p>
-                            <button class="btn btn-primary btn-block m-t-10 m-b-10">Register</button>
-                            <div class="text-center"><small><a href="">Are you an Promoter?</a></small></div>
-                            <div class="top-nav__auth">
-                                <span>or</span>
-                                <div>Sign in using</div>
-                                <a href="" class="mdc-bg-blue-500">
-                                    <i class="zmdi zmdi-facebook"></i>
-                                </a>
-                                <a href="" class="mdc-bg-cyan-500">
-                                    <i class="zmdi zmdi-twitter"></i>
-                                </a>
-                                <a href="" class="mdc-bg-red-400">
-                                    <i class="zmdi zmdi-google"></i>
-                                </a>
-                            </div>
-                        </form>
+                        </div>
                     </li>
                     <li class="dropdown top-nav__guest">
                         <a data-toggle="dropdown" href="" data-rmd-action="switch-login">Login</a>
@@ -78,25 +76,13 @@
                                     </div>
                                     <button class="btn btn-primary btn-block m-t-10 m-b-10">Login</button>
                                     <div class="text-center">
-                                        <a href="#top-nav-forgot-password" data-toggle="tab"><small>Forgot email/password?</small></a>
-                                    </div>
-                                    <div class="top-nav__auth">
-                                        <span>or</span>
-                                        <div>Sign in using</div>
-                                        <a href="" class="mdc-bg-blue-500">
-                                            <i class="zmdi zmdi-facebook"></i>
-                                        </a>
-                                        <a href="" class="mdc-bg-cyan-500">
-                                            <i class="zmdi zmdi-twitter"></i>
-                                        </a>
-                                        <a href="" class="mdc-bg-red-400">
-                                            <i class="zmdi zmdi-google"></i>
-                                        </a>
+                                        <a href="#top-nav-forgot-password" data-toggle="tab"><small>Forgot password?</small></a>
                                     </div>
                                 </form>
+                                @Html.Partial("../Account/_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                                 <form class="tab-pane fade forgot-password" id="top-nav-forgot-password">
                                     <a href="#top-nav-login" class="top-nav__back" data-toggle="tab"></a>
-                                    <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                    <p>Please enter your email address and we will send you a reset link.</p>
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Emaill Address">
                                         <i class="form-group__bar"></i>
@@ -208,7 +194,7 @@
                             </div>
                         </a>
                         <address class="m-t-20 m-b-20 f-14">
-                           123 Lincoln Road, Miami Beach, Florida
+                            123 Lincoln Road, Miami Beach, Florida
                         </address>
                         <div class="f-20">0062-345678910</div>
                         <div class="f-14 m-t-5">hello@MyVIPCity.com / info@MyVIPCity.com</div>

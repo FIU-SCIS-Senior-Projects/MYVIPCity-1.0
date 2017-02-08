@@ -1,0 +1,7 @@
+button.button-a  {
+    background:none!important;
+    border:none; 
+    padding:0!important;
+    /*border is optional*/
+    border-bottom:1px solid #444; 
+}
