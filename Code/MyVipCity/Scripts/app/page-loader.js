@@ -18,7 +18,7 @@ window.onload = function() {
         }, 10);
     }
 
-    setTimeout(function () {
-        fade(document.getElementById('page-loader'));
-    }, 200);
+    //setTimeout(function () {
+    //    fade(document.getElementById('page-loader'));
+    //}, 200);
 };
