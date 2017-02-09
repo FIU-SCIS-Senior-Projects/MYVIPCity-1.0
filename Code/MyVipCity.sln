@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.Mailing.Sendgrid"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.CompositionRoot", "MyVipCity.CompositionRoot\MyVipCity.CompositionRoot.csproj", "{62291C93-87FA-4341-8503-20D2E3D7E63C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{BFE8E3E6-A84B-4F65-BF73-78C259E90B9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{62291C93-87FA-4341-8503-20D2E3D7E63C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62291C93-87FA-4341-8503-20D2E3D7E63C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62291C93-87FA-4341-8503-20D2E3D7E63C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFE8E3E6-A84B-4F65-BF73-78C259E90B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFE8E3E6-A84B-4F65-BF73-78C259E90B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFE8E3E6-A84B-4F65-BF73-78C259E90B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFE8E3E6-A84B-4F65-BF73-78C259E90B9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -21,3 +21,5 @@
 /Code/MyVipCity.Mailing.Contracts/obj/Release
 /Code/MyVipCity.Mailing.Sendgrid/obj/Release
 /Code/MyVipCity/Logs
+/Code/TestConsoleApp/bin/Debug
+/Code/TestConsoleApp/obj/Debug
