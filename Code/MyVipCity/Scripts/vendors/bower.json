@@ -13,6 +13,7 @@
   ],
   "dependencies": {
 	"angular": "~1.6.1",
+	"requirejs": "~2.3.2",
     "jquery": "^2.2.4",
     "bootstrap": "^3.3.6",
     "material-design-color-palette": "^1.1.0",

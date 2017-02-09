@@ -1,5 +1,6 @@
 ﻿@using MyVipCity.Models
 @using Microsoft.AspNet.Identity
+@model HomeModel
 @{
     Layout = null;
 }
@@ -227,17 +228,44 @@
     </div>
     <![endif]-->
     <!-- Javascript -->
-    <!-- jQuery -->
-    <script src="~/Scripts/vendors/bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="~/Scripts/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- Waves button ripple effects -->
-    <script src="~/Scripts/vendors/bower_components/Waves/dist/waves.min.js"></script>
+    <script type="text/javascript">
+        var dependencyLibraries = {
+            paths: {
+                'jquery': '@Scripts.Url("~/Scripts/vendors/bower_components/jquery/dist/jquery.min")',
+                'angular': '@Scripts.Url("~/Scripts/vendors/bower_components/angular/angular.min")',
+                'bootstrap': '@Scripts.Url("~/Scripts/vendors/bower_components/bootstrap/dist/js/bootstrap.min")',
+                'waves': '@Scripts.Url("~/Scripts/vendors/bower_components/Waves/dist/waves.min")',
+                'app': '@Scripts.Url("~/Scripts/app/app.min")'
+            },
+            shim: {
+                'jquery': {
+                    exports: 'jQuery'
+                },
+                'angular': {
+                    deps: ['jquery'],
+                    exports: 'angular'
+                },
+                'bootstrap': {
+                    deps: ['jquery']
+                },
+                'waves': {
+                    deps: ['jquery']
+                },
+                'app': {
+                    deps: ['jquery']
+                }
+            }
+        };
+        // set the version of the app
+        window.myVipCityVersion = '@Model.Version';
+    </script>
+
+    @* TODO: Add main.min.js if in production *@
+    <script data-main="@Scripts.Url("~/Scripts/modules/main.js")" src="~/Scripts/vendors/bower_components/requirejs/require.js"></script>
+
     <!-- IE9 Placeholder -->
     <!--[if IE 9 ]>
     <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
     <![endif]-->
-    <!-- Site functions and actions -->
-    <script src="~/Scripts/app/app.min.js"></script>
 </body>
 </html>
