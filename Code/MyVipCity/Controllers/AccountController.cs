@@ -55,7 +55,9 @@ namespace MyVipCity.Controllers {
 		[AllowAnonymous]
 		public ActionResult Login(string returnUrl) {
 			ViewBag.ReturnUrl = returnUrl;
-			return View();
+			if (Url.IsLocalUrl(returnUrl))
+				return RedirectToLocal(returnUrl);
+			return Redirect("/");
 		}
 
 		private List<string> GetModelStateErrors(ModelStateDictionary modelState) {
