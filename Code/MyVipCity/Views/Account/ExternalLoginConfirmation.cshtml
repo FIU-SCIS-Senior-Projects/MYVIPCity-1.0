@@ -2,35 +2,33 @@
 @{
     ViewBag.Title = "Register";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>Associate your @ViewBag.LoginProvider account.</h3>
 
-@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
 
-    <h4>Association Form</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <p class="text-info">
-        You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
-        Please enter a user name for this site below and click the Register button to finish
-        logging in.
-    </p>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-        </div>
+<header class="section__title">
+    <h3>Associate your @ViewBag.LoginProvider account</h3>
+</header>
+
+<div class="card">
+    <div class="card__body">
+        @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", name = "externalLoginConfirmForm" })) {
+            @Html.AntiForgeryToken()
+
+            <p class="text-info">
+                You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
+                Please enter a user name for this site below and click the Register button to finish
+                logging in.
+            </p>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Email" ng-init="Email='@Model.Email'" name="Email" ng-model="Email" required>
+                <i class="form-group__bar"></i>
+                <div ng-messages="externalLoginConfirmForm.Email.$error" ng-show="externalLoginConfirmForm.Email.$touched" class="mdc-text-red-500 animated fadeIn">
+                    <div ng-message="required"><small class="pull-right">Email is required</small></div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block m-t-10 m-b-10" type="submit" ng-disabled="externalLoginConfirmForm.$invalid">Register</button>
+            @Html.ValidationSummary(true, "", new { @class = "mdc-text-red-500 animated bounce" })
+        }
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+</div>
 
-@*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+

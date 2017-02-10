@@ -301,7 +301,7 @@ namespace MyVipCity.Controllers {
 		public async Task<ActionResult> ExternalLoginCallback(string returnUrl) {
 			var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
 			if (loginInfo == null) {
-				return RedirectToAction("Login");
+				return RedirectToLocal("/");
 			}
 
 			// Sign in the user with this external login provider if the user already has a login
