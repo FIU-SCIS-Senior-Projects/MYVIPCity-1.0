@@ -15,6 +15,8 @@
     <!-- Vendors -->
     <!-- Material design colors -->
     <link href="~/Scripts/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <!--Sweet alerts-->
+    <link href="~/Scripts/vendors/bower_components/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- CSS animations -->
     <link rel="stylesheet" href="~/Scripts/vendors/bower_components/animate.css/animate.min.css">
     <!-- Site -->
@@ -233,8 +235,14 @@
             paths: {
                 'jquery': '@Scripts.Url("~/Scripts/vendors/bower_components/jquery/dist/jquery.min")',
                 'angular': '@Scripts.Url("~/Scripts/vendors/bower_components/angular/angular.min")',
+                'angular-animate': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-animate/angular-animate.min")',
+                'angular-resource': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-resource/angular-resource.min")',
+                'angular-messages': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-messages/angular-messages.min")',
                 'bootstrap': '@Scripts.Url("~/Scripts/vendors/bower_components/bootstrap/dist/js/bootstrap.min")',
                 'waves': '@Scripts.Url("~/Scripts/vendors/bower_components/Waves/dist/waves.min")',
+                'sweet-alert': '@Scripts.Url("~/Scripts/vendors/bower_components/sweetalert2/dist/sweetalert2.min")',
+                'es6-promise': '@Scripts.Url("~/Scripts/vendors/bower_components/es6-promise/es6-promise.min")',
+
                 'app': '@Scripts.Url("~/Scripts/app/app.min")'
             },
             shim: {
@@ -245,11 +253,24 @@
                     deps: ['jquery'],
                     exports: 'angular'
                 },
+                'angular-resource': {
+                    deps: ['angular']
+                },
+                'angular-messages': {
+                    deps: ['angular']
+                },
+                'angular-animate': {
+                    deps: ['angular']
+                },
                 'bootstrap': {
                     deps: ['jquery']
                 },
                 'waves': {
                     deps: ['jquery']
+                },
+                'sweet-alert': {
+                    exports: 'swal',
+                    deps: ['es6-promise']
                 },
                 'app': {
                     deps: ['jquery']

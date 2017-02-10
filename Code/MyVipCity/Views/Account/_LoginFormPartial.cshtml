@@ -1,30 +1,46 @@
 ﻿@using MyVipCity.Models
 
-@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "tab-pane active in fade", id = "top-nav-login" })) {
-    @Html.AntiForgeryToken()
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="Email Address" name="Email">
-        <i class="form-group__bar"></i>
-    </div>
-    <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password" name="Password">
-        <i class="form-group__bar"></i>
-    </div>
-    <div class="form-group">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" class="form-control" name="RememberMe" value="true">
-                <i class="input-helper"></i>
-                Remember Me
-            </label>
+<div ng-controller="vip.loginFormController">
+    @using (Html.BeginForm("Login", "Account", new RouteValueDictionary { { "ReturnUrl", ViewBag.ReturnUrl } }, FormMethod.Post, new Dictionary<string, object> { { "class", "tab-pane active in fade" }, { "id", "top-nav-login" }, { "name", "loginForm" }, { "ng-submit", "submitLogin($event)" } })) {
+        <div class="vip-mvc-antiforgery-token" ng-model="loginModel.__RequestVerificationToken">
+            @Html.AntiForgeryToken()
         </div>
-    </div>
+        
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email Address" name="Email" ng-model="loginModel.Email" required>
+            <i class="form-group__bar"></i>
+            <div ng-messages="loginForm.Email.$error" ng-show="loginForm.Email.$touched" class="mdc-text-red-500 animated fadeIn">
+                <div ng-message="required"><small class="pull-right">Email is required</small></div>
+                <div ng-message="email"><small class="pull-right">Invalid email</small></div>
+            </div>
+        </div>
 
-    <button class="btn btn-primary btn-block m-t-10 m-b-10" type="submit">Login</button>
-    <div class="text-center">
-        <a href="#top-nav-forgot-password" data-toggle="tab"><small>Forgot password?</small></a>
-    </div>
-}
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="loginModel.Password" required>
+            <i class="form-group__bar"></i>
+            <div ng-messages="loginForm.Password.$error" ng-show="loginForm.Password.$touched" class="mdc-text-red-500 animated fadeIn">
+                <div ng-message="required"><small class="pull-right">Password is required</small></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" class="form-control" name="RememberMe" value="true" ng-model="loginModel.RememberMe">
+                    <i class="input-helper"></i>
+                    Remember Me?
+                </label>
+            </div>
+        </div>
+
+        <button class="btn btn-primary btn-block m-t-10 m-b-10" type="submit" ng-disabled="loginForm.$invalid">Login</button>
+        <div class="mdc-text-red-500 animated bounce" ng-if="serverError">
+            <small>{{serverError}}</small>
+        </div>
+        <div class="text-center">
+            <a href="#top-nav-forgot-password" data-toggle="tab"><small>Forgot password?</small></a>
+        </div>
+    }
+</div>
 @* Enable this once you have account confirmation enabled for password reset functionality
     <p>
         @Html.ActionLink("Forgot your password?", "ForgotPassword")
