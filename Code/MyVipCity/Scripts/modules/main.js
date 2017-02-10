@@ -7,7 +7,7 @@
 		context: 'MyVIPCity',
 		paths: dependencyLibraries.paths,
 		shim: dependencyLibraries.shim,
-		baseUrl: 'Scripts/modules',
+		baseUrl: '/Scripts/modules',
 		packages: packages,
 		urlArgs: 'v=' + myVipCityVersion,
 		waitSeconds: 0

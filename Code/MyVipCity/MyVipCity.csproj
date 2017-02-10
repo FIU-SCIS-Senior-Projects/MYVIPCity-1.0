@@ -4784,6 +4784,7 @@
     <Content Include="Scripts\vendors\bower_components\angular-animate\LICENSE.md" />
     <Content Include="Scripts\vendors\bower_components\angular-animate\package.json" />
     <Content Include="Scripts\vendors\bower_components\angular-animate\README.md" />
+    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
