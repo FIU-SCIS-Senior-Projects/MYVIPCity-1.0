@@ -281,7 +281,6 @@
     <Content Include="Content\fonts\Roboto\Roboto-Regular-webfont.svg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo.svg" />
-    <Content Include="Content\img\skyline.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
