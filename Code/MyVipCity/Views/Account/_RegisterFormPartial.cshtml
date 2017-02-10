@@ -6,7 +6,7 @@
             @Html.AntiForgeryToken()
         </div>
         <div class="form-group">
-            <input type="email" class="form-control" placeholder="Email Address" name="Email" ng-model="registerModel.Email">
+            <input type="email" class="form-control" placeholder="Email Address" name="Email" ng-model="registerModel.Email" required>
             <i class="form-group__bar"></i>
             <div ng-messages="registerForm.Email.$error" ng-show="registerForm.Email.$touched" class="mdc-text-red-500 animated fadeIn">
                 <div ng-message="required"><small class="pull-right">Email is required</small></div>
@@ -14,14 +14,14 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="registerModel.Password">
+            <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="registerModel.Password" required>
             <i class="form-group__bar"></i>
             <div ng-messages="registerForm.Password.$error" ng-show="registerForm.Password.$touched" class="mdc-text-red-500 animated fadeIn">
                 <div ng-message="required"><small class="pull-right">Password is required</small></div>
             </div>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Confirm Password" name="ConfirmPassword" ng-model="registerModel.ConfirmPassword" required vip-match="registerModel.Password">
+            <input type="password" class="form-control" placeholder="Confirm Password" name="ConfirmPassword" ng-model="registerModel.ConfirmPassword" ng-required="registerModel.Password" vip-match="registerModel.Password">
             <i class="form-group__bar"></i>
             <div ng-messages="registerForm.ConfirmPassword.$error" ng-show="registerForm.ConfirmPassword.$touched" class="mdc-text-red-500 animated fadeIn">
                 <div ng-message="required"><small class="pull-right">Please confirm the password</small></div>
