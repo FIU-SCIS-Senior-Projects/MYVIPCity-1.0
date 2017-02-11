@@ -17,9 +17,8 @@
 					'Content-Type': 'application/x-www-form-urlencoded'
 				}
 			}).then(function (response) {
+				// let the user know the registration was successful
 				swal('Registration successful!', response.data, 'success');
-				// if success login, then reload the page
-				// $window.location.reload();
 			},
 				function (error) {
 					// login failed, show the error

@@ -18,8 +18,14 @@
 					'Content-Type': 'application/x-www-form-urlencoded'
 				}
 			}).then(function () {
-				// if success login, then reload the page
-				$window.location.reload();
+				// if we are confirming email, then redirect to home page
+				if ($window.location.pathname.toLowerCase().indexOf("confirmemail") > -1) {
+					$window.location = $window.location.origin;
+				}
+				else {
+					// if successful login, then reload the page
+					$window.location.reload();
+				}
 			},
 				function (error) {
 					// login failed, show the error
