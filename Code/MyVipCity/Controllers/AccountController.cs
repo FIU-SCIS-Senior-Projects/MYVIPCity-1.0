@@ -188,7 +188,7 @@ namespace MyVipCity.Controllers {
 						ConfirmationLink = callbackUrl
 					};
 					// send email
-					await EmailService.SenConfirmationEmailAsync(emailModel);
+					await EmailService.SendConfirmationEmailAsync(emailModel);
 
 					// TODO: Return json
 					return Json("Thank you for registering. We just sent you a confirmation email to " + model.Email + " . Once your confirm your email, you will be able to log in.");
@@ -230,19 +230,29 @@ namespace MyVipCity.Controllers {
 				var user = await UserManager.FindByNameAsync(model.Email);
 				if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id))) {
 					// Don't reveal that the user does not exist or is not confirmed
-					return View("ForgotPasswordConfirmation");
+					return Json("An email to reset the password has been sent to the email provided");
 				}
 
 				// For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
 				// Send an email with this link
-				// string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-				// var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+				string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+				var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+				var forgotPasswordEmailModel = new ForgotPasswordEmailModel {
+					From = "hello@myvipcity.com",
+					ResetPasswordLink = callbackUrl,
+					Subject = "MyVIPCity - Reset password request",
+					To = user.Email
+				};
+				await EmailService.SendForgotPasswordEmailAsync(forgotPasswordEmailModel);
+				return Json("An email to reset the password has been sent to the email provided");
 				// await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
 				// return RedirectToAction("ForgotPasswordConfirmation", "Account");
 			}
 
 			// If we got this far, something failed, redisplay form
-			return View(model);
+			var errors = GetModelStateErrors(ModelState);
+			Response.StatusCode = (int)HttpStatusCode.BadRequest;
+			return Json(errors);
 		}
 
 		//

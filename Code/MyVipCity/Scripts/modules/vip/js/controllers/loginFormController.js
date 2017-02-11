@@ -18,14 +18,16 @@
 					'Content-Type': 'application/x-www-form-urlencoded'
 				}
 			}).then(function () {
-				// if we are confirming email, then redirect to home page
-				if ($window.location.pathname.toLowerCase().indexOf("confirmemail") > -1) {
-					$window.location = $window.location.origin;
+				var avoidRoutes = ["ResetPasswordConfirmation", "ConfirmEmail"];
+				for (var i = 0; i < avoidRoutes.length; i++) {
+					if ($window.location.pathname.toLowerCase().indexOf(avoidRoutes[i]) > -1) {
+						$window.location = $window.location.origin;
+						return;
+					}
 				}
-				else {
-					// if successful login, then reload the page
-					$window.location.reload();
-				}
+
+				// if successful login, then reload the page
+				$window.location.reload();
 			},
 				function (error) {
 					// login failed, show the error

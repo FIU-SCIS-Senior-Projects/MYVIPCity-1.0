@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MyVipCity.Mailing.Contracts;
 using MyVipCity.Mailing.Contracts.EmailModels;
 using SendGrid;
@@ -30,7 +29,7 @@ namespace MyVipCity.Mailing.Sendgrid {
 			});
 		}
 
-		public async Task SenConfirmationEmailAsync(ConfirmationEmailModel model) {
+		public async Task SendConfirmationEmailAsync(ConfirmationEmailModel model) {
 			await Task.Run(async () => {
 				Content content = new Content("text/html", model.Body ?? "!");
 				Email to = new Email(model.To);
@@ -38,6 +37,18 @@ namespace MyVipCity.Mailing.Sendgrid {
 				Mail mail = new Mail(from, model.Subject, to, content) { TemplateId = SendGridTemplateIds.ConfirmationEmailTemplateId };
 				// add substitutions
 				mail.Personalization[0].AddSubstitution("-confirmLink-", model.ConfirmationLink);
+				await SendEmail(mail);
+			});
+		}
+
+		public async Task SendForgotPasswordEmailAsync(ForgotPasswordEmailModel model) {
+			await Task.Run(async () => {
+				Content content = new Content("text/html", model.Body ?? "!");
+				Email to = new Email(model.To);
+				Email from = new Email(model.From);
+				Mail mail = new Mail(from, model.Subject, to, content) { TemplateId = SendGridTemplateIds.ForgotPasswordTemplateId };
+				// add substitutions
+				mail.Personalization[0].AddSubstitution("-resetPasswordLink-", model.ResetPasswordLink);
 				await SendEmail(mail);
 			});
 		}

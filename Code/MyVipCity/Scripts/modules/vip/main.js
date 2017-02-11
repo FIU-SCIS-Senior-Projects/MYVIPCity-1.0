@@ -3,6 +3,7 @@
 	'angular',
 	'vip/js/vip',
 	// controllers
+	'vip/js/controllers/forgotPasswordFormController',
 	'vip/js/controllers/loginFormController',
 	'vip/js/controllers/registerFormController',
 	// directives

@@ -9,8 +9,10 @@ namespace MyVipCity.Mailing.Contracts {
 		Task SendBasicEmailAsync(BasicEmailModel model);
 
 		// Sends a confirmation email to a just registered user
-		Task SenConfirmationEmailAsync(ConfirmationEmailModel model);
+		Task SendConfirmationEmailAsync(ConfirmationEmailModel model);
 
+		// Sends an email to reset a forgotten password.
+		Task SendForgotPasswordEmailAsync(ForgotPasswordEmailModel model);
 
 		// This sends a test email
 		Task SendTestEmailAsync(TestEmailModel model);
