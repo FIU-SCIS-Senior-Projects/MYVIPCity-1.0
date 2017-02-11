@@ -13,7 +13,7 @@
 			e.preventDefault();
 
 			// post login form
-			$http.post('Account/Login', jQuery.param($scope.loginModel), {
+			$http.post('/Account/Login', jQuery.param($scope.loginModel), {
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				}
