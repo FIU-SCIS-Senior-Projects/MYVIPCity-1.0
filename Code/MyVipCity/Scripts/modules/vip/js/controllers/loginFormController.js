@@ -20,7 +20,7 @@
 			}).then(function () {
 				var avoidRoutes = ["ResetPasswordConfirmation", "ConfirmEmail"];
 				for (var i = 0; i < avoidRoutes.length; i++) {
-					if ($window.location.pathname.toLowerCase().indexOf(avoidRoutes[i]) > -1) {
+					if ($window.location.pathname.toLowerCase().indexOf(avoidRoutes[i].toLowerCase()) > -1) {
 						$window.location = $window.location.origin;
 						return;
 					}
