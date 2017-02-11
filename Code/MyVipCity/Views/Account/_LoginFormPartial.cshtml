@@ -74,7 +74,12 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-warning btn-block" type="submit" ng-disabled="forgotPasswordForm.$invalid">Reset Password</button>
+    <button class="btn btn-warning btn-block" type="submit" ng-disabled="forgotPasswordForm.$invalid || loading">
+        Reset Password
+        <div class="pull-right" ng-show="loading">
+            <img src="~/Content/img/ring.gif" />
+        </div>
+    </button>
     <div class="mdc-text-red-500 animated bounce" ng-if="serverError">
         <small>{{serverError}}</small>
     </div>
