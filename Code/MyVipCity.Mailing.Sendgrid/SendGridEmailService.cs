@@ -20,7 +20,29 @@ namespace MyVipCity.Mailing.Sendgrid {
 			return response;
 		}
 
-		public async Task SendTestEmail(TestEmailModel model) {
+		public async Task SendBasicEmailAsync(BasicEmailModel model) {
+			await Task.Run(async () => {
+				Content content = new Content("text/html", model.Body);
+				Email to = new Email(model.To);
+				Email from = new Email(model.From);
+				Mail mail = new Mail(from, model.Subject, to, content);
+				await SendEmail(mail);
+			});
+		}
+
+		public async Task SenConfirmationEmailAsync(ConfirmationEmailModel model) {
+			await Task.Run(async () => {
+				Content content = new Content("text/html", model.Body ?? "!");
+				Email to = new Email(model.To);
+				Email from = new Email(model.From);
+				Mail mail = new Mail(from, model.Subject, to, content) { TemplateId = SendGridTemplateIds.ConfirmationEmailTemplateId };
+				// add substitutions
+				mail.Personalization[0].AddSubstitution("-confirmLink-", model.ConfirmationLink);
+				await SendEmail(mail);
+			});
+		}
+
+		public async Task SendTestEmailAsync(TestEmailModel model) {
 			await Task.Run(async () => {
 				Content content = new Content("text/html", "!");
 				Email to = new Email(model.To);

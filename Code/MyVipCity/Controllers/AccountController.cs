@@ -10,11 +10,16 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MyVipCity.Mailing.Contracts;
+using MyVipCity.Mailing.Contracts.EmailModels;
 using MyVipCity.Models;
+using Ninject;
 
 namespace MyVipCity.Controllers {
+
 	[Authorize]
 	public class AccountController: Controller {
+
 		private ApplicationSignInManager _signInManager;
 		private ApplicationUserManager _userManager;
 
@@ -24,6 +29,13 @@ namespace MyVipCity.Controllers {
 		public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) {
 			UserManager = userManager;
 			SignInManager = signInManager;
+		}
+
+		[Inject]
+		public IEmailService EmailService
+		{
+			get;
+			set;
 		}
 
 		public ApplicationSignInManager SignInManager
@@ -75,6 +87,14 @@ namespace MyVipCity.Controllers {
 				var errors = GetModelStateErrors(ModelState);
 				Response.StatusCode = (int)HttpStatusCode.Forbidden;
 				return Json(errors);
+			}
+
+			// find the user
+			var user = await UserManager.FindByNameAsync(model.Email);
+			// check if the user exists
+			if (user != null && !await UserManager.IsEmailConfirmedAsync(user.Id)) {
+				Response.StatusCode = (int)HttpStatusCode.Forbidden;
+				return Json("Unconfirmed email");
 			}
 
 			// This doesn't count login failures towards account lockout
@@ -152,15 +172,26 @@ namespace MyVipCity.Controllers {
 				var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
 				var result = await UserManager.CreateAsync(user, model.Password);
 				if (result.Succeeded) {
-					await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+					// await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
 					// For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
 					// Send an email with this link
-					// string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-					// var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+					string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+					var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 					// await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+					// create email model
+					var emailModel = new ConfirmationEmailModel {
+						Subject = "MyVIPCity - Confirm your account",
+						Body = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>",
+						From = "hello@myvipcity.com",
+						To = model.Email,
+						ConfirmationLink = callbackUrl
+					};
+					// send email
+					await EmailService.SenConfirmationEmailAsync(emailModel);
 
-					return RedirectToAction("Index", "Home");
+					// TODO: Return json
+					return Json("Thank you for registering. We just sent you a confirmation email to " + model.Email + " . Once your confirm your email, you will be able to log in.");
 				}
 				AddErrors(result);
 			}
