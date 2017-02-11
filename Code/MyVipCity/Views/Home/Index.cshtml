@@ -1,4 +1,8 @@
-﻿<header class="section__title">
+﻿@using Microsoft.AspNet.Identity
+<header class="section__title">
+    @if (Request.IsAuthenticated) {
+        <h2>Hello @User.Identity.GetUserName()</h2>
+    }
     <h2>Welcome to MyVIPCity</h2>
     <small>Site under construction, check back soon!</small>
 </header>

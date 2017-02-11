@@ -38,7 +38,12 @@
         </div>
     </div>
 
-    <button class="btn btn-primary btn-block m-t-10 m-b-10" type="submit" ng-disabled="loginForm.$invalid">Login</button>
+    <button class="btn btn-primary btn-block m-t-10 m-b-10" type="submit" ng-disabled="loginForm.$invalid || loading">
+        Login
+        <div class="pull-right" ng-show="loading">
+            <img src="~/Content/img/ring.gif" />
+        </div>
+    </button>
     <div class="mdc-text-red-500 animated bounce" ng-if="serverError">
         <small>{{serverError}}</small>
     </div>
@@ -58,12 +63,14 @@
         <div class="vip-mvc-antiforgery-token" ng-model="forgotPasswordModel.__RequestVerificationToken">
             @Html.AntiForgeryToken()
         </div>
-        <input type="email" class="form-control" placeholder="Email Address" name="Email" ng-model="forgotPasswordModel.Email" required/>
+        <input type="email" class="form-control" placeholder="Email Address" name="Email" ng-model="forgotPasswordModel.Email" required />
         <i class="form-group__bar"></i>
         <div ng-messages="forgotPasswordForm.Email.$error" ng-show="forgotPasswordForm.Email.$touched" class="mdc-text-red-500 animated fadeIn">
-            <div ng-message="required"><small class="pull-right">Email is required</small>
+            <div ng-message="required">
+                <small class="pull-right">Email is required</small>
             </div>
-            <div ng-message="email"><small class="pull-right">Invalid email</small>
+            <div ng-message="email">
+                <small class="pull-right">Invalid email</small>
             </div>
         </div>
     </div>

@@ -279,8 +279,10 @@
     <Content Include="Content\fonts\Roboto\Roboto-Light-webfont.svg" />
     <Content Include="Content\fonts\Roboto\Roboto-Medium-webfont.svg" />
     <Content Include="Content\fonts\Roboto\Roboto-Regular-webfont.svg" />
+    <Content Include="Content\img\ellipsis.gif" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo.svg" />
+    <Content Include="Content\img\ring.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
