@@ -235,6 +235,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\HomeController .cs" />
     <Compile Include="Controllers\Home2Controller.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -327,6 +328,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\modules\main.js" />
+    <Content Include="Scripts\modules\vip\js\config\vipConfig.js" />
     <Content Include="Scripts\modules\vip\js\controllers\loginFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
@@ -348,6 +350,9 @@
     <Content Include="Scripts\vendors\bower_components\angular-resource\angular-resource.js" />
     <Content Include="Scripts\vendors\bower_components\angular-resource\angular-resource.min.js" />
     <Content Include="Scripts\vendors\bower_components\angular-resource\index.js" />
+    <Content Include="Scripts\vendors\bower_components\angular-route\angular-route.js" />
+    <Content Include="Scripts\vendors\bower_components\angular-route\angular-route.min.js" />
+    <Content Include="Scripts\vendors\bower_components\angular-route\index.js" />
     <Content Include="Scripts\vendors\bower_components\angular\angular-csp.css" />
     <Content Include="Scripts\vendors\bower_components\angular\angular.js" />
     <Content Include="Scripts\vendors\bower_components\angular\angular.min.js" />
@@ -4789,6 +4794,13 @@
     <Content Include="Scripts\vendors\bower_components\angular-animate\package.json" />
     <Content Include="Scripts\vendors\bower_components\angular-animate\README.md" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Configuration\JsConfig.cshtml" />
+    <Content Include="Scripts\vendors\bower_components\angular-route\.bower.json" />
+    <Content Include="Scripts\vendors\bower_components\angular-route\angular-route.min.js.map" />
+    <Content Include="Scripts\vendors\bower_components\angular-route\bower.json" />
+    <Content Include="Scripts\vendors\bower_components\angular-route\LICENSE.md" />
+    <Content Include="Scripts\vendors\bower_components\angular-route\package.json" />
+    <Content Include="Scripts\vendors\bower_components\angular-route\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

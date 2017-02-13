@@ -15,6 +15,8 @@
     "angular": "~1.6.1",
     "angular-messages": "~1.6.2",
     "angular-resource": "^1.6.2",
+	"angular-animate": "^1.6.2",
+    "angular-route": "^1.6.2",
     "requirejs": "~2.3.2",
     "jquery": "^2.2.4",
     "bootstrap": "^3.3.6",
@@ -39,8 +41,7 @@
     "trumbowyg": "Alex-D/Trumbowyg#^2.1.1",
     "jquery-placeholder": "^2.3.1",
     "sweetalert": "^1.1.3",
-    "sweetalert2": "^5.2.0",
-    "angular-animate": "^1.6.2"
+    "sweetalert2": "^5.2.0"   
   },
   "resolutions": {
     "jquery": "^2.2.4"

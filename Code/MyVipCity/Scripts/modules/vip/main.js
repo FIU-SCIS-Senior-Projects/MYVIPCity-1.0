@@ -2,6 +2,8 @@
 	'require',
 	'angular',
 	'vip/js/vip',
+	// config
+	'vip/js/config/vipConfig',
 	// controllers
 	'vip/js/controllers/forgotPasswordFormController',
 	'vip/js/controllers/loginFormController',

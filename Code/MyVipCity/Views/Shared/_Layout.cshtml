@@ -222,11 +222,12 @@
                 'angular-animate': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-animate/angular-animate.min")',
                 'angular-resource': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-resource/angular-resource.min")',
                 'angular-messages': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-messages/angular-messages.min")',
+                'angular-route': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-route/angular-route.min")',
                 'bootstrap': '@Scripts.Url("~/Scripts/vendors/bower_components/bootstrap/dist/js/bootstrap.min")',
                 'waves': '@Scripts.Url("~/Scripts/vendors/bower_components/Waves/dist/waves.min")',
                 'sweet-alert': '@Scripts.Url("~/Scripts/vendors/bower_components/sweetalert2/dist/sweetalert2.min")',
                 'es6-promise': '@Scripts.Url("~/Scripts/vendors/bower_components/es6-promise/es6-promise.min")',
-
+                'myVipCityConfig': '@Scripts.Url("~/Configuration/JsConfig?x=0")',
                 'app': '@Scripts.Url("~/Scripts/app/app.min")'
             },
             shim: {
@@ -246,6 +247,9 @@
                 'angular-animate': {
                     deps: ['angular']
                 },
+                'angular-route': {
+                    deps: ['angular']
+                },
                 'bootstrap': {
                     deps: ['jquery']
                 },
@@ -258,6 +262,9 @@
                 },
                 'app': {
                     deps: ['jquery']
+                },
+                'myVipCityConfig': {
+                    exports: '_myVipCityConfig'
                 }
             }
         };
@@ -265,11 +272,7 @@
         window.myVipCityVersion = '1.0.0';
     </script>
 
-@* TODO: Add main.min.js if in production *@
-    @{
-        var x = Request;
-        var y = Response;
-    }
+    @* TODO: Add main.min.js if in production *@
     <script data-main="@Url.Content("../../Scripts/modules/main.js")" src=@Url.Content("../../Scripts/vendors/bower_components/requirejs/require.js")></script>
 
     <!-- IE9 Placeholder -->

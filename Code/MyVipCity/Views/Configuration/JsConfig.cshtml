@@ -1,0 +1,10 @@
+﻿@model dynamic
+
+@{
+    Layout = null;
+}
+
+(function(){
+    var root = self;
+    root._myVipCityConfig = (@Html.Raw(@ViewBag.ConfigObject))
+})();
