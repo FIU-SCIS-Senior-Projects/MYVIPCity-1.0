@@ -11,7 +11,7 @@ namespace MyVipCity.Filters {
 		/// <param name="filterContext">The filter context.</param>
 		public void OnException(ExceptionContext filterContext) {
 			var logger = DependencyResolver.Current.GetService<ILogger>();
-			logger.Error(filterContext.Exception.Message + "\n" + filterContext.Exception.StackTrace);
+			logger?.Error(filterContext.Exception.Message + "\n" + filterContext.Exception.StackTrace);
 		}
 	}
 }
