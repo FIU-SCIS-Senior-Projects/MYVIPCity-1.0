@@ -311,6 +311,7 @@
     <None Include="Properties\PublishProfiles\myvipcity - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\myvipcity - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="gulpfile.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\app.min.js" />
     <Content Include="Scripts\app\page-loader.js" />
