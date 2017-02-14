@@ -54,55 +54,8 @@
                         <span>Find your next best nightlife experience</span>
                     </div>
                 </a>
-                <div class="navigation-trigger visible-xs visible-sm" data-rmd-action="block-open" data-rmd-target=".navigation">
-                    <i class="zmdi zmdi-menu"></i>
-                </div>
-                <ul class="navigation">
-                    <li class="visible-xs visible-sm"><a class="navigation__close" data-rmd-action="navigation-close" href=""><i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                    <li class="navigation__dropdown">
-                        <a href="/">Home</a>
-                        <ul class="navigation__drop-menu">
-                            <li><a href="/">After Login</a></li>
-                            <li><a href="/">Home Alternative</a></li>
-                            <li><a href="/">Dashboard</a></li>
-                        </ul>
-                    </li>
-                    <li class="navigation__dropdown">
-                        <a href="" class="prevent-default">Listings</a>
-                        <ul class="navigation__drop-menu">
-                            <li><a href="/">Grid view</a></li>
-                            <li><a href="/">List view</a></li>
-                            <li><a href="/">Map view</a></li>
-                            <li><a href="/">Listing Detail</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="submit-property.html">Submit</a></li>
-                    <li class="navigation__dropdown">
-                        <a href="Club.html">Clubs</a>
-                        <ul class="navigation__drop-menu">
-                            <li><a href="/">Club Detail</a></li>
-                            <li><a href="/">Club Reviews</a></li>
-                            <li><a href="/">Club Disclaimer</a></li>
-                        </ul>
-                    </li>
-                    <li class="navigation__dropdown">
-                        <a href="Promoters.html">Promoters</a>
-                        <ul class="navigation__drop-menu">
-                            <li><a href="/">Promoter Detail</a></li>
-                            <li><a href="/">Promoter Properties</a></li>
-                            <li><a href="/">Promoter Reviews</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/">Contact</a></li>
-                    <li class="active navigation__dropdown">
-                        <a href="" class="prevent-default">More</a>
-                        <ul class="navigation__drop-menu navigation__drop-menu--right">
-                            <li><a href="/">Profile</a></li>
-                            <li><a href="/">Blog</a></li>
-                            <li><a href="/">FAQ</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <!--Directive to render navigation menu-->
+                <div class="vip-navigation-menu"></div>
             </div>
         </div>
     </header>
@@ -228,7 +181,7 @@
                 'sweet-alert': '@Scripts.Url("~/Scripts/vendors/bower_components/sweetalert2/dist/sweetalert2.min")',
                 'es6-promise': '@Scripts.Url("~/Scripts/vendors/bower_components/es6-promise/es6-promise.min")',
                 'myVipCityConfig': '@Scripts.Url("~/Configuration/JsConfig?x=0")',
-                'app': '@Scripts.Url("~/Scripts/app/app.min")'
+                'app': '@Scripts.Url("~/Scripts/app/app")'
             },
             shim: {
                 'jquery': {

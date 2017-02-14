@@ -11,6 +11,7 @@
 	// directives
 	'vip/js/directives/vip-match',
 	'vip/js/directives/vip-mvc-antiforgery-token',
+	'vip/js/directives/vip-navigation-menu',
 	// services
 	'vip/js/services/vipServerErrorProcessorService'
 ], function (require, angular, vip) {

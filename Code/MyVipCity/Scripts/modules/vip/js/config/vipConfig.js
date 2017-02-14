@@ -2,4 +2,8 @@
 	'use strict';
 
 	vip.constant('vipConfig', myVipCityConfig);
+
+	vip.config(['$compileProvider', function ($compileProvider) {
+		$compileProvider.debugInfoEnabled(false);
+	}]);
 });
