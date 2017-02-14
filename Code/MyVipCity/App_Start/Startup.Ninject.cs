@@ -1,9 +1,10 @@
 ﻿using System.Configuration;
+using System.Web;
 using System.Web.Http;
+using Microsoft.AspNet.Identity.Owin;
 using MyVipCity.CompositionRoot;
 using MyVipCity.Models;
 using Ninject;
-using Ninject.Extensions.Logging.Log4net;
 using Ninject.Web.Common;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi;
@@ -34,7 +35,8 @@ namespace MyVipCity {
 		}
 
 		private void RegisterServices(StandardKernel kernel) {
-			kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
+			kernel.Bind<ApplicationDbContext>().ToMethod(context => HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>()).InRequestScope();
+			kernel.Bind<ApplicationUserManager>().ToMethod(context => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()).InRequestScope();
 			BindingsManager.SetBindings(kernel, ConfigurationManager.AppSettings);
 		}
 	}

@@ -240,6 +240,7 @@
     <Compile Include="Controllers\Home2Controller.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PicturesController.cs" />
+    <Compile Include="Filters\LogExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -259,6 +260,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UploadedFileDto.cs" />

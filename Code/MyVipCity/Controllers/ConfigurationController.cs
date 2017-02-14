@@ -1,8 +1,29 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Ninject;
+using Ninject.Extensions.Logging;
 
 namespace MyVipCity.Controllers {
+
 	public class ConfigurationController: Controller {
+
+		[Inject]
+		public ILogger Logger
+		{
+			get;
+			set;
+		}
+
+		[Inject]
+		public ApplicationUserManager ApplicationUserManager
+		{
+			get;
+			set;
+		}
 
 		[HttpGet]
 		[AllowAnonymous]
@@ -21,7 +42,7 @@ namespace MyVipCity.Controllers {
 		}
 
 		private object GetNavigationMenu() {
-			var menu = new object[] {
+			var menu = new List<object> {
 				new {
 					Title = "Home",
 					Path ="/",
@@ -99,7 +120,21 @@ namespace MyVipCity.Controllers {
 					}
 				}
 			};
-			return menu;
+
+			// add menu item only if user is authenticated and in admin role
+			if (Request.IsAuthenticated && ApplicationUserManager.IsInRole(User.Identity.GetUserId(), "Admin")) {
+				menu.Add(new {
+					Title = "Admin",
+					Path = "/",
+					Submenu = new object[] {
+						new {
+							Title = "Add Club",
+							Path = "/"
+						}
+					}
+				});
+			}
+			return menu.ToArray();
 		}
 	}
 }
