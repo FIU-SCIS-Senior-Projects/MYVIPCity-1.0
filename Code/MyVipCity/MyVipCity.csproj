@@ -236,6 +236,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\ExampleController.cs" />
     <Compile Include="Controllers\HomeController .cs" />
     <Compile Include="Controllers\Home2Controller.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -332,6 +333,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\modules\main.js" />
     <Content Include="Scripts\modules\vip\js\config\vipConfig.js" />
+    <Content Include="Scripts\modules\vip\js\config\vipRouteConfig.js" />
     <Content Include="Scripts\modules\vip\js\controllers\loginFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
@@ -4805,6 +4807,7 @@
     <Content Include="Scripts\vendors\bower_components\angular-route\LICENSE.md" />
     <Content Include="Scripts\vendors\bower_components\angular-route\package.json" />
     <Content Include="Scripts\vendors\bower_components\angular-route\README.md" />
+    <Content Include="Views\Example\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

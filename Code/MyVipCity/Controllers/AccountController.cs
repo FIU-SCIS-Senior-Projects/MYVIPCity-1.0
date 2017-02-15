@@ -24,9 +24,10 @@ namespace MyVipCity.Controllers {
 		private ApplicationUserManager _userManager;
 
 		public AccountController() {
+			ViewBag.HideNgView = true;
 		}
 
-		public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) {
+		public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) : this() {
 			UserManager = userManager;
 			SignInManager = signInManager;
 		}
@@ -76,7 +77,7 @@ namespace MyVipCity.Controllers {
 			var errors = modelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
 			return errors;
 		}
-		//
+		//e
 		// POST: /Account/Login
 		[HttpPost]
 		[AllowAnonymous]
@@ -265,8 +266,18 @@ namespace MyVipCity.Controllers {
 		//
 		// GET: /Account/ResetPassword
 		[AllowAnonymous]
-		public ActionResult ResetPassword(string code) {
-			return code == null ? View("Error") : View();
+		public async Task<ActionResult> ResetPassword(string userId, string code) {
+			// build an empty view model
+			var resetPasswordViewModel = new ResetPasswordViewModel();
+			// check if the user id was provided
+			if (!string.IsNullOrWhiteSpace(userId)) {
+				// find the user with the given userId
+				var user = await UserManager.FindByIdAsync(userId);
+				// make sure the user exists and update the email of the view model
+				if (user != null)
+					resetPasswordViewModel.Email = user.Email;
+			}
+			return code == null ? View("Error") : View(resetPasswordViewModel);
 		}
 
 		//

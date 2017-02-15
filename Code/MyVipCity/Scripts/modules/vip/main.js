@@ -4,6 +4,7 @@
 	'vip/js/vip',
 	// config
 	'vip/js/config/vipConfig',
+	'vip/js/config/vipRouteConfig',
 	// controllers
 	'vip/js/controllers/forgotPasswordFormController',
 	'vip/js/controllers/loginFormController',

@@ -45,15 +45,15 @@ namespace MyVipCity.Controllers {
 			var menu = new List<object> {
 				new {
 					Title = "Home",
-					Path ="/",
+					Path ="#/",
 					Submenu = new object[] {
 						new {
 							Title = "After Login",
-							Path = "/"
+							Path = "#/Testing"
 						},
 						new {
-							Title = "Home Alternative",
-							Path = "/"
+							Title = "Example",
+							Path = "Example"
 						},
 						new {
 							Title = "Dashboard",

@@ -1,7 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.Ajax.Utilities
+<!DOCTYPE html>
 <html lang="en">
 <!--[if IE 9 ]><html lang="en" class="ie9"><![endif]-->
 <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,7 +63,12 @@
     </header>
     <section class="section">
         <div class="container">
-            @RenderBody()
+            @if (ViewBag.HideNgView == null || ViewBag.HideNgView != true) {
+                <div ng-view></div>
+            }
+            <div class="mvc-body-container">
+                @RenderBody()
+            </div>
         </div>
     </section>
     <footer id="footer" class="footer">
