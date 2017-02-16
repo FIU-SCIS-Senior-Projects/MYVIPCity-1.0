@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Web.Mvc;
-using MyVipCity.Models;
+﻿using System.Web.Mvc;
 
 namespace MyVipCity.Controllers {
 
@@ -8,10 +6,11 @@ namespace MyVipCity.Controllers {
 	public class HomeController: Controller {
 
 		public ActionResult Index() {
-			var model = new HomeModel {
-				Version = FileVersionInfo.GetVersionInfo(typeof(HomeController).Assembly.Location).FileVersion
-			};
-			return View(model);
+			return View("Empty");
+		}
+
+		public ActionResult Home() {
+			return View("Index");
 		}
 	}
 }

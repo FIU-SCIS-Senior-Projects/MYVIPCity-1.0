@@ -235,6 +235,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddBusinessController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\ExampleController.cs" />
     <Compile Include="Controllers\HomeController .cs" />
@@ -262,7 +263,6 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
-    <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UploadedFileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -4808,6 +4808,8 @@
     <Content Include="Scripts\vendors\bower_components\angular-route\package.json" />
     <Content Include="Scripts\vendors\bower_components\angular-route\README.md" />
     <Content Include="Views\Example\Index.cshtml" />
+    <Content Include="Views\AddBusiness\Index.cshtml" />
+    <Content Include="Views\Home\Empty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

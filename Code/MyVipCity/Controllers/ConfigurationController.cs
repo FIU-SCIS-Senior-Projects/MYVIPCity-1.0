@@ -31,7 +31,8 @@ namespace MyVipCity.Controllers {
 			// set configuration
 			var config = new {
 				Name = User.Identity.GetUserName(),
-				Menu = GetNavigationMenu()
+				Menu = GetNavigationMenu(),
+				Routes = GetRoutes()
 			};
 			// set the JSON string
 			ViewBag.ConfigObject = System.Web.Helpers.Json.Encode(config);
@@ -129,12 +130,31 @@ namespace MyVipCity.Controllers {
 					Submenu = new object[] {
 						new {
 							Title = "Add Club",
-							Path = "/"
+							Path = "#/addbusiness"
 						}
 					}
 				});
 			}
 			return menu.ToArray();
+		}
+
+		private object GetRoutes() {
+			var routes = new List<object> {
+				new {
+					Path = "/home",
+					TemplateUrl = "/Home/Home"
+				}
+			};
+
+			// add route only if user is authenticated and in admin role
+			if (Request.IsAuthenticated && ApplicationUserManager.IsInRole(User.Identity.GetUserId(), "Admin")) {
+				routes.Add(new {
+					Path = "/addbusiness",
+					TemplateUrl = "/AddBusiness"
+				});
+			}
+
+			return routes.ToArray();
 		}
 	}
 }
