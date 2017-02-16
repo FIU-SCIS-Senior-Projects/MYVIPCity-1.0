@@ -3,5 +3,10 @@
 
 	var vipModule = angular.module('vip', ['ng', 'ngResource', 'ngMessages', 'ngAnimate', 'ngRoute']);
 
+	vipModule.renderingModes = {
+		read: 1,
+		edit: 2
+	};
+
 	return vipModule;
 });

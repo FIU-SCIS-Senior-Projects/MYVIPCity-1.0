@@ -4,6 +4,7 @@
 	vip.constant('vipConfig', myVipCityConfig);
 
 	vip.config(['$compileProvider', function ($compileProvider) {
-		$compileProvider.debugInfoEnabled(false);
+		// TODO Set debug info to false in production
+		$compileProvider.debugInfoEnabled(true);
 	}]);
 });
