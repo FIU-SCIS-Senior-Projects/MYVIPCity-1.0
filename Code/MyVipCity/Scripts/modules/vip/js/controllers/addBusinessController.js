@@ -3,7 +3,15 @@
 
 	vip.controller('vip.addBusinessController', ['$scope', function ($scope) {
 		$scope.renderingMode = vip.renderingModes.edit;
-		$scope.Name = 'Dance by the Ocean Nightclub';
+
+		var newBusiness = function () {
+			return {
+				Name: 'Dance by the Ocean Nightclub',
+				Phrase: 'People, food, music and much more...'
+			};
+		};
+
+		$scope.model = newBusiness();
 
 		$scope.toggleRenderingMode = function () {
 			$scope.renderingMode = $scope.renderingMode === vip.renderingModes.edit ? vip.renderingModes.read : vip.renderingModes.edit;

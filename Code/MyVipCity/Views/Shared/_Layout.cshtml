@@ -18,7 +18,7 @@
     <!-- Site -->
     <link rel="stylesheet" href="~/Content/css/app_1.min.css">
     <link rel="stylesheet" href="~/Content/css/app_2.min.css">
-    <link rel="stylesheet" href="~/Content/css/custom.css">
+    <link rel="stylesheet" href="~/Content/css/vip.min.css">
     <!-- Page Loader JS -->
     @*<script src="~/Scripts/app/page-loader.js" async></script>*@
 </head>
@@ -64,8 +64,7 @@
     <section class="section">
         <div class="container">
             @if (ViewBag.HideNgView == null || ViewBag.HideNgView != true) {
-                <div ng-view></div>
-            }
+                <div ng-view></div>}
             <div class="mvc-body-container">
                 @RenderBody()
             </div>
@@ -187,6 +186,8 @@
                 'waves': '@Scripts.Url("~/Scripts/vendors/bower_components/Waves/dist/waves.min")',
                 'sweet-alert': '@Scripts.Url("~/Scripts/vendors/bower_components/sweetalert2/dist/sweetalert2.min")',
                 'es6-promise': '@Scripts.Url("~/Scripts/vendors/bower_components/es6-promise/es6-promise.min")',
+                'jquery-auto-grow-input': '@Scripts.Url("~/Scripts/vendors/bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min")',
+
                 'myVipCityConfig': '@Scripts.Url("~/Configuration/JsConfig?x=0")',
                 'app': '@Scripts.Url("~/Scripts/app/app.min")'
             },
@@ -220,6 +221,10 @@
                     exports: 'swal',
                     deps: ['es6-promise']
                 },
+                'jquery-auto-grow-input': {
+                    deps: ['jquery']
+                },
+
                 'app': {
                     deps: ['jquery']
                 },

@@ -5,12 +5,13 @@
 }
 
 <div ng-controller="vip.addBusinessController">
-    {{Name}}
     <button ng-click="toggleRenderingMode()">Toggle Rendering Mode</button>
     <header class="section__title section__title-alt">
-        <h2>Duis mollisest non commodo luctus nisierat porttito</h2>
-        <div class="vip-textbox" placeholder="Business Name" ng-model="Name" wrap-with="h1" edit-mode-class="h1 text-center" read-mode-class="text-uppercase"></div>
-        <small>The Villa, Murano Hill, Manhattan, NY, 90082</small>
+        <!--Name-->
+        <div vip-textbox ng-model="model.Name" placeholder="Business Name" wrap-with="h1" edit-mode-class="h1 text-center" read-mode-class="text-uppercase" auto-grow="true"></div>
+        <!--Phrase-->
+        <div vip-textbox ng-model="model.Phrase" placeholder="Business Phrase" wrap-with="small" edit-mode-class="small text-center" auto-grow="true"></div>
+
         <div class="actions actions--section">
             <div class="actions__toggle">
                 <input type="checkbox">
@@ -89,20 +90,20 @@
                         <li><a href="#detail-media-map" data-toggle="tab"><i class="zmdi zmdi-map"></i></a></li>
                     </ul>
                 </div>
-                <div class="detail-info">
+                <div class="detail-info vip-business-info">
                     <div class="detail-info__header clearfix">
-                        <strong>$1,175,000</strong>
-                        <small>Est. Mortgage: $5,328/month</small>
-                        <span>For Sale</span>
+                        <strong>Information</strong>
+                        <span>OPEN NOW</span>
                     </div>
-                    <ul class="detail-info__list clearfix">
+                    <ul class="detail-info__list clearfix vip-business-info__list">
                         <li>
                             <span>Ownership Type</span>
                             <span>Villa</span>
                         </li>
                         <li>
-                            <span>Property Area</span>
-                            <span>2435+ sqft</span>
+                            <span>Ambiance</span>
+                            <div vip-textbox class="inline-block" ng-model="model.Ambiance" placeholder="Ambiance" wrap-with="span" edit-mode-class="span text-center" auto-grow="true"></div>
+                            <span></span>
                         </li>
                         <li>
                             <span>Garages</span>

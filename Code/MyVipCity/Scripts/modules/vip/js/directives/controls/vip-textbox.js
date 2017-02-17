@@ -35,7 +35,7 @@
 
 				var createEditModeElement = function () {
 					// create edit mode element
-					var element = angular.element('<input type="text" placeholder="' + (attrs.placeholder || '') + '" ng-model="_text"/>');
+					var element = angular.element('<input type="text" placeholder="' + (attrs.placeholder || '') + '" ng-model="_text"' + (!!attrs.autoGrow ? ' vip-auto-grow-input' : '') + '/>');
 					// add css class
 					if (attrs.editModeClass)
 						element.addClass(attrs.editModeClass);

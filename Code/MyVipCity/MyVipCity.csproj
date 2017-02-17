@@ -263,6 +263,7 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
+    <Compile Include="Models\Dtos\BusinessDto.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UploadedFileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -274,11 +275,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\vip.css" />
     <Content Include="Content\css\app_1.css" />
     <Content Include="Content\css\app_1.min.css" />
     <Content Include="Content\css\app_2.css" />
     <Content Include="Content\css\app_2.min.css" />
+    <Content Include="Content\css\vip.min.css" />
     <Content Include="Content\fonts\Roboto\Roboto-Bold-webfont.svg" />
     <Content Include="Content\fonts\Roboto\Roboto-Light-webfont.svg" />
     <Content Include="Content\fonts\Roboto\Roboto-Medium-webfont.svg" />
@@ -311,6 +313,8 @@
     <Content Include="Content\fonts\Roboto\Roboto-Regular-webfont.eot" />
     <Content Include="Content\fonts\Roboto\Roboto-Regular-webfont.ttf" />
     <Content Include="Content\fonts\Roboto\Roboto-Regular-webfont.woff" />
+    <Content Include="Content\less\vip.less" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\myvipcity - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\myvipcity - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -339,6 +343,7 @@
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-textbox.js" />
+    <Content Include="Scripts\modules\vip\js\directives\vip-auto-grow-input.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-match.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-mvc-antiforgery-token.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-navigation-menu.js" />
@@ -607,6 +612,8 @@
     <Content Include="Scripts\vendors\bower_components\fullcalendar\dist\lang\zh-tw.js" />
     <Content Include="Scripts\vendors\bower_components\install\detect-zoom.js" />
     <Content Include="Scripts\vendors\bower_components\install\detect-zoom.min.js" />
+    <Content Include="Scripts\vendors\bower_components\jquery-auto-grow-input\jquery.auto-grow-input.js" />
+    <Content Include="Scripts\vendors\bower_components\jquery-auto-grow-input\jquery.auto-grow-input.min.js" />
     <Content Include="Scripts\vendors\bower_components\jquery-placeholder\jquery.placeholder.js" />
     <Content Include="Scripts\vendors\bower_components\jquery-placeholder\jquery.placeholder.min.js" />
     <Content Include="Scripts\vendors\bower_components\jquery\dist\jquery.js" />
@@ -4812,6 +4819,8 @@
     <Content Include="Views\Example\Index.cshtml" />
     <Content Include="Views\AddBusiness\Index.cshtml" />
     <Content Include="Views\Home\Empty.cshtml" />
+    <Content Include="Scripts\vendors\bower_components\jquery-auto-grow-input\.bower.json" />
+    <Content Include="Scripts\vendors\bower_components\jquery-auto-grow-input\bower.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,6 @@
+.inline-block {
+  display: inline-block;
+}
+.vip-business-info .vip-business-info__list div[vip-textbox] {
+  display: inline-block;
+}

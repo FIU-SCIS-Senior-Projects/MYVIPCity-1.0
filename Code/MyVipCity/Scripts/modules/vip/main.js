@@ -12,6 +12,7 @@
 	'vip/js/controllers/registerFormController',
 	// directives
 	'vip/js/directives/controls/vip-textbox',
+	'vip/js/directives/vip-auto-grow-input',
 	'vip/js/directives/vip-match',
 	'vip/js/directives/vip-mvc-antiforgery-token',
 	'vip/js/directives/vip-navigation-menu',
