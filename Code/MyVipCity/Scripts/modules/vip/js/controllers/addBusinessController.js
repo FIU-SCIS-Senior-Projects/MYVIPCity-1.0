@@ -7,7 +7,12 @@
 		var newBusiness = function () {
 			return {
 				Name: 'Dance by the Ocean Nightclub',
-				Phrase: 'People, food, music and much more...'
+				Phrase: 'People, food, music and much more...',
+				Parking: 'Street/Valet',
+				Ambiance: 'Upscale Trendy',
+				Alcohol: 'Fullbar',
+				Phone: '305-000-0000',
+				WebsiteUrl: 'http://www.google.com'
 			};
 		};
 

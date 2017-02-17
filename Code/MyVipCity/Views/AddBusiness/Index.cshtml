@@ -5,7 +5,7 @@
 }
 
 <div ng-controller="vip.addBusinessController">
-    <button ng-click="toggleRenderingMode()">Toggle Rendering Mode</button>
+    <button ng-click="toggleRenderingMode()" style="position: fixed; top: 180px;left:20px">Toggle Rendering Mode</button>
     <header class="section__title section__title-alt">
         <!--Name-->
         <div vip-textbox ng-model="model.Name" placeholder="Business Name" wrap-with="h1" edit-mode-class="h1 text-center" read-mode-class="text-uppercase" auto-grow="true"></div>
@@ -97,29 +97,28 @@
                     </div>
                     <ul class="detail-info__list clearfix vip-business-info__list">
                         <li>
-                            <span>Ownership Type</span>
-                            <span>Villa</span>
+                            <span>Hours</span>
+                            <span>Mo, Tu,...</span>
                         </li>
                         <li>
                             <span>Ambiance</span>
-                            <div vip-textbox class="inline-block" ng-model="model.Ambiance" placeholder="Ambiance" wrap-with="span" edit-mode-class="span text-center" auto-grow="true"></div>
-                            <span></span>
+                            <div vip-textbox class="inline-block" ng-model="model.Ambiance" placeholder="Ambiance details" wrap-with="span" edit-mode-class="span"></div>
                         </li>
                         <li>
-                            <span>Garages</span>
-                            <span>04</span>
+                            <span>Parking</span>
+                            <div vip-textbox class="inline-block" ng-model="model.Parking" placeholder="Parking details" wrap-with="span" edit-mode-class="span"></div>
                         </li>
                         <li>
-                            <span>Floors</span>
-                            <span>03</span>
+                            <span>Alcohol</span>
+                            <div vip-textbox class="inline-block" ng-model="model.Alcohol" placeholder="Alchol details" wrap-with="span" edit-mode-class="span"></div>
                         </li>
                         <li>
-                            <span>Bedrooms</span>
-                            <span>06</span>
+                            <span>Phone</span>
+                            <div vip-textbox class="inline-block" ng-model="model.Phone" type="phone" placeholder="Alchol details" wrap-with="span" edit-mode-class="span"></div>
                         </li>
                         <li>
-                            <span>Bathrooms</span>
-                            <span>06</span>
+                            <span>Website</span>
+                            <div vip-link class="inline-block" ng-model="model.WebsiteUrl" placeholder="Website URL" edit-mode-class="span"></div>
                         </li>
                     </ul>
                 </div>

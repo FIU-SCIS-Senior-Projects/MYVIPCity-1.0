@@ -1,7 +1,7 @@
 ﻿define(['vip/js/vip', 'jquery', 'angular'], function (vip, jQuery, angular) {
 	'use strict';
 
-	vip.directive('vipTextbox', ['vipControlRenderingService', function (vipControlRenderingService) {
+	vip.directive('vipLink', ['vipControlRenderingService', function (vipControlRenderingService) {
 		return {
 			restrict: 'ACE',
 
@@ -17,18 +17,20 @@
 				var controlRenderingService = vipControlRenderingService(scope, element);
 
 				ngModelCtrl.$render = function () {
-					scope._text = ngModelCtrl.$viewValue;
+					scope._link = ngModelCtrl.$viewValue;
 				};
-
-				listeners.push(scope.$watch('_text', function (value) {
+				
+				listeners.push(scope.$watch('_link', function (value) {
+					// if the link does not start with either http:// or https
+					if (value && value.indexOf('https://') !== 0 && value.indexOf('http://') !== 0)
+						value='http://' + value;
 					ngModelCtrl.$setViewValue(value);
+					scope._link = value;
 				}));
 
 				controlRenderingService.setCreateReadModeElementFunction(function () {
-					// tag to wrap the read only text
-					var tag = attrs.wrapWith || 'label';
 					// create the read mode element
-					var element = angular.element('<' + tag + '>{{_text}}</' + tag + '>');
+					var element = angular.element('<a href="{{_link}}" target="_blank">{{_link}}</a>');
 					// add css class
 					if (attrs.readModeClass)
 						element.addClass(attrs.readModeClass);
@@ -38,13 +40,10 @@
 
 				controlRenderingService.setCreateEditModeElementFunction(function () {
 					// create edit mode element
-					var element = angular.element('<input placeholder="' + (attrs.placeholder || '') + '" ng-model="_text"' + (!!attrs.autoGrow ? ' vip-auto-grow-input' : '') + '/>');
+					var element = angular.element('<input type="text" placeholder="' + (attrs.placeholder || '') + '" ng-model="_link" ng-model-options="{updateOn: \'blur\'}"' + (!!attrs.autoGrow ? ' vip-auto-grow-input' : '') + '/>');
 					// add css class
 					if (attrs.editModeClass)
 						element.addClass(attrs.editModeClass);
-					// set input type
-					var inputType = attrs.type || 'text';
-					element.attr('type', inputType);
 					// return element
 					return element;
 				});
