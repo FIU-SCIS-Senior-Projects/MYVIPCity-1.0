@@ -342,6 +342,7 @@
     <Content Include="Scripts\modules\vip\js\controllers\loginFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-checkbox.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-textbox.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-link.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-auto-grow-input.js" />

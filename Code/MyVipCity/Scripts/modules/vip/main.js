@@ -11,6 +11,7 @@
 	'vip/js/controllers/loginFormController',
 	'vip/js/controllers/registerFormController',
 	// directives
+	'vip/js/directives/controls/vip-checkbox',
 	'vip/js/directives/controls/vip-link',
 	'vip/js/directives/controls/vip-textbox',
 	'vip/js/directives/vip-auto-grow-input',

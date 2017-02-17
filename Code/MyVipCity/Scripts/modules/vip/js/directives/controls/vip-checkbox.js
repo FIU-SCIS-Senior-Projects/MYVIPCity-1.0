@@ -1,7 +1,7 @@
 ﻿define(['vip/js/vip', 'jquery', 'angular'], function (vip, jQuery, angular) {
 	'use strict';
 
-	vip.directive('vipTextbox', ['vipControlRenderingService', function (vipControlRenderingService) {
+	vip.directive('vipCheckbox', ['vipControlRenderingService', function (vipControlRenderingService) {
 		return {
 			restrict: 'ACE',
 
@@ -17,10 +17,10 @@
 				var controlRenderingService = vipControlRenderingService(scope, element);
 
 				ngModelCtrl.$render = function () {
-					scope._text = ngModelCtrl.$viewValue;
+					scope._value = ngModelCtrl.$viewValue;
 				};
 
-				listeners.push(scope.$watch('_text', function (value) {
+				listeners.push(scope.$watch('_value', function (value) {
 					ngModelCtrl.$setViewValue(value);
 				}));
 
@@ -28,7 +28,7 @@
 					// tag to wrap the read only text
 					var tag = attrs.wrapWith || 'span';
 					// create the read mode element
-					var readElement = angular.element('<' + tag + '>{{_text}}</' + tag + '>');
+					var readElement = angular.element('<' + tag + '>{{(!!_value ? "Yes" : "No")}}</' + tag + '>');
 					// add css class
 					if (attrs.readModeClass)
 						readElement.addClass(attrs.readModeClass);
@@ -38,13 +38,10 @@
 
 				controlRenderingService.setCreateEditModeElementFunction(function () {
 					// create edit mode element
-					var editElement = angular.element('<input placeholder="' + (attrs.placeholder || '') + '" ng-model="_text"' + (!!attrs.autoGrow ? ' vip-auto-grow-input' : '') + '/>');
+					var editElement = angular.element('<div class="checkbox"><input type="checkbox" ng-model="_value" value="true"/><i class="input-helper inline-block"></i></div>');
 					// add css class
 					if (attrs.editModeClass)
 						editElement.addClass(attrs.editModeClass);
-					// set input type
-					var inputType = attrs.type || 'text';
-					editElement.attr('type', inputType);
 					// return element
 					return editElement;
 				});

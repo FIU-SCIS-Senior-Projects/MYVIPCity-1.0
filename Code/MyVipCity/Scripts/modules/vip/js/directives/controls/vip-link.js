@@ -30,22 +30,22 @@
 
 				controlRenderingService.setCreateReadModeElementFunction(function () {
 					// create the read mode element
-					var element = angular.element('<a href="{{_link}}" target="_blank">{{_link}}</a>');
+					var readElement = angular.element('<a href="{{_link}}" target="_blank">{{_link}}</a>');
 					// add css class
 					if (attrs.readModeClass)
-						element.addClass(attrs.readModeClass);
+						readElement.addClass(attrs.readModeClass);
 					// return element
-					return element;
+					return readElement;
 				});
 
 				controlRenderingService.setCreateEditModeElementFunction(function () {
 					// create edit mode element
-					var element = angular.element('<input type="text" placeholder="' + (attrs.placeholder || '') + '" ng-model="_link" ng-model-options="{updateOn: \'blur\'}"' + (!!attrs.autoGrow ? ' vip-auto-grow-input' : '') + '/>');
+					var editElement = angular.element('<input type="text" placeholder="' + (attrs.placeholder || '') + '" ng-model="_link" ng-model-options="{updateOn: \'blur\'}"' + (!!attrs.autoGrow ? ' vip-auto-grow-input' : '') + '/>');
 					// add css class
 					if (attrs.editModeClass)
-						element.addClass(attrs.editModeClass);
+						editElement.addClass(attrs.editModeClass);
 					// return element
-					return element;
+					return editElement;
 				});
 
 				listeners.push(scope.$watch('$parent.renderingMode', function (value) {

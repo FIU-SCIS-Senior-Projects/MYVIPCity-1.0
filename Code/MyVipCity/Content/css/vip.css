@@ -1,6 +1,7 @@
 .inline-block {
   display: inline-block;
 }
-.vip-business-info .vip-business-info__list div[vip-textbox] {
+.vip-business-info .vip-business-info__list div[vip-textbox],
+.vip-business-info .vip-business-info__list div[vip-checkbox] {
   display: inline-block;
 }
