@@ -14,7 +14,7 @@
 				Phone: '305-000-0000',
 				WebsiteUrl: 'http://www.google.com',
 				GoodForDancing: true,
-				Details: '<strong>Hello</strong> World'
+				Details: '<h1><strong>Hello</strong> World</h1>'
 			};
 		};
 

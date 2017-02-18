@@ -15211,27 +15211,5 @@ html:not(.ie9) .page-loader__spinner {
 /* Trumbowyg */
 .trumbowyg-box,
 .trumbowyg-editor {
-  border: 0;
   margin: 0;
-}
-.trumbowyg-button-pane {
-  background-color: #fff;
-  border-bottom-color: #f1f1f1;
-  padding: 0 10px;
-}
-.trumbowyg-button-pane:after {
-  display: none;
-}
-.trumbowyg-button-pane button {
-  margin: 0;
-  height: 45px;
-}
-.trumbowyg-button-pane .trumbowyg-button-group:not(:empty) + .trumbowyg-button-group:before {
-  background: #f1f1f1;
-  height: 100%;
-}
-@media (max-width: 767px) {
-  .trumbowyg-button-pane .trumbowyg-button-group:not(:empty) + .trumbowyg-button-group:before {
-    display: none;
-  }
 }
