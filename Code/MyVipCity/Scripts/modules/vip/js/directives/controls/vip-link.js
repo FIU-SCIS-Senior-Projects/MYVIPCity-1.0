@@ -53,6 +53,7 @@
 				}));
 
 				listeners.push(scope.$on('$destroy', function () {
+					controlRenderingService.destroy();
 					// unregister listeners
 					for (var i = 0; i < listeners.length; i++)
 						listeners[i]();

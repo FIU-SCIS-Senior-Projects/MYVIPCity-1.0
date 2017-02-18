@@ -67,6 +67,13 @@
 
 				setCreateEditModeElementFunction: function (fn) {
 					this.$$createEditModeElementFn = fn;
+				},
+
+				destroy: function() {
+					this.$$editModeElement = null;
+					this.$$readModeElement = null;
+					this.$$createReadModeElementFn = null;
+					this.$$createEditModeElementFn = null;
 				}
 			};
 		};

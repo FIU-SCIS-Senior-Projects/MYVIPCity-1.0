@@ -15,9 +15,11 @@
     <link href="~/Scripts/vendors/bower_components/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- CSS animations -->
     <link rel="stylesheet" href="~/Scripts/vendors/bower_components/animate.css/animate.min.css">
+    <!-- Trumbowyg  -->
+    <link rel="stylesheet" href="~/Scripts/vendors/bower_components/trumbowyg/dist/ui/trumbowyg.min.css">
+
     <!-- Site -->
-    <link rel="stylesheet" href="~/Content/css/app_1.min.css">
-    <link rel="stylesheet" href="~/Content/css/app_2.min.css">
+    <link rel="stylesheet" href="~/Content/css/app.min.css">
     <link rel="stylesheet" href="~/Content/css/vip.min.css">
     <!-- Page Loader JS -->
     @*<script src="~/Scripts/app/page-loader.js" async></script>*@
@@ -182,11 +184,13 @@
                 'angular-resource': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-resource/angular-resource.min")',
                 'angular-messages': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-messages/angular-messages.min")',
                 'angular-route': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-route/angular-route.min")',
+                'angular-sanitize': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-sanitize/angular-sanitize.min")',
                 'bootstrap': '@Scripts.Url("~/Scripts/vendors/bower_components/bootstrap/dist/js/bootstrap.min")',
                 'waves': '@Scripts.Url("~/Scripts/vendors/bower_components/Waves/dist/waves.min")',
                 'sweet-alert': '@Scripts.Url("~/Scripts/vendors/bower_components/sweetalert2/dist/sweetalert2.min")',
                 'es6-promise': '@Scripts.Url("~/Scripts/vendors/bower_components/es6-promise/es6-promise.min")',
                 'jquery-auto-grow-input': '@Scripts.Url("~/Scripts/vendors/bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min")',
+                'trumbowyg': '@Scripts.Url("~/Scripts/vendors/bower_components/trumbowyg/dist/trumbowyg.min")',
 
                 'myVipCityConfig': '@Scripts.Url("~/Configuration/JsConfig?x=0")',
                 'app': '@Scripts.Url("~/Scripts/app/app.min")'
@@ -211,6 +215,9 @@
                 'angular-route': {
                     deps: ['angular']
                 },
+                'angular-sanitize': {
+                    deps: ['angular']
+                },
                 'bootstrap': {
                     deps: ['jquery']
                 },
@@ -224,7 +231,9 @@
                 'jquery-auto-grow-input': {
                     deps: ['jquery']
                 },
-
+                'trumbowyg': {
+                    deps: ['jquery']
+                },
                 'app': {
                     deps: ['jquery']
                 },

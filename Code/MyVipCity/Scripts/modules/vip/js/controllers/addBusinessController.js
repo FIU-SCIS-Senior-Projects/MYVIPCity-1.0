@@ -13,7 +13,8 @@
 				Alcohol: 'Fullbar',
 				Phone: '305-000-0000',
 				WebsiteUrl: 'http://www.google.com',
-				GoodForDancing: true
+				GoodForDancing: true,
+				Details: '<strong>Hello</strong> World'
 			};
 		};
 

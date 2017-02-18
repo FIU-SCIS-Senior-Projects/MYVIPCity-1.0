@@ -16,7 +16,7 @@
 
 	var r = requirejs.config(config);
 
-	r(['jquery', 'angular', 'vip', 'bootstrap', 'waves', 'app'], function (jQuery, angular, vip) {
+	r(['jquery', 'angular', 'vip', 'bootstrap', 'waves', 'app', 'trumbowyg'], function (jQuery, angular, vip) {
 		angular.bootstrap(document, [vip.name]);
 
 		// TODO Encapsulate this

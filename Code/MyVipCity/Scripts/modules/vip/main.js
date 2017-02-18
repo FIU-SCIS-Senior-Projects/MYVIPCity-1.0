@@ -14,6 +14,7 @@
 	'vip/js/directives/controls/vip-checkbox',
 	'vip/js/directives/controls/vip-link',
 	'vip/js/directives/controls/vip-textbox',
+	'vip/js/directives/controls/vip-wysiwyg',
 	'vip/js/directives/vip-auto-grow-input',
 	'vip/js/directives/vip-match',
 	'vip/js/directives/vip-mvc-antiforgery-token',
