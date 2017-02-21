@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="~/Scripts/vendors/bower_components/animate.css/animate.min.css">
     <!-- Trumbowyg  -->
     <link rel="stylesheet" href="~/Scripts/vendors/bower_components/trumbowyg/dist/ui/trumbowyg.min.css">
-
+    <!-- Angular material  -->
+    <link rel="stylesheet" href="~/Scripts/vendors/bower_components/angular-material/angular-material.min.css">
     <!-- Site -->
     <link rel="stylesheet" href="~/Content/css/app.min.css">
     <link rel="stylesheet" href="~/Content/css/vip.min.css">
@@ -185,6 +186,8 @@
                 'angular-messages': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-messages/angular-messages.min")',
                 'angular-route': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-route/angular-route.min")',
                 'angular-sanitize': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-sanitize/angular-sanitize.min")',
+                'angular-material': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-material/angular-material.min")',
+                'angular-aria': '@Scripts.Url("~/Scripts/vendors/bower_components/angular-aria/angular-aria.min")',
                 'bootstrap': '@Scripts.Url("~/Scripts/vendors/bower_components/bootstrap/dist/js/bootstrap.min")',
                 'waves': '@Scripts.Url("~/Scripts/vendors/bower_components/Waves/dist/waves.min")',
                 'sweet-alert': '@Scripts.Url("~/Scripts/vendors/bower_components/sweetalert2/dist/sweetalert2.min")',
@@ -217,6 +220,12 @@
                 },
                 'angular-sanitize': {
                     deps: ['angular']
+                },
+                'angular-aria': {
+                    deps: ['angular']
+                },
+                'angular-material': {
+                    deps: ['angular', 'angular-aria']
                 },
                 'bootstrap': {
                     deps: ['jquery']

@@ -13,6 +13,7 @@
 	// directives
 	'vip/js/directives/controls/vip-checkbox',
 	'vip/js/directives/controls/vip-link',
+	'vip/js/directives/controls/vip-tags',
 	'vip/js/directives/controls/vip-textbox',
 	'vip/js/directives/controls/vip-wysiwyg',
 	'vip/js/directives/vip-auto-grow-input',
@@ -20,9 +21,10 @@
 	'vip/js/directives/vip-mvc-antiforgery-token',
 	'vip/js/directives/vip-navigation-menu',
 	// services
+	'vip/js/services/vipColorsService',
 	'vip/js/services/vipControlRenderingService',
-	'vip/js/services/vipServerErrorProcessorService'
-
+	'vip/js/services/vipServerErrorProcessorService',
+	'vip/js/services/vipUtilsService'
 ], function (require, angular, vip) {
 	return vip;
 });

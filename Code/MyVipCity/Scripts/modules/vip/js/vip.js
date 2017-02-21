@@ -1,7 +1,7 @@
-﻿define(['angular', 'angular-resource', 'angular-messages', 'angular-animate', 'angular-route', 'angular-sanitize'], function (angular) {
+﻿define(['angular', 'angular-resource', 'angular-messages', 'angular-animate', 'angular-route', 'angular-sanitize', 'angular-material'], function (angular) {
 	'use strict';
 
-	var vipModule = angular.module('vip', ['ng', 'ngResource', 'ngMessages', 'ngAnimate', 'ngRoute', 'ngSanitize']);
+	var vipModule = angular.module('vip', ['ng', 'ngResource', 'ngMessages', 'ngAnimate', 'ngRoute', 'ngSanitize', 'ngMaterial']);
 
 	vipModule.renderingModes = {
 		read: 1,

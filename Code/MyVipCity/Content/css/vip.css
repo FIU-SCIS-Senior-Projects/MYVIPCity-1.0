@@ -5,3 +5,6 @@
 .vip-business-info .vip-business-info__list div[vip-checkbox] {
   display: inline-block;
 }
+.detail-amenities__list li {
+  margin-right: 4px;
+}

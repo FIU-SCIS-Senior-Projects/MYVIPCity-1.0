@@ -14,7 +14,9 @@
 				Phone: '305-000-0000',
 				WebsiteUrl: 'http://www.google.com',
 				GoodForDancing: true,
-				Details: '<h1><strong>Hello</strong> World</h1>'
+				Details: '<h1><strong>Hello</strong> World</h1>',
+				Amenities: 'FULL-TIME DOORMAN,RIVER VIEWS,COMMON ,ROOF DECK,CITY VIEWS,GYM,SAUNA,OPEN VIEWS,BASKETBALL COURT,POOL',
+				AmenitiesPhrase: 'These are just some of the cool things you can experience in this club'
 			};
 		};
 

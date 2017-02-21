@@ -55,5 +55,41 @@
 			get;
 			set;
 		}
+
+		/// <summary>
+		/// Indicates whether or not the business is good for dancing.
+		/// </summary>
+		public bool GoodForDancing
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Details of the business.
+		/// </summary>
+		public string Details
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// List of amenities separated by comma(,).
+		/// </summary>
+		public string Amenities
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// A small phrase to introduce the <see cref="Amenities"/>.
+		/// </summary>
+		public string AmenitiesPhrase
+		{
+			get;
+			set;
+		}
 	}
 }

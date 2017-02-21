@@ -130,20 +130,12 @@
             <div class="card detail-amenities">
                 <div class="card__header">
                     <h2>Amenities</h2>
-                    <small>Maecenas seddiam eget risus varius blandit sitamet nonmagna</small>
+                    <!--Amenities Phrase-->
+                    <div vip-textbox ng-model="model.AmenitiesPhrase" placeholder="Amenties Phrase" wrap-with="small" edit-mode-class="small text-center" auto-grow="true"></div>
                 </div>
                 <div class="card__body">
-                    <ul class="detail-amenities__list">
-                        <li class="mdc-bg-red-300">Full-Time Doorman</li>
-                        <li class="mdc-bg-purple-300">River Views</li>
-                        <li class="mdc-bg-pink-300">Common Roof Deck</li>
-                        <li class="mdc-bg-light-blue-500">City Views</li>
-                        <li class="mdc-bg-amber-400">Gym</li>
-                        <li class="mdc-bg-teal-400">Sauna</li>
-                        <li class="mdc-bg-light-green-500">Open Views</li>
-                        <li class="mdc-bg-brown-400">Basketball Court</li>
-                        <li class="mdc-bg-blue-grey-400">Pool</li>
-                    </ul>
+                    <!--Amenities-->
+                    <div vip-tags ng-model="model.Amenities" read-mode-class="detail-amenities__list" placeholder="Add an amenity..."></div>
                 </div>
             </div>
             <div class="card">
