@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="~/Scripts/vendors/bower_components/trumbowyg/dist/ui/trumbowyg.min.css">
     <!-- Angular material  -->
     <link rel="stylesheet" href="~/Scripts/vendors/bower_components/angular-material/angular-material.min.css">
+    <!-- Jt Timepicker -->
+    <link rel="stylesheet" href="~/Scripts/vendors/bower_components/jt.timepicker/jquery.timepicker.css">
+
     <!-- Site -->
     <link rel="stylesheet" href="~/Content/css/app.min.css">
     <link rel="stylesheet" href="~/Content/css/vip.min.css">
@@ -194,6 +197,8 @@
                 'es6-promise': '@Scripts.Url("~/Scripts/vendors/bower_components/es6-promise/es6-promise.min")',
                 'jquery-auto-grow-input': '@Scripts.Url("~/Scripts/vendors/bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min")',
                 'trumbowyg': '@Scripts.Url("~/Scripts/vendors/bower_components/trumbowyg/dist/trumbowyg.min")',
+                'moment': '@Scripts.Url("~/Scripts/vendors/bower_components/moment/min/moment.min")',
+                'jtTimePicker': '@Scripts.Url("~/Scripts/vendors/bower_components/jt.timepicker/jquery.timepicker.min")',
 
                 'myVipCityConfig': '@Scripts.Url("~/Configuration/JsConfig?x=0")',
                 'app': '@Scripts.Url("~/Scripts/app/app.min")'
@@ -242,6 +247,12 @@
                 },
                 'trumbowyg': {
                     deps: ['jquery']
+                },
+                'jtTimePicker': {
+                    deps: ['jquery']
+                },
+                'mdPickers': {
+                    deps: ['angular', 'angular-material', 'moment']
                 },
                 'app': {
                     deps: ['jquery']

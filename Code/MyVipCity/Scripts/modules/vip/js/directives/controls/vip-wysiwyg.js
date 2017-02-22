@@ -7,10 +7,8 @@
 
 			require: 'ngModel',
 
-			// isolated scope
-			scope: {
-				ngModel: '='
-			},
+			// new scope
+			scope: true,
 
 			link: function (scope, element, attrs, ngModelCtrl) {
 				var listeners = [];
@@ -24,7 +22,7 @@
 
 				controlRenderingService.setCreateReadModeElementFunction(function () {
 					// create the read mode element
-					var readElement = angular.element('<div ng-bind-html="ngModel"></div>');
+					var readElement = angular.element('<div ng-bind-html="' + attrs.ngModel + '"></div>');
 					// add css class
 					if (attrs.readModeClass)
 						readElement.addClass(attrs.readModeClass);
@@ -57,7 +55,7 @@
 					return editElement;
 				});
 
-				listeners.push(scope.$watch('$parent.renderingMode', function (value) {
+				listeners.push(scope.$watch('renderingMode', function (value) {
 					controlRenderingService.setRenderingMode(value);
 				}));
 

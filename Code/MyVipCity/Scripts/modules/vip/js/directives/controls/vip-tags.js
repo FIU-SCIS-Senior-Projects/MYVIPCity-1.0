@@ -7,9 +7,8 @@
 
 			require: 'ngModel',
 
-			// isolated scope
-			scope: {
-			},
+			// new scope
+			scope: true,
 
 			controller: ['$scope', function ($scope) {
 				// get all the color names
@@ -70,7 +69,7 @@
 					return editElement;
 				});
 
-				listeners.push(scope.$watch('$parent.renderingMode', function (value) {
+				listeners.push(scope.$watch('renderingMode', function (value) {
 					controlRenderingService.setRenderingMode(value);
 				}));
 

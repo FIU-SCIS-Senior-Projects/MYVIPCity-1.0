@@ -16,7 +16,45 @@
 				GoodForDancing: true,
 				Details: '<h1><strong>Hello</strong> World</h1>',
 				Amenities: 'FULL-TIME DOORMAN,RIVER VIEWS,COMMON ,ROOF DECK,CITY VIEWS,GYM,SAUNA,OPEN VIEWS,BASKETBALL COURT,POOL',
-				AmenitiesPhrase: 'These are just some of the cool things you can experience in this club'
+				AmenitiesPhrase: 'These are just some of the cool things you can experience in this club',
+
+				WeekHours: {
+					Monday: {
+						Day: 1,
+						OpenTime: '2017-02-21T10:00:00',
+						CloseTime: new Date()
+					},
+					Tuesday: {
+						Day: 2,
+						OpenTime: '2017-02-21T10:00:00',
+						CloseTime: new Date()
+					},
+					Wednesday: {
+						Day: 3,
+						OpenTime: '2017-02-21T10:00:00',
+						CloseTime: new Date()
+					},
+					Thursday: {
+						Day: 4,
+						OpenTime: '2017-02-21T10:00:00',
+						CloseTime: new Date()
+					},
+					Friday: {
+						Day: 5,
+						OpenTime: '2017-02-21T10:00:00',
+						CloseTime: new Date()
+					},
+					Saturday: {
+						Day: 6,
+						OpenTime: '2017-02-21T10:00:00',
+						CloseTime: new Date()
+					},
+					Sunday: {
+						Day: 0,
+						OpenTime: '2017-02-21T10:00:00',
+						CloseTime: new Date()
+					}
+				}
 			};
 		};
 

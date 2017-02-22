@@ -16,7 +16,10 @@
 
 	var r = requirejs.config(config);
 
-	r(['jquery', 'angular', 'vip', 'bootstrap', 'waves', 'app', 'trumbowyg'], function (jQuery, angular, vip) {
+	r(['jquery', 'angular', 'vip', 'moment', 'bootstrap', 'waves', 'app', 'trumbowyg'], function (jQuery, angular, vip, moment) {
+		// add moment to global scope to keep compatibility with some libraries like mdPickers
+		window.moment = moment;
+
 		angular.bootstrap(document, [vip.name]);
 
 		// TODO Encapsulate this

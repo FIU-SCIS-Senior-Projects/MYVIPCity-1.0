@@ -7,28 +7,20 @@
 
 			require: 'ngModel',
 
-			// isolated scope
-			scope: {},
+			// new scope
+			scope: true,
 
-			link: function (scope, element, attrs, ngModelCtrl) {
+			link: function (scope, element, attrs) {
 				var listeners = [];
 
 				// instantiate a control rendering service
 				var controlRenderingService = vipControlRenderingService(scope, element);
 
-				ngModelCtrl.$render = function () {
-					scope._text = ngModelCtrl.$viewValue;
-				};
-
-				listeners.push(scope.$watch('_text', function (value) {
-					ngModelCtrl.$setViewValue(value);
-				}));
-
 				controlRenderingService.setCreateReadModeElementFunction(function () {
 					// tag to wrap the read only text
 					var tag = attrs.wrapWith || 'span';
 					// create the read mode element
-					var readElement = angular.element('<' + tag + '>{{_text}}</' + tag + '>');
+					var readElement = angular.element('<' + tag + '>{{' + attrs.ngModel + '}}</' + tag + '>');
 					// add css class
 					if (attrs.readModeClass)
 						readElement.addClass(attrs.readModeClass);
@@ -38,7 +30,7 @@
 
 				controlRenderingService.setCreateEditModeElementFunction(function () {
 					// create edit mode element
-					var editElement = angular.element('<input placeholder="' + (attrs.placeholder || '') + '" ng-model="_text"' + (!!attrs.autoGrow ? ' vip-auto-grow-input' : '') + '/>');
+					var editElement = angular.element('<input placeholder="' + (attrs.placeholder || '') + '" ng-model="' + attrs.ngModel + '"' + (!!attrs.autoGrow ? ' vip-auto-grow-input' : '') + '/>');
 					// add css class
 					if (attrs.editModeClass)
 						editElement.addClass(attrs.editModeClass);
@@ -49,7 +41,7 @@
 					return editElement;
 				});
 
-				listeners.push(scope.$watch('$parent.renderingMode', function (value) {
+				listeners.push(scope.$watch('renderingMode', function (value) {
 					controlRenderingService.setRenderingMode(value);
 				}));
 

@@ -12,9 +12,12 @@
 	'vip/js/controllers/registerFormController',
 	// directives
 	'vip/js/directives/controls/vip-checkbox',
+	'vip/js/directives/controls/vip-day-hours',
 	'vip/js/directives/controls/vip-link',
 	'vip/js/directives/controls/vip-tags',
 	'vip/js/directives/controls/vip-textbox',
+	'vip/js/directives/controls/vip-time-picker',
+	'vip/js/directives/controls/vip-week-hours',
 	'vip/js/directives/controls/vip-wysiwyg',
 	'vip/js/directives/vip-auto-grow-input',
 	'vip/js/directives/vip-match',

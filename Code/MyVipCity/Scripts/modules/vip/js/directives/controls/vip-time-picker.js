@@ -1,7 +1,7 @@
-﻿define(['vip/js/vip', 'jquery', 'angular'], function (vip, jQuery, angular) {
+﻿define(['vip/js/vip', 'jquery', 'angular', 'moment', 'jtTimePicker'], function (vip, jQuery, angular, moment) {
 	'use strict';
 
-	vip.directive('vipLink', ['vipControlRenderingService', function (vipControlRenderingService) {
+	vip.directive('vipTimePicker', ['vipControlRenderingService', function (vipControlRenderingService) {
 		return {
 			restrict: 'ACE',
 
@@ -9,28 +9,22 @@
 
 			// new scope
 			scope: true,
-
+			
 			link: function (scope, element, attrs, ngModelCtrl) {
 				var listeners = [];
-				scope._link = null;
+
 				// instantiate a control rendering service
 				var controlRenderingService = vipControlRenderingService(scope, element);
 
-				ngModelCtrl.$render = function () {
-					scope._link = ngModelCtrl.$viewValue;
+				ngModelCtrl.$render = function() {
+					scope._time = moment(ngModelCtrl.$viewValue).toDate();
 				};
-				
-				listeners.push(scope.$watch('_link', function (value) {
-					// if the link does not start with either http:// or https
-					if (value && value.indexOf('https://') !== 0 && value.indexOf('http://') !== 0)
-						value='http://' + value;
-					ngModelCtrl.$setViewValue(value);
-					scope._link = value;
-				}));
 
 				controlRenderingService.setCreateReadModeElementFunction(function () {
+					// tag to wrap the read only text
+					var tag = attrs.wrapWith || 'span';
 					// create the read mode element
-					var readElement = angular.element('<a href="{{_link}}" target="_blank">{{_link}}</a>');
+					var readElement = angular.element('<' + tag + '>{{_time | date:"h:mm a"}}</' + tag + '>');
 					// add css class
 					if (attrs.readModeClass)
 						readElement.addClass(attrs.readModeClass);
@@ -40,10 +34,31 @@
 
 				controlRenderingService.setCreateEditModeElementFunction(function () {
 					// create edit mode element
-					var editElement = angular.element('<input type="text" placeholder="' + (attrs.placeholder || '') + '" ng-model="_link" ng-model-options="{updateOn: \'blur\'}"' + (!!attrs.autoGrow ? ' vip-auto-grow-input' : '') + '/>');
+					var editElement = angular.element('<input type="text" ' + (attrs.placeholder ? ' placeholder="' + attrs.placeholder + '"' : '') + '/>');
+					jQuery(editElement)
+						.timepicker()
+						.on('change', function(e) {
+							var time = jQuery(e.target).timepicker('getTime');
+							scope._time = time;
+							if (time) {
+								var isoDate = moment(time).toISOString();
+								// TODO: fix UTC
+								ngModelCtrl.$setViewValue(isoDate);
+							}
+							else {
+								ngModelCtrl.$setViewValue(null);
+							}
+						});
+
+					if (ngModelCtrl.$viewValue) {
+						var timeToSet = moment(ngModelCtrl.$viewValue).toDate();
+						jQuery(editElement).timepicker('setTime', timeToSet);
+					}
+
 					// add css class
 					if (attrs.editModeClass)
 						editElement.addClass(attrs.editModeClass);
+
 					// return element
 					return editElement;
 				});

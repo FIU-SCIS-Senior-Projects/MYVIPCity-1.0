@@ -7,28 +7,20 @@
 
 			require: 'ngModel',
 
-			// isolated scope
-			scope: {},
+			// new scope
+			scope: true,
 
-			link: function (scope, element, attrs, ngModelCtrl) {
+			link: function (scope, element, attrs) {
 				var listeners = [];
 
 				// instantiate a control rendering service
 				var controlRenderingService = vipControlRenderingService(scope, element);
 
-				ngModelCtrl.$render = function () {
-					scope._value = ngModelCtrl.$viewValue;
-				};
-
-				listeners.push(scope.$watch('_value', function (value) {
-					ngModelCtrl.$setViewValue(value);
-				}));
-
 				controlRenderingService.setCreateReadModeElementFunction(function () {
 					// tag to wrap the read only text
 					var tag = attrs.wrapWith || 'span';
 					// create the read mode element
-					var readElement = angular.element('<' + tag + '>{{(!!_value ? "Yes" : "No")}}</' + tag + '>');
+					var readElement = angular.element('<' + tag + '>{{(!!' + attrs.ngModel + ' ? "Yes" : "No")}}</' + tag + '>');
 					// add css class
 					if (attrs.readModeClass)
 						readElement.addClass(attrs.readModeClass);
@@ -38,7 +30,7 @@
 
 				controlRenderingService.setCreateEditModeElementFunction(function () {
 					// create edit mode element
-					var editElement = angular.element('<div class="checkbox"><input type="checkbox" ng-model="_value" value="true"/><i class="input-helper inline-block"></i></div>');
+					var editElement = angular.element('<div class="checkbox"><input type="checkbox" ng-model="' + attrs.ngModel + '" value="true"/><i class="input-helper inline-block"></i></div>');
 					// add css class
 					if (attrs.editModeClass)
 						editElement.addClass(attrs.editModeClass);
@@ -46,7 +38,7 @@
 					return editElement;
 				});
 
-				listeners.push(scope.$watch('$parent.renderingMode', function (value) {
+				listeners.push(scope.$watch('renderingMode', function (value) {
 					controlRenderingService.setRenderingMode(value);
 				}));
 

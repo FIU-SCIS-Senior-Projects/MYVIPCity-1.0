@@ -408,6 +408,9 @@
     <Content Include="Scripts\modules\vip\js\controllers\loginFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-week-hours.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-time-picker.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-day-hours.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-tags.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-wysiwyg.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-checkbox.js" />
@@ -1266,6 +1269,17 @@
     <Content Include="Scripts\vendors\bower_components\jssocials\dist\jssocials.min.js" />
     <Content Include="Scripts\vendors\bower_components\jssocials\src\jssocials.js" />
     <Content Include="Scripts\vendors\bower_components\jssocials\src\jssocials.shares.js" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\GruntFile.js" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\index.html" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\jquery.timepicker.css" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\jquery.timepicker.js" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\jquery.timepicker.min.js" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\lib\bootstrap-datepicker.css" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\lib\bootstrap-datepicker.js" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\lib\glyphicons-halflings.png" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\lib\screenshot.png" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\lib\site.css" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\lib\site.js" />
     <Content Include="Scripts\vendors\bower_components\lightgallery\demo\img\1-1600.jpg" />
     <Content Include="Scripts\vendors\bower_components\lightgallery\demo\img\1-375.jpg" />
     <Content Include="Scripts\vendors\bower_components\lightgallery\demo\img\1-480.jpg" />
@@ -5462,6 +5476,12 @@
     <Content Include="Scripts\vendors\bower_components\angular-material\modules\scss\angular-material.scss" />
     <Content Include="Scripts\vendors\bower_components\angular-material\package.json" />
     <Content Include="Scripts\vendors\bower_components\angular-material\README.md" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\.bower.json" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\.gitignore" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\bower.json" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\jt.timepicker.jquery.json" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\package.json" />
+    <Content Include="Scripts\vendors\bower_components\jt.timepicker\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5496,6 +5516,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\vendors\bower_components\jt.timepicker\jquery.timepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\vendors\bower_components\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>

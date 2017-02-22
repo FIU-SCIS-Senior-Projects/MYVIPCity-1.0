@@ -4,14 +4,39 @@
 
 .vip-business-info {
     .vip-business-info__list {
-        div[vip-textbox], div[vip-checkbox] {
+        div[vip-textbox], div[vip-checkbox], div[vip-time-picker] {
             .inline-block
+        }
+
+        div[vip-time-picker] {
+            input.ui-timepicker-input {
+                width: 70px;
+            }
+        }
+
+        div[vip-day-hours] {
+            .vip-day-hours__read-mode-container{
+                margin-bottom: 3px;
+            }
+        }
+
+        span.vip-business-info__list-hours-label {
+            width: 50px;
         }
     }
 }
 
-.detail-amenities__list{
-    li{
+.detail-amenities__list {
+    li {
         margin-right: 4px;
     }
+}
+
+.vip-day-hours__day {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.vip-day-hours__closed {
+    margin-right: 5px;
 }
