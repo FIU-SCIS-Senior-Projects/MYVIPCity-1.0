@@ -24,9 +24,10 @@
 						'<div class="vip-day-hours__read-mode-container">' +
 							'<span class="vip-day-hours__day">{{locale.DATETIME_FORMATS.SHORTDAY[' + attrs.ngModel + '.Day]}}</span>' +
 							'<div vip-time-picker ng-model="' + attrs.ngModel + '.OpenTime" placeholder="Open Time" wrap-with="span" ng-hide="' + attrs.ngModel + '.Closed"></div>' +
-							'<span ng-hide="' + attrs.ngModel + '.Closed"> - </span>' +
+							'<span ng-hide="' + attrs.ngModel + '.Closed || !' + attrs.ngModel + '.OpenTime || !' + attrs.ngModel + '.CloseTime"> - </span>' +
 							'<div vip-time-picker ng-model="' + attrs.ngModel + '.CloseTime" placeholder="Close Time" wrap-with="span" ng-hide="' + attrs.ngModel + '.Closed"></div>' +
 							'<span class="vip-day-hours__closed" ng-show="' + attrs.ngModel + '.Closed">Closed</span>' +
+							'<span class="vip-day-hours__open-24" ng-show="!' + attrs.ngModel + '.OpenTime && !' + attrs.ngModel + '.CloseTime && !' + attrs.ngModel + '.Closed">Opened 24 hours</span>' +
 						'</div>'
 					);
 					// add css class

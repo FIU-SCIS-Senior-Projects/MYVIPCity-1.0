@@ -15,44 +15,30 @@
 				WebsiteUrl: 'http://www.google.com',
 				GoodForDancing: true,
 				Details: '<h1><strong>Hello</strong> World</h1>',
-				Amenities: 'FULL-TIME DOORMAN,RIVER VIEWS,COMMON ,ROOF DECK,CITY VIEWS,GYM,SAUNA,OPEN VIEWS,BASKETBALL COURT,POOL',
+				Amenities: 'FULL-TIME DOORMAN,CITY VIEWS,SMOKING area, large dance floor, downtown view, ocean view, light effects, happy hour',
 				AmenitiesPhrase: 'These are just some of the cool things you can experience in this club',
 
 				WeekHours: {
 					Monday: {
-						Day: 1,
-						OpenTime: '2017-02-21T10:00:00',
-						CloseTime: new Date()
+						Day: 1
 					},
 					Tuesday: {
-						Day: 2,
-						OpenTime: '2017-02-21T10:00:00',
-						CloseTime: new Date()
+						Day: 2
 					},
 					Wednesday: {
-						Day: 3,
-						OpenTime: '2017-02-21T10:00:00',
-						CloseTime: new Date()
+						Day: 3
 					},
 					Thursday: {
-						Day: 4,
-						OpenTime: '2017-02-21T10:00:00',
-						CloseTime: new Date()
+						Day: 4
 					},
 					Friday: {
-						Day: 5,
-						OpenTime: '2017-02-21T10:00:00',
-						CloseTime: new Date()
+						Day: 5
 					},
 					Saturday: {
-						Day: 6,
-						OpenTime: '2017-02-21T10:00:00',
-						CloseTime: new Date()
+						Day: 6
 					},
 					Sunday: {
-						Day: 0,
-						OpenTime: '2017-02-21T10:00:00',
-						CloseTime: new Date()
+						Day: 0
 					}
 				}
 			};

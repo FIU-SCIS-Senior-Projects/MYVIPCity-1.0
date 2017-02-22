@@ -9,15 +9,15 @@
 
 			// new scope
 			scope: true,
-			
+
 			link: function (scope, element, attrs, ngModelCtrl) {
 				var listeners = [];
 
 				// instantiate a control rendering service
 				var controlRenderingService = vipControlRenderingService(scope, element);
 
-				ngModelCtrl.$render = function() {
-					scope._time = moment(ngModelCtrl.$viewValue).toDate();
+				ngModelCtrl.$render = function () {
+					scope._time = ngModelCtrl.$viewValue ? moment(ngModelCtrl.$viewValue).toDate() : null;
 				};
 
 				controlRenderingService.setCreateReadModeElementFunction(function () {
@@ -37,7 +37,7 @@
 					var editElement = angular.element('<input type="text" ' + (attrs.placeholder ? ' placeholder="' + attrs.placeholder + '"' : '') + '/>');
 					jQuery(editElement)
 						.timepicker()
-						.on('change', function(e) {
+						.on('change', function (e) {
 							var time = jQuery(e.target).timepicker('getTime');
 							scope._time = time;
 							if (time) {
