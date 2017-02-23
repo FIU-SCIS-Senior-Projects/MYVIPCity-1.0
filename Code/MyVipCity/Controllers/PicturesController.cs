@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Permissions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using MyVipCity.Models;
 using Ninject;
+using Ninject.Extensions.Logging;
 
 namespace MyVipCity.Controllers {
 
 	[RoutePrefix("api/Pictures")]
 	public class PicturesController: ApiController {
+
+		[Inject]
+		public ILogger Logger
+		{
+			get;
+			set;
+		}
 
 		[Inject]
 		public ApplicationDbContext DbContext
@@ -28,6 +34,7 @@ namespace MyVipCity.Controllers {
 
 		[HttpPost]
 		[Authorize]
+		// [EnableCors(origins: "*", headers: "*", methods: "*")]
 		[Route("")]
 		public async Task<IHttpActionResult> UploadImage() {
 			var imageContentTypes = new List<string> {
@@ -78,10 +85,12 @@ namespace MyVipCity.Controllers {
 						if (task.IsCanceled || task.IsFaulted) {
 							// check if there is an exception for the task
 							if (task.Exception != null) {
-								// TODO: Log the exception
+								// log the exception
+								Logger.Error(task.Exception.Message + "\n" + task.Exception.StackTrace);
+								// return error
 								return InternalServerError(task.Exception.InnerException ?? task.Exception);
 							}
-							// TODO: Log the fact that there was an unknown error
+							Logger.Error("Unknown error");
 							return InternalServerError();
 						}
 						// check if there is a list of allowed content types
@@ -127,10 +136,12 @@ namespace MyVipCity.Controllers {
 				if (task.IsFaulted || task.IsCanceled) {
 					// check we have an exception
 					if (task.Exception != null) {
-						// TODO: log error
+						// log exception
+						Logger.Error(task.Exception.Message + "\n" + task.Exception.StackTrace);
 						var exception = task.Exception.InnerException ?? task.Exception;
 						return InternalServerError(exception);
 					}
+					Logger.Error("Unknown error");
 					return InternalServerError();
 				}
 				uploadedFiles.Add(task.Result);
