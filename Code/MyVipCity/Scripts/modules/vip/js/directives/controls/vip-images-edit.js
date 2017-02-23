@@ -16,9 +16,9 @@
 				'<div>' +
 					'<div class="vip-image-preview">' +
 						'<ul class="vip-image-preview__img-list">' +
-							'<li ng-repeat="pic in files" class="id_{{pic.BinaryDataId}}">' +
-								 '<img class="vip-image-preview__img animated bounceIn" src="api/Pictures/{{pic.BinaryDataId}}" alt="{{pic.FileName}}"/>' +
-								 //'<div>Remove</div>' +
+							'<li ng-repeat="pic in files" class="id_{{pic.BinaryDataId}} animated bounceIn">' +
+								'<div class="vip-image-preview__remove-img"><i class="zmdi zmdi-close"></i></div>' +
+								 '<img class="vip-image-preview__img" src="api/Pictures/{{pic.BinaryDataId}}" alt="{{pic.FileName}}"/>' +
 							'</li>' +
 						'</ul>' +
 					'</div>' +
