@@ -51,23 +51,26 @@
                     <div></div>
                 </div>
             </div>
-        </div>d
+        </div>
     </header>
     <div class="row">
         <div class="col-md-8">
             <div class="card">
                 <div class="detail-media">
                     <div class="tab-content">
-                        <div class="tab-pane fade in active light-gallery list-unstyled justified-gallery" id="detail-media-images">
-                            <a href="~/Content/img/tempPics/1.jpg" target="_self">
-                                <img src="~/Content/img/tempPics/1.jpg" alt="">
-                            </a>
-                            <a href="~/Content/img/tempPics/2.jpg" target="_self">
-                                <img src="~/Content/img/tempPics/2.jpg" alt="">
-                            </a>
-                            <a href="~/Content/img/tempPics/3.jpg" target="_self">
-                                <img src="~/Content/img/tempPics/3.jpg" alt="">
-                            </a>
+                        <div class="tab-pane fade in active" id="detail-media-images">
+                            <div vip-images-edit ng-model="model.Images"></div>
+                            <div class="light-gallery list-unstyled justified-gallery">
+                                <a href="~/Content/img/tempPics/1.jpg" target="_self">
+                                    <img src="~/Content/img/tempPics/1.jpg" alt="">
+                                </a>
+                                <a href="~/Content/img/tempPics/2.jpg" target="_self">
+                                    <img src="~/Content/img/tempPics/2.jpg" alt="">
+                                </a>
+                                <a href="~/Content/img/tempPics/3.jpg" target="_self">
+                                    <img src="~/Content/img/tempPics/3.jpg" alt="">
+                                </a>
+                            </div>
                         </div>
                         <div class="tab-pane fade light-gallery" id="detail-media-floorplan">
                             <a href="img/demo/floor-plan.png">
@@ -86,7 +89,7 @@
                 </div>
                 <div class="detail-info vip-business-info">
                     <div>
-                        <div vip-images-edit ng-model="Images"></div>
+
                     </div>
                     <div class="detail-info__header clearfix">
                         <strong>Information</strong>

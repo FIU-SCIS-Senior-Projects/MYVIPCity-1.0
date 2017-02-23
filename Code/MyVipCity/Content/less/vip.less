@@ -64,26 +64,40 @@
         border-radius: 2px;
     }
 
-    .vip-image-preview__remove-img{
-        &:hover{
+    .vip-image-preview__remove-img {
+        &:hover {
             opacity: 0.9;
         }
-        i{
+
+        i {
             cursor: pointer;
-            &:hover{
-            transition: 0.5s;
-            transform: rotate(90deg);            
+
+            &:hover {
+                transition: 0.4s;
+                transform: rotate(90deg);
             }
         }
+
         border-top-left-radius: 2px;
         border-top-right-radius: 2px;
         text-align: right;
-        font-size:x-large;
-        padding-right:8px;
-        color:white;
+        font-size: x-large;
+        padding-right: 8px;
+        color: white;
         background-color: @mdc-grey-900;
-        opacity: 0.7;        
+        opacity: 0.7;
         position: relative;
         top: 34px;
+    }
+}
+
+.dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+
+    .dz-default.dz-message {
+        font-size: x-large;
+        font-weight: 400;
     }
 }

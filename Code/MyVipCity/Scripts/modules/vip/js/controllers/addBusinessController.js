@@ -40,7 +40,15 @@
 					Sunday: {
 						Day: 0
 					}
-				}
+				},
+
+				Images: [
+					{ "BinaryDataId": 438, "FileName": 'doral.jpg', "ContentType": "image/jpeg" },
+					{ "BinaryDataId": 429, "FileName": 'a', "ContentType": "image/jpeg" },
+					{ "BinaryDataId": 430, "FileName": 'a', "ContentType": "image/jpeg" },
+					{ "BinaryDataId": 431, "FileName": 'a', "ContentType": "image/jpeg" },
+					{ "BinaryDataId": 432, "FileName": 'a', "ContentType": "image/jpeg" }
+				]
 			};
 		};
 

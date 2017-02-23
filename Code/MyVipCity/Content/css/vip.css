@@ -3999,6 +3999,15 @@ a.mdc-text-black-darker:focus {
   cursor: pointer;
 }
 .vip-image-preview .vip-image-preview__remove-img i:hover {
-  transition: 0.5s;
+  transition: 0.4s;
   transform: rotate(90deg);
+}
+.dropzone {
+  border: 2px dashed #0087F7;
+  border-radius: 5px;
+  background: white;
+}
+.dropzone .dz-default.dz-message {
+  font-size: x-large;
+  font-weight: 400;
 }
