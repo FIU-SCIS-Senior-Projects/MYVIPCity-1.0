@@ -1,9 +1,9 @@
-﻿define(['vip/js/vip', 'jquery', 'angular', 'dropzone'], function (vip, jQuery, angular, dropzone) {
+﻿define(['vip/js/vip', 'jquery', 'angular', 'dropzone', 'sortable'], function (vip, jQuery, angular, dropzone, sortable) {
 	'use strict';
 
 	dropzone.autoDiscover = false;
 
-	vip.directive('vipImagesEdit', [function () {
+	vip.directive('vipImagesEdit', ['$timeout', function ($timeout) {
 		return {
 			restrict: 'ACE',
 
@@ -15,8 +15,8 @@
 			template:
 				'<div>' +
 					'<div class="vip-image-preview">' +
-						'<ul class="clearfix vip-image-preview__img-list">' +
-							'<li ng-repeat="pic in files">' +
+						'<ul class="vip-image-preview__img-list">' +
+							'<li ng-repeat="pic in files" class="id_{{pic.BinaryDataId}}">' +
 								 '<img class="vip-image-preview__img animated bounceIn" src="api/Pictures/{{pic.BinaryDataId}}" alt="{{pic.FileName}}"/>' +
 								 //'<div>Remove</div>' +
 							'</li>' +
@@ -31,6 +31,7 @@
 			link: function (scope, element, attrs) {
 				var listeners = [];
 
+				// TODO COmment code
 				// TODO: Remove this
 				jQuery('.light-gallery').lightGallery({
 					hash: false,
@@ -49,11 +50,31 @@
 							scope.$apply(function () {
 								scope.files.push.apply(scope.files, response);
 							});
+							$timeout(function() {
+								var animatedImages = element.find('img.animated');
+								animatedImages.removeClass('animated');
+							}, 1000, false);
 						});
 						// complete event handler
 						this.on('complete', function (file) {
 							this.removeFile(file);
 						});
+					}
+				});
+
+				var list = element.find('.vip-image-preview__img-list');
+				sortable.create(list[0], {
+					onUpdate: function (e) {
+						var newIndex = e.newIndex;
+						var oldIndex = e.oldIndex;
+						if (oldIndex < newIndex) {
+							scope.files.splice(newIndex + 1, 0, scope.files[oldIndex]);
+							scope.files.splice(oldIndex, 1);
+						}
+						else {
+							scope.files.splice(newIndex, 0, scope.files[oldIndex]);
+							scope.files.splice(oldIndex + 1, 1);
+						}
 					}
 				});
 

@@ -4720,6 +4720,26 @@
     <Content Include="Scripts\vendors\bower_components\slick-carousel\slick\slick.css" />
     <Content Include="Scripts\vendors\bower_components\slick-carousel\slick\slick.js" />
     <Content Include="Scripts\vendors\bower_components\slick-carousel\slick\slick.min.js" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\Gruntfile.js" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\index.html" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\jquery.binding.js" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\Sortable.js" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\Sortable.min.js" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\app.css" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\app.js" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\face-01.jpg" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\face-02.jpg" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\face-03.jpg" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\face-04.jpg" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\face-05.jpg" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\face-06.jpg" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\face-07.jpg" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\face-08.jpg" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\face-09.jpg" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\iframe\frame.html" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\iframe\index.html" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\logo.png" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\st\og-image.png" />
     <Content Include="Scripts\vendors\bower_components\sweetalert2\config\banner.js" />
     <Content Include="Scripts\vendors\bower_components\sweetalert2\config\utils.js" />
     <Content Include="Scripts\vendors\bower_components\sweetalert2\dist\sweetalert2.common.js" />
@@ -5505,6 +5525,16 @@
     <Content Include="Scripts\vendors\bower_components\dropzone\.bower.json" />
     <Content Include="Scripts\vendors\bower_components\dropzone\bower.json" />
     <Content Include="Scripts\vendors\bower_components\dropzone\dist\readme.md" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\.bower.json" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\.editorconfig" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\.gitignore" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\.jshintrc" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\bower.json" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\component.json" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\CONTRIBUTING.md" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\ISSUE_TEMPLATE.md" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\package.json" />
+    <Content Include="Scripts\vendors\bower_components\Sortable\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
