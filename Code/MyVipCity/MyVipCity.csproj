@@ -419,7 +419,9 @@
     <Content Include="Scripts\modules\vip\js\controllers\loginFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
-    <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-edit.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-control.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-gallery.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-upload.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-week-hours.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-time-picker.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-day-hours.js" />

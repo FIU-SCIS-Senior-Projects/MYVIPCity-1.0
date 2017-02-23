@@ -59,18 +59,9 @@
                 <div class="detail-media">
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="detail-media-images">
-                            <div vip-images-edit ng-model="model.Images"></div>
-                            <div class="light-gallery list-unstyled justified-gallery">
-                                <a href="~/Content/img/tempPics/1.jpg" target="_self">
-                                    <img src="~/Content/img/tempPics/1.jpg" alt="">
-                                </a>
-                                <a href="~/Content/img/tempPics/2.jpg" target="_self">
-                                    <img src="~/Content/img/tempPics/2.jpg" alt="">
-                                </a>
-                                <a href="~/Content/img/tempPics/3.jpg" target="_self">
-                                    <img src="~/Content/img/tempPics/3.jpg" alt="">
-                                </a>
-                            </div>
+                            @*<div vip-images-upload ng-model="model.Images"></div>
+                            <div vip-images-gallery ng-model="model.Images"></div>*@
+                            <div vip-images-control ng-model="model.Images"></div>
                         </div>
                         <div class="tab-pane fade light-gallery" id="detail-media-floorplan">
                             <a href="img/demo/floor-plan.png">

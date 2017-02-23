@@ -3,7 +3,7 @@
 
 	dropzone.autoDiscover = false;
 
-	vip.directive('vipImagesEdit', ['$timeout', function ($timeout) {
+	vip.directive('vipImagesUpload', ['$timeout', '$parse', function ($timeout, $parse) {
 		return {
 			restrict: 'ACE',
 
@@ -13,7 +13,6 @@
 			scope: true,
 
 			template:
-				'<div>' +
 					'<div class="vip-image-preview">' +
 						'<ul class="vip-image-preview__img-list">' +
 							'<li ng-repeat="pic in files" class="id_{{pic.BinaryDataId}} animated bounceIn">' +
@@ -21,27 +20,33 @@
 								 '<img class="vip-image-preview__img" src="api/Pictures/{{pic.BinaryDataId}}" alt="{{pic.FileName}}"/>' +
 							'</li>' +
 						'</ul>' +
-					'</div>' +
-					'<div class="vip-dropzone-container dropzone"></div>' +
-				'</div>',
+						'<div class="vip-dropzone-container dropzone"></div>' +
+					'</div>',
 
-			controller: ['$scope', function ($scope) {
-				$scope.files = [];
-			}],
 			link: function (scope, element, attrs, ngModelCtrl) {
 				var listeners = [];
 
 				ngModelCtrl.$render = function() {
 					scope.files = ngModelCtrl.$viewValue || [];
-				}
+				};
 
-				// TODO COmment code
-				// TODO: Remove this
-				jQuery('.light-gallery').lightGallery({
-					hash: false,
-					// galleryId: scope.$id,
-					thumbnail: true
-				});
+				var clearAnimations = function(waitTimeInSeconds) {
+					// wait 1 sec and remove the animated class this is to avoid the animation from being repeated when sorting the images)
+					$timeout(function() {
+						var animatedImages = element.find('.animated');
+						animatedImages.removeClass('animated');
+					}, waitTimeInSeconds || 1000, false);
+				};
+
+				clearAnimations(3000);
+
+				//// TODO COmment code
+				//// TODO: Remove this
+				//jQuery('.light-gallery').lightGallery({
+				//	hash: false,
+				//	galleryId: scope.$id,
+				//	thumbnail: true
+				//});
 
 				// find the element on which the dropzone jquery plugin will be initialized
 				var dropzoneElement = element.find('.vip-dropzone-container');
@@ -60,12 +65,10 @@
 								scope.files.push.apply(scope.files, response);
 								// update ngModel
 								ngModelCtrl.$setViewValue(scope.files);
+								$parse(attrs.ngModel).assign(scope, scope.files);
+
 							});
-							// wait 1 sec and remove the animated class this is to avoid the animation from being repeated when sorting the images)
-							$timeout(function () {
-								var animatedImages = element.find('.animated');
-								animatedImages.removeClass('animated');
-							}, 1000, false);
+							clearAnimations();
 						});
 						// complete event handler
 						this.on('complete', function (file) {

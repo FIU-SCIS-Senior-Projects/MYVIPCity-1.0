@@ -3963,9 +3963,6 @@ a.mdc-text-black-darker:focus {
 .vip-day-hours__closed {
   margin-right: 5px;
 }
-.vip-image-preview {
-  padding-top: 10px;
-}
 .vip-image-preview li {
   display: inline-block;
   padding-right: 1px;
@@ -4001,6 +3998,16 @@ a.mdc-text-black-darker:focus {
 .vip-image-preview .vip-image-preview__remove-img i:hover {
   transition: 0.4s;
   transform: rotate(90deg);
+}
+.vip-light-gallery {
+  max-height: 600px;
+}
+.vip-light-gallery img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: fill;
+  margin: auto;
+  display: block;
 }
 .dropzone {
   border: 2px dashed #0087F7;

@@ -13,7 +13,9 @@
 	// directives
 	'vip/js/directives/controls/vip-checkbox',
 	'vip/js/directives/controls/vip-day-hours',
-	'vip/js/directives/controls/vip-images-edit',
+	'vip/js/directives/controls/vip-images-control',
+	'vip/js/directives/controls/vip-images-gallery',
+	'vip/js/directives/controls/vip-images-upload',
 	'vip/js/directives/controls/vip-link',
 	'vip/js/directives/controls/vip-tags',
 	'vip/js/directives/controls/vip-textbox',
