@@ -25,7 +25,7 @@
 					return array;
 				};
 
-				var initializePreviewPictures = function() {
+				var initializePreviewPicturesArray = function () {
 					if (!scope.previewPictures)
 						scope.previewPictures = [];
 					else {
@@ -34,26 +34,32 @@
 				};
 
 				var buildGallery = function () {
+					// build gallery element
 					var galleryElement = angular.element(
 						'<div class="vip-light-gallery list-unstyled justified-gallery">' +
-							'<a href="#" target="_self" ng-repeat="pic in previewPictures">' +
-								'<img src="{{pic.src}}" alt="">' +
-							'</a>' +
+							'<img src="{{pic.src}}" alt="" ng-repeat="pic in previewPictures"/>' +
 						'</div>'
 					);
+					// search for a previously added gallery element inside this element
 					var existingGalleryElement = element.find('.vip-light-gallery');
+					// if there was a previous gallery
 					if (existingGalleryElement.length) {
+						// search the plugin
 						var lg = existingGalleryElement.data('lightGallery');
+						// destroy it
 						if (lg)
 							lg.destroy(true);
+						// empty the element
 						jQuery(element).empty();
 					}
+					// build the array lightGallery plugin understands
 					var files = buildFilesArrayForLightGallery(ngModelCtrl.$viewValue || []);
-					initializePreviewPictures();
+
+					initializePreviewPicturesArray();
 					// get first picture if any
 					if (files && files.length)
 						scope.previewPictures.push(files[0]);
-					
+
 					element.append(galleryElement);
 					$compile(galleryElement)(scope);
 
@@ -72,8 +78,6 @@
 				ngModelCtrl.$render = function () {
 					buildGallery();
 				};
-
-				listeners.push(scope.$watch(attrs.ngModel, buildGallery));
 
 				listeners.push(scope.$on('$destroy', function () {
 					lg = null;

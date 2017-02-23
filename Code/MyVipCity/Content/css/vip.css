@@ -4000,6 +4000,7 @@ a.mdc-text-black-darker:focus {
   transform: rotate(90deg);
 }
 .vip-light-gallery {
+  cursor: pointer;
   max-height: 600px;
 }
 .vip-light-gallery img {

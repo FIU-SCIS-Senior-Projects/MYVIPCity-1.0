@@ -48,6 +48,9 @@
 				//	thumbnail: true
 				//});
 
+				var updateNgModel = function() {
+					ngModelCtrl.$setViewValue(angular.copy(scope.files));
+				};
 				// find the element on which the dropzone jquery plugin will be initialized
 				var dropzoneElement = element.find('.vip-dropzone-container');
 				// initialize dropzone
@@ -64,8 +67,7 @@
 								// add the new files to the array
 								scope.files.push.apply(scope.files, response);
 								// update ngModel
-								ngModelCtrl.$setViewValue(scope.files);
-								$parse(attrs.ngModel).assign(scope, scope.files);
+								updateNgModel();
 
 							});
 							clearAnimations();
@@ -98,7 +100,7 @@
 							scope.files.splice(oldIndex + 1, 1);
 						}
 						// update ngModel
-						ngModelCtrl.$setViewValue(scope.files);
+						updateNgModel();
 					}
 				});
 
@@ -114,7 +116,7 @@
 					if (index > -1) {
 						scope.files.splice(index, 1);
 						// update ngModel
-						ngModelCtrl.$setViewValue(scope.files);
+						updateNgModel();
 					}
 				};
 

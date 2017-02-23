@@ -43,8 +43,9 @@
 				},
 
 				Images: [
-					{ "BinaryDataId": 445, "FileName": 'doral.jpg', "ContentType": "image/jpeg" },
-					{ "BinaryDataId": 444, "FileName": 'a', "ContentType": "image/jpeg" }
+					{ "BinaryDataId": 462, "FileName": 'a', "ContentType": "image/jpeg" },
+					{ "BinaryDataId": 463, "FileName": 'a', "ContentType": "image/jpeg" },
+					{ "BinaryDataId": 464, "FileName": 'doral.jpg', "ContentType": "image/jpeg" }
 				]
 			};
 		};
