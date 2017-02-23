@@ -16,6 +16,7 @@
 				templateUrl: route.TemplateUrl
 			});
 		});
+
 		if (window.location.pathname === '/') {
 			$routeProvider.otherwise({
 				redirectTo: '/home'

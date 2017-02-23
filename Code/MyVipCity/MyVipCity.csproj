@@ -299,6 +299,9 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo.svg" />
     <Content Include="Content\img\ring.gif" />
+    <Content Include="Content\img\tempPics\1.jpg" />
+    <Content Include="Content\img\tempPics\2.jpg" />
+    <Content Include="Content\img\tempPics\3.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -416,6 +419,7 @@
     <Content Include="Scripts\modules\vip\js\controllers\loginFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-edit.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-week-hours.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-time-picker.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-day-hours.js" />
@@ -1032,6 +1036,14 @@
     <Content Include="Scripts\vendors\bower_components\Clamp.js\clamp.js" />
     <Content Include="Scripts\vendors\bower_components\Clamp.js\clamp.min.js" />
     <Content Include="Scripts\vendors\bower_components\Clamp.js\examples\example1.html" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\dist\basic.css" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\dist\dropzone-amd-module.js" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\dist\dropzone.css" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\dist\dropzone.js" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\dist\min\basic.min.css" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\dist\min\dropzone-amd-module.min.js" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\dist\min\dropzone.min.css" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\dist\min\dropzone.min.js" />
     <Content Include="Scripts\vendors\bower_components\es6-promise\es6-promise.js" />
     <Content Include="Scripts\vendors\bower_components\es6-promise\es6-promise.min.js" />
     <Content Include="Scripts\vendors\bower_components\es6-promise\promise.js" />
@@ -5490,6 +5502,9 @@
     <Content Include="Scripts\vendors\bower_components\jt.timepicker\jt.timepicker.jquery.json" />
     <Content Include="Scripts\vendors\bower_components\jt.timepicker\package.json" />
     <Content Include="Scripts\vendors\bower_components\jt.timepicker\README.md" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\.bower.json" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\bower.json" />
+    <Content Include="Scripts\vendors\bower_components\dropzone\dist\readme.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

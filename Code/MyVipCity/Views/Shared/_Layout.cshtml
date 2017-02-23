@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="~/Scripts/vendors/bower_components/angular-material/angular-material.min.css">
     <!-- Jt Timepicker -->
     <link rel="stylesheet" href="~/Scripts/vendors/bower_components/jt.timepicker/jquery.timepicker.css">
+    <!-- Dropzone -->
+    <link rel="stylesheet" href="~/Scripts/vendors/bower_components/dropzone/dist/dropzone.css">
+    <!-- Lightgallery -->
+    <link rel="stylesheet" href="~/Scripts/vendors/bower_components/lightgallery/dist/css/lightgallery.min.css">
 
     <!-- Site -->
     <link rel="stylesheet" href="~/Content/css/app.min.css">
@@ -199,6 +203,8 @@
                 'trumbowyg': '@Scripts.Url("~/Scripts/vendors/bower_components/trumbowyg/dist/trumbowyg.min")',
                 'moment': '@Scripts.Url("~/Scripts/vendors/bower_components/moment/min/moment.min")',
                 'jtTimePicker': '@Scripts.Url("~/Scripts/vendors/bower_components/jt.timepicker/jquery.timepicker.min")',
+                'dropzone': '@Scripts.Url("~/Scripts/vendors/bower_components/dropzone/dist/min/dropzone.min")',
+                'lightgallery': '@Scripts.Url("~/Scripts/vendors/bower_components/lightgallery/dist/js/lightgallery-all.min")',
 
                 'myVipCityConfig': '@Scripts.Url("~/Configuration/JsConfig?x=0")',
                 'app': '@Scripts.Url("~/Scripts/app/app.min")'
@@ -251,9 +257,14 @@
                 'jtTimePicker': {
                     deps: ['jquery']
                 },
-                'mdPickers': {
-                    deps: ['angular', 'angular-material', 'moment']
+                'dropzone': {
+                    deps: ['jquery'],
+                    exports: 'Dropzone'
                 },
+                'lightgallery': {
+                    deps: ['jquery']
+                },
+
                 'app': {
                     deps: ['jquery']
                 },

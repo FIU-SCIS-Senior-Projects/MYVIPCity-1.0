@@ -13,6 +13,7 @@
 	// directives
 	'vip/js/directives/controls/vip-checkbox',
 	'vip/js/directives/controls/vip-day-hours',
+	'vip/js/directives/controls/vip-images-edit',
 	'vip/js/directives/controls/vip-link',
 	'vip/js/directives/controls/vip-tags',
 	'vip/js/directives/controls/vip-textbox',
