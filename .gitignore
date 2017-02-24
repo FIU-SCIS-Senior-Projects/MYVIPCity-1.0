@@ -2,27 +2,10 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Code/MyVipCity/bin
-/Code/MyVipCity/obj
-/Code/MyVipCity.Mailing.Contracts/bin/Debug
-/Code/MyVipCity.Mailing.Contracts/obj/Debug
-/Code/MyVipCity.Mailing.Sendgrid/bin/Debug
-/Code/MyVipCity.Mailing.Sendgrid/obj/Debug
-/Code/TestingConsoleApp/bin/Debug
-/Code/TestingConsoleApp/obj/Debug
+bin
+obj
 /Code/packages
-/Code/MyVipCity.CompositionRoot/bin/Debug
-/Code/MyVipCity.CompositionRoot/obj/Debug
 /AppSettingsSecrets.config
-/Code/MyVipCity.Mailing.Sendgrid/bin/Release
-/Code/MyVipCity.CompositionRoot/bin/Release
-/Code/MyVipCity.CompositionRoot/obj/Release
-/Code/MyVipCity.Mailing.Contracts/bin/Release
-/Code/MyVipCity.Mailing.Contracts/obj/Release
-/Code/MyVipCity.Mailing.Sendgrid/obj/Release
 /Code/MyVipCity/Logs
-/Code/TestConsoleApp/bin/Debug
-/Code/TestConsoleApp/obj/Debug
-/Code/TestConsoleApp/obj/Release
 /Code/MyVipCity/node_modules
 /Code/Logs

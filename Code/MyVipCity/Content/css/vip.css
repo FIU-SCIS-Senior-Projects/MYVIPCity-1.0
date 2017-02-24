@@ -3969,6 +3969,9 @@ a.mdc-text-black-darker:focus {
 .vip-day-hours__closed {
   margin-right: 5px;
 }
+.vip-image-preview {
+  padding-top: 35px;
+}
 .vip-image-preview li {
   display: inline-block;
   padding-right: 1px;
@@ -3993,7 +3996,7 @@ a.mdc-text-black-darker:focus {
   background-color: #212121;
   opacity: 0.7;
   position: relative;
-  top: 34px;
+  margin-bottom: -34px;
 }
 .vip-image-preview .vip-image-preview__remove-img:hover {
   opacity: 0.9;
