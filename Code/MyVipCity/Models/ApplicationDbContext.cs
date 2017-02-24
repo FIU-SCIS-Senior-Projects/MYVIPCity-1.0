@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
+using System.Reflection;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MyVipCity.Domain;
 using MyVipCity.Utils;
 
 namespace MyVipCity.Models {
@@ -15,6 +18,33 @@ namespace MyVipCity.Models {
 
 		public static ApplicationDbContext Create() {
 			return new ApplicationDbContext();
+		}
+
+		public DbSet<Business> Businesses
+		{
+			get;
+			set;
+		}
+
+		public DbSet<MyVipCity.Domain.File> Files
+		{
+			get;
+			set;
+		}
+		public DbSet<Picture> Pictures
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Maps table names, and sets up relationships between the various user entities
+		/// </summary>
+		/// <param name="modelBuilder"/>
+		protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+			base.OnModelCreating(modelBuilder);
+			var mappingDefinitionAssembly = Assembly.Load("MyVipCity.Domain.Mappings.EF");
+			modelBuilder.Configurations.AddFromAssembly(mappingDefinitionAssembly);
 		}
 
 		/// <summary>

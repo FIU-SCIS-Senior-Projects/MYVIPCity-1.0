@@ -266,6 +266,10 @@
     <Compile Include="Migrations\201702051841071_ReadBinaryDataStoredProcedure.Designer.cs">
       <DependentUpon>201702051841071_ReadBinaryDataStoredProcedure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702240545106_AddForeignKeyFromFilesToBinaryData.cs" />
+    <Compile Include="Migrations\201702240545106_AddForeignKeyFromFilesToBinaryData.Designer.cs">
+      <DependentUpon>201702240545106_AddForeignKeyFromFilesToBinaryData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -5710,11 +5714,22 @@
     <EmbeddedResource Include="Migrations\201702051841071_ReadBinaryDataStoredProcedure.resx">
       <DependentUpon>201702051841071_ReadBinaryDataStoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702240545106_AddForeignKeyFromFilesToBinaryData.resx">
+      <DependentUpon>201702240545106_AddForeignKeyFromFilesToBinaryData.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyVipCity.CompositionRoot\MyVipCity.CompositionRoot.csproj">
       <Project>{62291c93-87fa-4341-8503-20d2e3d7e63c}</Project>
       <Name>MyVipCity.CompositionRoot</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyVipCity.Domain.Mappings.EF\MyVipCity.Domain.Mappings.EF.csproj">
+      <Project>{719d7629-4e5f-4346-82ae-4df345a72cb4}</Project>
+      <Name>MyVipCity.Domain.Mappings.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyVipCity.Domain\MyVipCity.Domain.csproj">
+      <Project>{3b9c5906-0331-43f0-895f-f49f428fe1a5}</Project>
+      <Name>MyVipCity.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyVipCity.Mailing.Contracts\MyVipCity.Mailing.Contracts.csproj">
       <Project>{e3055c1a-8f62-439c-b904-eeb04261feeb}</Project>
@@ -5727,6 +5742,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

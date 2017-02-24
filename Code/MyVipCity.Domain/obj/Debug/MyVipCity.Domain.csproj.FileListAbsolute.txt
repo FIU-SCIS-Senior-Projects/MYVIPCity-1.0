@@ -1,0 +1,4 @@
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain\bin\Debug\MyVipCity.Domain.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain\bin\Debug\MyVipCity.Domain.pdb
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain\obj\Debug\MyVipCity.Domain.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain\obj\Debug\MyVipCity.Domain.pdb

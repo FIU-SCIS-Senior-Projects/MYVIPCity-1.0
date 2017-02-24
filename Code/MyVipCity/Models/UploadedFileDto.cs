@@ -2,6 +2,12 @@
 
 	public class UploadedFileDto {
 
+		public int Id
+		{
+			get;
+			set;
+		}
+
 		public int BinaryDataId
 		{
 			get;
@@ -19,5 +25,6 @@
 			get;
 			set;
 		}
+		
 	}
 }

@@ -1,0 +1,12 @@
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\bin\Debug\MyVipCity.Domain.Mappings.EF.dll.config
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\bin\Debug\MyVipCity.Domain.Mappings.EF.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\bin\Debug\MyVipCity.Domain.Mappings.EF.pdb
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\bin\Debug\EntityFramework.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\bin\Debug\EntityFramework.xml
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\obj\Debug\MyVipCity.Domain.Mappings.EF.csprojResolveAssemblyReference.cache
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\obj\Debug\MyVipCity.Domain.Mappings.EF.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\obj\Debug\MyVipCity.Domain.Mappings.EF.pdb
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\bin\Debug\MyVipCity.Domain.dll
+C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity.Domain.Mappings.EF\bin\Debug\MyVipCity.Domain.pdb

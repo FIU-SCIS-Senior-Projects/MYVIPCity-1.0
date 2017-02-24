@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.CompositionRoot",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{BFE8E3E6-A84B-4F65-BF73-78C259E90B9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.Domain", "MyVipCity.Domain\MyVipCity.Domain.csproj", "{3B9C5906-0331-43F0-895F-F49F428FE1A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.Domain.Mappings.EF", "MyVipCity.Domain.Mappings.EF\MyVipCity.Domain.Mappings.EF.csproj", "{719D7629-4E5F-4346-82AE-4DF345A72CB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{BFE8E3E6-A84B-4F65-BF73-78C259E90B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFE8E3E6-A84B-4F65-BF73-78C259E90B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFE8E3E6-A84B-4F65-BF73-78C259E90B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B9C5906-0331-43F0-895F-F49F428FE1A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B9C5906-0331-43F0-895F-F49F428FE1A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B9C5906-0331-43F0-895F-F49F428FE1A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B9C5906-0331-43F0-895F-F49F428FE1A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{719D7629-4E5F-4346-82AE-4DF345A72CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{719D7629-4E5F-4346-82AE-4DF345A72CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{719D7629-4E5F-4346-82AE-4DF345A72CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{719D7629-4E5F-4346-82AE-4DF345A72CB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
