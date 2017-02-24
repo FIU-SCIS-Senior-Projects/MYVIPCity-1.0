@@ -1,7 +1,7 @@
 ﻿define(['vip/js/vip', 'jquery', 'angular', 'googleMaps', 'lodash'], function (vip, jQuery, angular, google, _) {
 	'use strict';
 
-	vip.directive('vipAddress', ['vipControlRenderingService', '$parse', '$http', 'vipApiKeys', '$timeout', function (vipControlRenderingService, $parse, $http, vipApiKeys, $timeout) {
+	vip.directive('vipAddress', ['vipControlRenderingService', '$parse', '$http', 'vipApiKeys', '$timeout', '$compile', function (vipControlRenderingService, $parse, $http, vipApiKeys, $timeout, $compile) {
 		return {
 			restrict: 'ACE',
 
@@ -13,10 +13,9 @@
 			link: function (scope, element, attrs, ngModelCtrl) {
 				var listeners = [];
 				var lastZipCode, lastStreet, lastCity, lastState, mapTimeout;
-				// instantiate a control rendering service
-				var controlRenderingService = vipControlRenderingService(scope, element);
 
 				scope._address = {};
+				scope._showMap = false;
 
 				ngModelCtrl.$render = function () {
 					if (ngModelCtrl.$viewValue) {
@@ -26,34 +25,6 @@
 						scope._address.ZipCode = ngModelCtrl.$viewValue.ZipCode;
 					}
 				};
-
-				controlRenderingService.setCreateReadModeElementFunction(function () {
-					// tag to wrap the read only text
-					var tag = attrs.wrapWith || 'span';
-					// create the read mode element
-					var readElement = angular.element('<' + tag + '>{{(!!' + attrs.ngModel + ' ? "Yes" : "No")}}</' + tag + '>');
-					// add css class
-					if (attrs.readModeClass)
-						readElement.addClass(attrs.readModeClass);
-					// return element
-					return readElement;
-				});
-
-				controlRenderingService.setCreateEditModeElementFunction(function () {
-					// create edit mode element
-					var editElement = angular.element(
-						'<div vip-textbox class="inline-block" ng-model="_address.Street" ng-model-options="{debounce: 300}" placeholder="Street" wrap-with="span" edit-mode-class="span"></div>' +
-						'<div vip-textbox class="inline-block" ng-model="_address.City" ng-model-options="{debounce: 300}" placeholder="City" wrap-with="span" edit-mode-class="span"></div>' +
-						'<div vip-textbox class="inline-block" ng-model="_address.State" ng-model-options="{debounce: 300}" placeholder="State" wrap-with="span" edit-mode-class="span"></div>' +
-						'<div vip-textbox class="inline-block" ng-model="_address.ZipCode" ng-model-options="{debounce: 300}" placeholder="ZipCode" wrap-with="span" edit-mode-class="span"></div>' +
-						'<div class="vip-map"></div>'
-					);
-					// add css class
-					if (attrs.editModeClass)
-						editElement.addClass(attrs.editModeClass);
-					// return element
-					return editElement;
-				});
 
 				var getAddressComponentByType = function (googResponse, type) {
 					var addressComponents = googResponse.address_components;
@@ -79,12 +50,10 @@
 					return stateComponent.short_name;
 				};
 
-
 				var getZipCodeFromGoogleResponse = function (googResponse) {
 					var zipCodeComponent = getAddressComponentByType(googResponse, 'postal_code');
 					return zipCodeComponent.short_name;
 				};
-
 
 				var getCountryFromGoogleResponse = function (googResponse) {
 					var zipCodeComponent = getAddressComponentByType(googResponse, 'country');
@@ -105,7 +74,6 @@
 					ngModelCtrl.$setViewValue(modelValue);
 				};
 
-
 				var processMap = function (fullAddress) {
 					// cancel any previous map processing request
 					if (mapTimeout)
@@ -117,6 +85,7 @@
 							var data = response.data;
 							// check for successful response
 							if (data.status === 'OK') {
+								scope._showMap = true;
 								// get the coordinates (longitude and latitude)
 								var location = data.results[0].geometry.location;
 								// create a map
@@ -162,6 +131,21 @@
 					}
 				};
 
+				// create edit mode element
+				var editElement = angular.element(
+					'<div ng-show="renderingMode == ' + vip.renderingModes.edit + '">' +
+						'<div vip-textbox class="inline-block" ng-model="_address.Street" ng-model-options="{debounce: 300}" placeholder="Street" wrap-with="span" edit-mode-class="span"></div>' +
+						'<div vip-textbox class="inline-block" ng-model="_address.City" ng-model-options="{debounce: 300}" placeholder="City" wrap-with="span" edit-mode-class="span"></div>' +
+						'<div vip-textbox class="inline-block" ng-model="_address.State" ng-model-options="{debounce: 300}" placeholder="State" wrap-with="span" edit-mode-class="span"></div>' +
+						'<div vip-textbox class="inline-block" ng-model="_address.ZipCode" ng-model-options="{debounce: 300}" placeholder="ZipCode" wrap-with="span" edit-mode-class="span"></div>' +
+					'</div>' +
+					'<div class="inline-block vip-address__formatted-address">{{' + attrs.ngModel + '.FormattedAddress}}</div>' +
+					'<div class="vip-map" ng-show="_showMap"></div>'
+				);
+
+				element.append(editElement);
+				$compile(editElement)(scope);
+
 				listeners.push(scope.$watch('_address.Street', function () {
 					processAddress();
 				}));
@@ -176,12 +160,11 @@
 				}));
 
 				listeners.push(scope.$watch('renderingMode', function (value) {
-					controlRenderingService.setRenderingMode(value);
 				}));
+
 
 				listeners.push(scope.$on('$destroy', function () {
 					mapTimeout = undefined;
-					controlRenderingService.destroy();
 					// unregister listeners
 					for (var i = 0; i < listeners.length; i++)
 						listeners[i]();

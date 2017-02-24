@@ -2,7 +2,7 @@
 	'use strict';
 
 	vip.controller('vip.addBusinessController', ['$scope', function ($scope) {
-		$scope.renderingMode = vip.renderingModes.edit;
+		$scope.renderingMode = vip.renderingModes.read;
 
 		var newBusiness = function () {
 			return {

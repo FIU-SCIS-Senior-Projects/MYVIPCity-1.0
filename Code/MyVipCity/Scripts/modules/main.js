@@ -9,7 +9,7 @@
 		shim: dependencyLibraries.shim,
 		baseUrl: '/Scripts/modules',
 		packages: packages,
-		urlArgs: 'v=' + myVipCityVersion,
+		urlArgs: 'b=' + myVipCityVersion,
 		waitSeconds: 0
 	};
 

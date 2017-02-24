@@ -3953,6 +3953,12 @@ a.mdc-text-black-darker:focus {
 .vip-business-info .vip-business-info__list span.vip-business-info__list-hours-label {
   width: 50px;
 }
+.vip-business-info .vip-address-info > span:first-child {
+  display: inline-block;
+  font-weight: 500;
+  color: #2e353b;
+  width: 110px;
+}
 .detail-amenities__list li {
   margin-right: 4px;
 }
@@ -4022,4 +4028,7 @@ a.mdc-text-black-darker:focus {
 div[vip-address] .vip-map {
   height: 360px;
   width: 100%;
+}
+div[vip-address] div[vip-textbox] {
+  padding-right: 3px;
 }
