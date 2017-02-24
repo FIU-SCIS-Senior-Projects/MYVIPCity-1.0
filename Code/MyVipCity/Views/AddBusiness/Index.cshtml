@@ -60,7 +60,7 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="detail-media-images">
                             @*<div vip-images-upload ng-model="model.Images"></div>
-                            <div vip-images-gallery ng-model="model.Images"></div>*@
+                                <div vip-images-gallery ng-model="model.Images"></div>*@
                             <div vip-images-control ng-model="model.Images"></div>
                         </div>
                         <div class="tab-pane fade light-gallery" id="detail-media-floorplan">
@@ -79,9 +79,6 @@
                     </ul>
                 </div>
                 <div class="detail-info vip-business-info">
-                    <div>
-
-                    </div>
                     <div class="detail-info__header clearfix">
                         <strong>Information</strong>
                         <span>OPEN NOW</span>
@@ -118,6 +115,11 @@
                             <div vip-link class="inline-block" ng-model="model.WebsiteUrl" placeholder="Website URL" edit-mode-class="span"></div>
                         </li>
                     </ul>
+                    <div class="card__body">
+                        <span>Address {{model.Address}}</span>
+                        
+                        <div vip-address ng-model="model.Address"></div>
+                    </div>
                 </div>
             </div>
             <div class="card detail-amenities">
@@ -168,7 +170,7 @@
                         <i class="form-group__bar"></i>
                     </div>
                     <div class="form-group form-group--float">
-                        <textarea class="form-control textarea-autoheight">Hi there, I am interested in 35 West 33rd Street, Unit 14B</textarea>
+                        <textarea class="form-control textarea-autoheight"></textarea>
                         <label>Message</label>
                         <i class="form-group__bar"></i>
                     </div>
@@ -181,8 +183,8 @@
             </form>
             <div class="card hidden-xs hidden-sm hidden-print">
                 <div class="card__header">
-                    <h2>Agents representing</h2>
-                    <small>Etiam porta sem malesuada magna mollis</small>
+                    <h2>VIP Hosts</h2>
+                    <small>These VIP hosts will make you have the best time</small>
                 </div>
                 <div class="list-group">
                     <a class="list-group-item media" href="">
@@ -190,8 +192,7 @@
                             <img src="https://placeholdit.imgix.net/~text?&w=500&h=500" alt="" class="list-group__img img-circle" width="65" height="65">
                         </div>
                         <div class="media-body list-group__text">
-                            <strong>Sarah Zelermyer Diaz</strong>
-                            <small class="list-group__text">+1-202-555-0121</small>
+                            <strong>John "The Dancer" Doe</strong>
                             <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
                         </div>
                     </a>
@@ -200,8 +201,7 @@
                             <img src="https://placeholdit.imgix.net/~text?&w=500&h=500" alt="" class="list-group__img img-circle" width="65" height="65">
                         </div>
                         <div class="media-body list-group__text">
-                            <strong>Malinda Hollaway</strong>
-                            <small class="list-group__text">+1-202-555-0188</small>
+                            <strong>Jane McLaren</strong>
                             <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
                         </div>
                     </a>
@@ -211,7 +211,7 @@
             <div class="card hidden-xs hidden-sm hidden-print">
                 <div class="card__header">
                     <h2>You may also like...</h2>
-                    <small>Morbi risus porta consectetur vestibulum ateros</small>
+                    <small>Check these other great places</small>
                 </div>
                 <div class="list-group">
                     <a href="" class="list-group-item media">
@@ -219,8 +219,8 @@
                             <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
                         </div>
                         <div class="media-body list-group__text">
-                            <strong>Vivamus sagittis lacus vel augue laoreet rutrum faucibus</strong>
-                            <small>$810,000 . 04 Beds . 03 Baths</small>
+                            <strong>Viva L' Musica</strong>
+                            <small>OPEN NOW</small>
                         </div>
                     </a>
                     <a href="" class="list-group-item media">
@@ -228,8 +228,8 @@
                             <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
                         </div>
                         <div class="media-body list-group__text">
-                            <strong>Fusce dapibus tellusac cursus</strong>
-                            <small>$910,300 . 03 Beds . 02 Baths</small>
+                            <strong>Studio 6.0</strong>
+                            <small>OPEN NOW</small>
                         </div>
                     </a>
                     <a href="" class="list-group-item media">
@@ -237,8 +237,8 @@
                             <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
                         </div>
                         <div class="media-body list-group__text">
-                            <strong>Praesent commodo cursus magnavel scelerisque nisl</strong>
-                            <small>$2,560,000 . 08 Beds . 07 Baths</small>
+                            <strong>PURDY LOUNGE</strong>
+                            <small>OPENING SOON</small>
                         </div>
                     </a>
                     <a href="" class="list-group-item media">
@@ -246,8 +246,8 @@
                             <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
                         </div>
                         <div class="media-body list-group__text">
-                            <strong>Lorem ipsum dolor sitamet consectetur adipiscing elit</strong>
-                            <small>$1,140,650 . 06 Beds . 03 Baths</small>
+                            <strong>MusicTalks</strong>
+                            <small>OPEN NOW</small>
                         </div>
                     </a>
                     <a href="" class="list-group-item media">

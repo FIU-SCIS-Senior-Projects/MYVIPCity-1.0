@@ -4019,3 +4019,7 @@ a.mdc-text-black-darker:focus {
   font-size: x-large;
   font-weight: 400;
 }
+div[vip-address] .vip-map {
+  height: 360px;
+  width: 100%;
+}

@@ -46,7 +46,14 @@
 					{ "BinaryDataId": 462, "FileName": 'a', "ContentType": "image/jpeg" },
 					{ "BinaryDataId": 463, "FileName": 'a', "ContentType": "image/jpeg" },
 					{ "BinaryDataId": 464, "FileName": 'doral.jpg', "ContentType": "image/jpeg" }
-				]
+				],
+
+				Address: {
+					Street: '900 Ocean Dr',
+					City: 'Miami',
+					State: 'FL',
+					ZipCode: '33139'
+				}
 			};
 		};
 

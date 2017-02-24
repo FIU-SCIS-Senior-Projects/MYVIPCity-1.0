@@ -47,7 +47,8 @@
     "trumbowyg": "^2.5.0",
     "jt.timepicker": "^1.11.10",
     "dropzone": "dropzonejs#^4.3.0",
-    "Sortable": "^1.5.0"
+    "Sortable": "^1.5.0",
+    "lodash": "^4.17.4"
   },
   "resolutions": {
     "jquery": "^2.2.4",

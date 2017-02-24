@@ -206,6 +206,8 @@
                 'dropzone': '@Scripts.Url("~/Scripts/vendors/bower_components/dropzone/dist/min/dropzone.min")',
                 'lightgallery': '@Scripts.Url("~/Scripts/vendors/bower_components/lightgallery/dist/js/lightgallery-all.min")',
                 'sortable': '@Scripts.Url("~/Scripts/vendors/bower_components/Sortable/Sortable.min")',
+                'lodash': '@Scripts.Url("~/Scripts/vendors/bower_components/lodash/dist/lodash.min")',
+                'googleMaps': 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCilfDIIXr4o4c3FSLgTwG5jynPpu_TJgY',
 
                 'myVipCityConfig': '@Scripts.Url("~/Configuration/JsConfig?x=0")',
                 'app': '@Scripts.Url("~/Scripts/app/app.min")'
@@ -264,6 +266,9 @@
                 },
                 'lightgallery': {
                     deps: ['jquery']
+                },
+                'googleMaps': {
+                    exports: 'google'
                 },
 
                 'app': {

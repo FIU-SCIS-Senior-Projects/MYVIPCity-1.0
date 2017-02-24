@@ -11,6 +11,7 @@
 	'vip/js/controllers/loginFormController',
 	'vip/js/controllers/registerFormController',
 	// directives
+	'vip/js/directives/controls/vip-address',
 	'vip/js/directives/controls/vip-checkbox',
 	'vip/js/directives/controls/vip-day-hours',
 	'vip/js/directives/controls/vip-images-control',
