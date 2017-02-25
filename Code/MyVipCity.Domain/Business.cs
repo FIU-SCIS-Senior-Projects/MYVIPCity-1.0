@@ -69,6 +69,15 @@ namespace MyVipCity.Domain {
 		}
 
 		/// <summary>
+		/// Phone information.
+		/// </summary>
+		public string Phone
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Website URL.
 		/// </summary>
 		public string WebsiteUrl

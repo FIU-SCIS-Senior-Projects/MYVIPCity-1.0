@@ -45,7 +45,7 @@
 						$route.reload();
 					});
 				}, function (error) {
-
+					swal('Oops!', 'Something went wrong!', 'error');
 				});
 		};
 
