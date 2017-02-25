@@ -3969,15 +3969,13 @@ a.mdc-text-black-darker:focus {
 .vip-day-hours__closed {
   margin-right: 5px;
 }
-.vip-image-preview {
-  padding-top: 35px;
-}
 .vip-image-preview li {
   display: inline-block;
   padding-right: 1px;
   padding-bottom: 1px;
 }
 .vip-image-preview .vip-image-preview__img-list {
+  padding-top: 35px;
   list-style: none;
 }
 .vip-image-preview .vip-image-preview__img {
