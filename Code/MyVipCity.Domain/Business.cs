@@ -108,6 +108,15 @@ namespace MyVipCity.Domain {
 		}
 
 		/// <summary>
+		/// Week hours for the business.
+		/// </summary>
+		public WeekHours WeekHours
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Address information of the business.
 		/// </summary>
 		public Address Address

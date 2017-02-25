@@ -3,7 +3,7 @@
 
 	dropzone.autoDiscover = false;
 
-	vip.directive('vipImagesUpload', ['$timeout', '$parse', function ($timeout, $parse) {
+	vip.directive('vipImagesUpload', ['$timeout', function ($timeout) {
 		return {
 			restrict: 'ACE',
 
@@ -38,15 +38,7 @@
 					}, waitTimeInSeconds || 1000, false);
 				};
 
-				clearAnimations(3000);
-
-				//// TODO COmment code
-				//// TODO: Remove this
-				//jQuery('.light-gallery').lightGallery({
-				//	hash: false,
-				//	galleryId: scope.$id,
-				//	thumbnail: true
-				//});
+				clearAnimations(2000);
 
 				var updateNgModel = function() {
 					ngModelCtrl.$setViewValue(angular.copy(scope.files));

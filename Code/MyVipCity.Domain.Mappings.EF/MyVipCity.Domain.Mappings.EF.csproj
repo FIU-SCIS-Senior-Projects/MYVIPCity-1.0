@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DayHoursConfiguration.cs" />
+    <Compile Include="WeekHoursConfiguration.cs" />
     <Compile Include="FileConfiguration.cs" />
     <Compile Include="BusinessConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

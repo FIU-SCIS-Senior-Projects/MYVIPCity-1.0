@@ -244,12 +244,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddBusinessController.cs" />
+    <Compile Include="Controllers\api\BusinessController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
-    <Compile Include="Controllers\ExampleController.cs" />
+    <Compile Include="Controllers\VipControllerBase.cs" />
     <Compile Include="Controllers\HomeController .cs" />
     <Compile Include="Controllers\Home2Controller.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PicturesController.cs" />
+    <Compile Include="Controllers\api\PicturesController.cs" />
     <Compile Include="Filters\LogExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -275,9 +276,14 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
+    <Compile Include="Models\Dtos\AddressDto.cs" />
     <Compile Include="Models\Dtos\BusinessDto.cs" />
+    <Compile Include="Models\Dtos\DayHoursDto.cs" />
+    <Compile Include="Models\Dtos\FileDto.cs" />
+    <Compile Include="Models\Dtos\PictureDto.cs" />
+    <Compile Include="Models\Dtos\WeekHoursDto.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\UploadedFileDto.cs" />
+    <Compile Include="Models\Dtos\UploadedFileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\SqlDataReaderReadOnlyStream.cs" />
@@ -439,6 +445,8 @@
     <Content Include="Scripts\modules\vip\js\directives\vip-match.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-mvc-antiforgery-token.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-navigation-menu.js" />
+    <Content Include="Scripts\modules\vip\js\services\factories\business.js" />
+    <Content Include="Scripts\modules\vip\js\services\vipFactoryService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipUtilsService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipControlRenderingService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipColorsService.js" />
@@ -5572,7 +5580,6 @@
     <Content Include="Scripts\vendors\bower_components\angular-route\LICENSE.md" />
     <Content Include="Scripts\vendors\bower_components\angular-route\package.json" />
     <Content Include="Scripts\vendors\bower_components\angular-route\README.md" />
-    <Content Include="Views\Example\Index.cshtml" />
     <Content Include="Views\AddBusiness\Index.cshtml" />
     <Content Include="Views\Home\Empty.cshtml" />
     <Content Include="Scripts\vendors\bower_components\jquery-auto-grow-input\.bower.json" />

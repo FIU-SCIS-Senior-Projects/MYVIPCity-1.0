@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="Business.cs" />
+    <Compile Include="DayHours.cs" />
+    <Compile Include="WeekHours.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="File.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

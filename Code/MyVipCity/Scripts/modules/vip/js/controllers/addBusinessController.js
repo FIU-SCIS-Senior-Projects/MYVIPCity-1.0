@@ -1,8 +1,21 @@
 ﻿define(['vip/js/vip', 'jquery', 'sweet-alert'], function (vip, jQuery, swal) {
 	'use strict';
 
-	vip.controller('vip.addBusinessController', ['$scope', function ($scope) {
-		$scope.renderingMode = vip.renderingModes.read;
+	vip.controller('vip.addBusinessController', ['$scope', 'vipFactoryService', '$q', '$http', function ($scope, vipFactoryService, $q, $http) {
+		$scope.renderingMode = vip.renderingModes.edit;
+		$scope.model = {};
+
+		$q.when(vipFactoryService('business')).then(function (newBusiness) {
+			$scope.model = newBusiness;
+		});
+
+		$scope.save = function () {
+			$http.post('api/Business', $scope.model)
+				.then(function (response) {
+					var data = response.data;
+				}, function (error) {
+				});
+		};
 
 		var newBusiness = function () {
 			return {
@@ -57,7 +70,7 @@
 			};
 		};
 
-		$scope.model = newBusiness();
+		// $scope.model = newBusiness();
 
 		$scope.toggleRenderingMode = function () {
 			$scope.renderingMode = $scope.renderingMode === vip.renderingModes.edit ? vip.renderingModes.read : vip.renderingModes.edit;

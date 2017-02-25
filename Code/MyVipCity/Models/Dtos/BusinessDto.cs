@@ -1,6 +1,20 @@
-﻿namespace MyVipCity.Models.Dtos {
+﻿using System.Collections.Generic;
+
+namespace MyVipCity.Models.Dtos {
 
 	public class BusinessDto {
+		
+		public int Id
+		{
+			get;
+			set;
+		}
+
+		public string FriendlyId
+		{
+			get;
+			set;
+		}
 
 		/// <summary>
 		/// Name of the business.
@@ -87,6 +101,30 @@
 		/// A small phrase to introduce the <see cref="Amenities"/>.
 		/// </summary>
 		public string AmenitiesPhrase
+		{
+			get;
+			set;
+		}
+
+		public WeekHoursDto WeekHours
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Address information of the business.
+		/// </summary>
+		public AddressDto Address
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// List of pictures for the business.
+		/// </summary>
+		public virtual ICollection<PictureDto> Pictures
 		{
 			get;
 			set;

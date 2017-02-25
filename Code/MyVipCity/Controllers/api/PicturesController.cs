@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using MyVipCity.Models;
+using MyVipCity.Models.Dtos;
 using Ninject;
 using Ninject.Extensions.Logging;
 
-namespace MyVipCity.Controllers {
+namespace MyVipCity.Controllers.api {
 
 	[RoutePrefix("api/Pictures")]
 	public class PicturesController: ApiController {

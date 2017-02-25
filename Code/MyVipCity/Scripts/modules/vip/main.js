@@ -28,8 +28,10 @@
 	'vip/js/directives/vip-mvc-antiforgery-token',
 	'vip/js/directives/vip-navigation-menu',
 	// services
+	'vip/js/services/factories/business',
 	'vip/js/services/vipColorsService',
 	'vip/js/services/vipControlRenderingService',
+	'vip/js/services/vipFactoryService',
 	'vip/js/services/vipServerErrorProcessorService',
 	'vip/js/services/vipUtilsService'
 ], function (require, angular, vip) {

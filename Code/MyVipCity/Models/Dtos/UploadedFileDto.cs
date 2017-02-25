@@ -1,4 +1,4 @@
-﻿namespace MyVipCity.Models {
+﻿namespace MyVipCity.Models.Dtos {
 
 	public class UploadedFileDto {
 

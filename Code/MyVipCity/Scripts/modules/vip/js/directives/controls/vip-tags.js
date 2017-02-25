@@ -29,7 +29,7 @@
 				var controlRenderingService = vipControlRenderingService(scope, element);
 
 				ngModelCtrl.$render = function () {
-					scope._items = (ngModelCtrl.$viewValue || '').split(',');
+					scope._items = ngModelCtrl.$viewValue ? ngModelCtrl.$viewValue.split(',') : [];
 				};
 
 				listeners.push(scope.$watchCollection('_items', function (items) {

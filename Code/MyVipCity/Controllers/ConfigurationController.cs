@@ -9,7 +9,7 @@ using Ninject.Extensions.Logging;
 
 namespace MyVipCity.Controllers {
 
-	public class ConfigurationController: Controller {
+	public class ConfigurationController: VipControllerBase {
 
 		[Inject]
 		public ILogger Logger
@@ -122,18 +122,20 @@ namespace MyVipCity.Controllers {
 				}
 			};
 
-			// add menu item only if user is authenticated and in admin role
-			if (Request.IsAuthenticated && ApplicationUserManager.IsInRole(User.Identity.GetUserId(), "Admin")) {
-				menu.Add(new {
-					Title = "Admin",
-					Path = "/",
-					Submenu = new object[] {
-						new {
-							Title = "Add Club",
-							Path = "#/addbusiness"
+			if (Request.IsAuthenticated) {
+				// add menu item only if user is authenticated and in admin role
+				if (IsUserInRole("Admin")) {
+					menu.Add(new {
+						Title = "Admin",
+						Path = "/",
+						Submenu = new object[] {
+							new {
+								Title = "Add Club",
+								Path = "#/addbusiness"
+							}
 						}
-					}
-				});
+					});
+				}
 			}
 			return menu.ToArray();
 		}
@@ -146,12 +148,14 @@ namespace MyVipCity.Controllers {
 				}
 			};
 
-			// add route only if user is authenticated and in admin role
-			if (Request.IsAuthenticated && ApplicationUserManager.IsInRole(User.Identity.GetUserId(), "Admin")) {
-				routes.Add(new {
-					Path = "/addbusiness",
-					TemplateUrl = "/AddBusiness"
-				});
+			if (Request.IsAuthenticated) {
+				// add route only if user is authenticated and in admin role
+				if (IsUserInRole("Admin")) {
+					routes.Add(new {
+						Path = "/addbusiness",
+						TemplateUrl = "/AddBusiness"
+					});
+				}
 			}
 
 			return routes.ToArray();

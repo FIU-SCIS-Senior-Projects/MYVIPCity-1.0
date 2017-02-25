@@ -10,23 +10,27 @@
 			// new scope
 			scope: true,
 
-			link: function (scope, element, attrs) {
+			link: function (scope, element, attrs, ngModelCtrl) {
 				var listeners = [];
-				scope.model = $parse(attrs.ngModel)(scope);
+
 				// instantiate a control rendering service
 				var controlRenderingService = vipControlRenderingService(scope, element);
+
+				//ngModelCtrl.$render = function() {
+				//	scope.model = ngModelCtrl.$viewValue;
+				//};
 
 				controlRenderingService.setCreateReadModeElementFunction(function () {
 					// create the read mode element
 					var readElement = angular.element(
 						'<div>' +
-							'<div vip-day-hours ng-model="model.Monday"></div>' +
-							'<div vip-day-hours ng-model="model.Tuesday"></div>' +
-							'<div vip-day-hours ng-model="model.Wednesday"></div>' +
-							'<div vip-day-hours ng-model="model.Thursday"></div>' +
-							'<div vip-day-hours ng-model="model.Friday"></div>' +
-							'<div vip-day-hours ng-model="model.Saturday"></div>' +
-							'<div vip-day-hours ng-model="model.Sunday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Monday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Tuesday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Wednesday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Thursday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Friday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Saturday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Sunday"></div>' +
 						'</div>'
 					);
 					// add css class
@@ -40,13 +44,13 @@
 					// create edit mode element
 					var editElement = angular.element(
 						'<div>' +
-							'<div vip-day-hours ng-model="model.Monday"></div>' +
-							'<div vip-day-hours ng-model="model.Tuesday"></div>' +
-							'<div vip-day-hours ng-model="model.Wednesday"></div>' +
-							'<div vip-day-hours ng-model="model.Thursday"></div>' +
-							'<div vip-day-hours ng-model="model.Friday"></div>' +
-							'<div vip-day-hours ng-model="model.Saturday"></div>' +
-							'<div vip-day-hours ng-model="model.Sunday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Monday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Tuesday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Wednesday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Thursday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Friday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Saturday"></div>' +
+							'<div vip-day-hours ng-model="' + attrs.ngModel + '.Sunday"></div>' +
 						'</div>'
 					);
 					// add css class
