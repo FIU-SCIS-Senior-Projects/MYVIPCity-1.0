@@ -16,7 +16,16 @@
 
 				scope._address = {};
 
+				var clearMapAndHideElement = function() {
+					jQuery(element.find('.vip-map')).empty().hide();
+				};
+
+				var clearMapAndShowElement = function () {
+					jQuery(element.find('.vip-map')).empty().show();
+				};
+
 				ngModelCtrl.$render = function () {
+					clearMapAndHideElement();
 					if (ngModelCtrl.$viewValue) {
 						scope._address.Street = ngModelCtrl.$viewValue.Street;
 						scope._address.City = ngModelCtrl.$viewValue.City;
@@ -36,7 +45,7 @@
 					var streetNumberComponent = getAddressComponentByType(googResponse, 'street_number');
 					var routeComponent = getAddressComponentByType(googResponse, 'route');
 
-					return streetNumberComponent.short_name + ' ' + routeComponent.short_name;
+					return (streetNumberComponent ? streetNumberComponent.short_name + ' ' : '') + (routeComponent.short_name || '');
 				};
 
 				var getCityFromGoogleResponse = function (googResponse) {
@@ -87,7 +96,7 @@
 								// get the coordinates (longitude and latitude)
 								var location = data.results[0].geometry.location;
 								// create a map
-								jQuery(element.find('.vip-map')).empty().show();
+								clearMapAndShowElement();
 								var map = new google.maps.Map(element.find('.vip-map')[0], {
 									zoom: 13,
 									center: location
