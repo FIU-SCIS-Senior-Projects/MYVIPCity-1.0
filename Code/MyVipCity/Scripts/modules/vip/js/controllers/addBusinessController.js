@@ -36,8 +36,10 @@
 						confirmButtonText: "Yes",
 						cancelButtonText: "No"
 					}).then(function () {
-						// navigate
-						vipNavigationService.goToClub(business.FriendlyId);
+						$scope.$apply(function() {
+							// navigate to the club
+							vipNavigationService.goToClub(business.FriendlyId);
+						});
 					}, function () {
 						// setNewBusinessModel();
 						$route.reload();

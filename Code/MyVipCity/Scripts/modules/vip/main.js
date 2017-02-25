@@ -7,6 +7,7 @@
 	'vip/js/config/vipRouteConfig',
 	// controllers
 	'vip/js/controllers/addBusinessController',
+	'vip/js/controllers/clubListController',
 	'vip/js/controllers/forgotPasswordFormController',
 	'vip/js/controllers/loginFormController',
 	'vip/js/controllers/registerFormController',

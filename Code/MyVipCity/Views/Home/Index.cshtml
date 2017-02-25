@@ -9,5 +9,14 @@
     <h2>Welcome to MyVIPCity</h2>
     <small>Site under construction, check back soon!</small>
 </header>
+
+
+<div ng-controller="vip.clubListController">
+    <ul>
+        <li ng-repeat="club in clubs">
+            <a href="#/viewClub/{{club.FriendlyId}}">{{club.Name}}</a>
+        </li>
+    </ul>
+</div>
 @*<object type="image/svg+xml" data="~/Content/img/skyline.svg"></object>*@
 

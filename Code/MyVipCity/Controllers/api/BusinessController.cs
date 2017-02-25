@@ -18,6 +18,15 @@ namespace MyVipCity.Controllers.api {
 		}
 
 		[HttpGet]
+		[Route("")]
+		public async Task<IHttpActionResult> Index() {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var dtos = BusinessManager.GetAllBusiness();
+				return Ok(dtos);
+			});
+		}
+
+		[HttpGet]
 		[Route("{id:int}")]
 		public async Task<IHttpActionResult> GetBusiness(int id) {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {

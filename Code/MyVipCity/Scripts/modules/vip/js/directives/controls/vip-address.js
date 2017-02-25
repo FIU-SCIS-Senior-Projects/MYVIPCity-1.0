@@ -36,36 +36,39 @@
 
 				var getAddressComponentByType = function (googResponse, type) {
 					var addressComponents = googResponse.address_components;
-					return _.find(addressComponents, function (addComp) {
+					var component =  _.find(addressComponents, function (addComp) {
 						return _.indexOf(addComp.types, type) > -1;
 					});
+					if (!component || !component.short_name)
+						return '';
+					return component.short_name;
 				};
 
 				var getStreetFromGoogleResponse = function (googResponse) {
 					var streetNumberComponent = getAddressComponentByType(googResponse, 'street_number');
 					var routeComponent = getAddressComponentByType(googResponse, 'route');
 
-					return (streetNumberComponent ? streetNumberComponent.short_name + ' ' : '') + (routeComponent.short_name || '');
+					return streetNumberComponent + ' ' + routeComponent;
 				};
 
 				var getCityFromGoogleResponse = function (googResponse) {
 					var cityComponent = getAddressComponentByType(googResponse, 'locality');
-					return cityComponent.short_name;
+					return cityComponent;
 				};
 
 				var getStateFromGoogleResponse = function (googResponse) {
 					var stateComponent = getAddressComponentByType(googResponse, 'administrative_area_level_1');
-					return stateComponent.short_name;
+					return stateComponent;
 				};
 
 				var getZipCodeFromGoogleResponse = function (googResponse) {
 					var zipCodeComponent = getAddressComponentByType(googResponse, 'postal_code');
-					return zipCodeComponent.short_name;
+					return zipCodeComponent;
 				};
 
 				var getCountryFromGoogleResponse = function (googResponse) {
 					var zipCodeComponent = getAddressComponentByType(googResponse, 'country');
-					return zipCodeComponent.short_name;
+					return zipCodeComponent;
 				};
 
 				var setNgModelValueFromGoogleResponse = function (googResponse) {

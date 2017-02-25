@@ -31,6 +31,7 @@ namespace MyVipCity.Controllers {
 			// set configuration
 			var config = new {
 				Name = User.Identity.GetUserName(),
+				Roles = GetRolesFromUser(),
 				Menu = GetNavigationMenu(),
 				Routes = GetRoutes()
 			};
@@ -148,7 +149,7 @@ namespace MyVipCity.Controllers {
 				},
 				new {
 					Path = "/viewClub/:friendlyId",
-					TemplateUrl = "/AddBusiness",
+					TemplateUrl = "/ViewBusiness",
 					Controller = "vip.viewBusinessController"
 				}
 			};

@@ -60,6 +60,12 @@ namespace MyVipCity.BusinessLogic {
 			return businessDto;
 		}
 
+		public BusinessDto[] GetAllBusiness() {
+			var allBusiness = DbContext.Set<Business>().ToList();
+			var allBusinessDtos = Mapper.Map<BusinessDto[]>(allBusiness);
+			return allBusinessDtos;
+		}
+
 		private BusinessDto ToDto(Business business) {
 			if (business == null)
 				return null;

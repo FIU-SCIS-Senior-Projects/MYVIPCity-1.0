@@ -247,6 +247,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ViewBusinessController.cs" />
     <Compile Include="Controllers\AddBusinessController.cs" />
     <Compile Include="Controllers\api\BusinessController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
@@ -422,6 +423,7 @@
     <Content Include="Scripts\modules\main.js" />
     <Content Include="Scripts\modules\vip\js\config\vipConfig.js" />
     <Content Include="Scripts\modules\vip\js\config\vipRouteConfig.js" />
+    <Content Include="Scripts\modules\vip\js\controllers\clubListController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\viewBusinessController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\addBusinessController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\loginFormController.js" />

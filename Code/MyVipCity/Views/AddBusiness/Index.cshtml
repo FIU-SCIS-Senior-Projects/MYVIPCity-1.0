@@ -4,8 +4,12 @@
     Layout = null;
 }
 
-<button ng-click="toggleRenderingMode()" ng-show="showToggleButton" style="position: fixed; top: 180px; left: 20px">Toggle Rendering Mode</button>
-<button ng-click="resetForm()" ng-show="showResetButton" style="position: fixed; top: 220px;left:20px">Reset Form</button>
+@*<button ng-click="toggleRenderingMode()" ng-show="showToggleButton" style="position: fixed; top: 180px; left: 20px">Toggle Rendering Mode</button>
+<button ng-click="resetForm()" ng-show="showResetButton" style="position: fixed; top: 220px; left: 20px">Reset Form</button>*@
+<div>
+    <button class="btn btn-primary" ng-show="showEditButton" ng-click="editClick()">Edit</button>
+    <button class="btn btn-primary" ng-show="showReadModeButton" ng-click="readModeClick()">View Read Mode</button>
+</div>
 <header class="section__title section__title-alt">
     <!--Name-->
     <div vip-textbox ng-model="model.Name" placeholder="Business Name" wrap-with="h1" edit-mode-class="h1 text-center" read-mode-class="text-uppercase" auto-grow="true"></div>

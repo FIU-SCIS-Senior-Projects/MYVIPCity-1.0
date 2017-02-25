@@ -9,5 +9,7 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		BusinessDto LoadById(int id);
 
 		BusinessDto LoadByFriendlyId(string friendlyId);
+
+		BusinessDto[] GetAllBusiness();
 	}
 }
