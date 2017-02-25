@@ -1,13 +1,15 @@
-﻿namespace MyVipCity.Models.Dtos {
+﻿namespace MyVipCity.DataTransferObjects {
 
-	public class UploadedFileDto {
+	public class FileDto {
 
+		// TODO Change Id to guid
 		public int Id
 		{
 			get;
 			set;
 		}
 
+		// TODO Change to GUID
 		public int BinaryDataId
 		{
 			get;
@@ -25,6 +27,5 @@
 			get;
 			set;
 		}
-		
 	}
 }

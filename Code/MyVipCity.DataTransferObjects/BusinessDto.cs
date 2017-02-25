@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MyVipCity.Models.Dtos {
+namespace MyVipCity.DataTransferObjects {
 
 	public class BusinessDto {
 		

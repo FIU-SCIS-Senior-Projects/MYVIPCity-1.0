@@ -17,6 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.Domain", "MyVipCi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.Domain.Mappings.EF", "MyVipCity.Domain.Mappings.EF\MyVipCity.Domain.Mappings.EF.csproj", "{719D7629-4E5F-4346-82AE-4DF345A72CB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.DataTransferObjects", "MyVipCity.DataTransferObjects\MyVipCity.DataTransferObjects.csproj", "{56335850-5DF9-4C56-812C-21574D1B9EBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.Domain.Automapper", "MyVipCity.Domain.Automapper\MyVipCity.Domain.Automapper.csproj", "{3FA92D54-2D2B-4965-8066-7D70012DC154}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVipCity.BusinessLogic", "MyVipCity.BusinessLogic\MyVipCity.BusinessLogic.csproj", "{4A0DC78F-9512-4F81-BC89-5810D9E20EA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +57,18 @@ Global
 		{719D7629-4E5F-4346-82AE-4DF345A72CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{719D7629-4E5F-4346-82AE-4DF345A72CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{719D7629-4E5F-4346-82AE-4DF345A72CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56335850-5DF9-4C56-812C-21574D1B9EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56335850-5DF9-4C56-812C-21574D1B9EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56335850-5DF9-4C56-812C-21574D1B9EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56335850-5DF9-4C56-812C-21574D1B9EBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FA92D54-2D2B-4965-8066-7D70012DC154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FA92D54-2D2B-4965-8066-7D70012DC154}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FA92D54-2D2B-4965-8066-7D70012DC154}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FA92D54-2D2B-4965-8066-7D70012DC154}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A0DC78F-9512-4F81-BC89-5810D9E20EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A0DC78F-9512-4F81-BC89-5810D9E20EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A0DC78F-9512-4F81-BC89-5810D9E20EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A0DC78F-9512-4F81-BC89-5810D9E20EA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,6 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
+using System.Data.Entity.ModelConfiguration;
 
 namespace MyVipCity.Domain.Mappings.EF {
 
@@ -9,7 +11,11 @@ namespace MyVipCity.Domain.Mappings.EF {
 			HasKey(b => b.Id);
 
 			// properties
-			Property(b => b.FriendlyId).IsRequired();
+			Property(b => b.FriendlyIdBase).IsRequired().HasMaxLength(200);
+			Property(b => b.FriendlyId)
+				.IsRequired()
+				.HasMaxLength(200)
+				.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
 			Property(b => b.Name).IsRequired().HasMaxLength(150);
 			Property(b => b.Phrase).HasMaxLength(500);
 			Property(b => b.Ambiance).HasMaxLength(150);

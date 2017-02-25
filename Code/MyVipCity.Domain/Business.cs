@@ -11,6 +11,12 @@ namespace MyVipCity.Domain {
 			set;
 		}
 
+		public string FriendlyIdBase
+		{
+			get;
+			set;
+		}
+
 		public string FriendlyId
 		{
 			get;

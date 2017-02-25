@@ -33,7 +33,7 @@
 				};
 
 				listeners.push(scope.$watchCollection('_items', function (items) {
-					if (items === null || angular.isUndefined(items) || !angular.isArray(items)) {
+					if (items === null || angular.isUndefined(items) || !angular.isArray(items) || !items.length) {
 						ngModelCtrl.$setViewValue(null);
 					}
 					else {

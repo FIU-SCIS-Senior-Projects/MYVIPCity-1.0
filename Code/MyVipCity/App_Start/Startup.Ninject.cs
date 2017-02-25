@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity.Owin;
@@ -36,7 +37,9 @@ namespace MyVipCity {
 
 		private void RegisterServices(StandardKernel kernel) {
 			kernel.Bind<ApplicationDbContext>().ToMethod(context => HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>()).InRequestScope();
+			kernel.Bind<DbContext>().ToMethod(context => HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>()).InRequestScope();
 			kernel.Bind<ApplicationUserManager>().ToMethod(context => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()).InRequestScope();
+
 			BindingsManager.SetBindings(kernel, ConfigurationManager.AppSettings);
 		}
 	}

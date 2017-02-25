@@ -9,8 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
+using MyVipCity.DataTransferObjects;
 using MyVipCity.Models;
-using MyVipCity.Models.Dtos;
 using Ninject;
 using Ninject.Extensions.Logging;
 
@@ -112,7 +112,7 @@ namespace MyVipCity.Controllers.api {
 		}
 
 		private UploadedFileDto ProcessFile(MultipartFileData fileData) {
-			var fileName = fileData.Headers.ContentDisposition.FileName.Replace("\\\"", "");
+			var fileName = fileData.Headers.ContentDisposition.FileName.Replace("\"", "");
 			var createdBy = User.Identity.GetUserName();
 			var contentType = fileData.Headers.ContentType.MediaType;
 			int binaryDataId = 0;
@@ -156,6 +156,7 @@ namespace MyVipCity.Controllers.api {
 					return new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
 				}
 				catch (IOException ex) {
+					Logger.Error(ex.Message + "\n" + ex.StackTrace);
 					retries--;
 					if (retries == 0)
 						throw;

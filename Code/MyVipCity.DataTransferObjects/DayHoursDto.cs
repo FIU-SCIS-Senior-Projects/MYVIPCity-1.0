@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyVipCity.Models.Dtos {
+namespace MyVipCity.DataTransferObjects {
 
 	public enum WeekDayDto {
 		Sunday = 0,

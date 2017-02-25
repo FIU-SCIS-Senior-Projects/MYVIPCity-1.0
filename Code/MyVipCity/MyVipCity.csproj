@@ -51,6 +51,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -276,14 +280,7 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
-    <Compile Include="Models\Dtos\AddressDto.cs" />
-    <Compile Include="Models\Dtos\BusinessDto.cs" />
-    <Compile Include="Models\Dtos\DayHoursDto.cs" />
-    <Compile Include="Models\Dtos\FileDto.cs" />
-    <Compile Include="Models\Dtos\PictureDto.cs" />
-    <Compile Include="Models\Dtos\WeekHoursDto.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Dtos\UploadedFileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\SqlDataReaderReadOnlyStream.cs" />
@@ -5726,9 +5723,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyVipCity.BusinessLogic\MyVipCity.BusinessLogic.csproj">
+      <Project>{4a0dc78f-9512-4f81-bc89-5810d9e20ea0}</Project>
+      <Name>MyVipCity.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyVipCity.CompositionRoot\MyVipCity.CompositionRoot.csproj">
       <Project>{62291c93-87fa-4341-8503-20d2e3d7e63c}</Project>
       <Name>MyVipCity.CompositionRoot</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyVipCity.DataTransferObjects\MyVipCity.DataTransferObjects.csproj">
+      <Project>{56335850-5df9-4c56-812c-21574d1b9ebf}</Project>
+      <Name>MyVipCity.DataTransferObjects</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyVipCity.Domain.Mappings.EF\MyVipCity.Domain.Mappings.EF.csproj">
       <Project>{719d7629-4e5f-4346-82ae-4df345a72cb4}</Project>

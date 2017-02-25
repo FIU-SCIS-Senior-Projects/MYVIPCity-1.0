@@ -59,9 +59,7 @@
                 <div class="detail-media">
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="detail-media-images">
-                            @*<div vip-images-upload ng-model="model.Images"></div>
-                                <div vip-images-gallery ng-model="model.Images"></div>*@
-                            <div vip-images-control ng-model="model.Images"></div>
+                            <div vip-images-control ng-model="model.Pictures"></div>
                         </div>
                         <div class="tab-pane fade light-gallery" id="detail-media-floorplan">
                             <a href="img/demo/floor-plan.png">
@@ -104,11 +102,11 @@
                         </li>
                         <li>
                             <span>Alcohol</span>
-                            <div vip-textbox class="inline-block" ng-model="model.Alcohol" placeholder="Alchol details" wrap-with="span" edit-mode-class="span"></div>
+                            <div vip-textbox class="inline-block" ng-model="model.Alcohol" placeholder="Alcohol details" wrap-with="span" edit-mode-class="span"></div>
                         </li>
                         <li>
                             <span>Phone</span>
-                            <div vip-textbox class="inline-block" ng-model="model.Phone" type="phone" placeholder="Alchol details" wrap-with="span" edit-mode-class="span"></div>
+                            <div vip-textbox class="inline-block" ng-model="model.Phone" type="phone" placeholder="Phone number" wrap-with="span" edit-mode-class="span"></div>
                         </li>
                         <li>
                             <span>Website</span>

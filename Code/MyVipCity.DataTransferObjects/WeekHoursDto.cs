@@ -1,4 +1,4 @@
-﻿namespace MyVipCity.Models.Dtos {
+﻿namespace MyVipCity.DataTransferObjects {
 
 	public class WeekHoursDto {
 
