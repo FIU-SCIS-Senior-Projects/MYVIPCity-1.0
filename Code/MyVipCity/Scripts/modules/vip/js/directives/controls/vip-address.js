@@ -15,7 +15,6 @@
 				var lastZipCode, lastStreet, lastCity, lastState, mapTimeout;
 
 				scope._address = {};
-				scope._showMap = false;
 
 				ngModelCtrl.$render = function () {
 					if (ngModelCtrl.$viewValue) {
@@ -85,10 +84,10 @@
 							var data = response.data;
 							// check for successful response
 							if (data.status === 'OK') {
-								scope._showMap = true;
 								// get the coordinates (longitude and latitude)
 								var location = data.results[0].geometry.location;
 								// create a map
+								jQuery(element.find('.vip-map')).empty().show();
 								var map = new google.maps.Map(element.find('.vip-map')[0], {
 									zoom: 13,
 									center: location
@@ -140,7 +139,7 @@
 						'<div vip-textbox class="inline-block" ng-model="_address.ZipCode" ng-model-options="{debounce: 300}" placeholder="ZipCode" wrap-with="span" edit-mode-class="span"></div>' +
 					'</div>' +
 					'<div class="inline-block vip-address__formatted-address">{{' + attrs.ngModel + '.FormattedAddress}}</div>' +
-					'<div class="vip-map" ng-show="_showMap"></div>'
+					'<div class="vip-map" style="display:none"></div>'
 				);
 
 				element.append(editElement);
