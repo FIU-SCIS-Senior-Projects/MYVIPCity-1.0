@@ -18,6 +18,7 @@
 
 				ngModelCtrl.$render = function () {
 					scope._time = ngModelCtrl.$viewValue ? moment(ngModelCtrl.$viewValue).toDate() : null;
+					element.find('.vip-time-picker-input').timepicker('setTime', scope._time);
 				};
 
 				controlRenderingService.setCreateReadModeElementFunction(function () {
@@ -34,7 +35,7 @@
 
 				controlRenderingService.setCreateEditModeElementFunction(function () {
 					// create edit mode element
-					var editElement = angular.element('<input type="text" ' + (attrs.placeholder ? ' placeholder="' + attrs.placeholder + '"' : '') + '/>');
+					var editElement = angular.element('<input class="vip-time-picker-input" type="text" ' + (attrs.placeholder ? ' placeholder="' + attrs.placeholder + '"' : '') + '/>');
 					jQuery(editElement)
 						.timepicker()
 						.on('change', function (e) {

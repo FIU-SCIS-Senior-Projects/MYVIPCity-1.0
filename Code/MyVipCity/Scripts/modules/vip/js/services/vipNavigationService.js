@@ -1,7 +1,7 @@
 ﻿define(['vip/js/vip'], function (vip) {
 	'use strict';
 
-	vip.factory('vipLocationService', ['$location', function ($location) {
+	vip.factory('vipNavigationService', ['$location', function ($location) {
 
 		var changeLocation = function(url) {
 			$location.path(url);

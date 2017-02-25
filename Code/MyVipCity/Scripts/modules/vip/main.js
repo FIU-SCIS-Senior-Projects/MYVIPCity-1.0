@@ -33,7 +33,7 @@
 	'vip/js/services/vipColorsService',
 	'vip/js/services/vipControlRenderingService',
 	'vip/js/services/vipFactoryService',
-	'vip/js/services/vipLocationService',
+	'vip/js/services/vipNavigationService',
 	'vip/js/services/vipServerErrorProcessorService',
 	'vip/js/services/vipUtilsService'
 ], function (require, angular, vip) {

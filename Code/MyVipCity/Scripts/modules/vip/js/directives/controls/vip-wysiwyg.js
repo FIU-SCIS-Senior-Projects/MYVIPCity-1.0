@@ -16,9 +16,18 @@
 				// instantiate a control rendering service
 				var controlRenderingService = vipControlRenderingService(scope, element);
 
-				//ngModelCtrl.$render = function () {
-				//	scope._body = ngModelCtrl.$viewValue;
-				//};
+				ngModelCtrl.$render = function () {
+					if (ngModelCtrl.$viewValue) {
+						jQuery(element)
+							.find('.vip-wysiwyg-wysiwyg')
+							.trumbowyg('html', ngModelCtrl.$viewValue);
+					}
+					else {
+						jQuery(element)
+							.find('.vip-wysiwyg-wysiwyg')
+							.trumbowyg('empty');
+					}
+				};
 
 				controlRenderingService.setCreateReadModeElementFunction(function () {
 					// create the read mode element

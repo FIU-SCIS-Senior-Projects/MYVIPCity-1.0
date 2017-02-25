@@ -445,7 +445,7 @@
     <Content Include="Scripts\modules\vip\js\directives\vip-navigation-menu.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\business.js" />
     <Content Include="Scripts\modules\vip\js\services\vipFactoryService.js" />
-    <Content Include="Scripts\modules\vip\js\services\vipLocationService.js" />
+    <Content Include="Scripts\modules\vip\js\services\vipNavigationService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipUtilsService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipControlRenderingService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipColorsService.js" />

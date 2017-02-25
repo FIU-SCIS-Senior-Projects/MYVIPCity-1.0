@@ -1,7 +1,7 @@
 ﻿define(['vip/js/vip', 'sweet-alert'], function (vip, swal) {
 	'use strict';
 
-	vip.controller('vip.addBusinessController', ['$scope', 'vipFactoryService', '$q', '$http', 'vipLocationService', function ($scope, vipFactoryService, $q, $http, vipLocationService) {
+	vip.controller('vip.addBusinessController', ['$scope', 'vipFactoryService', '$q', '$http', 'vipNavigationService', '$route', function ($scope, vipFactoryService, $q, $http, vipNavigationService, $route) {
 		// TODO Remove this button
 		$scope.showToggleButton = true;
 		$scope.showResetButton = true;
@@ -17,15 +17,17 @@
 
 		setNewBusinessModel();
 
-		$scope.resetForm = function() {
+		$scope.resetForm = function () {
 			setNewBusinessModel();
+			// $route.reload();
 		};
 
 		$scope.save = function () {
 			$http.post('api/Business', $scope.model)
 				.then(function (response) {
+					// get the response
 					var business = response.data;
-					// let the user know the registration was successful
+					// let the user know save was successful, and prompt if want to display the view mode for this club
 					swal({
 						type: 'success',
 						title: 'Club created successfully!',
@@ -34,8 +36,12 @@
 						confirmButtonText: "Yes",
 						cancelButtonText: "No"
 					}).then(function () {
-						vipLocationService.goToClub(business.FriendlyId);
-					}, setNewBusinessModel);
+						// navigate
+						vipNavigationService.goToClub(business.FriendlyId);
+					}, function () {
+						// setNewBusinessModel();
+						$route.reload();
+					});
 				}, function (error) {
 
 				});

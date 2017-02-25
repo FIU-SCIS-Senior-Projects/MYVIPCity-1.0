@@ -5,9 +5,7 @@
 		return {
 			restrict: 'AC',
 			priority: 1000,
-			link: function (scope, element, attrs) {
-				// set the max width
-				var maxWidth = attrs.autoGrowMax || 1000;
+			link: function (scope, element) {
 				// enable auto grow jquery plugin
 				jQuery(element).autoGrowInput();
 				// trigger autogrow
