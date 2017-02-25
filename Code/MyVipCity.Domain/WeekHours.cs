@@ -8,43 +8,43 @@
 			set;
 		}
 
-		public DayHours Monday
+		public virtual DayHours Monday
 		{
 			get;
 			set;
 		}
 
-		public DayHours Tuesday
+		public virtual DayHours Tuesday
 		{
 			get;
 			set;
 		}
 
-		public DayHours Wednesday
+		public virtual DayHours Wednesday
 		{
 			get;
 			set;
 		}
 
-		public DayHours Thursday
+		public virtual DayHours Thursday
 		{
 			get;
 			set;
 		}
 
-		public DayHours Friday
+		public virtual DayHours Friday
 		{
 			get;
 			set;
 		}
 
-		public DayHours Saturday
+		public virtual DayHours Saturday
 		{
 			get;
 			set;
 		}
 
-		public DayHours Sunday
+		public virtual DayHours Sunday
 		{
 			get;
 			set;

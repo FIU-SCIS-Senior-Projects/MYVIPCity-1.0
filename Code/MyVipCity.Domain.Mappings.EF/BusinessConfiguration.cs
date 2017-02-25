@@ -32,7 +32,7 @@ namespace MyVipCity.Domain.Mappings.EF {
 				m.MapLeftKey("BusinessId");
 				m.MapRightKey("FileId");
 			});
-			HasRequired(b => b.WeekHours).WithRequiredDependent().Map(m => m.MapKey("WeekHoursId"));
+			HasRequired(b => b.WeekHours).WithMany().Map(m => m.MapKey("WeekHoursId")).WillCascadeOnDelete(false);
 		}
 	}
 }

@@ -116,7 +116,7 @@ namespace MyVipCity.Domain {
 		/// <summary>
 		/// Week hours for the business.
 		/// </summary>
-		public WeekHours WeekHours
+		public virtual WeekHours WeekHours
 		{
 			get;
 			set;

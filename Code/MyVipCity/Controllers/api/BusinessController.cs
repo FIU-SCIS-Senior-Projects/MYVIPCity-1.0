@@ -17,16 +17,22 @@ namespace MyVipCity.Controllers.api {
 			set;
 		}
 
+		[HttpGet]
+		[Route("{id:int}")]
+		// TODO: Change Id to FriendlyId
+		public async Task<IHttpActionResult> GetBusiness(int id) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var dto = BusinessManager.Load(id);
+				return Ok(dto);
+			});
+		}
+
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
 		[Route("")]
 		public async Task<IHttpActionResult> AddBusiness(BusinessDto businessDto) {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
-
-				var dto = BusinessManager.Load(1);
-				return Ok(dto);
 				BusinessManager.Create(businessDto);
-
 				return Ok();
 			});
 		}
