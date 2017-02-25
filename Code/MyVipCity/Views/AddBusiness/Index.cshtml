@@ -4,254 +4,252 @@
     Layout = null;
 }
 
-<div ng-controller="vip.addBusinessController">
-    <button ng-click="toggleRenderingMode()" style="position: fixed; top: 180px;left:20px">Toggle Rendering Mode</button>
-    <header class="section__title section__title-alt">
-        <!--Name-->
-        <div vip-textbox ng-model="model.Name" placeholder="Business Name" wrap-with="h1" edit-mode-class="h1 text-center" read-mode-class="text-uppercase" auto-grow="true"></div>
-        <!--Phrase-->
-        <div vip-textbox ng-model="model.Phrase" placeholder="Business Phrase" wrap-with="small" edit-mode-class="small text-center" auto-grow="true"></div>
+<button ng-click="toggleRenderingMode()" ng-show="showToggleButton" style="position: fixed; top: 180px;left:20px">Toggle Rendering Mode</button>
+<header class="section__title section__title-alt">
+    <!--Name-->
+    <div vip-textbox ng-model="model.Name" placeholder="Business Name" wrap-with="h1" edit-mode-class="h1 text-center" read-mode-class="text-uppercase" auto-grow="true"></div>
+    <!--Phrase-->
+    <div vip-textbox ng-model="model.Phrase" placeholder="Business Phrase" wrap-with="small" edit-mode-class="small text-center" auto-grow="true"></div>
 
-        <div class="actions actions--section">
-            <div class="actions__toggle">
-                <input type="checkbox">
-                <i class="zmdi zmdi-favorite-outline"></i>
-                <i class="zmdi zmdi-favorite"></i>
+    <div class="actions actions--section">
+        <div class="actions__toggle">
+            <input type="checkbox">
+            <i class="zmdi zmdi-favorite-outline"></i>
+            <i class="zmdi zmdi-favorite"></i>
+        </div>
+        <a href="" data-rmd-action="print"><i class="zmdi zmdi-print"></i></a>
+        <div class="dropdown actions__email">
+            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-email"></i></a>
+            <div class="dropdown-menu stop-propagate">
+                <form>
+                    <p>
+                        <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong>
+                    </p>
+                    <div class="clearfix"></div>
+                    <div class="form-group form-group--float m-t-10">
+                        <input type="text" class="form-control">
+                        <label>Recipient Email Address</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <textarea class="form-control textarea-autoheight">I came across this listing from Roost and thought of sharing with you.</textarea>
+                        <label>Message (optional)</label>
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="m-t-15">
+                        <button class="btn btn-primary">Send</button>
+                        <a href="email/listing-mail.html" target="_blank" class="btn btn-link">View Email</a>
+                    </div>
+                </form>
             </div>
-            <a href="" data-rmd-action="print"><i class="zmdi zmdi-print"></i></a>
-            <div class="dropdown actions__email">
-                <a href="" data-toggle="dropdown"><i class="zmdi zmdi-email"></i></a>
-                <div class="dropdown-menu stop-propagate">
-                    <form>
-                        <p>
-                            <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong>
-                        </p>
-                        <div class="clearfix"></div>
-                        <div class="form-group form-group--float m-t-10">
-                            <input type="text" class="form-control">
-                            <label>Recipient Email Address</label>
-                            <i class="form-group__bar"></i>
-                        </div>
-                        <div class="form-group form-group--float">
-                            <textarea class="form-control textarea-autoheight">I came across this listing from Roost and thought of sharing with you.</textarea>
-                            <label>Message (optional)</label>
-                            <i class="form-group__bar"></i>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="m-t-15">
-                            <button class="btn btn-primary">Send</button>
-                            <a href="email/listing-mail.html" target="_blank" class="btn btn-link">View Email</a>
-                        </div>
-                    </form>
+        </div>
+        <div class="dropdown">
+            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-share"></i></a>
+            <div class="dropdown-menu pull-right rmd-share">
+                <div></div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="detail-media">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="detail-media-images">
+                        <div vip-images-control ng-model="model.Pictures"></div>
+                    </div>
+                    <div class="tab-pane fade light-gallery" id="detail-media-floorplan">
+                        <a href="img/demo/floor-plan.png">
+                            <img src="https://placeholdit.imgix.net/~text?&w=1000&h=464" alt="">
+                        </a>
+                    </div>
+                    <div class="tab-pane fade" id="detail-media-map">
+                        <div id="listing-map"></div>
+                    </div>
                 </div>
+                <ul class="detail-media__nav hidden-print">
+                    <li class="active"><a href="#detail-media-images" data-toggle="tab"><i class="zmdi zmdi-collection-image"></i></a></li>
+                    <li><a href="#detail-media-floorplan" data-toggle="tab"><i class="zmdi zmdi-view-dashboard"></i></a></li>
+                    <li><a href="#detail-media-map" data-toggle="tab"><i class="zmdi zmdi-map"></i></a></li>
+                </ul>
             </div>
-            <div class="dropdown">
-                <a href="" data-toggle="dropdown"><i class="zmdi zmdi-share"></i></a>
-                <div class="dropdown-menu pull-right rmd-share">
-                    <div></div>
+            <div class="detail-info vip-business-info">
+                <div class="detail-info__header clearfix">
+                    <strong>Information</strong>
+                    <span>OPEN NOW</span>
+                </div>
+                <ul class="detail-info__list clearfix vip-business-info__list">
+                    <li>
+                        <span class="vip-business-info__list-hours-label pull-left">Hours</span>
+                        <div class="inline-block">
+                            <div vip-week-hours ng-model="model.WeekHours"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <span>Ambiance</span>
+                        <div vip-textbox class="inline-block" ng-model="model.Ambiance" placeholder="Ambiance details" wrap-with="span" edit-mode-class="span"></div>
+                    </li>
+                    <li>
+                        <span>Good for Dancing</span>
+                        <div vip-checkbox class="inline-block" ng-model="model.GoodForDancing" wrap-with="span"></div>
+                    </li>
+                    <li>
+                        <span>Parking</span>
+                        <div vip-textbox class="inline-block" ng-model="model.Parking" placeholder="Parking details" wrap-with="span" edit-mode-class="span"></div>
+                    </li>
+                    <li>
+                        <span>Alcohol</span>
+                        <div vip-textbox class="inline-block" ng-model="model.Alcohol" placeholder="Alcohol details" wrap-with="span" edit-mode-class="span"></div>
+                    </li>
+                    <li>
+                        <span>Phone</span>
+                        <div vip-textbox class="inline-block" ng-model="model.Phone" type="phone" placeholder="Phone number" wrap-with="span" edit-mode-class="span"></div>
+                    </li>
+                    <li>
+                        <span>Website</span>
+                        <div vip-link class="inline-block" ng-model="model.WebsiteUrl" placeholder="Website URL" edit-mode-class="span"></div>
+                    </li>
+                </ul>
+                <div class="card__body vip-address-info">
+                    <span>Address</span>
+                    <div vip-address ng-model="model.Address"></div>
                 </div>
             </div>
         </div>
-    </header>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="detail-media">
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="detail-media-images">
-                            <div vip-images-control ng-model="model.Pictures"></div>
-                        </div>
-                        <div class="tab-pane fade light-gallery" id="detail-media-floorplan">
-                            <a href="img/demo/floor-plan.png">
-                                <img src="https://placeholdit.imgix.net/~text?&w=1000&h=464" alt="">
-                            </a>
-                        </div>
-                        <div class="tab-pane fade" id="detail-media-map">
-                            <div id="listing-map"></div>
-                        </div>
-                    </div>
-                    <ul class="detail-media__nav hidden-print">
-                        <li class="active"><a href="#detail-media-images" data-toggle="tab"><i class="zmdi zmdi-collection-image"></i></a></li>
-                        <li><a href="#detail-media-floorplan" data-toggle="tab"><i class="zmdi zmdi-view-dashboard"></i></a></li>
-                        <li><a href="#detail-media-map" data-toggle="tab"><i class="zmdi zmdi-map"></i></a></li>
-                    </ul>
-                </div>
-                <div class="detail-info vip-business-info">
-                    <div class="detail-info__header clearfix">
-                        <strong>Information</strong>
-                        <span>OPEN NOW</span>
-                    </div>
-                    <ul class="detail-info__list clearfix vip-business-info__list">
-                        <li>
-                            <span class="vip-business-info__list-hours-label pull-left">Hours</span>
-                            <div class="inline-block">
-                                <div vip-week-hours ng-model="model.WeekHours"></div>
-                            </div>
-                        </li>
-                        <li>
-                            <span>Ambiance</span>
-                            <div vip-textbox class="inline-block" ng-model="model.Ambiance" placeholder="Ambiance details" wrap-with="span" edit-mode-class="span"></div>
-                        </li>
-                        <li>
-                            <span>Good for Dancing</span>
-                            <div vip-checkbox class="inline-block" ng-model="model.GoodForDancing" wrap-with="span"></div>
-                        </li>
-                        <li>
-                            <span>Parking</span>
-                            <div vip-textbox class="inline-block" ng-model="model.Parking" placeholder="Parking details" wrap-with="span" edit-mode-class="span"></div>
-                        </li>
-                        <li>
-                            <span>Alcohol</span>
-                            <div vip-textbox class="inline-block" ng-model="model.Alcohol" placeholder="Alcohol details" wrap-with="span" edit-mode-class="span"></div>
-                        </li>
-                        <li>
-                            <span>Phone</span>
-                            <div vip-textbox class="inline-block" ng-model="model.Phone" type="phone" placeholder="Phone number" wrap-with="span" edit-mode-class="span"></div>
-                        </li>
-                        <li>
-                            <span>Website</span>
-                            <div vip-link class="inline-block" ng-model="model.WebsiteUrl" placeholder="Website URL" edit-mode-class="span"></div>
-                        </li>
-                    </ul>
-                    <div class="card__body vip-address-info">
-                        <span>Address</span>
-                        <div vip-address ng-model="model.Address"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="card detail-amenities">
-                <div class="card__header">
-                    <h2>Amenities</h2>
-                    <!--Amenities Phrase-->
-                    <div vip-textbox ng-model="model.AmenitiesPhrase" placeholder="Amenties Phrase" wrap-with="small" edit-mode-class="small text-center" auto-grow="true"></div>
+        <div class="card detail-amenities">
+            <div class="card__header">
+                <h2>Amenities</h2>
+                <!--Amenities Phrase-->
+                <div vip-textbox ng-model="model.AmenitiesPhrase" placeholder="Amenties Phrase" wrap-with="small" edit-mode-class="small text-center" auto-grow="true"></div>
 
-                </div>
-                <div class="card__body">
-                    <!--Amenities-->
-                    <div vip-tags ng-model="model.Amenities" read-mode-class="detail-amenities__list" placeholder="Add an amenity..."></div>
-                </div>
             </div>
-            <div class="card">
-                <div class="card__header">
-                    <h2>Details</h2>
-                </div>
-                <div class="card__body">
-                    <div vip-wysiwyg ng-model="model.Details" placeholder="Write details here..."></div>
-                </div>
-            </div>
-            <div>
-                <button class="btn btn-primary" ng-click="save()">Save</button>
+            <div class="card__body">
+                <!--Amenities-->
+                <div vip-tags ng-model="model.Amenities" read-mode-class="detail-amenities__list" placeholder="Add an amenity..."></div>
             </div>
         </div>
-        <div id="inquire" class="col-md-4 rmd-sidebar-mobile">
-            <form class="card hidden-print">
-                <div class="card__header">
-                    <h2>Want to go to this club?</h2>
-                    <small>Fill this form and we will get in contact with you.</small>
-                </div>
-                <div class="card__body">
-                    <div class="inquire__number">
-                        <i class="zmdi zmdi-phone"></i>
-                        +1-541-754-3010
-                    </div>
-                    <div class="form-group form-group--float">
-                        <input type="text" class="form-control">
-                        <label>Name</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float">
-                        <input type="text" class="form-control">
-                        <label>Email Address</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float">
-                        <input type="text" class="form-control">
-                        <label>Contact Number</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float">
-                        <textarea class="form-control textarea-autoheight"></textarea>
-                        <label>Message</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <small class="text-muted">By sending us your information, you agree to Roost’s Terms of Use & Privacy Policy.</small>
-                </div>
-                <div class="card__footer">
-                    <button type="submit" class="btn btn-primary">Request Information</button>
-                    <button class="btn btn-link hidden-lg hidden-md" data-rmd-action="block-close" data-rmd-target="#inquire">Cancel</button>
-                </div>
-            </form>
-            <div class="card hidden-xs hidden-sm hidden-print">
-                <div class="card__header">
-                    <h2>VIP Hosts</h2>
-                    <small>These VIP hosts will make you have the best time</small>
-                </div>
-                <div class="list-group">
-                    <a class="list-group-item media" href="">
-                        <div class="pull-left">
-                            <img src="https://placeholdit.imgix.net/~text?&w=500&h=500" alt="" class="list-group__img img-circle" width="65" height="65">
-                        </div>
-                        <div class="media-body list-group__text">
-                            <strong>John "The Dancer" Doe</strong>
-                            <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
-                        </div>
-                    </a>
-                    <a class="list-group-item media" href="">
-                        <div class="pull-left">
-                            <img src="https://placeholdit.imgix.net/~text?&w=500&h=500" alt="" class="list-group__img img-circle" width="65" height="65">
-                        </div>
-                        <div class="media-body list-group__text">
-                            <strong>Jane McLaren</strong>
-                            <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
-                        </div>
-                    </a>
-                    <div class="p-10"></div>
-                </div>
+        <div class="card">
+            <div class="card__header">
+                <h2>Details</h2>
             </div>
-            <div class="card hidden-xs hidden-sm hidden-print">
-                <div class="card__header">
-                    <h2>You may also like...</h2>
-                    <small>Check these other great places</small>
+            <div class="card__body">
+                <div vip-wysiwyg ng-model="model.Details" placeholder="Write details here..."></div>
+            </div>
+        </div>
+        <div class="vip-save-button-container">
+            <button class="btn btn-primary" ng-show="showSaveButton" ng-click="save()">Save</button>
+        </div>
+    </div>
+    <div id="inquire" class="col-md-4 rmd-sidebar-mobile">
+        <form class="card hidden-print">
+            <div class="card__header">
+                <h2>Want to go to this club?</h2>
+                <small>Fill this form and we will get in contact with you.</small>
+            </div>
+            <div class="card__body">
+                <div class="inquire__number">
+                    <i class="zmdi zmdi-phone"></i>
+                    +1-541-754-3010
                 </div>
-                <div class="list-group">
-                    <a href="" class="list-group-item media">
-                        <div class="pull-left">
-                            <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
-                        </div>
-                        <div class="media-body list-group__text">
-                            <strong>Viva L' Musica</strong>
-                            <small>OPEN NOW</small>
-                        </div>
-                    </a>
-                    <a href="" class="list-group-item media">
-                        <div class="pull-left">
-                            <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
-                        </div>
-                        <div class="media-body list-group__text">
-                            <strong>Studio 6.0</strong>
-                            <small>OPEN NOW</small>
-                        </div>
-                    </a>
-                    <a href="" class="list-group-item media">
-                        <div class="pull-left">
-                            <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
-                        </div>
-                        <div class="media-body list-group__text">
-                            <strong>PURDY LOUNGE</strong>
-                            <small>OPENING SOON</small>
-                        </div>
-                    </a>
-                    <a href="" class="list-group-item media">
-                        <div class="pull-left">
-                            <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
-                        </div>
-                        <div class="media-body list-group__text">
-                            <strong>MusicTalks</strong>
-                            <small>OPEN NOW</small>
-                        </div>
-                    </a>
-                    <div class="p-10"></div>
+                <div class="form-group form-group--float">
+                    <input type="text" class="form-control">
+                    <label>Name</label>
+                    <i class="form-group__bar"></i>
                 </div>
+                <div class="form-group form-group--float">
+                    <input type="text" class="form-control">
+                    <label>Email Address</label>
+                    <i class="form-group__bar"></i>
+                </div>
+                <div class="form-group form-group--float">
+                    <input type="text" class="form-control">
+                    <label>Contact Number</label>
+                    <i class="form-group__bar"></i>
+                </div>
+                <div class="form-group form-group--float">
+                    <textarea class="form-control textarea-autoheight"></textarea>
+                    <label>Message</label>
+                    <i class="form-group__bar"></i>
+                </div>
+                <small class="text-muted">By sending us your information, you agree to Roost’s Terms of Use & Privacy Policy.</small>
+            </div>
+            <div class="card__footer">
+                <button type="submit" class="btn btn-primary">Request Information</button>
+                <button class="btn btn-link hidden-lg hidden-md" data-rmd-action="block-close" data-rmd-target="#inquire">Cancel</button>
+            </div>
+        </form>
+        <div class="card hidden-xs hidden-sm hidden-print">
+            <div class="card__header">
+                <h2>VIP Hosts</h2>
+                <small>These VIP hosts will make you have the best time</small>
+            </div>
+            <div class="list-group">
+                <a class="list-group-item media" href="">
+                    <div class="pull-left">
+                        <img src="https://placeholdit.imgix.net/~text?&w=500&h=500" alt="" class="list-group__img img-circle" width="65" height="65">
+                    </div>
+                    <div class="media-body list-group__text">
+                        <strong>John "The Dancer" Doe</strong>
+                        <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
+                    </div>
+                </a>
+                <a class="list-group-item media" href="">
+                    <div class="pull-left">
+                        <img src="https://placeholdit.imgix.net/~text?&w=500&h=500" alt="" class="list-group__img img-circle" width="65" height="65">
+                    </div>
+                    <div class="media-body list-group__text">
+                        <strong>Jane McLaren</strong>
+                        <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
+                    </div>
+                </a>
+                <div class="p-10"></div>
+            </div>
+        </div>
+        <div class="card hidden-xs hidden-sm hidden-print">
+            <div class="card__header">
+                <h2>You may also like...</h2>
+                <small>Check these other great places</small>
+            </div>
+            <div class="list-group">
+                <a href="" class="list-group-item media">
+                    <div class="pull-left">
+                        <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
+                    </div>
+                    <div class="media-body list-group__text">
+                        <strong>Viva L' Musica</strong>
+                        <small>OPEN NOW</small>
+                    </div>
+                </a>
+                <a href="" class="list-group-item media">
+                    <div class="pull-left">
+                        <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
+                    </div>
+                    <div class="media-body list-group__text">
+                        <strong>Studio 6.0</strong>
+                        <small>OPEN NOW</small>
+                    </div>
+                </a>
+                <a href="" class="list-group-item media">
+                    <div class="pull-left">
+                        <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
+                    </div>
+                    <div class="media-body list-group__text">
+                        <strong>PURDY LOUNGE</strong>
+                        <small>OPENING SOON</small>
+                    </div>
+                </a>
+                <a href="" class="list-group-item media">
+                    <div class="pull-left">
+                        <img src="https://placeholdit.imgix.net/~text?&w=400&h=266" alt="" class="list-group__img" width="65">
+                    </div>
+                    <div class="media-body list-group__text">
+                        <strong>MusicTalks</strong>
+                        <small>OPEN NOW</small>
+                    </div>
+                </a>
+                <div class="p-10"></div>
             </div>
         </div>
     </div>

@@ -13,7 +13,8 @@
 			// set the route
 			$routeProvider.when(route.Path, {
 				template: route.Template,
-				templateUrl: route.TemplateUrl
+				templateUrl: route.TemplateUrl,
+				controller: route.Controller
 			});
 		});
 

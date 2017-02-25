@@ -4033,3 +4033,9 @@ div[vip-address] .vip-map {
 div[vip-address] div[vip-textbox] {
   padding-right: 3px;
 }
+.vip-save-button-container {
+  text-align: center;
+}
+.vip-save-button-container button {
+  width: 30%;
+}

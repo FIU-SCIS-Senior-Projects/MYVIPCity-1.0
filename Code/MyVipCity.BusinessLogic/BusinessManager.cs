@@ -33,20 +33,34 @@ namespace MyVipCity.BusinessLogic {
 			set;
 		}
 
-		public void Create(BusinessDto businessDto) {
+		public BusinessDto Create(BusinessDto businessDto) {
 			try {
 				var business = Mapper.Map<Business>(businessDto);
 				BuildFriendlyIdForBusiness(business);
 				DbContext.Set<Business>().Add(business);
 				DbContext.SaveChanges();
+				var result = ToDto(business);
+				return result;
 			}
 			catch (Exception e) {
 				Logger.Error(e.Message + "\n" + e.StackTrace);
+				return null;
 			}
 		}
-
-		public BusinessDto Load(int id) {
+		
+		public BusinessDto LoadById(int id) {
 			var business = DbContext.Set<Business>().Find(id);
+			var businessDto = ToDto(business);
+			return businessDto;
+		}
+
+		public BusinessDto LoadByFriendlyId(string friendlyId) {
+			var business = DbContext.Set<Business>().FirstOrDefault(b => b.FriendlyId == friendlyId);
+			var businessDto = ToDto(business);
+			return businessDto;
+		}
+
+		private BusinessDto ToDto(Business business) {
 			if (business == null)
 				return null;
 			var businessDto = Mapper.Map<BusinessDto>(business);
@@ -57,7 +71,7 @@ namespace MyVipCity.BusinessLogic {
 			if (string.IsNullOrWhiteSpace(business.Name))
 				throw new InvalidOperationException("Business name must be provided.");
 			// compute friendly id
-			var friendlyName = string.Join("-", business.Name.Trim().Split(' ').Select(s => s.Trim()));
+			var friendlyName = string.Join("-", business.Name.Trim().Split(' ').Select(s => s.Trim().ToLowerInvariant()));
 			// count the number of existing businesses with the same friendly id
 			var count = DbContext.Set<Business>().Count(b => b.FriendlyIdBase == friendlyName);
 			business.FriendlyIdBase = friendlyName;

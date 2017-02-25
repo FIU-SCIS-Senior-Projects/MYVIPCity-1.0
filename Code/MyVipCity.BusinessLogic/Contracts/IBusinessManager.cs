@@ -4,8 +4,10 @@ namespace MyVipCity.BusinessLogic.Contracts {
 
 	public interface IBusinessManager {
 
-		void Create(BusinessDto businessDto);
+		BusinessDto Create(BusinessDto businessDto);
 
-		BusinessDto Load(int id);
+		BusinessDto LoadById(int id);
+
+		BusinessDto LoadByFriendlyId(string friendlyId);
 	}
 }

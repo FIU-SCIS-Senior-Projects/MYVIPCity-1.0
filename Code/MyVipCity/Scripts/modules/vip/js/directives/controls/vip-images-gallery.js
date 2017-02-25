@@ -80,7 +80,6 @@
 				};
 
 				listeners.push(scope.$on('$destroy', function () {
-					lg = null;
 					// unregister listeners
 					for (var i = 0; i < listeners.length; i++)
 						listeners[i]();

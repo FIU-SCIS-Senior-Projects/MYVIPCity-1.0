@@ -422,6 +422,7 @@
     <Content Include="Scripts\modules\main.js" />
     <Content Include="Scripts\modules\vip\js\config\vipConfig.js" />
     <Content Include="Scripts\modules\vip\js\config\vipRouteConfig.js" />
+    <Content Include="Scripts\modules\vip\js\controllers\viewBusinessController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\addBusinessController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\loginFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
@@ -444,6 +445,7 @@
     <Content Include="Scripts\modules\vip\js\directives\vip-navigation-menu.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\business.js" />
     <Content Include="Scripts\modules\vip\js\services\vipFactoryService.js" />
+    <Content Include="Scripts\modules\vip\js\services\vipLocationService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipUtilsService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipControlRenderingService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipColorsService.js" />

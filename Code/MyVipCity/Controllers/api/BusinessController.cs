@@ -19,10 +19,18 @@ namespace MyVipCity.Controllers.api {
 
 		[HttpGet]
 		[Route("{id:int}")]
-		// TODO: Change Id to FriendlyId
 		public async Task<IHttpActionResult> GetBusiness(int id) {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
-				var dto = BusinessManager.Load(id);
+				var dto = BusinessManager.LoadById(id);
+				return Ok(dto);
+			});
+		}
+
+		[HttpGet]
+		[Route("ByFriendlyId/{friendlyId}")]
+		public async Task<IHttpActionResult> GetByFriendlyIdBusiness(string friendlyId) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var dto = BusinessManager.LoadByFriendlyId(friendlyId);
 				return Ok(dto);
 			});
 		}
@@ -32,8 +40,8 @@ namespace MyVipCity.Controllers.api {
 		[Route("")]
 		public async Task<IHttpActionResult> AddBusiness(BusinessDto businessDto) {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
-				BusinessManager.Create(businessDto);
-				return Ok();
+				var savedBusinessDto = BusinessManager.Create(businessDto);
+				return Ok(savedBusinessDto);
 			});
 		}
 	}

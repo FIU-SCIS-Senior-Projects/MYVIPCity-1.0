@@ -10,6 +10,7 @@
 	'vip/js/controllers/forgotPasswordFormController',
 	'vip/js/controllers/loginFormController',
 	'vip/js/controllers/registerFormController',
+	'vip/js/controllers/viewBusinessController',
 	// directives
 	'vip/js/directives/controls/vip-address',
 	'vip/js/directives/controls/vip-checkbox',
@@ -32,8 +33,10 @@
 	'vip/js/services/vipColorsService',
 	'vip/js/services/vipControlRenderingService',
 	'vip/js/services/vipFactoryService',
+	'vip/js/services/vipLocationService',
 	'vip/js/services/vipServerErrorProcessorService',
 	'vip/js/services/vipUtilsService'
 ], function (require, angular, vip) {
 	return vip;
 });
+

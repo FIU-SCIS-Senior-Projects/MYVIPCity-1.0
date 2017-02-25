@@ -145,6 +145,11 @@ namespace MyVipCity.Controllers {
 				new {
 					Path = "/home",
 					TemplateUrl = "/Home/Home"
+				},
+				new {
+					Path = "/viewClub/:friendlyId",
+					TemplateUrl = "/AddBusiness",
+					Controller = "vip.viewBusinessController"
 				}
 			};
 
@@ -153,7 +158,8 @@ namespace MyVipCity.Controllers {
 				if (IsUserInRole("Admin")) {
 					routes.Add(new {
 						Path = "/addbusiness",
-						TemplateUrl = "/AddBusiness"
+						TemplateUrl = "/AddBusiness",
+						Controller = "vip.addBusinessController"
 					});
 				}
 			}
