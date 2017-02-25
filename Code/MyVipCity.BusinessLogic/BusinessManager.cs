@@ -35,14 +35,22 @@ namespace MyVipCity.BusinessLogic {
 
 		public void Create(BusinessDto businessDto) {
 			try {
-				var business = Mapper.Map<Domain.Business>(businessDto);
-				DbContext.Set<Business>().Add(business);
+				var business = Mapper.Map<Business>(businessDto);
 				BuildFriendlyIdForBusiness(business);
+				DbContext.Set<Business>().Add(business);
 				DbContext.SaveChanges();
 			}
 			catch (Exception e) {
 				Logger.Error(e.Message + "\n" + e.StackTrace);
 			}
+		}
+
+		public BusinessDto Load(int id) {
+			var business = DbContext.Set<Business>().Find(id);
+			if (business == null)
+				return null;
+			var businessDto = Mapper.Map<BusinessDto>(business);
+			return businessDto;
 		}
 
 		private void BuildFriendlyIdForBusiness(Business business) {

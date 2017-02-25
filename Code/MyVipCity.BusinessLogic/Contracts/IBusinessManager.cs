@@ -6,5 +6,6 @@ namespace MyVipCity.BusinessLogic.Contracts {
 
 		void Create(BusinessDto businessDto);
 
+		BusinessDto Load(int id);
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
@@ -22,6 +23,8 @@ namespace MyVipCity.Controllers.api {
 		public async Task<IHttpActionResult> AddBusiness(BusinessDto businessDto) {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
 
+				var dto = BusinessManager.Load(1);
+				return Ok(dto);
 				BusinessManager.Create(businessDto);
 
 				return Ok();
