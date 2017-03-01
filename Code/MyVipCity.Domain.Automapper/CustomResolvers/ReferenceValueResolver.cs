@@ -8,11 +8,11 @@ using Ninject;
 
 namespace MyVipCity.Domain.Automapper.CustomResolvers {
 
-	public class ReferenceValueResolver<TDto, TModel, TDtoProperty, TModelProperty>: IValueResolver<TDto, TModel, TModelProperty>
+	public class ReferenceValueResolver<TDto, TModel, TDtoProperty, TModelProperty>: ValueResolverBase, IValueResolver<TDto, TModel, TModelProperty>
 		where TDtoProperty : class, IIdentifiableDto
-		where TModelProperty: class, IIdentifiable
-		where TDto: class
-		where TModel: class {
+		where TModelProperty : class, IIdentifiable
+		where TDto : class
+		where TModel : class {
 
 		private Func<TDto, TDtoProperty> getDtoProperty;
 
@@ -35,45 +35,25 @@ namespace MyVipCity.Domain.Automapper.CustomResolvers {
 
 			// get the property from the dto
 			TDtoProperty dtoProperty = getDtoProperty(source);
+			// if the dto property is null then return null as well
+			if (dtoProperty == null)
+				return null;
+			// to store the model property object
 			TModelProperty modelProperty = null;
 			// see if the property has been mapped before
 			var mappedInstance = dtoToModelContext.TryGetMappedInstance<TDtoProperty, TModelProperty>(dtoProperty);
 			if (mappedInstance != null)
 				return mappedInstance;
-			// check if the reference property is new
-			if (dtoProperty.Id == 0) {
-				modelProperty = CreateModelPropertyInstance();
-			}
-			else {
-				// the reference property is not null, so it must be retrieved from the database
-				modelProperty = dbContext.Set<TModelProperty>().Find(dtoProperty.Id);
-			}
-			dtoToModelContext.SetMappedObjectInContext(dtoProperty, modelProperty);
-			
-			var result =  mapper.Map<TDtoProperty, TModelProperty>(dtoProperty, modelProperty, opts => {
-				opts.Items.Add(typeof(DtoToModelContext).Name, dtoToModelContext);
-				opts.Items.Add(typeof(DbContext).Name, dbContext);
-			});
+			var result = MapDtoToModel(dtoProperty, dto => dbContext.Set<TModelProperty>().Find(dto.Id), dtoToModelContext, dbContext, mapper);
 			return result;
 		}
+
+		
+
 
 		private TModelProperty CreateModelPropertyInstance() {
 			var instance = Activator.CreateInstance<TModelProperty>();
 			return instance;
-		}
-
-		private DbContext GetDbContextResolutionContext(ResolutionContext context) {
-			object dbContext;
-			context.Options.Items.TryGetValue(typeof(DbContext).Name, out dbContext);
-			return (DbContext)dbContext;
-		}
-
-		private DtoToModelContext GetDtoToModelContextFromResolutionContext(ResolutionContext context) {
-			object dtoToModelContext;
-			context.Options.Items.TryGetValue(typeof(DtoToModelContext).Name, out dtoToModelContext);
-			if (dtoToModelContext != null)
-				return (DtoToModelContext)dtoToModelContext;
-			return new DtoToModelContext();
 		}
 	}
 }
