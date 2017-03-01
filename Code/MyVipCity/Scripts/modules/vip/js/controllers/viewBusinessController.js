@@ -1,7 +1,7 @@
-﻿define(['vip/js/vip'], function (vip) {
+﻿define(['vip/js/vip', 'sweet-alert'], function (vip, swal) {
 	'use strict';
 
-	vip.controller('vip.viewBusinessController', ['$scope', '$routeParams', '$http', 'vipConfig', function ($scope, $routeParams, $http, vipConfig) {
+	vip.controller('vip.viewBusinessController', ['$scope', '$routeParams', '$http', 'vipConfig', '$route', 'vipNavigationService', function ($scope, $routeParams, $http, vipConfig, $route, vipNavigationService) {
 		$scope.renderingMode = vip.renderingModes.read;
 		$scope.model = {};
 
@@ -22,6 +22,31 @@
 				$scope.showReadModeButton = false;
 				$scope.showEditButton = true;
 				$scope.showSaveButton = false;
+			};
+
+			$scope.save = function() {
+				$http.put('api/Business', $scope.model)
+				.then(function (response) {
+					// get the response
+					var business = response.data;
+					// let the user know save was successful, and prompt if want to display the view mode for this club
+					swal({
+						type: 'success',
+						title: 'Success!',
+						text: 'The club has been updated successfully',
+						confirmButtonText: "Ok"
+					}).then(function () {
+						$scope.$apply(function () {
+							// navigate to the club
+							$route.reload();
+						});
+					}, function () {
+						// setNewBusinessModel();
+						$route.reload();
+					});
+				}, function (error) {
+					swal('Oops!', 'Something went wrong!', 'error');
+				});
 			};
 		}
 

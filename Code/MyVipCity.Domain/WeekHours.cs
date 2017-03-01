@@ -1,6 +1,8 @@
-﻿namespace MyVipCity.Domain {
+﻿using MyVipCity.Domain.Contracts;
 
-	public class WeekHours {
+namespace MyVipCity.Domain {
+
+	public class WeekHours : IIdentifiable {
 
 		public int Id
 		{

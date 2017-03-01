@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MyVipCity.DataTransferObjects;
+using MyVipCity.Domain.Automapper.CustomResolvers;
+using Ninject;
 
 namespace MyVipCity.Domain.Automapper {
 
@@ -15,7 +17,8 @@ namespace MyVipCity.Domain.Automapper {
 		}
 
 		private void DtoToModel() {
-			CreateMap<BusinessDto, Business>();
+			CreateMap<BusinessDto, Business>()
+				.ForMember(b => b.WeekHours, opts => opts.ResolveUsing(new ReferenceValueResolver<BusinessDto, Business, WeekHoursDto, WeekHours>(bu => bu.WeekHours)));
 		}
 	}
 }

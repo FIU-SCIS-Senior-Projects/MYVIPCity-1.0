@@ -1,4 +1,5 @@
 ﻿using System;
+using MyVipCity.Domain.Contracts;
 
 namespace MyVipCity.Domain {
 
@@ -12,7 +13,7 @@ namespace MyVipCity.Domain {
 		Saturday = 6
 	};
 
-	public class DayHours {
+	public class DayHours : IIdentifiable {
 
 		public int Id
 		{

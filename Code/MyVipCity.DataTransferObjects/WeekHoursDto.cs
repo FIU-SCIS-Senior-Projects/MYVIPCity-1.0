@@ -1,6 +1,8 @@
-﻿namespace MyVipCity.DataTransferObjects {
+﻿using MyVipCity.DataTransferObjects.Contracts;
 
-	public class WeekHoursDto {
+namespace MyVipCity.DataTransferObjects {
+
+	public class WeekHoursDto : IIdentifiableDto {
 
 		public int Id
 		{

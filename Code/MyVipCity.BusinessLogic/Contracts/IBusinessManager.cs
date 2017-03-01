@@ -6,6 +6,8 @@ namespace MyVipCity.BusinessLogic.Contracts {
 
 		BusinessDto Create(BusinessDto businessDto);
 
+		BusinessDto Update(BusinessDto businessDto);
+
 		BusinessDto LoadById(int id);
 
 		BusinessDto LoadByFriendlyId(string friendlyId);

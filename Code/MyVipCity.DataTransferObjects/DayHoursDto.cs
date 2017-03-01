@@ -1,4 +1,5 @@
 ﻿using System;
+using MyVipCity.DataTransferObjects.Contracts;
 
 namespace MyVipCity.DataTransferObjects {
 
@@ -12,7 +13,7 @@ namespace MyVipCity.DataTransferObjects {
 		Saturday = 6
 	};
 
-	public class DayHoursDto {
+	public class DayHoursDto : IIdentifiableDto {
 
 		public int Id
 		{

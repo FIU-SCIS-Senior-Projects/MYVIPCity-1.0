@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AddressDto.cs" />
     <Compile Include="BusinessDto.cs" />
+    <Compile Include="Contracts\IIdentifiableDto.cs" />
     <Compile Include="DayHoursDto.cs" />
     <Compile Include="FileDto.cs" />
     <Compile Include="PictureDto.cs" />

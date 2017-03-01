@@ -1,6 +1,8 @@
-﻿namespace MyVipCity.Domain {
+﻿using MyVipCity.Domain.Contracts;
 
-	public class File {
+namespace MyVipCity.Domain {
+
+	public class File : IIdentifiable {
 
 		// TODO Change Id to guid
 		public int Id

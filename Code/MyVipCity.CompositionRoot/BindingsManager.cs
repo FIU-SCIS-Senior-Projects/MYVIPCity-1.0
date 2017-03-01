@@ -1,4 +1,5 @@
 ﻿using System.Collections.Specialized;
+using System.Linq;
 using AutoMapper;
 using MyVipCity.BusinessLogic;
 using MyVipCity.BusinessLogic.Contracts;
@@ -22,8 +23,15 @@ namespace MyVipCity.CompositionRoot {
 					var config = new MapperConfiguration(cfg => {
 						// load assembly with automapper profiles
 						var autoMapperProfilesAssembly = typeof(BusinessProfile).Assembly;
+						var profileTypes = autoMapperProfilesAssembly.GetTypes().Where(t => t.IsClass && t.IsSubclassOf(typeof(Profile)));
+						var profileInstances = profileTypes.Select(profType => {
+							var profile = (Profile)context.Kernel.Get(profType);
+							return profile;
+						});
 						// add the profiles
-						cfg.AddProfiles(autoMapperProfilesAssembly);
+						// cfg.AddProfiles(autoMapperProfilesAssembly);
+						foreach (var profInstance in profileInstances)
+							cfg.AddProfile(profInstance);
 					});
 					// create mapper
 					var mapper = config.CreateMapper();

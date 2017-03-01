@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Web.Http;
 using MyVipCity.BusinessLogic.Contracts;
@@ -9,6 +10,12 @@ namespace MyVipCity.Controllers.api {
 
 	[RoutePrefix("api/Business")]
 	public class BusinessController: ApiController {
+
+		[Inject]
+		public IKernel Kernel
+		{
+			get; set;
+		}
 
 		[Inject]
 		public IBusinessManager BusinessManager
@@ -51,6 +58,16 @@ namespace MyVipCity.Controllers.api {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
 				var savedBusinessDto = BusinessManager.Create(businessDto);
 				return Ok(savedBusinessDto);
+			});
+		}
+
+		[HttpPut]
+		[Authorize(Roles = "Admin")]
+		[Route("")]
+		public async Task<IHttpActionResult> UpdateBusiness(BusinessDto businessDto) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var updatedBusinessDto = BusinessManager.Update(businessDto);
+				return Ok(updatedBusinessDto);
 			});
 		}
 	}

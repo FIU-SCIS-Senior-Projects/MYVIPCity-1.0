@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MyVipCity.Domain.Contracts;
 
 namespace MyVipCity.Domain {
 
-	public class Business {
+	public class Business : IIdentifiable {
 
 		public int Id
 		{

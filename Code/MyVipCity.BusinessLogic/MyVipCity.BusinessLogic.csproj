@@ -81,6 +81,10 @@
       <Project>{56335850-5df9-4c56-812c-21574d1b9ebf}</Project>
       <Name>MyVipCity.DataTransferObjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyVipCity.Domain.Automapper\MyVipCity.Domain.Automapper.csproj">
+      <Project>{3fa92d54-2d2b-4965-8066-7d70012dc154}</Project>
+      <Name>MyVipCity.Domain.Automapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyVipCity.Domain\MyVipCity.Domain.csproj">
       <Project>{3b9c5906-0331-43f0-895f-f49f428fe1a5}</Project>
       <Name>MyVipCity.Domain</Name>

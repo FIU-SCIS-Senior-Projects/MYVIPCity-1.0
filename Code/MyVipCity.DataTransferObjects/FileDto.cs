@@ -1,6 +1,8 @@
-﻿namespace MyVipCity.DataTransferObjects {
+﻿using MyVipCity.DataTransferObjects.Contracts;
 
-	public class FileDto {
+namespace MyVipCity.DataTransferObjects {
+
+	public class FileDto : IIdentifiableDto {
 
 		// TODO Change Id to guid
 		public int Id

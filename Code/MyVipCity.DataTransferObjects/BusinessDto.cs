@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using MyVipCity.DataTransferObjects.Contracts;
 
 namespace MyVipCity.DataTransferObjects {
 
-	public class BusinessDto {
+	public class BusinessDto : IIdentifiableDto {
 		
 		public int Id
 		{

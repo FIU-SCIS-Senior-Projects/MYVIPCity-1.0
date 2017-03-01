@@ -24,7 +24,7 @@ namespace MyVipCity {
 			try {
 				// kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
 				// kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-
+				// kernel.Bind<IKernel>().ToConstant(kernel);
 				RegisterServices(kernel);
 				GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
 				return kernel;
@@ -37,7 +37,9 @@ namespace MyVipCity {
 
 		private void RegisterServices(StandardKernel kernel) {
 			kernel.Bind<ApplicationDbContext>().ToMethod(context => HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>()).InRequestScope();
-			kernel.Bind<DbContext>().ToMethod(context => HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>()).InRequestScope();
+			kernel.Bind<DbContext>().ToMethod(context => {
+				return HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
+			}).InRequestScope();
 			kernel.Bind<ApplicationUserManager>().ToMethod(context => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()).InRequestScope();
 
 			BindingsManager.SetBindings(kernel, ConfigurationManager.AppSettings);
