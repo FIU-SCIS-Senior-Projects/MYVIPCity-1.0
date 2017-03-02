@@ -5,6 +5,12 @@ namespace MyVipCity.Domain {
 
 	public class Business : IIdentifiable {
 
+		private ICollection<Picture> pictures;
+
+		public Business() {
+			pictures = new List<Picture>();
+		}
+
 		public int Id
 		{
 			get;
@@ -145,8 +151,8 @@ namespace MyVipCity.Domain {
 		/// </summary>
 		public virtual ICollection<Picture> Pictures
 		{
-			get;
-			set;
+			get { return pictures; }
+			protected set { pictures = value; }
 		}
 	}
 }

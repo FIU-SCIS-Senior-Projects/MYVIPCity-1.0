@@ -14,8 +14,8 @@ namespace MyVipCity.Domain.Mappings.EF {
 			Property(b => b.FriendlyIdBase).IsRequired().HasMaxLength(200);
 			Property(b => b.FriendlyId)
 				.IsRequired()
-				.HasMaxLength(200)
-				.HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
+				.HasMaxLength(200);
+				// .HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute() { IsUnique = true }));
 			Property(b => b.Name).IsRequired().HasMaxLength(150);
 			Property(b => b.Phrase).HasMaxLength(500);
 			Property(b => b.Ambiance).HasMaxLength(150);

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.EquivilencyExpression;
 using MyVipCity.DataTransferObjects;
 
 namespace MyVipCity.Domain.Automapper {
@@ -21,7 +22,9 @@ namespace MyVipCity.Domain.Automapper {
 			CreateMap<FileDto, File>()
 				.Include<PictureDto, Picture>();
 
-			CreateMap<PictureDto, Picture>();
+			// EquilityComparision is used to properly map ICollection<PictureDto> -> ICollection<Picture>, i.e in BusinessDto.Pictures
+			CreateMap<PictureDto, Picture>()
+				.EqualityComparision((odto, o) => odto.Id != 0 && odto.Id == o.Id);
 		}
 	}
 }

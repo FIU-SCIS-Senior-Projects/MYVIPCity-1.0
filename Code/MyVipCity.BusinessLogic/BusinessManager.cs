@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
@@ -51,6 +52,37 @@ namespace MyVipCity.BusinessLogic {
 
 		public BusinessDto Update(BusinessDto businessDto) {
 			try {
+				//var b = new Business();
+				//b.Pictures.Add(new Picture {
+				//	Id = 2,
+				//	BinaryDataId = 1,
+				//	ContentType = "ct",
+				//	FileName = "fn.txt"
+				//});
+
+				//var bb = new BusinessDto {
+				//	Pictures = new List<PictureDto>() {
+				//		new PictureDto {
+				//			Id = 2,
+				//			BinaryDataId = 1,
+				//			ContentType = "ct",
+				//			FileName = "fn.txt"
+				//		},
+				//		new PictureDto {
+				//			Id = 0,
+				//			BinaryDataId = 2,
+				//			ContentType = "ct222222",
+				//			FileName = "fn22222.txt"
+				//		}
+				//	}
+				//};
+
+				//var bbb = Mapper.Map<BusinessDto, Business>(bb, b,
+				//opts => {
+				//	opts.Items.Add(typeof(DtoToModelContext).Name, new DtoToModelContext());
+				//	opts.Items.Add(typeof(DbContext).Name, DbContext);
+				//});
+
 				var business = ToModel(businessDto);
 				DbContext.SaveChanges();
 				var result = ToDto(business);

@@ -3,4 +3,5 @@
   &lt;Assembly Path="C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\Bin\log4net.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\MyVipCity\Bin\Ninject.Extensions.Logging.Log4Net.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

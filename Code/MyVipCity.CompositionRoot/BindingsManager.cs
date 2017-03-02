@@ -1,6 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Linq;
 using AutoMapper;
+using AutoMapper.Mappers;
 using MyVipCity.BusinessLogic;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.Domain.Automapper;
@@ -24,6 +25,7 @@ namespace MyVipCity.CompositionRoot {
 						// load assembly with automapper profiles
 						var autoMapperProfilesAssembly = typeof(BusinessProfile).Assembly;
 						cfg.AddProfiles(autoMapperProfilesAssembly);
+						cfg.AddProfile<CollectionProfile>();
 					});
 					// create mapper
 					var mapper = config.CreateMapper();
