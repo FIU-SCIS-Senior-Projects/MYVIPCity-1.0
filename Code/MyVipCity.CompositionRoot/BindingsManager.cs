@@ -24,7 +24,9 @@ namespace MyVipCity.CompositionRoot {
 					var config = new MapperConfiguration(cfg => {
 						// load assembly with automapper profiles
 						var autoMapperProfilesAssembly = typeof(BusinessProfile).Assembly;
+						// register the profiles
 						cfg.AddProfiles(autoMapperProfilesAssembly);
+						// register profile defined in Automapper.Collection
 						cfg.AddProfile<CollectionProfile>();
 					});
 					// create mapper
