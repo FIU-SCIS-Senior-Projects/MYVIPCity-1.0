@@ -28,6 +28,9 @@
 
 				ngModelCtrl.$render = function() {
 					scope.files = ngModelCtrl.$viewValue || [];
+					scope.files.sort(function(a, b) {
+						return a.Index - b.Index;
+					});
 				};
 
 				var clearAnimations = function(waitTimeInSeconds) {
@@ -40,7 +43,11 @@
 
 				clearAnimations(2000);
 
-				var updateNgModel = function() {
+				var updateNgModel = function () {
+					// update the index of the pictures
+					for (var i = 0; i < scope.files.length; i++)
+						scope.files[i].Index = i;
+					// set ngModel viewValue
 					ngModelCtrl.$setViewValue(angular.copy(scope.files));
 				};
 				// find the element on which the dropzone jquery plugin will be initialized

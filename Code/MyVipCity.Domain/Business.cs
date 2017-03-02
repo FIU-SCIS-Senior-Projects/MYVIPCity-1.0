@@ -5,10 +5,10 @@ namespace MyVipCity.Domain {
 
 	public class Business : IIdentifiable {
 
-		private ICollection<Picture> pictures;
+		private ICollection<IndexedPicture> pictures;
 
 		public Business() {
-			pictures = new List<Picture>();
+			pictures = new List<IndexedPicture>();
 		}
 
 		public int Id
@@ -149,7 +149,7 @@ namespace MyVipCity.Domain {
 		/// <summary>
 		/// List of pictures for the business.
 		/// </summary>
-		public virtual ICollection<Picture> Pictures
+		public virtual ICollection<IndexedPicture> Pictures
 		{
 			get { return pictures; }
 			protected set { pictures = value; }

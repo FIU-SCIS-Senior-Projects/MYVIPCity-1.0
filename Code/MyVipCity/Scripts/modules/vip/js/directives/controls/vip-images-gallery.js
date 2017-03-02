@@ -19,8 +19,12 @@
 					var array = [];
 					angular.forEach(modelArray, function (file) {
 						array.push({
-							src: 'api/Pictures/' + file.BinaryDataId
+							src: 'api/Pictures/' + file.BinaryDataId,
+							Index: file.Index
 						});
+					});
+					array.sort(function(a, b) {
+						return a.Index - b.Index;
 					});
 					return array;
 				};
@@ -37,7 +41,7 @@
 					// build gallery element
 					var galleryElement = angular.element(
 						'<div class="vip-light-gallery list-unstyled justified-gallery">' +
-							'<img src="{{pic.src}}" alt="" ng-repeat="pic in previewPictures"/>' +
+							'<img src="{{pic.src}}" alt="" ng-repeat="pic in previewPictures | orderBy: \'Index\'"/>' +
 						'</div>'
 					);
 					// search for a previously added gallery element inside this element
@@ -54,6 +58,7 @@
 					}
 					// build the array lightGallery plugin understands
 					var files = buildFilesArrayForLightGallery(ngModelCtrl.$viewValue || []);
+
 
 					initializePreviewPicturesArray();
 					// get first picture if any

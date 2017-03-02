@@ -134,7 +134,7 @@ namespace MyVipCity.DataTransferObjects {
 		/// <summary>
 		/// List of pictures for the business.
 		/// </summary>
-		public virtual ICollection<PictureDto> Pictures
+		public virtual ICollection<IndexedPictureDto> Pictures
 		{
 			get;
 			set;
