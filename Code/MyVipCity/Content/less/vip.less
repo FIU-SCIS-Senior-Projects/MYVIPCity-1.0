@@ -133,21 +133,58 @@ div[vip-address] {
     }
 }
 
-.vip-save-button-container{
+.vip-save-button-container {
     text-align: center;
-    button{
+
+    button {
         width: 30%;
     }
 }
 
-ul.vip-new-promoter__list{
+ul.vip-new-promoter__list {
     list-style: none;
-    li{
+
+    div[vip-new-promoter] {
+        display: inline-block;
+    }
+
+    .vip-new-promoter__delete {
+        font-size: larger;
+        cursor: pointer;
+        vertical-align: middle;
+        &:hover {
+            transition: 0.4s;
+            transform: rotate(90deg);
+            color: @mdc-red-500;
+        }
+    }
+
+    li {
         padding-bottom: 10px;
     }
-    form{
+
+    form {
         .vip-new-promoter__field-container {
             display: inline-block;
         }
+    }
+}
+
+.vip-new-promoter__actions-container {
+    padding-left: 35px;
+    padding-bottom: 35px;
+
+    i {
+        font-size: larger;
+        padding-right: 5px;
+    }
+
+    button {
+        margin-right: 5px;
+    }
+
+    .vip-new-promoter__send-invitation {
+        background-color: @mdc-green-500;
+        color: white;
     }
 }

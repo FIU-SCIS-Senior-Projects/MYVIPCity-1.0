@@ -4042,9 +4042,37 @@ div[vip-address] div[vip-textbox] {
 ul.vip-new-promoter__list {
   list-style: none;
 }
+ul.vip-new-promoter__list div[vip-new-promoter] {
+  display: inline-block;
+}
+ul.vip-new-promoter__list .vip-new-promoter__delete {
+  font-size: larger;
+  cursor: pointer;
+  vertical-align: middle;
+}
+ul.vip-new-promoter__list .vip-new-promoter__delete:hover {
+  transition: 0.4s;
+  transform: rotate(90deg);
+  color: #F44336;
+}
 ul.vip-new-promoter__list li {
   padding-bottom: 10px;
 }
 ul.vip-new-promoter__list form .vip-new-promoter__field-container {
   display: inline-block;
+}
+.vip-new-promoter__actions-container {
+  padding-left: 35px;
+  padding-bottom: 35px;
+}
+.vip-new-promoter__actions-container i {
+  font-size: larger;
+  padding-right: 5px;
+}
+.vip-new-promoter__actions-container button {
+  margin-right: 5px;
+}
+.vip-new-promoter__actions-container .vip-new-promoter__send-invitation {
+  background-color: #4CAF50;
+  color: white;
 }

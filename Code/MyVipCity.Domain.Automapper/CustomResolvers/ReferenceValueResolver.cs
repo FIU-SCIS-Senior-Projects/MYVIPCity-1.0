@@ -17,7 +17,6 @@ namespace MyVipCity.Domain.Automapper.CustomResolvers {
 		private Func<TDto, TDtoProperty> getDtoProperty;
 
 		public ReferenceValueResolver(Func<TDto, TDtoProperty> getDtoProperty) {
-
 			this.getDtoProperty = getDtoProperty;
 		}
 
@@ -46,14 +45,6 @@ namespace MyVipCity.Domain.Automapper.CustomResolvers {
 				return mappedInstance;
 			var result = MapDtoToModel(dtoProperty, dto => dbContext.Set<TModelProperty>().Find(dto.Id), dtoToModelContext, dbContext, mapper);
 			return result;
-		}
-
-		
-
-
-		private TModelProperty CreateModelPropertyInstance() {
-			var instance = Activator.CreateInstance<TModelProperty>();
-			return instance;
 		}
 	}
 }

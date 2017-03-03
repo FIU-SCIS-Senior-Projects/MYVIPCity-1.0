@@ -2,7 +2,7 @@
 	'use strict';
 
 	vip.controller('vip.viewBusinessController', ['$scope', '$routeParams', '$http', 'vipConfig', '$route', 'vipNavigationService', function ($scope, $routeParams, $http, vipConfig, $route, vipNavigationService) {
-		$scope.renderingMode = vip.renderingModes.read;
+		 $scope.renderingMode = vip.renderingModes.read;
 		$scope.model = {};
 
 		if (vipConfig && vipConfig.Roles && vipConfig.Roles.indexOf("Admin") > -1) {
