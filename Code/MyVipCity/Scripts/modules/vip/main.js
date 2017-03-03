@@ -7,6 +7,7 @@
 	'vip/js/config/vipRouteConfig',
 	// controllers
 	'vip/js/controllers/addBusinessController',
+	'vip/js/controllers/businessPromotersController',
 	'vip/js/controllers/clubListController',
 	'vip/js/controllers/forgotPasswordFormController',
 	'vip/js/controllers/loginFormController',
@@ -29,6 +30,7 @@
 	'vip/js/directives/vip-match',
 	'vip/js/directives/vip-mvc-antiforgery-token',
 	'vip/js/directives/vip-navigation-menu',
+	'vip/js/directives/vip-new-promoters',
 	// services
 	'vip/js/services/factories/business',
 	'vip/js/services/vipColorsService',

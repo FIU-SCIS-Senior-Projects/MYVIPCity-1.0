@@ -420,6 +420,7 @@
     <Content Include="Scripts\modules\vip\js\config\vipConfig.js" />
     <Content Include="Scripts\modules\vip\js\config\vipRouteConfig.js" />
     <Content Include="Scripts\modules\vip\js\controllers\clubListController.js" />
+    <Content Include="Scripts\modules\vip\js\controllers\businessPromotersController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\viewBusinessController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\addBusinessController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\loginFormController.js" />
@@ -429,6 +430,7 @@
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-control.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-gallery.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-upload.js" />
+    <Content Include="Scripts\modules\vip\js\directives\vip-new-promoters.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-week-hours.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-time-picker.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-day-hours.js" />

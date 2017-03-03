@@ -209,7 +209,11 @@
                         <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
                     </div>
                 </a>
-                <div class="p-10"></div>
+                <div ng-controller="vip.businessPromotersController">
+                    <div vip-new-promoters ng-model="newPromoters" ng-show="renderingMode == 2">
+
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card hidden-xs hidden-sm hidden-print">

@@ -4039,3 +4039,12 @@ div[vip-address] div[vip-textbox] {
 .vip-save-button-container button {
   width: 30%;
 }
+ul.vip-new-promoter__list {
+  list-style: none;
+}
+ul.vip-new-promoter__list li {
+  padding-bottom: 10px;
+}
+ul.vip-new-promoter__list form .vip-new-promoter__field-container {
+  display: inline-block;
+}

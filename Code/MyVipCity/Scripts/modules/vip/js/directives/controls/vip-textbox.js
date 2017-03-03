@@ -6,7 +6,6 @@
 			restrict: 'ACE',
 
 			require: 'ngModel',
-
 			// new scope
 			scope: true,
 
