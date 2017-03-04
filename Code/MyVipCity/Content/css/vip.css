@@ -4076,3 +4076,35 @@ ul.vip-new-promoter__list form .vip-new-promoter__field-container {
   background-color: #4CAF50;
   color: white;
 }
+.vip-promoters-pending {
+  padding-left: 35px;
+}
+.vip-promoters-pending i {
+  vertical-align: middle;
+  font-size: large;
+  padding-left: 5px;
+  cursor: pointer;
+}
+.vip-promoters-pending i.zmdi-email:hover {
+  color: #eabe21;
+}
+.vip-promoters-pending i.zmdi-delete:hover {
+  color: #EF5350;
+}
+.vip-promoters-pending .vip-promoter-pending__name {
+  font-weight: bold;
+}
+.vip-promoters-pending .vip-promoter-pending__email {
+  color: #2196F3;
+}
+.vip-promoters-pending h2 {
+  font-weight: 400;
+  font-size: 17px;
+}
+.vip-promoters-pending ul {
+  list-style: none;
+  padding-left: 0;
+}
+.vip-promoters-pending ul li {
+  padding-bottom: 10px;
+}

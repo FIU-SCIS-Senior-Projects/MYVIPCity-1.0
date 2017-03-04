@@ -2,19 +2,72 @@
 	'use strict';
 
 	vip.controller('vip.businessPromotersController', ['$scope', '$http', function ($scope, $http) {
-		$scope.newPromoters = [];
+		$scope.newPromoterInvitations = [];
+		$scope.pendingInvitations = [];
+		var friendlyId;
 
-		$scope.sendInvitation = function() {
-			angular.forEach($scope.newPromoters, function(newPromoter) {
-				newPromoter.Id = 0;
-				newPromoter.ClubFriendlyId = $scope.model.FriendlyId;
+		var getPromoterPendingInvitations = function () {
+			return $http.get('api/Business/GetPendingPromoterInvitations/' + friendlyId).then(function (response) {
+				$scope.pendingInvitations = response.data;
+				return response.data;
 			});
+		};
 
-			$http.post('api/Business/SendPromoterInvitation', $scope.newPromoters).then(function (response) {
-				$scope.newPromoters = [];
-				swal('Invitation sent!', 'An invitation email has been sent to each new promoter', 'success');
-			}, function(error) {
-				
+		var unwatch = $scope.$watch('model.FriendlyId', function (id) {
+			if (id) {
+				friendlyId = id;
+				getPromoterPendingInvitations();
+				unwatch();
+			}
+		});
+
+		var showErrorPopup = function (title, errorMsg) {
+			swal(title || 'Oops', errorMsg || 'An error has occurred', 'error');
+		};
+
+		var sendInvitationToPromoters = function (invitations, successMessage) {
+			$http.post('api/Business/SendPromoterInvitation', invitations).then(function () {
+				$scope.newPromoterInvitations = [];
+				getPromoterPendingInvitations();
+				swal('Success', successMessage || 'Invitation sent successfully', 'success');
+			}, function () {
+				showErrorPopup('Oops', 'An error has occurred sending the invitations');
+			});
+		};
+
+		$scope.sendInvitation = function () {
+			angular.forEach($scope.newPromoterInvitations, function (newPromoter) {
+				newPromoter.Id = 0;
+				newPromoter.ClubFriendlyId = friendlyId;
+			});
+			sendInvitationToPromoters($scope.newPromoterInvitations, 'An invitation email has been sent to each new promoter');
+		};
+
+		$scope.deleteInvitation = function (invitation) {
+			swal({
+				type: 'warning',
+				title: 'Delete Invitation?',
+				text: 'If you delete this pending invitation the promoter will not be able to join the club. Are you sure you want to continue?',
+				confirmButtonText: "Yes, delete it",
+				showCancelButton: true
+			}).then(function () {
+				$http.delete('api/Business/DeletePromoterInvitation/' + invitation.Id).then(function () {
+					getPromoterPendingInvitations();
+				}, function () {
+					showErrorPopup();
+				});
+			});
+		};
+
+		$scope.resendInvitation = function (invitation) {
+			swal({
+				type: 'question',
+				title: 'Resend invitation?',
+				text: 'Are you sure you want to resend and invitation to ' + invitation.Name + ' at ' + invitation.Email + '?',
+				confirmButtonText: "Yes",
+				showCancelButton: true
+			}).then(function () {
+				sendInvitationToPromoters([invitation]);
 			});
 		};
 	}]);

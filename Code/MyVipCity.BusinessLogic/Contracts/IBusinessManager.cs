@@ -15,5 +15,9 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		BusinessDto[] GetAllBusiness();
 
 		bool SendPromoterInvitations(PromoterInvitationDto[] invitations, string baseUrl);
+
+		PromoterInvitationDto[] GetPendingPromoterInvitations(string businessFriendlyId);
+
+		void DeletePromoterInvitation(int id);
 	}
 }

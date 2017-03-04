@@ -152,6 +152,7 @@ ul.vip-new-promoter__list {
         font-size: larger;
         cursor: pointer;
         vertical-align: middle;
+
         &:hover {
             transition: 0.4s;
             transform: rotate(90deg);
@@ -186,5 +187,50 @@ ul.vip-new-promoter__list {
     .vip-new-promoter__send-invitation {
         background-color: @mdc-green-500;
         color: white;
+    }
+}
+
+.vip-promoters-pending {
+    padding-left: 35px;
+
+    i {
+        vertical-align: middle;
+        font-size: large;
+        padding-left: 5px;
+        cursor: pointer;
+        
+        &.zmdi-email {
+            &:hover {
+                color: #eabe21;
+            }
+        }
+
+        &.zmdi-delete {
+            &:hover {
+                color: @mdc-red-400;
+            }
+        }
+    }
+
+    .vip-promoter-pending__name {
+        font-weight: bold;
+    }
+
+    .vip-promoter-pending__email {
+        color: @mdc-blue-500;
+    }
+
+    h2 {
+        font-weight: 400;
+        font-size: 17px;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+
+        li {
+            padding-bottom: 10px;
+        }
     }
 }

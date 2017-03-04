@@ -82,5 +82,25 @@ namespace MyVipCity.Controllers.api {
 				return Ok();
 			});
 		}
+
+		[HttpGet]
+		[Authorize(Roles = "Admin")]
+		[Route("GetPendingPromoterInvitations/{friendlyId}")]
+		public async Task<IHttpActionResult> GetPendingPromoterInvitations(string friendlyId) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var pendingInvitations = BusinessManager.GetPendingPromoterInvitations(friendlyId);
+				return Ok(pendingInvitations);
+			});
+		}
+
+		[HttpDelete]
+		[Authorize(Roles = "Admin")]
+		[Route("DeletePromoterInvitation/{id:int}")]
+		public async Task<IHttpActionResult> DeletePromoterInvitation(int id) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				BusinessManager.DeletePromoterInvitation(id);
+				return Ok();
+			});
+		}
 	}
 }
