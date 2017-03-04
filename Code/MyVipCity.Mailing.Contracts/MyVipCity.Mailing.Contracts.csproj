@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailModels\BasicEmailModel.cs" />
+    <Compile Include="EmailModels\PromoterInvitationEmailModel.cs" />
     <Compile Include="EmailModels\ForgotPasswordEmailModel.cs" />
     <Compile Include="EmailModels\ConfirmationEmailModel.cs" />
     <Compile Include="EmailModels\TestEmailModel.cs" />

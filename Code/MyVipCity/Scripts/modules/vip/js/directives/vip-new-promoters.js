@@ -1,6 +1,6 @@
 ﻿define(['vip/js/vip', 'jquery', 'angular'], function (vip, jQuery, angular) {
 	'use strict';
-
+	
 	vip.directive('vipNewPromoters', ['$compile', function ($compile) {
 		return {
 			restrict: 'ACE',

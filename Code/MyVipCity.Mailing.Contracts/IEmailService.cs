@@ -14,6 +14,9 @@ namespace MyVipCity.Mailing.Contracts {
 		// Sends an email to reset a forgotten password.
 		Task SendForgotPasswordEmailAsync(ForgotPasswordEmailModel model);
 
+		// Sends an email to invite a promoter to join a club.
+		Task SendPromoterInvitationEmailAsync(PromoterInvitationEmailModel model);
+
 		// This sends a test email
 		Task SendTestEmailAsync(TestEmailModel model);
 	}

@@ -29,7 +29,7 @@
 
 				controlRenderingService.setCreateEditModeElementFunction(function () {
 					// create edit mode element
-					var editElement = angular.element('<input placeholder="' + (attrs.placeholder || '') + '" ng-model="' + attrs.ngModel + '"' + (!!attrs.autoGrow ? ' vip-auto-grow-input' : '') + (attrs.ngModelOptions ? ' ng-model-options="' + attrs.ngModelOptions + '"' : '') + '/>');
+					var editElement = angular.element('<input placeholder="' + (attrs.placeholder || '') + '" ng-model="' + attrs.ngModel + '"' + (attrs.autoGrow ? ' vip-auto-grow-input' : '') + (attrs.ngModelOptions ? ' ng-model-options="' + attrs.ngModelOptions + '"' : '') + '/>');
 					// add css class
 					if (attrs.editModeClass)
 						editElement.addClass(attrs.editModeClass);

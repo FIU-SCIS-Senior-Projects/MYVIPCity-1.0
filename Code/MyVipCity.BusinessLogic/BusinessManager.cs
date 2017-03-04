@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using AutoMapper;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.Domain;
 using MyVipCity.Domain.Automapper.MappingContext;
+using MyVipCity.Mailing.Contracts;
+using MyVipCity.Mailing.Contracts.EmailModels;
 using Ninject;
 using Ninject.Extensions.Logging;
 
@@ -35,6 +39,12 @@ namespace MyVipCity.BusinessLogic {
 			set;
 		}
 
+		[Inject]
+		public IEmailService EmailService
+		{
+			get; set;
+		}
+
 		public BusinessDto Create(BusinessDto businessDto) {
 			try {
 				var business = ToModel(businessDto);
@@ -52,37 +62,6 @@ namespace MyVipCity.BusinessLogic {
 
 		public BusinessDto Update(BusinessDto businessDto) {
 			try {
-				//var b = new Business();
-				//b.Pictures.Add(new Picture {
-				//	Id = 2,
-				//	BinaryDataId = 1,
-				//	ContentType = "ct",
-				//	FileName = "fn.txt"
-				//});
-
-				//var bb = new BusinessDto {
-				//	Pictures = new List<PictureDto>() {
-				//		new PictureDto {
-				//			Id = 2,
-				//			BinaryDataId = 1,
-				//			ContentType = "ct",
-				//			FileName = "fn.txt"
-				//		},
-				//		new PictureDto {
-				//			Id = 0,
-				//			BinaryDataId = 2,
-				//			ContentType = "ct222222",
-				//			FileName = "fn22222.txt"
-				//		}
-				//	}
-				//};
-
-				//var bbb = Mapper.Map<BusinessDto, Business>(bb, b,
-				//opts => {
-				//	opts.Items.Add(typeof(DtoToModelContext).Name, new DtoToModelContext());
-				//	opts.Items.Add(typeof(DbContext).Name, DbContext);
-				//});
-
 				var business = ToModel(businessDto);
 				DbContext.SaveChanges();
 				var result = ToDto(business);
@@ -110,6 +89,49 @@ namespace MyVipCity.BusinessLogic {
 			var allBusiness = DbContext.Set<Business>().ToList();
 			var allBusinessDtos = Mapper.Map<BusinessDto[]>(allBusiness);
 			return allBusinessDtos;
+		}
+
+		public bool SendPromoterInvitations(PromoterInvitationDto[] invitations, string baseUrl) {
+
+			Dictionary<string, string> businessesNames = new Dictionary<string, string>();
+			foreach (var promoterInvitationDto in invitations) {
+				// check if the club is already in the dictionary
+				if (businessesNames.ContainsKey(promoterInvitationDto.ClubFriendlyId))
+					continue;
+				// since the club is not in the dictionary, look for it in the database
+				var business = DbContext.Set<Business>().FirstOrDefault(b => b.FriendlyId == promoterInvitationDto.ClubFriendlyId);
+				// if the club was not found, the return false and log it
+				if (business == null) {
+					Logger.Warn($"Business with [FriendlyId={0}] not found.", promoterInvitationDto.ClubFriendlyId);
+					return false;
+				}
+				// add the club to the dictionary
+				businessesNames.Add(business.FriendlyId, business.Name);
+			}
+			// loop each invitation and send the email
+			Parallel.ForEach(invitations, invitation => {
+				var businessName = businessesNames[invitation.ClubFriendlyId];
+				var emailModel = new PromoterInvitationEmailModel {
+					To = invitation.Email,
+					Subject = "Invitation to join " + businessName,
+					From = "hello@myvipcity.com",
+					ClubName = businessName,
+					Name = invitation.Name,
+					AcceptInvitationUrl = baseUrl + "/accept-invitation/" + invitation.ClubFriendlyId
+				};
+				EmailService.SendPromoterInvitationEmailAsync(emailModel);
+				invitation.SentOn = DateTimeOffset.Now;
+				invitation.Status = PromoterInvitationStatusDto.Sent;
+			});
+
+			var modelInvitations = Mapper.Map<PromoterInvitationDto[], PromoterInvitation[]>(invitations);
+			DbContext.Set<PromoterInvitation>().AddRange(modelInvitations.Where(i => i.Id == 0));
+			var existingInvitations = modelInvitations.Where(i => i.Id > 0).ToList();
+			foreach (var existingInvitation in existingInvitations) {
+				DbContext.Entry(existingInvitation).State = EntityState.Modified;
+			}
+			DbContext.SaveChanges();
+			return true;
 		}
 
 		private BusinessDto ToDto(Business business) {

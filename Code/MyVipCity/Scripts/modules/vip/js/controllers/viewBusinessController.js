@@ -2,7 +2,7 @@
 	'use strict';
 
 	vip.controller('vip.viewBusinessController', ['$scope', '$routeParams', '$http', 'vipConfig', '$route', 'vipNavigationService', function ($scope, $routeParams, $http, vipConfig, $route, vipNavigationService) {
-		 $scope.renderingMode = vip.renderingModes.read;
+		$scope.renderingMode = vip.renderingModes.read;
 		$scope.model = {};
 
 		if (vipConfig && vipConfig.Roles && vipConfig.Roles.indexOf("Admin") > -1) {
@@ -24,7 +24,7 @@
 				$scope.showSaveButton = false;
 			};
 
-			$scope.save = function() {
+			$scope.save = function () {
 				$http.put('api/Business', $scope.model)
 				.then(function (response) {
 					// get the response

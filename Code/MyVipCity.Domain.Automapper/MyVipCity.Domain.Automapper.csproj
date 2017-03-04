@@ -64,6 +64,7 @@
     <Compile Include="CustomResolvers\ReferenceValueResolver.cs" />
     <Compile Include="CustomResolvers\CollectionValueResolver.cs" />
     <Compile Include="CustomResolvers\ValueResolverBase.cs" />
+    <Compile Include="PromoterInvitationProfile.cs" />
     <Compile Include="FileProfile.cs" />
     <Compile Include="AddressProfile.cs" />
     <Compile Include="DayHoursProfile.cs" />

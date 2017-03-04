@@ -45,6 +45,7 @@
     <Compile Include="Contracts\IIdentifiable.cs" />
     <Compile Include="DayHours.cs" />
     <Compile Include="IndexedPicture.cs" />
+    <Compile Include="PromoterInvitation.cs" />
     <Compile Include="WeekHours.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="File.cs" />

@@ -6,6 +6,8 @@
 
 		public const string ForgotPasswordTemplateId = "3d5e6dd7-4786-4f1d-a68b-df9b1c43fef2";
 
+		public const string PromoterInvitationTemplateId = "ee301a81-055a-4263-9ad5-37eb69b3cfb7";
+
 		public const string TestTemplateId = "865015c4-f2ae-4e17-84fe-20f41e06045f";
 
 	}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Migrations.Model;
 using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -68,6 +69,17 @@ namespace MyVipCity.Controllers.api {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
 				var updatedBusinessDto = BusinessManager.Update(businessDto);
 				return Ok(updatedBusinessDto);
+			});
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		[Route("SendPromoterInvitation")]
+		public async Task<IHttpActionResult> SendPromoterInvitation(PromoterInvitationDto[] promoterInvitations) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var baseUrl = new Uri(Request.RequestUri, RequestContext.VirtualPathRoot);
+				BusinessManager.SendPromoterInvitations(promoterInvitations, baseUrl.ToString());
+				return Ok();
 			});
 		}
 	}

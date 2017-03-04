@@ -53,6 +53,20 @@ namespace MyVipCity.Mailing.Sendgrid {
 			});
 		}
 
+		public async Task SendPromoterInvitationEmailAsync(PromoterInvitationEmailModel model) {
+			await Task.Run(async () => {
+				Content content = new Content("text/html", model.Body ?? "!");
+				Email to = new Email(model.To);
+				Email from = new Email(model.From);
+				Mail mail = new Mail(from, model.Subject, to, content) { TemplateId = SendGridTemplateIds.PromoterInvitationTemplateId };
+				// add substitutions
+				mail.Personalization[0].AddSubstitution("-invitationUrl-", model.AcceptInvitationUrl);
+				mail.Personalization[0].AddSubstitution("-name-", model.Name);
+				mail.Personalization[0].AddSubstitution("-clubName-", model.ClubName);
+				await SendEmail(mail);
+			});
+		}
+
 		public async Task SendTestEmailAsync(TestEmailModel model) {
 			await Task.Run(async () => {
 				Content content = new Content("text/html", "!");

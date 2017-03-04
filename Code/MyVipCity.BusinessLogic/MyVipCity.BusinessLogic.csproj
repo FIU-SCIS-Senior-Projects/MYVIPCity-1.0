@@ -90,6 +90,10 @@
       <Project>{3b9c5906-0331-43f0-895f-f49f428fe1a5}</Project>
       <Name>MyVipCity.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyVipCity.Mailing.Contracts\MyVipCity.Mailing.Contracts.csproj">
+      <Project>{e3055c1a-8f62-439c-b904-eeb04261feeb}</Project>
+      <Name>MyVipCity.Mailing.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
