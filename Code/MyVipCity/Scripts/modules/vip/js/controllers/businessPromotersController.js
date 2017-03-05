@@ -7,7 +7,7 @@
 		var friendlyId;
 
 		var getPromoterPendingInvitations = function () {
-			return $http.get('api/Business/GetPendingPromoterInvitations/' + friendlyId).then(function (response) {
+			return $http.get('api/PromoterInvitation/GetPendingInvitations/' + friendlyId).then(function (response) {
 				$scope.pendingInvitations = response.data;
 				return response.data;
 			});
@@ -26,9 +26,8 @@
 		};
 
 		var sendInvitationToPromoters = function (invitations, successMessage) {
-			$http.post('api/Business/SendPromoterInvitation', invitations).then(function () {
+			return $http.post('api/PromoterInvitation/SendInvitation', invitations).then(function () {
 				$scope.newPromoterInvitations = [];
-				getPromoterPendingInvitations();
 				swal('Success', successMessage || 'Invitation sent successfully', 'success');
 			}, function () {
 				showErrorPopup('Oops', 'An error has occurred sending the invitations');
@@ -40,7 +39,9 @@
 				newPromoter.Id = 0;
 				newPromoter.ClubFriendlyId = friendlyId;
 			});
-			sendInvitationToPromoters($scope.newPromoterInvitations, 'An invitation email has been sent to each new promoter');
+			sendInvitationToPromoters($scope.newPromoterInvitations, 'An invitation email has been sent to each new promoter').then(function () {
+				getPromoterPendingInvitations();
+			});
 		};
 
 		$scope.deleteInvitation = function (invitation) {
@@ -51,7 +52,7 @@
 				confirmButtonText: "Yes, delete it",
 				showCancelButton: true
 			}).then(function () {
-				$http.delete('api/Business/DeletePromoterInvitation/' + invitation.Id).then(function () {
+				$http.delete('api/PromoterInvitation/DeleteInvitation/' + invitation.Id).then(function () {
 					getPromoterPendingInvitations();
 				}, function () {
 					showErrorPopup();

@@ -39,12 +39,6 @@ namespace MyVipCity.BusinessLogic {
 			set;
 		}
 
-		[Inject]
-		public IEmailService EmailService
-		{
-			get; set;
-		}
-
 		public BusinessDto Create(BusinessDto businessDto) {
 			try {
 				var business = ToModel(businessDto);
@@ -89,71 +83,6 @@ namespace MyVipCity.BusinessLogic {
 			var allBusiness = DbContext.Set<Business>().ToList();
 			var allBusinessDtos = Mapper.Map<BusinessDto[]>(allBusiness);
 			return allBusinessDtos;
-		}
-
-		public bool SendPromoterInvitations(PromoterInvitationDto[] invitations, string baseUrl) {
-			// dictionary to store the name of the businesses businessFriedndlyId -> businessName
-			Dictionary<string, string> businessesNames = new Dictionary<string, string>();
-			foreach (var promoterInvitationDto in invitations) {
-				// check if the club is already in the dictionary
-				if (businessesNames.ContainsKey(promoterInvitationDto.ClubFriendlyId))
-					continue;
-				// since the club is not in the dictionary, look for it in the database
-				var business = DbContext.Set<Business>().FirstOrDefault(b => b.FriendlyId == promoterInvitationDto.ClubFriendlyId);
-				// if the club was not found, the return false and log it
-				if (business == null) {
-					Logger.Warn($"Business with [FriendlyId={0}] not found.", promoterInvitationDto.ClubFriendlyId);
-					return false;
-				}
-				// add the club to the dictionary
-				businessesNames.Add(business.FriendlyId, business.Name);
-			}
-			// loop each invitation and send the email
-			Parallel.ForEach(invitations, invitation => {
-				var businessName = businessesNames[invitation.ClubFriendlyId];
-				var emailModel = new PromoterInvitationEmailModel {
-					To = invitation.Email,
-					Subject = "Invitation to join " + businessName,
-					From = "hello@myvipcity.com",
-					ClubName = businessName,
-					Name = invitation.Name,
-					AcceptInvitationUrl = baseUrl + "/accept-invitation/" + invitation.ClubFriendlyId
-				};
-				EmailService.SendPromoterInvitationEmailAsync(emailModel);
-				invitation.SentOn = DateTimeOffset.Now;
-				invitation.Status = PromoterInvitationStatusDto.Sent;
-			});
-			// convert from dto to model
-			var modelInvitations = Mapper.Map<PromoterInvitationDto[], PromoterInvitation[]>(invitations);
-			// add the new invitations
-			DbContext.Set<PromoterInvitation>().AddRange(modelInvitations.Where(i => i.Id == 0));
-			// find the existing invitations
-			var existingInvitations = modelInvitations.Where(i => i.Id > 0).ToList();
-			// add the existing invitations to the EF tracker
-			foreach (var existingInvitation in existingInvitations) {
-				DbContext.Entry(existingInvitation).State = EntityState.Modified;
-			}
-			// save the changes
-			DbContext.SaveChanges();
-			return true;
-		}
-
-		public PromoterInvitationDto[] GetPendingPromoterInvitations(string businessFriendlyId) {
-			var pendingInvitations = DbContext.Set<PromoterInvitation>().Where(i => i.ClubFriendlyId == businessFriendlyId && i.Status == PromoterInvitationStatus.Sent).ToArray();
-			var pendingInvitationsDto = Mapper.Map<PromoterInvitation[], PromoterInvitationDto[]>(pendingInvitations);
-			return pendingInvitationsDto;
-		}
-
-		public void DeletePromoterInvitation(int id) {
-			// get the set of promoters
-			var promotersInvitations = DbContext.Set<PromoterInvitation>();
-			// find the invitation with the given id
-			var invitation = promotersInvitations.Find(id);
-			// make sure the invitation exists, and if so, remove it
-			if (invitation != null)
-				promotersInvitations.Remove(invitation);
-			// save changes
-			DbContext.SaveChanges();
 		}
 
 		private BusinessDto ToDto(Business business) {

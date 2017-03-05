@@ -1,0 +1,20 @@
+﻿@model MyVipCity.DataTransferObjects.BusinessDto
+@{
+    ViewBag.Title = "Accept Invitation";
+}
+
+<div class="card vip-accept-invitation-card">
+    <div class="card__header">
+        <h2>You have been invited to join @Model.Name as a promoter</h2>
+    </div>
+    <div class="card__body">
+        <a href="#/viewClub/@Model.FriendlyId">
+            @if (Model.Pictures != null && Model.Pictures.Any()) {
+                <img src="api/Pictures/@Model.Pictures.OrderBy(p => p.Index).ElementAt(0).BinaryDataId"/>
+            }
+            <p>@Model.Address.FormattedAddress</p>
+        </a>
+
+        <button class="btn btn-primary">Accept Invitation</button>
+    </div>
+</div>

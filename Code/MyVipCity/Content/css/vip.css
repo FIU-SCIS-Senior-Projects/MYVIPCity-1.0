@@ -4108,3 +4108,17 @@ ul.vip-new-promoter__list form .vip-new-promoter__field-container {
 .vip-promoters-pending ul li {
   padding-bottom: 10px;
 }
+.vip-accept-invitation-card {
+  text-align: center;
+}
+.vip-accept-invitation-card img {
+  max-width: 100%;
+  max-height: 500px;
+}
+.vip-accept-invitation-card button {
+  margin: auto;
+  display: block;
+  width: 30%;
+  font-size: larger;
+  margin-top: 20px;
+}

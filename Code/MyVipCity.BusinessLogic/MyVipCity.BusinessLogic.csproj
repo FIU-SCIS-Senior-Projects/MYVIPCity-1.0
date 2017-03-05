@@ -69,6 +69,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IPromoterInvitationManager.cs" />
+    <Compile Include="PromoterInvitationManager.cs" />
     <Compile Include="BusinessManager.cs" />
     <Compile Include="Contracts\IBusinessManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
