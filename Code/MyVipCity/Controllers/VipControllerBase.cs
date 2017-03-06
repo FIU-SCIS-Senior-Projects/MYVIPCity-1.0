@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
 
 namespace MyVipCity.Controllers {
 
@@ -23,6 +23,24 @@ namespace MyVipCity.Controllers {
 				throw new ArgumentNullException(nameof(roleName));
 			var roles = GetRolesFromUser();
 			return roles != null && roles.Contains(roleName);
+		}
+
+		protected string UserEmail
+		{
+			get
+			{
+				var userIdentity = (ClaimsIdentity)User.Identity;
+				return userIdentity.Name;
+			}
+		}
+
+		protected string UserId
+		{
+			get
+			{
+				var userIdentity = (ClaimsIdentity)User.Identity;
+				return userIdentity.GetUserId();
+			}
 		}
 	}
 }

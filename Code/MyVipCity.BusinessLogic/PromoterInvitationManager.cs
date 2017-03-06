@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.Domain;
@@ -14,24 +13,10 @@ using Ninject.Extensions.Logging;
 
 namespace MyVipCity.BusinessLogic {
 
-	public class PromoterInvitationManager: IPromoterInvitationManager {
+	public class PromoterInvitationManager: AbstractEntityManager, IPromoterInvitationManager {
 
 		[Inject]
 		public ILogger Logger
-		{
-			get;
-			set;
-		}
-
-		[Inject]
-		public DbContext DbContext
-		{
-			get;
-			set;
-		}
-
-		[Inject]
-		public IMapper Mapper
 		{
 			get;
 			set;
@@ -112,8 +97,47 @@ namespace MyVipCity.BusinessLogic {
 			var invitation = DbContext.Set<PromoterInvitation>().FirstOrDefault(i => i.Status == PromoterInvitationStatus.Sent && i.ClubFriendlyId == businessFriendlyId && i.Email == userEmail);
 			if (invitation == null)
 				return null;
-			var invitationDto = Mapper.Map<PromoterInvitation, PromoterInvitationDto>(invitation);
+			var invitationDto = ToDto<PromoterInvitationDto, PromoterInvitation>(invitation);
 			return invitationDto;
+		}
+
+		public PromoterProfileDto AcceptInvitation(string businessFriendlyId, string userEmail, string userId) {
+			if (string.IsNullOrWhiteSpace(businessFriendlyId))
+				throw new ArgumentNullException(nameof(businessFriendlyId));
+			if (string.IsNullOrWhiteSpace(userEmail))
+				throw new ArgumentNullException(nameof(userEmail));
+			// find the invitation
+			var invitation = DbContext.Set<PromoterInvitation>().FirstOrDefault(i => i.Status == PromoterInvitationStatus.Sent && i.ClubFriendlyId == businessFriendlyId && i.Email == userEmail);
+			// invitation must exists
+			if (invitation == null)
+				throw new Exception($"Pending invitation for user='{userEmail}' and business='{businessFriendlyId}' not found");
+			// find the business
+			var business = DbContext.Set<Business>().FirstOrDefault(b => b.FriendlyId == businessFriendlyId);
+			// business must exists
+			if (business == null)
+				throw new Exception($"Business with friendlyId='{businessFriendlyId}' not found");
+			// change the status of the invitation to accepted
+			invitation.Status = PromoterInvitationStatus.Accepted;
+			// try to come up with first name and last name for the promoter
+			var nameSplitted = invitation.Name.Split(' ');
+			var firstName = nameSplitted[0];
+			var lastName = string.Join(" ", nameSplitted.Skip(1));
+			// create the promoter profile
+			var profile = new PromoterProfile {
+				UserId = userId,
+				Business = business,
+				FirstName = firstName,
+				LastName = lastName,
+				CreatedOn = DateTimeOffset.UtcNow
+			};
+			// add it to the corresponding db set
+			DbContext.Set<PromoterProfile>().Add(profile);
+			// persist changes
+			DbContext.SaveChanges();
+			// map to dto
+			var profileDto = ToDto<PromoterProfileDto, PromoterProfile>(profile);
+			// return result
+			return profileDto;
 		}
 	}
 }

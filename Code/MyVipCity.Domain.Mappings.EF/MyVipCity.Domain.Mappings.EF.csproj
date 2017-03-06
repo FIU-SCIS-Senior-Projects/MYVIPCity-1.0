@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DayHoursConfiguration.cs" />
+    <Compile Include="PromoterProfileConfiguration.cs" />
     <Compile Include="PromoterInvitationConfiguration.cs" />
     <Compile Include="WeekHoursConfiguration.cs" />
     <Compile Include="FileConfiguration.cs" />

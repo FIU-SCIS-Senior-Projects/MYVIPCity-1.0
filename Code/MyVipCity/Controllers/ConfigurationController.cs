@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using MyVipCity.BusinessLogic.Contracts;
 using Ninject;
 using Ninject.Extensions.Logging;
 
@@ -20,6 +22,13 @@ namespace MyVipCity.Controllers {
 
 		[Inject]
 		public ApplicationUserManager ApplicationUserManager
+		{
+			get;
+			set;
+		}
+
+		[Inject]
+		public IPromoterProfileManager PromoterProfileManager
 		{
 			get;
 			set;
@@ -106,24 +115,28 @@ namespace MyVipCity.Controllers {
 							Path = "/"
 						}
 					}
-				},
-				new {
-					Title = "Promoters",
-					Path ="/",
-					Submenu = new object[] {
-						new {
-							Title = "Promoter Detail",
-							Path = "/"
-						},
-						new {
-							Title = "Promoter Reviews",
-							Path = "/"
-						}
-					}
 				}
 			};
 
 			if (Request.IsAuthenticated) {
+				if (IsUserInRole("Promoter")) {
+					// get all promoter profiles
+					var promoterProfiles = PromoterProfileManager.GetPromoterProfiles(UserId);
+					// create a submenu for each profile
+					var promoterProfileSubmenu = promoterProfiles.OrderBy(p => p.Business.Name).Select(p => new {
+						Title = p.Business.Name,
+						Path = $"#/promoter-profile/{p.Id}"
+					}).ToArray();
+					// add a menu entry if there is at least one promoter profile
+					if (promoterProfileSubmenu.Any()) {
+						menu.Add(new {
+							Title = "Promoter Profile",
+							Path = "/",
+							Submenu = promoterProfileSubmenu
+						});
+					}
+				}
+
 				// add menu item only if user is authenticated and in admin role
 				if (IsUserInRole("Admin")) {
 					menu.Add(new {

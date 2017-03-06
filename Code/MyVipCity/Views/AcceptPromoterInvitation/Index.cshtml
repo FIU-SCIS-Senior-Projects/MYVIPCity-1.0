@@ -14,7 +14,10 @@
             }
             <p>@Model.Address.FormattedAddress</p>
         </a>
-
-        <button class="btn btn-primary">Accept Invitation</button>
+        @using (Html.BeginForm("AcceptInvitation", "AcceptPromoterInvitation")) {
+            @Html.AntiForgeryToken();
+            @Html.HiddenFor(m => m.FriendlyId);
+            <button class="btn btn-primary" type="submit">Accept Invitation</button>
+        }
     </div>
 </div>

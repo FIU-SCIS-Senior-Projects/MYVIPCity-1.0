@@ -11,5 +11,7 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		void DeletePromoterInvitation(int id);
 
 		PromoterInvitationDto GetPendingInvitation(string businessFriendlyId, string userEmail);
+
+		PromoterProfileDto AcceptInvitation(string businessFriendlyId, string userEmail, string userId);
 	}
 }

@@ -69,7 +69,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractEntityManager.cs" />
     <Compile Include="Contracts\IPromoterInvitationManager.cs" />
+    <Compile Include="Contracts\IPromoterProfileManager.cs" />
+    <Compile Include="PromoterProfileManager.cs" />
     <Compile Include="PromoterInvitationManager.cs" />
     <Compile Include="BusinessManager.cs" />
     <Compile Include="Contracts\IBusinessManager.cs" />

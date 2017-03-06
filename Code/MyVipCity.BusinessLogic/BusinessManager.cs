@@ -1,22 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using AutoMapper;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.Domain;
-using MyVipCity.Domain.Automapper.MappingContext;
-using MyVipCity.Mailing.Contracts;
-using MyVipCity.Mailing.Contracts.EmailModels;
 using Ninject;
 using Ninject.Extensions.Logging;
 
 namespace MyVipCity.BusinessLogic {
 
-	public class BusinessManager: IBusinessManager {
+	public class BusinessManager: AbstractEntityManager, IBusinessManager {
 
 		[Inject]
 		public ILogger Logger
@@ -25,27 +17,13 @@ namespace MyVipCity.BusinessLogic {
 			set;
 		}
 
-		[Inject]
-		public DbContext DbContext
-		{
-			get;
-			set;
-		}
-
-		[Inject]
-		public IMapper Mapper
-		{
-			get;
-			set;
-		}
-
 		public BusinessDto Create(BusinessDto businessDto) {
 			try {
-				var business = ToModel(businessDto);
+				var business = ToModel<Business, BusinessDto>(businessDto);
 				BuildFriendlyIdForBusiness(business);
 				DbContext.Set<Business>().Add(business);
 				DbContext.SaveChanges();
-				var result = ToDto(business);
+				var result = ToDto<BusinessDto, Business>(business);
 				return result;
 			}
 			catch (Exception e) {
@@ -56,9 +34,9 @@ namespace MyVipCity.BusinessLogic {
 
 		public BusinessDto Update(BusinessDto businessDto) {
 			try {
-				var business = ToModel(businessDto);
+				var business = ToModel<Business, BusinessDto>(businessDto);
 				DbContext.SaveChanges();
-				var result = ToDto(business);
+				var result = ToDto<BusinessDto, Business>(business);
 				return result;
 			}
 			catch (Exception e) {
@@ -69,13 +47,13 @@ namespace MyVipCity.BusinessLogic {
 
 		public BusinessDto LoadById(int id) {
 			var business = DbContext.Set<Business>().Find(id);
-			var businessDto = ToDto(business);
+			var businessDto = ToDto<BusinessDto, Business>(business);
 			return businessDto;
 		}
 
 		public BusinessDto LoadByFriendlyId(string friendlyId) {
 			var business = DbContext.Set<Business>().FirstOrDefault(b => b.FriendlyId == friendlyId);
-			var businessDto = ToDto(business);
+			var businessDto = ToDto<BusinessDto, Business>(business);
 			return businessDto;
 		}
 
@@ -83,30 +61,6 @@ namespace MyVipCity.BusinessLogic {
 			var allBusiness = DbContext.Set<Business>().ToList();
 			var allBusinessDtos = Mapper.Map<BusinessDto[]>(allBusiness);
 			return allBusinessDtos;
-		}
-
-		private BusinessDto ToDto(Business business) {
-			if (business == null)
-				return null;
-			var businessDto = Mapper.Map<BusinessDto>(business);
-			return businessDto;
-		}
-
-		private Business ToModel(BusinessDto businessDto) {
-			Business business;
-			DtoToModelContext context = new DtoToModelContext();
-			if (businessDto.Id == 0) {
-				business = new Business();
-			}
-			else {
-				business = DbContext.Set<Business>().Find(businessDto.Id);
-			}
-			business = Mapper.Map<BusinessDto, Business>(businessDto, business,
-				opts => {
-					opts.Items.Add(typeof(DtoToModelContext).Name, context);
-					opts.Items.Add(typeof(DbContext).Name, DbContext);
-				});
-			return business;
 		}
 
 		private void BuildFriendlyIdForBusiness(Business business) {

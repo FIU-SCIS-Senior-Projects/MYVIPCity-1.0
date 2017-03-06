@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PromoterProfileProfile.cs" />
     <Compile Include="CustomResolvers\ReferenceValueResolver.cs" />
     <Compile Include="CustomResolvers\CollectionValueResolver.cs" />
     <Compile Include="CustomResolvers\ValueResolverBase.cs" />
