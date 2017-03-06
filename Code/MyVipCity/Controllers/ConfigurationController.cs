@@ -130,7 +130,7 @@ namespace MyVipCity.Controllers {
 					// add a menu entry if there is at least one promoter profile
 					if (promoterProfileSubmenu.Any()) {
 						menu.Add(new {
-							Title = "Promoter Profile",
+							Title = "My Promoter Profile",
 							Path = "/",
 							Submenu = promoterProfileSubmenu
 						});
