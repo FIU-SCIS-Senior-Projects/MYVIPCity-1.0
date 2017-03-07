@@ -33,7 +33,7 @@
     "Waves": "fians/Waves#^0.7.5",
     "lightgallery": "^1.2.19",
     "autosize": "^3.0.15",
-    "rateYo": "prrashi/rateYo#^2.1.1",
+    "rateYo": "prrashi/rateYo#^2.2.0",
     "Flot": "flot#^0.8.3",
     "flot-orderBars": "emmerich/flot-orderBars",
     "flot.tooltip": "~0.8.5",

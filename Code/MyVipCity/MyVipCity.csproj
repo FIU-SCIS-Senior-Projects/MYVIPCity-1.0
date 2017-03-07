@@ -244,7 +244,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AcceptPromoterInvitationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\api\PromoterProfileController.cs" />
     <Compile Include="Controllers\api\PromoterInvitationController.cs" />
+    <Compile Include="Controllers\PromoterProfileController.cs" />
     <Compile Include="Controllers\ViewBusinessController.cs" />
     <Compile Include="Controllers\AddBusinessController.cs" />
     <Compile Include="Controllers\api\BusinessController.cs" />
@@ -423,12 +425,15 @@
     <Content Include="Scripts\modules\vip\js\config\vipRouteConfig.js" />
     <Content Include="Scripts\modules\vip\js\controllers\clubListController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\businessPromotersController.js" />
+    <Content Include="Scripts\modules\vip\js\controllers\promoterProfileController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\viewBusinessController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\addBusinessController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\loginFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-address.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-rating.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-promoter-name.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-control.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-gallery.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-upload.js" />
@@ -5700,11 +5705,13 @@
     <Content Include="Scripts\vendors\bower_components\lodash\yarn.lock" />
     <Content Include="Views\AcceptPromoterInvitation\NeedAuthentication.cshtml" />
     <Content Include="Views\AcceptPromoterInvitation\Index.cshtml" />
+    <None Include="Views\PromoterProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\vendors\bower_components\bower\Packager\" />
     <Folder Include="Scripts\vendors\bower_components\select2\docs\dist\" />
+    <Folder Include="Views\Promoter\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

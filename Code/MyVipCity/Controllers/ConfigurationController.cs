@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using MyVipCity.BusinessLogic.Contracts;
 using Ninject;
 using Ninject.Extensions.Logging;
@@ -44,6 +41,7 @@ namespace MyVipCity.Controllers {
 				Menu = GetNavigationMenu(),
 				Routes = GetRoutes()
 			};
+
 			// set the JSON string
 			ViewBag.ConfigObject = System.Web.Helpers.Json.Encode(config);
 			// set response as javascript file
@@ -164,6 +162,11 @@ namespace MyVipCity.Controllers {
 					Path = "/viewClub/:friendlyId",
 					TemplateUrl = "/ViewBusiness",
 					Controller = "vip.viewBusinessController"
+				},
+				new {
+					Path = "/promoter-profile/:promoterProfileId",
+					TemplateUrl = "/PromoterProfile",
+					Controller = "vip.promoterProfileController"
 				}
 			};
 

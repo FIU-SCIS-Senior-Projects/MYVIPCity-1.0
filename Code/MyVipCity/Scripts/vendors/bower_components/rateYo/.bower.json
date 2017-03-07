@@ -31,5 +31,14 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1"
-  }
+  },
+  "_release": "2.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.2.0",
+    "commit": "fc4e2044ad6600f34797e7e8d7f547af842a61d5"
+  },
+  "_source": "git://github.com/prrashi/rateYo.git",
+  "_target": "^2.2.0",
+  "_originalSource": "prrashi/rateYo"
 }

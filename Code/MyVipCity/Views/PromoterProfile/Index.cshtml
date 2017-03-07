@@ -1,0 +1,100 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="row vip-promoter-profile">
+    <div class="col-md-8">
+        <button ng-click="toggleRenderingMode()">Toggle</button>
+        <div class="card profile">
+            <div class="profile__img">
+                <img src="https://placeholdit.imgix.net/~text?&w=500&h=500" alt="">
+            </div>
+            <div class="profile__info">
+                <!--Name-->
+                <div vip-promoter-name ng-model="model" wrap-with="h2"></div>
+                <!--Review-->
+                <div class="profile__review">
+                    <span class="rmd-rate" vip-rating ng-model="model.AverageRating" read-only="true"></span>
+                    <span>(0 Review)</span>
+                </div>
+                <span class="label label-warning">VIP Promoter</span>
+                <span class="label label-success vip-promoter-profile__business-link"><a href="#/viewClub/{{model.Business.FriendlyId}}">{{model.Business.Name}}</a></span>
+                <div class="vip-promoter-profile__business-address">
+                    <span>{{model.Business.Address.FormattedAddress}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="tab-nav tab-nav--justified" data-rmd-breakpoint="500">
+                <div class="tab-nav__inner">
+                    <ul>
+                        <li class="active"><a href="#">Overview</a></li>
+                        <li><a href="#">Properties</a></li>
+                        <li><a href="#">Reviews</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card__body">
+                <div class="card__sub">
+                    <h4>About Robert B. Osborne</h4>
+                    <p>Pellentesque vitae quam quis tellus dignissim faucibus. Suspendisse mattis felis at faucibus lobortis. Sed sit amet tellus dolor. Fusce quis sollicitudin velit. Praesent gravida ullamcorper lectus et tincidunt. Phasellus lectus quam, porta pharetra feugiat in, auctor eget dolor.</p>
+                    <p>Vestibulum tincidunt imperdiet egestas. In in nunc vitae elit tincidunt tristique id eu justo. Quisque gravida maximus orci, vulputate pharetra mauris commodo at. Mauris eget fermentum ipsum, quis faucibus neque. Fusce eleifend sapien sit amet convallis rhoncus. Proin commodo lacinia lectus, et tempus turpis.</p>
+                </div>
+                <div class="card__sub">
+                    <h4>Specialties</h4>
+                    <p>Property Management, Buyer's Agent, Listing Agent</p>
+                </div>
+                <div class="card__sub">
+                    <h4>Education</h4>
+                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Duis mollis, est non commodo luctuso.</p>
+                </div>
+                <div class="card__sub">
+                    <h4>Contact Information</h4>
+                    <ul class="rmd-contact-list">
+                        <li><i class="zmdi zmdi-phone"></i>308-360-8938</li>
+                        <li><i class="zmdi zmdi-email"></i>robertbosborne@inbound.plus</li>
+                        <li><i class="zmdi zmdi-facebook"></i>robertbosborne</li>
+                        <li><i class="zmdi zmdi-twitter"></i>@@robertbosborne</li>
+                        <li><i class="zmdi zmdi-pin"></i>5470 Madison Street Severna Park, MD 21146</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 rmd-sidebar-mobile" id="agent-question">
+        <form class="card">
+            <div class="card__header">
+                <h2>Ask me a Question</h2>
+                <small>Send my any question and/or comment. I'll be happy to help.</small>
+            </div>
+            <div class="card__body m-t-10">
+                <div class="form-group form-group--float">
+                    <input type="text" class="form-control">
+                    <i class="form-group__bar"></i>
+                    <label>Name</label>
+                </div>
+                <div class="form-group form-group--float">
+                    <input type="text" class="form-control">
+                    <i class="form-group__bar"></i>
+                    <label>Email Address</label>
+                </div>
+                <div class="form-group form-group--float">
+                    <input type="text" class="form-control">
+                    <i class="form-group__bar"></i>
+                    <label>Contact Number</label>
+                </div>
+                <div class="form-group form-group--float">
+                    <textarea class="form-control textarea-autoheight"></textarea>
+                    <i class="form-group__bar"></i>
+                    <label>Message</label>
+                </div>
+                <small class="text-muted">By sending us your information, you agree to MyVIPCity’s Terms of Use & Privacy Policy.</small>
+            </div>
+            <div class="card__footer">
+                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-sm btn-link">Reset</button>
+                <button class="btn btn-sm btn-link visible-sm-inline visible-xs-inline" data-rmd-action="block-close" data-rmd-target="#agent-question">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

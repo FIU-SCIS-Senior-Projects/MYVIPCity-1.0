@@ -21,5 +21,17 @@ namespace MyVipCity.BusinessLogic {
 			var promoterProfileDtos = ToDto<PromoterProfileDto[], PromoterProfile[]>(promoterProfiles);
 			return promoterProfileDtos;
 		}
+
+		public PromoterProfileDto GetProfileById(int id) {
+			// find the profile with the given id
+			var promoterProfile = DbContext.Set<PromoterProfile>().Find(id);
+			// check if the profile was not found
+			if (promoterProfile == null) {
+				Logger.Warn($"PromoterProfile with id={id} not found");
+				return null;
+			}
+			var promoterProfileDto = ToDto<PromoterProfileDto, PromoterProfile>(promoterProfile);
+			return promoterProfileDto;
+		}
 	}
 }

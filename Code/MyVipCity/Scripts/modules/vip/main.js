@@ -11,6 +11,7 @@
 	'vip/js/controllers/clubListController',
 	'vip/js/controllers/forgotPasswordFormController',
 	'vip/js/controllers/loginFormController',
+	'vip/js/controllers/promoterProfileController',
 	'vip/js/controllers/registerFormController',
 	'vip/js/controllers/viewBusinessController',
 	// directives
@@ -21,6 +22,8 @@
 	'vip/js/directives/controls/vip-images-gallery',
 	'vip/js/directives/controls/vip-images-upload',
 	'vip/js/directives/controls/vip-link',
+	'vip/js/directives/controls/vip-promoter-name',
+	'vip/js/directives/controls/vip-rating',
 	'vip/js/directives/controls/vip-tags',
 	'vip/js/directives/controls/vip-textbox',
 	'vip/js/directives/controls/vip-time-picker',
