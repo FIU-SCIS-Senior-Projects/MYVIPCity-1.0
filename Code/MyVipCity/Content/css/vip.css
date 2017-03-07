@@ -4134,6 +4134,9 @@ ul.vip-new-promoter__list form .vip-new-promoter__field-container {
 .vip-promoter-profile .vip-promoter-profile__business-address {
   padding: 15px 0 8px 0;
 }
+.vip-promoter-profile .vip-wysiwyg-container {
+  margin-top: -20px;
+}
 div[vip-promoter-name] {
   margin-bottom: 3px;
 }

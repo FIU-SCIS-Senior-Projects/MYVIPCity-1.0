@@ -31,7 +31,7 @@
 
 				controlRenderingService.setCreateReadModeElementFunction(function () {
 					// create the read mode element
-					var readElement = angular.element('<div ng-bind-html="' + attrs.ngModel + '"></div>');
+					var readElement = angular.element('<div class="vip-wysiwyg-read" ng-bind-html="' + attrs.ngModel + '"></div>');
 					// add css class
 					if (attrs.readModeClass)
 						readElement.addClass(attrs.readModeClass);

@@ -28,35 +28,23 @@
             <div class="tab-nav tab-nav--justified" data-rmd-breakpoint="500">
                 <div class="tab-nav__inner">
                     <ul>
-                        <li class="active"><a href="#">Overview</a></li>
-                        <li><a href="#">Properties</a></li>
-                        <li><a href="#">Reviews</a></li>
+                        <li class="active"><a data-toggle="tab" href="#promoter-posts">Posts</a></li>
+                        <li><a data-toggle="tab" href="#promoter-about">About</a></li>
+                        <li><a data-toggle="tab" href="#promoter-reviews">Reviews</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="card__body">
-                <div class="card__sub">
-                    <h4>About Robert B. Osborne</h4>
-                    <p>Pellentesque vitae quam quis tellus dignissim faucibus. Suspendisse mattis felis at faucibus lobortis. Sed sit amet tellus dolor. Fusce quis sollicitudin velit. Praesent gravida ullamcorper lectus et tincidunt. Phasellus lectus quam, porta pharetra feugiat in, auctor eget dolor.</p>
-                    <p>Vestibulum tincidunt imperdiet egestas. In in nunc vitae elit tincidunt tristique id eu justo. Quisque gravida maximus orci, vulputate pharetra mauris commodo at. Mauris eget fermentum ipsum, quis faucibus neque. Fusce eleifend sapien sit amet convallis rhoncus. Proin commodo lacinia lectus, et tempus turpis.</p>
+            <div class="card__body tab-content">
+                <div id="promoter-posts" class="tab-pane active">
+                    You don't have any posts yet
                 </div>
-                <div class="card__sub">
-                    <h4>Specialties</h4>
-                    <p>Property Management, Buyer's Agent, Listing Agent</p>
+
+                <div id="promoter-about" class="tab-pane">
+                    <div vip-wysiwyg ng-model="model.About" placeholder="Write something about yourself here..."></div>
                 </div>
-                <div class="card__sub">
-                    <h4>Education</h4>
-                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Duis mollis, est non commodo luctuso.</p>
-                </div>
-                <div class="card__sub">
-                    <h4>Contact Information</h4>
-                    <ul class="rmd-contact-list">
-                        <li><i class="zmdi zmdi-phone"></i>308-360-8938</li>
-                        <li><i class="zmdi zmdi-email"></i>robertbosborne@inbound.plus</li>
-                        <li><i class="zmdi zmdi-facebook"></i>robertbosborne</li>
-                        <li><i class="zmdi zmdi-twitter"></i>@@robertbosborne</li>
-                        <li><i class="zmdi zmdi-pin"></i>5470 Madison Street Severna Park, MD 21146</li>
-                    </ul>
+
+                <div id="promoter-reviews" class="tab-pane">
+                    Reviews
                 </div>
             </div>
         </div>
@@ -65,7 +53,7 @@
         <form class="card">
             <div class="card__header">
                 <h2>Ask me a Question</h2>
-                <small>Send my any question and/or comment. I'll be happy to help.</small>
+                <small>I'll be happy to answer any question.</small>
             </div>
             <div class="card__body m-t-10">
                 <div class="form-group form-group--float">
