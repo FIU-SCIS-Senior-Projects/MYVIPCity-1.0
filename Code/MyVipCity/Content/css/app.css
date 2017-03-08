@@ -11811,9 +11811,11 @@ a {
   }
 }
 .profile__img > img {
-  width: 208px;
+  width: 200px;
+  height: 200px;
   float: left;
   border: 5px solid #fff;
+  object-fit: cover;
 }
 @media (max-width: 767px) {
   .profile__img {
@@ -11822,9 +11824,11 @@ a {
     margin: -35px 0 0 -65px;
   }
   .profile__img > img {
-    width: 130px;
+    width: 135px;
+    height: 135px;
     border-radius: 50%;
     box-shadow: 0 -1px 15px rgba(0, 0, 0, 0.09);
+    object-fit: cover;
   }
 }
 .profile__info {

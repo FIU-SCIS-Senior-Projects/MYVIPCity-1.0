@@ -22,6 +22,7 @@
 	'vip/js/directives/controls/vip-images-gallery',
 	'vip/js/directives/controls/vip-images-upload',
 	'vip/js/directives/controls/vip-link',
+	'vip/js/directives/controls/vip-profile-picture',
 	'vip/js/directives/controls/vip-promoter-name',
 	'vip/js/directives/controls/vip-rating',
 	'vip/js/directives/controls/vip-tags',

@@ -310,6 +310,7 @@
     <Content Include="Content\img\tempPics\1.jpg" />
     <Content Include="Content\img\tempPics\2.jpg" />
     <Content Include="Content\img\tempPics\3.jpg" />
+    <Content Include="Content\img\tempPics\therock.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -432,6 +433,7 @@
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-address.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-profile-picture.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-rating.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-promoter-name.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-control.js" />
@@ -1057,6 +1059,27 @@
     <Content Include="Scripts\vendors\bower_components\Clamp.js\clamp.js" />
     <Content Include="Scripts\vendors\bower_components\Clamp.js\clamp.min.js" />
     <Content Include="Scripts\vendors\bower_components\Clamp.js\examples\example1.html" />
+    <Content Include="Scripts\vendors\bower_components\cropper\dist\cropper.css" />
+    <Content Include="Scripts\vendors\bower_components\cropper\dist\cropper.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\dist\cropper.min.css" />
+    <Content Include="Scripts\vendors\bower_components\cropper\dist\cropper.min.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\img\bg.png" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\bind.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\build.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\change.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\cropper.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\defaults.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\handlers.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\init.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\intro.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\methods.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\outro.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\plugin.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\preview.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\render.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\template.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\utilities.js" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\js\variables.js" />
     <Content Include="Scripts\vendors\bower_components\dropzone\dist\basic.css" />
     <Content Include="Scripts\vendors\bower_components\dropzone\dist\dropzone-amd-module.js" />
     <Content Include="Scripts\vendors\bower_components\dropzone\dist\dropzone.css" />
@@ -5705,6 +5728,17 @@
     <Content Include="Scripts\vendors\bower_components\lodash\yarn.lock" />
     <Content Include="Views\AcceptPromoterInvitation\NeedAuthentication.cshtml" />
     <Content Include="Views\AcceptPromoterInvitation\Index.cshtml" />
+    <Content Include="Scripts\vendors\bower_components\cropper\.bower.json" />
+    <Content Include="Scripts\vendors\bower_components\cropper\bower.json" />
+    <Content Include="Scripts\vendors\bower_components\cropper\CHANGELOG.md" />
+    <Content Include="Scripts\vendors\bower_components\cropper\LICENSE" />
+    <Content Include="Scripts\vendors\bower_components\cropper\package.json" />
+    <Content Include="Scripts\vendors\bower_components\cropper\README.md" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\scss\cropper.scss" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\scss\_main.scss" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\scss\_mixins.scss" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\scss\_utilities.scss" />
+    <Content Include="Scripts\vendors\bower_components\cropper\src\scss\_variables.scss" />
     <None Include="Views\PromoterProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

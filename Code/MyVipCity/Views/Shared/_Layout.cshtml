@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="~/Scripts/vendors/bower_components/lightgallery/dist/css/lightgallery.min.css">
     <!-- Rate Yo -->
     <link rel="stylesheet" href="~/Scripts/vendors/bower_components/rateYo/min/jquery.rateyo.min.css">
+    <!-- Cropper -->
+    <link rel="stylesheet" href="~/Scripts/vendors/bower_components/cropper/dist/cropper.min.css">
 
     <!-- Site -->
     <link rel="stylesheet" href="~/Content/css/app.min.css">
@@ -210,6 +212,7 @@
                 'sortable': '@Scripts.Url("~/Scripts/vendors/bower_components/Sortable/Sortable.min")',
                 'lodash': '@Scripts.Url("~/Scripts/vendors/bower_components/lodash/dist/lodash.min")',
                 'rateyo': '@Scripts.Url("~/Scripts/vendors/bower_components/rateYo/min/jquery.rateyo.min")',
+                'cropper': '@Scripts.Url("~/Scripts/vendors/bower_components/cropper/dist/cropper.min")',
                 'googleMaps': 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCilfDIIXr4o4c3FSLgTwG5jynPpu_TJgY',
 
                 'myVipCityConfig': '@Scripts.Url("~/Configuration/JsConfig?x=0")',
@@ -276,7 +279,9 @@
                 'rateyo': {
                     deps: ['jquery']
                 },
-
+                'cropper': {
+                    deps: ['jquery']
+                },
                 'app': {
                     deps: ['jquery']
                 },
