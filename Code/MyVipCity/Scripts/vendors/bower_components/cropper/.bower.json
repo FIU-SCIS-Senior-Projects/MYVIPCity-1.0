@@ -31,26 +31,23 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "tests",
-    "test",
-    "examples",
-    "assets",
-    "demo",
+    "build",
     "docs",
-    "gulpfile.js",
+    "examples",
+    "test",
+    "postcss.config.json",
+    "rollup.config.js",
     "CONTRIBUTING.md",
     "ISSUE_TEMPLATE.md"
   ],
-  "version": "2.3.4",
-  "_release": "2.3.4",
+  "version": "3.0.0-beta",
+  "_release": "3.0.0-beta",
   "_resolution": {
     "type": "version",
-    "tag": "v2.3.4",
-    "commit": "30c58b29ee21010e17e58ebab165fbd84285c685"
+    "tag": "v3.0.0-beta",
+    "commit": "d1bee4d3fb872a1c2f7f65e532c716ad5b9c5479"
   },
   "_source": "https://github.com/fengyuanchen/cropper.git",
-  "_target": "^2.3.4",
-  "_originalSource": "cropper",
-  "_direct": true
+  "_target": "^3.0.0-beta",
+  "_originalSource": "cropper"
 }

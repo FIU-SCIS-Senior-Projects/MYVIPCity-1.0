@@ -4155,3 +4155,65 @@ div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-nam
 div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-name {
   color: #2196F3;
 }
+.vip-promoter-profile div[vip-profile-picture] {
+  float: left;
+}
+.vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__change-img-btn {
+  width: 100%;
+  background-color: #263238;
+}
+.vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__change-img-btn:hover {
+  background-color: #2196F3;
+}
+.vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__read-mode-container {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  .vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__read-mode-container {
+    display: none !important;
+  }
+}
+.vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__read-mode-container-xs {
+  width: 135px;
+  height: 135px;
+  overflow: hidden;
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__read-mode-container-xs {
+    display: block !important;
+    border-radius: 50%;
+    box-shadow: 0 -1px 15px rgba(0, 0, 0, 0.09);
+  }
+}
+.vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__edit-mode-container {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+/*
+    .profile__img {
+    & > img {
+        width: 200px;
+        height: 200px;
+        float: left;
+        border: 5px solid #fff;
+        object-fit: cover;
+    }
+
+    @media(max-width: @screen-xs-max) {
+        position: absolute;
+        left: 50%;
+        margin: -35px 0 0 -65px;
+
+        & > img {
+            width: 135px;
+            height: 135px;
+            border-radius: 50%;
+            box-shadow: 0 -1px 15px rgba(0,0,0,.09);
+            object-fit: cover;
+        }
+    }
+}*/
