@@ -16,7 +16,12 @@
 		var unwatch = $scope.$watch('model.FriendlyId', function (id) {
 			if (id) {
 				friendlyId = id;
-				getPromoterPendingInvitations();
+				var unwatch2 = $scope.$watch('renderingMode', function (value) {
+					if (value === vip.renderingModes.edit) {
+						getPromoterPendingInvitations();
+						unwatch2();
+					}
+				});
 				unwatch();
 			}
 		});
