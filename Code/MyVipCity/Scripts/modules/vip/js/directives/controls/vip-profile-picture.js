@@ -1,4 +1,4 @@
-﻿define(['vip/js/vip', 'jquery', 'angular', 'cropper'], function (vip, jQuery, angular) {
+﻿define(['vip/js/vip', 'jquery', 'cropper', 'dropzone'], function (vip, jQuery) {
 	'use strict';
 
 	vip.directive('vipProfilePicture', ['$compile', function ($compile) {
@@ -16,18 +16,22 @@
 					'<div class="vip-rendering-edit vip-profile-picture__edit-mode-container">' +
 						'<img class="vip-profile-picture__cropper-img" src="/Content/img/tempPics/therock.jpg">' +
 					'</div>' +
-					'<button class="vip-rendering-edit btn btn-primary vip-profile-picture__change-img-btn">Change Picture</button>',
+					'<button ng-show="!uploading" class="vip-rendering-edit btn btn-primary vip-profile-picture__change-img-btn">Change Picture</button>' + 
+					'<div ng-show="uploading" class="vip-rendering-edit vip-profile-picture__uploading">' +
+						'<span><i class="zmdi zmdi-refresh"></i>Uploading...</span>' +
+					'</div>',
 
 			link: function (scope, element, attrs, ngModelCtrl) {
 				var listeners = [];
 
 				var imgEl = element.find('img.vip-profile-picture__cropper-img');
 				var imgPreviewEl = element.find('.vip-profile-picture__read-mode-container');
-				var imgPreviewEl2 = element.find('.vip-profile-picture__read-mode-container-xs');
+				var imgPreviewElXs = element.find('.vip-profile-picture__read-mode-container-xs');
 
+				// set the cropper with two previews
 				jQuery(imgEl).cropper({
 					aspectRatio: 1 / 1,
-					preview: [imgPreviewEl[0], imgPreviewEl2[0]],
+					preview: [imgPreviewEl[0], imgPreviewElXs[0]],
 					viewMode: 3,
 					dragMode: 'move',
 					autoCrop: true,
@@ -41,7 +45,47 @@
 					highlight: false,
 					responsive: false
 				});
-				var cropper = jQuery(imgEl).data('cropper');
+
+				// set the dropzone
+				element.find('.vip-profile-picture__change-img-btn').dropzone({
+					url: 'api/Pictures',
+					maxFileSize: 5,
+					addRemoveLinks: true,
+					dictDefaultMessage: 'Drop images here or click to upload',
+					previewsContainer: null,
+					createImageThumbnails: false,
+					previewTemplate: '<div id="preview-template" style="display: none;"></div>',
+					parallelUploads: 1,
+					uploadMultiple: false,
+					maxFiles: 1,
+					init: function () {
+						// success event handler
+						this.on('success', function (file, response) {
+							//// add the images to the array
+							//scope.$apply(function () {
+							//	// add the new files to the array
+							//	scope.files.push.apply(scope.files, response);
+							//});
+						});
+						// complete event handler
+						this.on('complete', function (file) {
+							// upload ended
+							scope.$apply(function() {
+								scope.uploading = false;
+							});
+							
+							// remove the file from the dropzone once it completes
+							this.removeFile(file);
+						});
+					},
+					sending: function () {
+						// upload started
+						scope.$apply(function () {
+							scope.uploading = true;
+						});
+					}
+				});
+
 
 				listeners.push(scope.$watch('renderingMode', function (renderingMode) {
 					if (renderingMode === vip.renderingModes.edit) {

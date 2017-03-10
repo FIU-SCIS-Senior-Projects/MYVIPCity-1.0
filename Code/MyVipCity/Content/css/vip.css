@@ -4155,6 +4155,14 @@ div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-nam
 div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-name {
   color: #2196F3;
 }
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
 .vip-promoter-profile div[vip-profile-picture] {
   float: left;
 }
@@ -4164,6 +4172,19 @@ div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-nam
 }
 .vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__change-img-btn:hover {
   background-color: #2196F3;
+}
+.vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__uploading {
+  width: 100%;
+  background-color: #263238;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 500;
+  padding: 7px;
+}
+.vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__uploading i.zmdi-refresh {
+  font-size: large;
+  -webkit-animation: rotating 2.5s linear infinite;
 }
 .vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__read-mode-container {
   width: 200px;

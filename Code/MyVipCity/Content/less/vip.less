@@ -300,6 +300,16 @@ div[vip-promoter-name] {
     }
 }
 
+@-webkit-keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
 .vip-promoter-profile {
     div[vip-profile-picture] {
         float: left;
@@ -310,6 +320,20 @@ div[vip-promoter-name] {
 
             &:hover {
                 background-color: @mdc-blue-500;
+            }
+        }
+
+        .vip-profile-picture__uploading {
+            width: 100%;
+            background-color: @mdc-blue-grey-900;
+            color: white;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 500;
+            padding: 7px;
+            i.zmdi-refresh {
+                font-size: large;
+                -webkit-animation: rotating 2.5s linear infinite;
             }
         }
 
