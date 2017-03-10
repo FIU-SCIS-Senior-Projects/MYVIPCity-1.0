@@ -4245,27 +4245,10 @@ div[vip-existing-promoters] .vip-existing-promoters__img {
   background: url(../img/noprofilepic.png);
   background-size: cover;
 }
-/*
-    .profile__img {
-    & > img {
-        width: 200px;
-        height: 200px;
-        float: left;
-        border: 5px solid #fff;
-        object-fit: cover;
-    }
-
-    @media(max-width: @screen-xs-max) {
-        position: absolute;
-        left: 50%;
-        margin: -35px 0 0 -65px;
-
-        & > img {
-            width: 135px;
-            height: 135px;
-            border-radius: 50%;
-            box-shadow: 0 -1px 15px rgba(0,0,0,.09);
-            object-fit: cover;
-        }
-    }
-}*/
+div[vip-existing-promoters] .media-body {
+  padding-left: 8px;
+}
+div[vip-existing-promoters] div[vip-promoter-name],
+div[vip-existing-promoters] .vip-existing-promoter__email {
+  padding-top: 5px;
+}

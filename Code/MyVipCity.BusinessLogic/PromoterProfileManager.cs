@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Linq;
 using System.Security.Claims;
@@ -72,6 +73,18 @@ namespace MyVipCity.BusinessLogic {
 			var result = ToDto<PromoterProfileDto, PromoterProfile>(promoterProfileToUpdate);
 
 			return result;
+		}
+
+		public string GetPromoterEmail(int id) {
+			var promoter = DbContext.Set<PromoterProfile>().Find(id);
+			if (promoter == null) {
+				Logger.Warn($"Promoter with id: {id} not found");
+				return null;
+			}
+
+			var email = DbContext.Database.SqlQuery<string>($"select Email from AspNetUsers where Id='{promoter.UserId}'").ToArray();
+
+			return email.Length == 0 ? null : email[0];
 		}
 	}
 }

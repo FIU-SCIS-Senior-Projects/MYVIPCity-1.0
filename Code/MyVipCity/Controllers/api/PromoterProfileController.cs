@@ -41,5 +41,15 @@ namespace MyVipCity.Controllers.api {
 				return Ok(updatedPromoterProfileDto);
 			});
 		}
+
+		[HttpGet]
+		[Authorize(Roles = "Admin")]
+		[Route("{id:int}/Email")]
+		public async Task<IHttpActionResult> GetPromoterEmail(int id) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var email = PromoterProfileManager.GetPromoterEmail(id);
+				return Ok(email);
+			});
+		}
 	}
 }

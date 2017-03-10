@@ -9,5 +9,7 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		PromoterProfileDto GetProfileById(int id);
 
 		PromoterProfileDto Update(PromoterProfileDto promoterProfileDto);
+
+		string GetPromoterEmail(int id);
 	}
 }
