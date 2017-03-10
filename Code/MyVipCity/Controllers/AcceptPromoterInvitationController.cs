@@ -62,7 +62,7 @@ namespace MyVipCity.Controllers {
 			PromoterProfileDto profileDto = PromoterInvitationManager.AcceptInvitation(friendlyId, UserEmail, UserId);
 			// add user to Promoter role
 			ApplicationUserManager.AddToRole(UserId, "Promoter");
-			return Redirect("/");
+			return Redirect($"#/promoter-profile/{profileDto.Id}");
 		}
 	}
 }
