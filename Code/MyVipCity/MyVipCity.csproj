@@ -5754,6 +5754,7 @@
     <Content Include="Scripts\vendors\bower_components\jquery\external\sizzle\dist\sizzle.min.map" />
     <Content Include="Scripts\vendors\bower_components\jquery\README.md" />
     <Content Include="Scripts\vendors\bower_components\jquery\src\.jshintrc" />
+    <Content Include="Views\PromoterProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

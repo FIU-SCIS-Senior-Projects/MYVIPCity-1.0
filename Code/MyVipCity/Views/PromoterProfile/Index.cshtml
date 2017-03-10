@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+}
+
+<div>
+    <button class="btn btn-primary" ng-show="canEditPromoterProfile && showEditButton" ng-click="editClick()">Edit Profile</button>
+    <button class="btn btn-primary" ng-show="canEditPromoterProfile && showReadModeButton" ng-click="readModeClick()">View Read Mode</button>
+</div>
+<div class="row vip-promoter-profile">
+    <div class="col-md-8">
+        <div class="card profile">
+            <div class="profile__img vip-rm-{{renderingMode}}">
+                <!--Profile Picture-->
+                <div vip-profile-picture ng-model="model.ProfilePicture"></div>
+            </div>
+            <div class="profile__info vip-rm-{{renderingMode}}">
+                <!--Name-->
+                <div vip-promoter-name ng-model="model" wrap-with="h2"></div>
+                <!--Review-->
+                <div class="profile__review">
+                    <span class="rmd-rate" vip-rating ng-model="model.AverageRating" read-only="true"></span>
+                    <span>(0 Review)</span>
+                </div>
+                <span class="label label-warning">VIP Promoter</span>
+                <span class="label label-success vip-promoter-profile__business-link">
+                    <a href="#/viewClub/{{model.Business.FriendlyId}}">{{model.Business.Name}}</a>
+                </span>
+                <div class="vip-promoter-profile__business-address">
+                    <span>{{model.Business.Address.FormattedAddress}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="tab-nav tab-nav--justified" data-rmd-breakpoint="500">
+                <div class="tab-nav__inner">
+                    <ul>
+                        <li class="active"><a data-toggle="tab" href="#promoter-posts">Posts</a></li>
+                        <li><a data-toggle="tab" href="#promoter-about">About</a></li>
+                        <li><a data-toggle="tab" href="#promoter-reviews">Reviews</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card__body tab-content">
+                <div id="promoter-posts" class="tab-pane active">
+                    You don't have any posts yet
+                </div>
+
+                <div id="promoter-about" class="tab-pane">
+                    <div vip-wysiwyg ng-model="model.About" placeholder="Write something about yourself here..."></div>
+                </div>
+
+                <div id="promoter-reviews" class="tab-pane">
+                    Reviews
+                </div>
+            </div>
+        </div>
+        <div class="vip-save-button-container">
+            <button class="btn btn-primary" ng-show="showSaveButton" ng-click="save()">Save</button>
+        </div>
+    </div>
+    <div class="col-md-4 rmd-sidebar-mobile" id="agent-question">
+        <form class="card">
+            <div class="card__header">
+                <h2>Ask me a Question</h2>
+                <small>I'll be happy to answer any question.</small>
+            </div>
+            <div class="card__body m-t-10">
+                <div class="form-group form-group--float">
+                    <input type="text" class="form-control">
+                    <i class="form-group__bar"></i>
+                    <label>Name</label>
+                </div>
+                <div class="form-group form-group--float">
+                    <input type="text" class="form-control">
+                    <i class="form-group__bar"></i>
+                    <label>Email Address</label>
+                </div>
+                <div class="form-group form-group--float">
+                    <input type="text" class="form-control">
+                    <i class="form-group__bar"></i>
+                    <label>Contact Number</label>
+                </div>
+                <div class="form-group form-group--float">
+                    <textarea class="form-control textarea-autoheight"></textarea>
+                    <i class="form-group__bar"></i>
+                    <label>Message</label>
+                </div>
+                <small class="text-muted">By sending us your information, you agree to MyVIPCity’s Terms of Use & Privacy Policy.</small>
+            </div>
+            <div class="card__footer">
+                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-sm btn-link">Reset</button>
+                <button class="btn btn-sm btn-link visible-sm-inline visible-xs-inline" data-rmd-action="block-close" data-rmd-target="#agent-question">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
