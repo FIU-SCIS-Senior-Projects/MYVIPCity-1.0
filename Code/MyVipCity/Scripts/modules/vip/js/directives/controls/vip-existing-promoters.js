@@ -82,8 +82,6 @@
 					}
 				}));
 
-
-
 				listeners.push(scope.$on('$destroy', function () {
 					// unregister listeners
 					for (var i = 0; i < listeners.length; i++)
