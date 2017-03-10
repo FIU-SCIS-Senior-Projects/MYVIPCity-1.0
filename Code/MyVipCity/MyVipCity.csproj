@@ -402,6 +402,7 @@
     <Content Include="Content\less\inc\vendor-overrides\trumbowyg.less" />
     <Content Include="Content\less\inc\vendor-overrides\waves.less" />
     <Content Include="Content\less\inc\widgets.less" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\myvipcity - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\myvipcity - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -5753,7 +5754,6 @@
     <Content Include="Scripts\vendors\bower_components\jquery\external\sizzle\dist\sizzle.min.map" />
     <Content Include="Scripts\vendors\bower_components\jquery\README.md" />
     <Content Include="Scripts\vendors\bower_components\jquery\src\.jshintrc" />
-    <None Include="Views\PromoterProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
