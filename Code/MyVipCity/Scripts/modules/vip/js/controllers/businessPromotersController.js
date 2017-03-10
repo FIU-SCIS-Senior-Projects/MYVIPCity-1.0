@@ -57,7 +57,7 @@
 				}, function () {
 					showErrorPopup();
 				});
-			});
+			}, angular.noop);
 		};
 
 		$scope.resendInvitation = function (invitation) {
@@ -69,7 +69,7 @@
 				showCancelButton: true
 			}).then(function () {
 				sendInvitationToPromoters([invitation]);
-			});
+			}, angular.noop);
 		};
 	}]);
 });
