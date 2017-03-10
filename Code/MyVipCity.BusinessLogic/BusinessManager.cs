@@ -63,6 +63,12 @@ namespace MyVipCity.BusinessLogic {
 			return allBusinessDtos;
 		}
 
+		public PromoterProfileDto[] GetPromoters(int id) {
+			var promoterProfiles = DbContext.Set<PromoterProfile>().Where(p => p.Business.Id == id).ToArray();
+			var promoterProfilesDto = Mapper.Map<PromoterProfileDto[]>(promoterProfiles);
+			return promoterProfilesDto;
+		}
+
 		private void BuildFriendlyIdForBusiness(Business business) {
 			if (string.IsNullOrWhiteSpace(business.Name))
 				throw new InvalidOperationException("Business name must be provided.");

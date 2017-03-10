@@ -46,9 +46,19 @@
 					return editElement;
 				});
 
-				listeners.push(scope.$watch('renderingMode', function (value) {
-					controlRenderingService.setRenderingMode(value);
-				}));
+				// check if the directive will be rendered in read mode only
+				if (angular.isDefined(attrs.vipReadOnly)) {
+					controlRenderingService.setRenderingMode(vip.renderingModes.read);
+				} else if (angular.isDefined(attrs.vipEditOnly)) {
+					// the directive will be rendered in edit mode only
+					controlRenderingService.setRenderingMode(vip.renderingModes.edit);
+				}
+				else {
+					// directive can change read/edit mode dinamically
+					listeners.push(scope.$watch('renderingMode', function(value) {
+						controlRenderingService.setRenderingMode(value);
+					}));
+				}
 
 				listeners.push(scope.$on('$destroy', function () {
 					controlRenderingService.destroy();

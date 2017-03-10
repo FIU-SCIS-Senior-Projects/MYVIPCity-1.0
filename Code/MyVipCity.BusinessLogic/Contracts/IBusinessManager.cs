@@ -13,5 +13,7 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		BusinessDto LoadByFriendlyId(string friendlyId);
 
 		BusinessDto[] GetAllBusiness();
+
+		PromoterProfileDto[] GetPromoters(int id);
 	}
 }

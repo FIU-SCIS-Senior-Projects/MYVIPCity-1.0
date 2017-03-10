@@ -191,24 +191,9 @@
                 <small>These VIP hosts will make you have the best time</small>
             </div>
             <div class="list-group">
-                <a class="list-group-item media" href="">
-                    <div class="pull-left">
-                        <img src="https://placeholdit.imgix.net/~text?&w=500&h=500" alt="" class="list-group__img img-circle" width="65" height="65">
-                    </div>
-                    <div class="media-body list-group__text">
-                        <strong>John "The Dancer" Doe</strong>
-                        <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
-                    </div>
-                </a>
-                <a class="list-group-item media" href="">
-                    <div class="pull-left">
-                        <img src="https://placeholdit.imgix.net/~text?&w=500&h=500" alt="" class="list-group__img img-circle" width="65" height="65">
-                    </div>
-                    <div class="media-body list-group__text">
-                        <strong>Jane McLaren</strong>
-                        <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
-                    </div>
-                </a>
+                <div vip-existing-promoters vip-business-id="{{model.Id}}">
+                </div>
+              
                 <div ng-controller="vip.businessPromotersController">
                     <!--List pending invitations-->
                     <div class="vip-promoters-pending" ng-show="pendingInvitations.length && renderingMode == 2">

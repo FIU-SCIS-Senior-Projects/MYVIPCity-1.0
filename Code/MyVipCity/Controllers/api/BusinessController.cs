@@ -71,5 +71,14 @@ namespace MyVipCity.Controllers.api {
 				return Ok(updatedBusinessDto);
 			});
 		}
+
+		[HttpGet]
+		[Route("{id:int}/Promoters")]
+		public async Task<IHttpActionResult> GetPromoters(int id) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var promoters = BusinessManager.GetPromoters(id);
+				return Ok(promoters);
+			});
+		}
 	}
 }

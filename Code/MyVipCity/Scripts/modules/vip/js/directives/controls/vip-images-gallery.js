@@ -41,7 +41,7 @@
 					// build gallery element
 					var galleryElement = angular.element(
 						'<div class="vip-light-gallery list-unstyled justified-gallery">' +
-							'<img src="{{pic.src}}" alt="" ng-repeat="pic in previewPictures | orderBy: \'Index\'"/>' +
+							'<img ng-src="{{pic.src}}" alt="" ng-repeat="pic in previewPictures | orderBy: \'Index\'"/>' +
 						'</div>'
 					);
 					// search for a previously added gallery element inside this element

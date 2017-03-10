@@ -17,7 +17,7 @@
 						'<ul class="vip-image-preview__img-list" ng-show="files.length">' +
 							'<li ng-repeat="pic in files" class="id_{{pic.BinaryDataId}} animated bounceIn">' +
 								'<div class="vip-image-preview__remove-img"><i class="zmdi zmdi-close" ng-click="removePicture($event, pic)"></i></div>' +
-								 '<img class="vip-image-preview__img" src="api/Pictures/{{pic.BinaryDataId}}" alt="{{pic.FileName}}"/>' +
+								'<img class="vip-image-preview__img" ng-src="api/Pictures/{{pic.BinaryDataId}}" alt="{{pic.FileName}}"/>' +
 							'</li>' +
 						'</ul>' +
 						'<div class="vip-dropzone-container dropzone"></div>' +

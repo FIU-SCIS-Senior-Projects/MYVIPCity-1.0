@@ -4200,8 +4200,8 @@ div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-nam
   }
 }
 .vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__read-mode-container-xs {
-  width: 136px;
-  height: 136px;
+  width: 140px;
+  height: 140px;
   overflow: hidden;
   border: 5px solid white;
 }
@@ -4239,6 +4239,10 @@ div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-nam
   .vip-promoter-profile .profile__img.vip-rm-2 {
     margin: -35px 0 0 -100px;
   }
+}
+div[vip-existing-promoters] .vip-existing-promoters__img {
+  background: url(../img/noprofilepic.png);
+  background-size: cover;
 }
 /*
     .profile__img {

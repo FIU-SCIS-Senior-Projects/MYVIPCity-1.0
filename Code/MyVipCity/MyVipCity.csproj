@@ -434,6 +434,7 @@
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-address.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-existing-promoters.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-profile-picture.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-rating.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-promoter-name.js" />

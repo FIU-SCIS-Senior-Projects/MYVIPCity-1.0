@@ -18,6 +18,7 @@
 	'vip/js/directives/controls/vip-address',
 	'vip/js/directives/controls/vip-checkbox',
 	'vip/js/directives/controls/vip-day-hours',
+	'vip/js/directives/controls/vip-existing-promoters',
 	'vip/js/directives/controls/vip-images-control',
 	'vip/js/directives/controls/vip-images-gallery',
 	'vip/js/directives/controls/vip-images-upload',
