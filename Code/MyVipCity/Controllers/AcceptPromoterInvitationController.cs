@@ -1,7 +1,9 @@
 ﻿using System.Security.Claims;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
 using Ninject;
@@ -62,6 +64,13 @@ namespace MyVipCity.Controllers {
 			PromoterProfileDto profileDto = PromoterInvitationManager.AcceptInvitation(friendlyId, UserEmail, UserId);
 			// add user to Promoter role
 			ApplicationUserManager.AddToRole(UserId, "Promoter");
+			// sign out/and sign in the user again so that the new role is added to the claims identity
+			var authManager = System.Web.HttpContext.Current.GetOwinContext().Authentication;
+			authManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+			var user = ApplicationUserManager.FindById(UserId);
+			var identity = ApplicationUserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+			authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
+
 			return Redirect($"#/promoter-profile/{profileDto.Id}");
 		}
 	}

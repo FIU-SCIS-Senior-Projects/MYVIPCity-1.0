@@ -66,13 +66,6 @@
 				}
 				// TODO: fix retrieval of average rating
 				$scope.model.AverageRating = 5;
-
-				//$scope.model.ProfilePicture = {
-				//	Picture: {
-				//		BinaryDataId: 82
-				//	},
-				//	CropData: '{"x":408.2655655175196,"y":0,"width":320.2106657759608,"height":320.2106657759608,"rotate":0,"scaleX":1,"scaleY":1}'
-				//};
 			}
 		});
 
