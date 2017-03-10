@@ -1,7 +1,7 @@
-﻿define(['vip/js/vip', 'jquery', 'cropper', 'dropzone'], function (vip, jQuery) {
+﻿define(['vip/js/vip', 'jquery', 'angular', 'cropper', 'dropzone'], function (vip, jQuery, angular) {
 	'use strict';
 
-	vip.directive('vipProfilePicture', ['$compile', function ($compile) {
+	vip.directive('vipProfilePicture', [function () {
 		return {
 			restrict: 'ACE',
 
@@ -14,9 +14,9 @@
 					'<div class="vip-rendering-read vip-profile-picture__read-mode-container"></div>' +
 					'<div class="vip-rendering-read vip-profile-picture__read-mode-container-xs"></div>' +
 					'<div class="vip-rendering-edit vip-profile-picture__edit-mode-container">' +
-						'<img class="vip-profile-picture__cropper-img" src="/Content/img/tempPics/therock.jpg">' +
+						'<img class="vip-profile-picture__cropper-img">' +
 					'</div>' +
-					'<button ng-show="!uploading" class="vip-rendering-edit btn btn-primary vip-profile-picture__change-img-btn">Change Picture</button>' + 
+					'<button ng-show="!uploading" class="vip-rendering-edit btn btn-primary vip-profile-picture__change-img-btn">Change Picture</button>' +
 					'<div ng-show="uploading" class="vip-rendering-edit vip-profile-picture__uploading">' +
 						'<span><i class="zmdi zmdi-refresh"></i>Uploading...</span>' +
 					'</div>',
@@ -43,8 +43,35 @@
 					center: false,
 					guides: false,
 					highlight: false,
-					responsive: false
+					responsive: false,
+					ready: function (e) {
+						// get the cropper instance
+						var cropperInstance = jQuery(e.target).data('cropper');
+						// get the value from ngModelCtrl
+						var value = ngModelCtrl.$viewValue;
+						// check if there is a crop data
+						if (value && value.CropData) {
+							// apply the crop data
+							var data = JSON.parse(value.CropData);
+							cropperInstance.setData(data);
+						}
+					},
+					crop: function (e) {
+						var data = jQuery(e.target).data().cropper.getData();
+						scope.$apply(function () {
+							var newValue = angular.extend(ngModelCtrl.$viewValue || {}, { CropData: JSON.stringify(data) });
+							ngModelCtrl.$setViewValue(newValue);
+						});
+					}
 				});
+
+				// get cropper instance
+				var cropper = jQuery(imgEl).data('cropper');
+
+				// set the picture for the cropper
+				var setProfilePicture = function (profilePicture) {
+					cropper.replace('api/Pictures/' + profilePicture.Picture.BinaryDataId);
+				};
 
 				// set the dropzone
 				element.find('.vip-profile-picture__change-img-btn').dropzone({
@@ -61,19 +88,18 @@
 					init: function () {
 						// success event handler
 						this.on('success', function (file, response) {
-							//// add the images to the array
-							//scope.$apply(function () {
-							//	// add the new files to the array
-							//	scope.files.push.apply(scope.files, response);
-							//});
+							scope.$apply(function () {
+								var newValue = { Picture: response[0], CropData: null };
+								ngModelCtrl.$setViewValue(newValue);
+								setProfilePicture(newValue);
+							});
 						});
 						// complete event handler
 						this.on('complete', function (file) {
 							// upload ended
-							scope.$apply(function() {
+							scope.$apply(function () {
 								scope.uploading = false;
 							});
-							
 							// remove the file from the dropzone once it completes
 							this.removeFile(file);
 						});
@@ -86,6 +112,12 @@
 					}
 				});
 
+				ngModelCtrl.$render = function () {
+					var value = ngModelCtrl.$viewValue;
+					if (value) {
+						setProfilePicture(value);
+					}
+				};
 
 				listeners.push(scope.$watch('renderingMode', function (renderingMode) {
 					if (renderingMode === vip.renderingModes.edit) {

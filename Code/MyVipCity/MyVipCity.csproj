@@ -306,6 +306,7 @@
     <Content Include="Content\img\ellipsis.gif" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo.svg" />
+    <Content Include="Content\img\noprofilepic.png" />
     <Content Include="Content\img\ring.gif" />
     <Content Include="Content\img\tempPics\1.jpg" />
     <Content Include="Content\img\tempPics\2.jpg" />

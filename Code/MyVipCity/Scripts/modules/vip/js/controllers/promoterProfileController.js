@@ -2,6 +2,8 @@
 	'use strict';
 
 	vip.controller('vip.promoterProfileController', ['$scope', '$routeParams', '$http', '$location', function ($scope, $routeParams, $http, $location) {
+
+
 		// set rendering mode to read mode
 		$scope.renderingMode = vip.renderingModes.read;
 		// get the id of the profile from the route parameters
@@ -18,8 +20,16 @@
 				// update the model
 				$scope.model = response.data;
 				$scope.model.AverageRating = 5;
+
+				$scope.model.ProfilePicture = {
+					Picture: {
+						BinaryDataId: 82
+					},
+					CropData: '{"x":408.2655655175196,"y":0,"width":320.2106657759608,"height":320.2106657759608,"rotate":0,"scaleX":1,"scaleY":1}'
+				};
 			}
 		});
+
 
 		$scope.toggleRenderingMode = function () {
 			if ($scope.renderingMode === vip.renderingModes.read)
