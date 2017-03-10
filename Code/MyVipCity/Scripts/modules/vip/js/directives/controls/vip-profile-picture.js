@@ -57,7 +57,10 @@
 						}
 					},
 					crop: function (e) {
-						var data = jQuery(e.target).data().cropper.getData();
+						var cropperInstance = jQuery(e.target).data().cropper;
+						var data = cropperInstance.getData();
+						var imgData = cropperInstance.getImageData();
+						data = angular.extend(data, { naturalHeight: imgData.naturalHeight, naturalWidth: imgData.naturalWidth });
 						scope.$apply(function () {
 							var newValue = angular.extend(ngModelCtrl.$viewValue || {}, { CropData: JSON.stringify(data) });
 							ngModelCtrl.$setViewValue(newValue);

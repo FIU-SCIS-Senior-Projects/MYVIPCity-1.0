@@ -4187,11 +4187,12 @@ div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-nam
   -webkit-animation: rotating 2.5s linear infinite;
 }
 .vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__read-mode-container {
-  width: 200px;
-  height: 200px;
+  width: 210px;
+  height: 210px;
   overflow: hidden;
   background: url(../img/noprofilepic.png);
   background-size: cover;
+  box-shadow: 0 -1px 15px rgba(0, 0, 0, 0.09);
   border: 5px solid white;
 }
 @media (max-width: 767px) {
@@ -4200,8 +4201,8 @@ div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-nam
   }
 }
 .vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__read-mode-container-xs {
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   overflow: hidden;
   border: 5px solid white;
 }
@@ -4226,8 +4227,8 @@ div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-nam
   }
 }
 .vip-promoter-profile div[vip-profile-picture] .vip-profile-picture__edit-mode-container {
-  width: 200px;
-  height: 200px;
+  width: 210px;
+  height: 210px;
   overflow: hidden;
   background: url(../img/noprofilepic.png);
   background-size: cover;
@@ -4237,7 +4238,7 @@ div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-nam
     padding-top: 225px;
   }
   .vip-promoter-profile .profile__img.vip-rm-2 {
-    margin: -35px 0 0 -100px;
+    margin: -35px 0 0 -105px;
   }
 }
 div[vip-existing-promoters] .vip-existing-promoters__img {

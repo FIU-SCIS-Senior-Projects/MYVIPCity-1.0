@@ -10,8 +10,8 @@
 
 			template:
 				'<a ng-repeat="promoter in promoters" class="list-group-item media" href="#/promoter-profile/{{promoter.Id}}">' +
-                    '<div class="pull-left">' +
-                        '<img alt="" class="list-group__img img-circle vip-existing-promoters__img" ng-src="api/Pictures/{{promoter.ProfilePicture.BinaryDataId}}" width="65" height="65">' +
+                    '<div class="pull-left" style="width:70px; height: 70px; overflow: hidden;">' +
+                        '<img alt="" class="list-group__img img-circle vip-existing-promoters__img" ng-src="api/Pictures/{{promoter.ProfilePicture.BinaryDataId}}" style="{{::getStyle(promoter, $element)}}">' +
                     '</div>' +
                     '<div class="media-body list-group__text">' +
 						'<div vip-promoter-name ng-model="promoter" wrap-with="strong" vip-read-only></div>' +
@@ -21,6 +21,10 @@
 
 			link: function (scope, element, attrs) {
 				var listeners = [];
+
+				scope.getStyle = function(promoter, e) {
+					return "width: 65px; height: 65px";
+				};
 
 				listeners.push(attrs.$observe('vipBusinessId', function (idValue) {
 					// get the attribute value as an int
