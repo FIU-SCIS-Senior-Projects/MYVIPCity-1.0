@@ -11,12 +11,6 @@ namespace MyVipCity.DataTransferObjects {
 			set;
 		}
 
-		public string UserId
-		{
-			get;
-			set;
-		}
-
 		public BusinessDto Business
 		{
 			get;

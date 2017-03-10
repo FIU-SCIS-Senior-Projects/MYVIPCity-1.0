@@ -2,9 +2,12 @@
     Layout = null;
 }
 
+<div>
+    <button class="btn btn-primary" ng-show="canEditPromoterProfile && showEditButton" ng-click="editClick()">Edit Profile</button>
+    <button class="btn btn-primary" ng-show="canEditPromoterProfile && showReadModeButton" ng-click="readModeClick()">View Read Mode</button>
+</div>
 <div class="row vip-promoter-profile">
     <div class="col-md-8">
-        <button ng-click="toggleRenderingMode()">Toggle</button>
         <div class="card profile">
             <div class="profile__img vip-rm-{{renderingMode}}">
                 <!--Profile Picture-->
@@ -48,6 +51,9 @@
                     Reviews
                 </div>
             </div>
+        </div>
+        <div class="vip-save-button-container">
+            <button class="btn btn-primary" ng-show="showSaveButton" ng-click="save()">Save</button>
         </div>
     </div>
     <div class="col-md-4 rmd-sidebar-mobile" id="agent-question">

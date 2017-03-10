@@ -36,12 +36,18 @@ namespace MyVipCity.BusinessLogic {
 			where TDto : class, IIdentifiableDto
 			where TModel : class, new() {
 			var model = dto.Id == 0 ? new TModel() : DbContext.Set<TModel>().Find(dto.Id);
-			model = Mapper.Map<TDto, TModel>(dto, model,
+			return ToModel(dto, model);
+		}
+
+		protected TModel ToModel<TModel, TDto>(TDto dto, TModel model)
+			where TDto : class, IIdentifiableDto
+			where TModel : class, new() {
+			var result = Mapper.Map<TDto, TModel>(dto, model,
 				opts => {
 					opts.Items.Add(typeof(DtoToModelContext).Name, new DtoToModelContext());
 					opts.Items.Add(typeof(DbContext).Name, DbContext);
 				});
-			return model;
+			return result;
 		}
 	}
 }

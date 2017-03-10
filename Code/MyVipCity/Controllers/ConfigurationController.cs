@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -34,16 +35,22 @@ namespace MyVipCity.Controllers {
 		[HttpGet]
 		[AllowAnonymous]
 		public ActionResult JsConfig() {
+			var roles = GetRolesFromUser();
 			// set configuration
-			var config = new {
-				Name = User.Identity.GetUserName(),
-				Roles = GetRolesFromUser(),
-				Menu = GetNavigationMenu(),
-				Routes = GetRoutes()
-			};
+			dynamic config = new ExpandoObject();
+
+			config.Name = User.Identity.GetUserName();
+			config.Roles = roles;
+			config.Menu = GetNavigationMenu();
+			config.Routes = GetRoutes();
+
+			if (roles != null && roles.Contains("Promoter")) {
+				var promoterProfiles = PromoterProfileManager.GetPromoterProfiles(UserId);
+				config.PromoterProfileIds = promoterProfiles.Select(pp => pp.Id).ToArray();
+			}
 
 			// set the JSON string
-			ViewBag.ConfigObject = System.Web.Helpers.Json.Encode(config);
+			ViewBag.ConfigObject = Newtonsoft.Json.JsonConvert.SerializeObject(config); // System.Web.Helpers.Json.Encode(config);
 			// set response as javascript file
 			Response.ContentType = "application/javascript";
 			// return the view

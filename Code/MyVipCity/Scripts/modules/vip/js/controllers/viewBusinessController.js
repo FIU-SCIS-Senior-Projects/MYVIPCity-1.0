@@ -29,7 +29,7 @@
 				.then(function (response) {
 					// get the response
 					var business = response.data;
-					// let the user know save was successful, and prompt if want to display the view mode for this club
+					// let the user know save was successful
 					swal({
 						type: 'success',
 						title: 'Success!',

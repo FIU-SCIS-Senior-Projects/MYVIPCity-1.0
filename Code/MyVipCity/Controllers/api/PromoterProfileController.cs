@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
@@ -23,7 +22,6 @@ namespace MyVipCity.Controllers.api {
 			set;
 		}
 		
-
 		[HttpGet]
 		[AllowAnonymous]
 		[Route("{id:int}")]
@@ -31,6 +29,16 @@ namespace MyVipCity.Controllers.api {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
 				var result = PromoterProfileManager.GetProfileById(id);
 				return Ok(result);
+			});
+		}
+
+		[HttpPut]
+		[Authorize(Roles = "Promoter")]
+		[Route("")]
+		public async Task<IHttpActionResult> UpdatePromoterProfile(PromoterProfileDto promoterProfileDto) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var updatedPromoterProfileDto = PromoterProfileManager.Update(promoterProfileDto);
+				return Ok(updatedPromoterProfileDto);
 			});
 		}
 	}

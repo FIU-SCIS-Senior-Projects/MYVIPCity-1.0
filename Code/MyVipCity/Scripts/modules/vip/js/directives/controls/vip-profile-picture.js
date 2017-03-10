@@ -70,7 +70,7 @@
 
 				// set the picture for the cropper
 				var setProfilePicture = function (profilePicture) {
-					cropper.replace('api/Pictures/' + profilePicture.Picture.BinaryDataId);
+					cropper.replace('api/Pictures/' + profilePicture.BinaryDataId);
 				};
 
 				// set the dropzone
@@ -89,7 +89,7 @@
 						// success event handler
 						this.on('success', function (file, response) {
 							scope.$apply(function () {
-								var newValue = { Picture: response[0], CropData: null };
+								var newValue = angular.extend(response[0], { CropData: null });
 								ngModelCtrl.$setViewValue(newValue);
 								setProfilePicture(newValue);
 							});
