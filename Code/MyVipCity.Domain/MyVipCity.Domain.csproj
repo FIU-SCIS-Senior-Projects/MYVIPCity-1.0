@@ -45,10 +45,11 @@
     <Compile Include="Contracts\IIdentifiable.cs" />
     <Compile Include="DayHours.cs" />
     <Compile Include="IndexedPicture.cs" />
+    <Compile Include="Picture.cs" />
     <Compile Include="PromoterInvitation.cs" />
     <Compile Include="PromoterProfile.cs" />
     <Compile Include="WeekHours.cs" />
-    <Compile Include="Picture.cs" />
+    <Compile Include="ProfilePicture.cs" />
     <Compile Include="File.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -313,7 +313,7 @@ div[vip-promoter-name] {
 .vip-promoter-profile {
     div[vip-profile-picture] {
         float: left;
-
+        // change image button
         .vip-profile-picture__change-img-btn {
             width: 100%;
             background-color: @mdc-blue-grey-900;
@@ -322,7 +322,7 @@ div[vip-promoter-name] {
                 background-color: @mdc-blue-500;
             }
         }
-
+        // shown when uploading the profile picture
         .vip-profile-picture__uploading {
             width: 100%;
             background-color: @mdc-blue-grey-900;
@@ -337,34 +337,50 @@ div[vip-promoter-name] {
                 -webkit-animation: rotating 2.5s linear infinite;
             }
         }
-
+        // large read mode picture container
         .vip-profile-picture__read-mode-container {
             width: 200px;
             height: 200px;
             overflow: hidden;
             background: url(../img/noprofilepic.png);
             background-size: cover;
-
+            // hide it on small screens
             @media(max-width: @screen-xs-max) {
                 display: none !important;
             }
+
+            border: 5px solid white;
         }
-
+        // small read mode picture container
         .vip-profile-picture__read-mode-container-xs {
-            width: 135px;
-            height: 135px;
+            width: 140px;
+            height: 140px;
             overflow: hidden;
-            display: none !important;
-
+            border: 5px solid white;
+            // read mode and large screen OR edit mode and large screen
+            @media(min-width: @screen-xs-max) {
+                &.vip-rm-1, &.vip-rm-2 {
+                    display: none !important;
+                }
+            }
+            // small screen
             @media(max-width: @screen-xs-max) {
-                display: block !important;
+                // read mode and small screen
+                &.vip-rm-1 {
+                    display: block !important;
+                }
+                // edit mode and small screen
+                &.vip-rm-2 {
+                    display: none !important;
+                }
+
                 border-radius: 50%;
                 box-shadow: 0 -1px 15px rgba(0,0,0,.09);
                 background: url(../img/noprofilepic.png);
                 background-size: cover;
             }
         }
-
+        // edit mode container
         .vip-profile-picture__edit-mode-container {
             width: 200px;
             height: 200px;
@@ -373,7 +389,19 @@ div[vip-promoter-name] {
             background-size: cover;
         }
     }
+
+    @media (max-width: @screen-xs-max) {
+        .profile__info.vip-rm-2 {
+            padding-top: 225px;
+        }
+
+        .profile__img.vip-rm-2 {
+            margin: -35px 0 0 -100px;
+        }
+    }
 }
+
+
 
 /*
     .profile__img {

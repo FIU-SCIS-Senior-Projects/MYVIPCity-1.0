@@ -47,7 +47,7 @@ namespace MyVipCity.Domain {
 			set;
 		}
 
-		public virtual Picture ProfilePicture
+		public virtual ProfilePicture ProfilePicture
 		{
 			get;
 			set;

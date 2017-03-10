@@ -6,12 +6,11 @@
     <div class="col-md-8">
         <button ng-click="toggleRenderingMode()">Toggle</button>
         <div class="card profile">
-            <div class="profile__img">
-                @*<img src="https://placeholdit.imgix.net/~text?&w=500&h=500" alt="">*@
-                @*<img id="profile-preview-img" alt="">*@
+            <div class="profile__img vip-rm-{{renderingMode}}">
+                <!--Profile Picture-->
                 <div vip-profile-picture ng-model="model.ProfilePicture"></div>
             </div>
-            <div class="profile__info">
+            <div class="profile__info vip-rm-{{renderingMode}}">
                 <!--Name-->
                 <div vip-promoter-name ng-model="model" wrap-with="h2"></div>
                 <!--Review-->

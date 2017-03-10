@@ -47,7 +47,7 @@ namespace MyVipCity.DataTransferObjects {
 			set;
 		}
 
-		public PictureDto ProfilePicture
+		public ProfilePictureDto ProfilePicture
 		{
 			get;
 			set;

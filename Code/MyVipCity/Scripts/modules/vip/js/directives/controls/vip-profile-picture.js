@@ -11,13 +11,13 @@
 			scope: true,
 
 			template:
-					'<div class="vip-rendering-read vip-profile-picture__read-mode-container"></div>' +
-					'<div class="vip-rendering-read vip-profile-picture__read-mode-container-xs"></div>' +
-					'<div class="vip-rendering-edit vip-profile-picture__edit-mode-container">' +
+					'<div class="vip-rendering-read vip-profile-picture__read-mode-container vip-rm-{{renderingMode}}"></div>' +
+					'<div class="vip-rendering-read vip-profile-picture__read-mode-container-xs vip-rm-{{renderingMode}}"></div>' +
+					'<div class="vip-rendering-edit vip-profile-picture__edit-mode-container vip-rm-{{renderingMode}}">' +
 						'<img class="vip-profile-picture__cropper-img">' +
 					'</div>' +
-					'<button ng-show="!uploading" class="vip-rendering-edit btn btn-primary vip-profile-picture__change-img-btn">Change Picture</button>' +
-					'<div ng-show="uploading" class="vip-rendering-edit vip-profile-picture__uploading">' +
+					'<button ng-show="!uploading" class="vip-rendering-edit btn btn-primary vip-profile-picture__change-img-btn vip-rm-{{renderingMode}}">Change Picture</button>' +
+					'<div ng-show="uploading" class="vip-rendering-edit vip-profile-picture__uploading vip-rm-{{renderingMode}}">' +
 						'<span><i class="zmdi zmdi-refresh"></i>Uploading...</span>' +
 					'</div>',
 

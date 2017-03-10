@@ -47,6 +47,7 @@
     <Compile Include="FileDto.cs" />
     <Compile Include="IndexedPictureDto.cs" />
     <Compile Include="PictureDto.cs" />
+    <Compile Include="ProfilePictureDto.cs" />
     <Compile Include="PromoterInvitationDto.cs" />
     <Compile Include="PromoterProfileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
