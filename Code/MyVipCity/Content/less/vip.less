@@ -150,7 +150,7 @@ ul.vip-new-promoter__list {
     }
 
     .vip-new-promoter__delete {
-        font-size: larger;
+        font-size: large;
         cursor: pointer;
         vertical-align: middle;
 
@@ -408,6 +408,25 @@ div[vip-existing-promoters] {
         background-size: cover;
     }
 
+    .vip-existing-promoters__delete {
+        font-size: large;
+        cursor: pointer;
+        position: absolute;
+        left: 100%;
+        margin-top: 10px;
+        margin-left: -23px;
+        z-index: 100;
+
+        &:hover {
+            transition: 0.4s;
+            transform: rotate(90deg);
+            color: @mdc-red-500;
+        }
+        &:hover + a{
+            background-color: @mdc-light-blue-50;
+        }        
+    }
+
     .media-body{
         padding-left: 8px;
     }
@@ -415,5 +434,8 @@ div[vip-existing-promoters] {
     div[vip-promoter-name], .vip-existing-promoter__email{
         padding-top: 5px;
     }
-}
 
+    a.list-group-item:hover {
+        background-color: @mdc-light-blue-50;
+    }
+}

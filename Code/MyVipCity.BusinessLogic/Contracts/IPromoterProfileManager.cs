@@ -11,5 +11,7 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		PromoterProfileDto Update(PromoterProfileDto promoterProfileDto);
 
 		string GetPromoterEmail(int id);
+
+		void Delete(int id);
 	}
 }

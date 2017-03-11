@@ -86,5 +86,13 @@ namespace MyVipCity.BusinessLogic {
 
 			return email.Length == 0 ? null : email[0];
 		}
+
+		public void Delete(int id) {
+			var promoters = DbContext.Set<PromoterProfile>();
+			var promoter = promoters.Find(id);
+			if (promoter != null)
+				promoters.Remove(promoter);
+			DbContext.SaveChanges();
+		}
 	}
 }

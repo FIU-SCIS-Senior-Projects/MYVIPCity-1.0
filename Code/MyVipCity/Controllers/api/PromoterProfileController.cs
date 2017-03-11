@@ -42,6 +42,16 @@ namespace MyVipCity.Controllers.api {
 			});
 		}
 
+		[HttpDelete]
+		[Authorize(Roles = "Admin")]
+		[Route("{id:int}")]
+		public async Task<IHttpActionResult> DeletePromoterProfile(int id) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				PromoterProfileManager.Delete(id);
+				return Ok();
+			});
+		}
+
 		[HttpGet]
 		[Authorize(Roles = "Admin")]
 		[Route("{id:int}/Email")]

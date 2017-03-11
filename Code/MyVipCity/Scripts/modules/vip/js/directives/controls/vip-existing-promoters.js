@@ -1,4 +1,4 @@
-﻿define(['vip/js/vip', 'jquery', 'angular'], function (vip, jQuery, angular) {
+﻿define(['vip/js/vip', 'jquery', 'angular', 'sweet-alert', 'lodash'], function (vip, jQuery, angular, swal, _) {
 	'use strict';
 
 	vip.directive('vipExistingPromoters', ['$http', function ($http) {
@@ -9,16 +9,20 @@
 			scope: true,
 
 			template:
-				'<a ng-repeat="promoter in promoters" class="list-group-item media" href="#/promoter-profile/{{promoter.Id}}">' +
-                    '<div class="pull-left" style="width:70px !important; height: 70px !important; overflow: hidden !important; border-radius:50% !important;">' +
-                        '<img alt="" class="list-group__img img-circle vip-existing-promoters__img" ng-src="api/Pictures/{{promoter.ProfilePicture.BinaryDataId}}" style="{{::getStyle(promoter, $element)}}">' +
-                    '</div>' +
-                    '<div class="media-body list-group__text">' +
-						'<div vip-promoter-name ng-model="promoter" wrap-with="strong" vip-read-only></div>' +
-						'<span class="rmd-rate" vip-rating ng-model="promoter.AverageRating" read-only="true"></span>' +
-						'<small ng-show="renderingMode == 2" class="list-group__text vip-existing-promoter__email">{{promoter.Email}}<small/>' +
-                    '</div>' +
-                '</a>',
+				'<div ng-repeat="promoter in promoters" >' +
+					'<i ng-show="renderingMode == 2" class="zmdi zmdi-close vip-existing-promoters__delete" ng-click="removePromoter($event, promoter)"></i>' +
+
+					'<a class="list-group-item media" href="#/promoter-profile/{{promoter.Id}}">' +
+						'<div class="pull-left" style="width:70px !important; height: 70px !important; overflow: hidden !important; border-radius:50% !important;">' +
+							'<img alt="" class="list-group__img img-circle vip-existing-promoters__img" ng-src="api/Pictures/{{promoter.ProfilePicture.BinaryDataId}}" style="{{::getStyle(promoter, $element)}}">' +
+						'</div>' +
+						'<div class="media-body">' +
+							'<div vip-promoter-name ng-model="promoter" wrap-with="strong" vip-read-only></div>' +
+							'<span class="rmd-rate" vip-rating ng-model="promoter.AverageRating" read-only="true"></span>' +
+							'<small ng-show="renderingMode == 2" class="list-group__text vip-existing-promoter__email">{{promoter.Email}}<small/>' +
+						'</div>' +
+					'</a>' +
+				'</div>',
 
 			link: function (scope, element, attrs) {
 				var listeners = [];
@@ -48,6 +52,28 @@
 					});
 
 					return result;
+				};
+
+				var showErrorPopup = function (title, errorMsg) {
+					swal(title || 'Oops', errorMsg || 'An error has occurred', 'error');
+				};
+
+				scope.removePromoter = function ($event, promoter) {
+					swal({
+						type: 'warning',
+						title: 'Delete Promoter?',
+						text: 'Are you sure you want to delete this promoter profile? This action cannot be rolled back.',
+						confirmButtonText: "Yes, delete it",
+						showCancelButton: true
+					}).then(function () {
+						$http.delete('api/PromoterProfile/' + promoter.Id).then(function () {
+							_.remove(scope.promoters, function(p) {
+								return p.Id === promoter.Id;
+							});
+						}, function () {
+							showErrorPopup();
+						});
+					}, angular.noop);
 				};
 
 				listeners.push(attrs.$observe('vipBusinessId', function (idValue) {
