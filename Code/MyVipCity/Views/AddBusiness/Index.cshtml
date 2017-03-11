@@ -146,6 +146,7 @@
         <div class="vip-save-button-container">
             <button class="btn btn-primary" ng-show="showSaveButton" ng-click="save()">Save</button>
         </div>
+        <div vip-hosts-card class="hidden-md hidden-lg hidden-print"></div>
     </div>
     <div id="inquire" class="col-md-4 rmd-sidebar-mobile">
         <form class="card hidden-print">
@@ -185,34 +186,7 @@
                 <button class="btn btn-link hidden-lg hidden-md" data-rmd-action="block-close" data-rmd-target="#inquire">Cancel</button>
             </div>
         </form>
-        <div class="card hidden-xs hidden-sm hidden-print">
-            <div class="card__header">
-                <h2>VIP Hosts</h2>
-                <small>These VIP hosts will make you have the best time</small>
-            </div>
-            <div class="list-group">
-                <div vip-existing-promoters vip-business-id="{{model.Id}}">
-                </div>
-              
-                <div ng-controller="vip.businessPromotersController">
-                    <!--List pending invitations-->
-                    <div class="vip-promoters-pending" ng-show="pendingInvitations.length && renderingMode == 2">
-                        <h2>Pending invitations</h2>
-                        <ul>
-                            <li ng-repeat="invitation in pendingInvitations">
-                                <span class="vip-promoter-pending__name">{{invitation.Name}}</span>
-                                <span class="vip-promoter-pending__email"><a href="mailto:{{invitation.Email}}">({{invitation.Email}})</a></span>
-                                <i class="zmdi zmdi-email" title="Resend invitation" ng-click="resendInvitation(invitation)"></i>
-                                <i class="zmdi zmdi-delete" title="Delete" ng-click="deleteInvitation(invitation)"></i>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--New invitations directive-->
-                    <div vip-new-promoters ng-model="newPromoterInvitations" ng-show="renderingMode == 2">
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div vip-hosts-card class="hidden-xs hidden-sm hidden-print"></div>
         <div class="card hidden-xs hidden-sm hidden-print">
             <div class="card__header">
                 <h2>You may also like...</h2>

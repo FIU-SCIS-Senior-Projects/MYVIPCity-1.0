@@ -442,6 +442,7 @@
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-control.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-gallery.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-upload.js" />
+    <Content Include="Scripts\modules\vip\js\directives\vip-hosts-card.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-new-promoters.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-week-hours.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-time-picker.js" />
@@ -464,6 +465,7 @@
     <Content Include="Scripts\modules\vip\js\vip.js" />
     <Content Include="Scripts\modules\vip\js\services\vipServerErrorProcessorService.js" />
     <Content Include="Scripts\modules\vip\main.js" />
+    <Content Include="Content\templates\vipHostsCard.html" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />

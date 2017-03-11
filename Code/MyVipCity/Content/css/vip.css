@@ -4035,6 +4035,7 @@ div[vip-address] div[vip-textbox] {
 }
 .vip-save-button-container {
   text-align: center;
+  padding-bottom: 20px;
 }
 .vip-save-button-container button {
   width: 30%;
