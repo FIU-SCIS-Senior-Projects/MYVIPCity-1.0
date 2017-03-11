@@ -12,7 +12,7 @@ namespace MyVipCity.Domain.Mappings.EF {
 			Property(p => p.FirstName).HasMaxLength(100).IsRequired();
 			Property(p => p.LastName).HasMaxLength(100);
 			Property(p => p.NickName).HasMaxLength(100);
-			Property(p => p.About).HasMaxLength(10000);
+			Property(p => p.About).HasMaxLength(100000);
 			Property(p => p.UserId).IsRequired();
 
 			// relationships

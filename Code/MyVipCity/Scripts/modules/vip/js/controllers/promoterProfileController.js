@@ -60,8 +60,8 @@
 			var difference = now.diff(then);
 			var duration = moment.duration(difference);
 			var seconds = duration.asSeconds();
-			// if the promoter profile was created no more than 30 seconds ago, then show a welcome to profile popup
-			if (seconds < 30) {
+			// if the promoter profile was created no more than 5 seconds ago, then show a welcome to profile popup
+			if (seconds < 8) {
 				swal({
 					type: 'success',
 					title: 'Welcome to your new profile for ' + promoter.Business.Name + '!',
