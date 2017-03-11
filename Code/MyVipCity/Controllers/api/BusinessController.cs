@@ -1,7 +1,4 @@
-﻿using System;
-using System.Data.Entity.Migrations.Model;
-using System.Security.Policy;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;

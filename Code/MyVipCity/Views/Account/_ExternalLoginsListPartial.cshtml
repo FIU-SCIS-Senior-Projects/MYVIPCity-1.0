@@ -1,5 +1,6 @@
 ﻿@model MyVipCity.Models.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
+
 @{
     var anchorClassDictionary = new Dictionary<string, string> {
         { "google", "mdc-bg-red-400"},
@@ -10,23 +11,25 @@
     var guid = Guid.NewGuid().ToString("N");
     var externalLoginFormId = "form_" + guid;
     var providerHiddenInputId = "hidden_" + guid;
+    var returnUrlHiddenInputId = "url_" + guid;
     // get the external login providers
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
     // check if there are indeed external login providers configured
-    if (loginProviders.Count() > 0) {
-        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { id = externalLoginFormId })) {
+    if (loginProviders.Any()) {
+        using (Html.BeginForm("ExternalLogin", "Account", FormMethod.Post, new { id = externalLoginFormId })) {
             @Html.AntiForgeryToken()
             <div class="top-nav__auth">
                 <span>or</span>
                 <div>Sign in using</div>
                 @foreach (AuthenticationDescription p in loginProviders.OrderBy(x => x.AuthenticationType)) {
                     if (anchorClassDictionary.ContainsKey(p.AuthenticationType.ToLower())) {
-                        <a href="javascript:document.getElementById('@providerHiddenInputId').value='@p.AuthenticationType';document.getElementById('@externalLoginFormId').submit()" class="@anchorClassDictionary[p.AuthenticationType.ToLower()]">
+                        <a href="javascript:document.getElementById('@providerHiddenInputId').value='@p.AuthenticationType';document.getElementById('@returnUrlHiddenInputId').value=location.href.substring(location.origin.length + 1); document.getElementById('@externalLoginFormId').submit()" class="@anchorClassDictionary[p.AuthenticationType.ToLower()]">
                             <i class="zmdi zmdi-@p.AuthenticationType.ToLower()"></i>
                         </a>
                     }
                 }
                 <input type="hidden" name="provider" id="@providerHiddenInputId" />
+                <input type="hidden" name="returnUrl" id="@returnUrlHiddenInputId" />
             </div>
         }
     }

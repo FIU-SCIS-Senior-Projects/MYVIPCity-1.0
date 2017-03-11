@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -359,7 +360,7 @@ namespace MyVipCity.Controllers {
 			var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
 			switch (result) {
 				case SignInStatus.Success:
-					return RedirectToLocal(returnUrl);
+					return Redirect(new Uri(new Uri(Request.Url.GetLeftPart(UriPartial.Authority)), returnUrl).ToString());
 				case SignInStatus.LockedOut:
 					return View("Lockout");
 				case SignInStatus.RequiresVerification:
