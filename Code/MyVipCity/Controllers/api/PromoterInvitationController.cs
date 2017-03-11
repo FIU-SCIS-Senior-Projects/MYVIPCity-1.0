@@ -30,8 +30,8 @@ namespace MyVipCity.Controllers.api {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
 				// var baseUrl = new Uri(Request.RequestUri, RequestContext.VirtualPathRoot);
 				var baseUrl = new Uri(Request.RequestUri, RequestContext.VirtualPathRoot) + "AcceptPromoterInvitation?friendlyId={0}";
-				PromoterInvitationManager.SendPromoterInvitations(promoterInvitations, baseUrl);
-				return Ok();
+				var result = PromoterInvitationManager.SendPromoterInvitations(promoterInvitations, baseUrl);
+				return Ok(result);
 			});
 		}
 

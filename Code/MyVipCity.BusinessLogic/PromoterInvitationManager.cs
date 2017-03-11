@@ -28,31 +28,65 @@ namespace MyVipCity.BusinessLogic {
 			get; set;
 		}
 
-		public bool SendPromoterInvitations(PromoterInvitationDto[] invitations, string baseUrl) {
-			// dictionary to store the name of the businesses businessFriedndlyId -> businessName
-			Dictionary<string, string> businessesNames = new Dictionary<string, string>();
+		public ResultDto<bool> SendPromoterInvitations(PromoterInvitationDto[] invitations, string baseUrl) {
+			// dictionary to store the businesses businessFriendlyId -> business
+			Dictionary<string, Business> businesses = new Dictionary<string, Business>();
+			// final list of invitations to be sent
+			var invitationsToSend = new List<PromoterInvitationDto>();
+			// list of emails that are either pending and there is a new invitation request OR there is a promoter with that email
+			var existingEmails = new HashSet<string>();
+			// loop invitations
 			foreach (var promoterInvitationDto in invitations) {
-				// check if the club is already in the dictionary
-				if (businessesNames.ContainsKey(promoterInvitationDto.ClubFriendlyId))
-					continue;
-				// since the club is not in the dictionary, look for it in the database
-				var business = DbContext.Set<Business>().FirstOrDefault(b => b.FriendlyId == promoterInvitationDto.ClubFriendlyId);
-				// if the club was not found, the return false and log it
-				if (business == null) {
-					Logger.Warn($"Business with [FriendlyId={0}] not found.", promoterInvitationDto.ClubFriendlyId);
-					return false;
+				// check if this is a new invitation
+				if (promoterInvitationDto.Id == 0) {
+					// check if there is already a pending invitation for this email and business
+					var existingPendingInvitation = DbContext.Set<PromoterInvitation>().FirstOrDefault(pi => pi.ClubFriendlyId == promoterInvitationDto.ClubFriendlyId && pi.Status == PromoterInvitationStatus.Sent && pi.Email == promoterInvitationDto.Email);
+					if (existingPendingInvitation != null) {
+						existingEmails.Add(promoterInvitationDto.Email);
+						// do not send this invitation
+						continue;
+					}
 				}
+
+				// business corresponding to the invitation
+				Business business;
+				// try to get business from the dictionary
+				businesses.TryGetValue(promoterInvitationDto.ClubFriendlyId, out business);
+				// not in the dictionary, then get it from the database
+				if (business == null)
+					business = DbContext.Set<Business>().FirstOrDefault(b => b.FriendlyId == promoterInvitationDto.ClubFriendlyId);
+				// if the club was not found, then return false and log it
+				if (business == null) {
+					var msg = $"Business with [FriendlyId={promoterInvitationDto.ClubFriendlyId}] not found.";
+					Logger.Warn(msg);
+					return new ResultDto<bool> {
+						Error = true,
+						Result = false,
+						Messages = new[] { msg }
+					};
+				}
+
+				// there must not exist a promoter associated to the business with the same email of the invitation
+				var promoterWithSameEmail = DbContext.Set<PromoterProfile>().FirstOrDefault(p => p.Business.Id == business.Id && p.Email == promoterInvitationDto.Email);
+				if (promoterWithSameEmail != null) {
+					existingEmails.Add(promoterInvitationDto.Email);
+					// do not send this invitation
+					continue;
+				}
+
 				// add the club to the dictionary
-				businessesNames.Add(business.FriendlyId, business.Name);
+				businesses[business.FriendlyId] = business;
+				// this is definitely an invitation that must be sent
+				invitationsToSend.Add(promoterInvitationDto);
 			}
 			// loop each invitation and send the email
-			Parallel.ForEach(invitations, invitation => {
-				var businessName = businessesNames[invitation.ClubFriendlyId];
+			Parallel.ForEach(invitationsToSend, invitation => {
+				var business = businesses[invitation.ClubFriendlyId];
 				var emailModel = new PromoterInvitationEmailModel {
 					To = invitation.Email,
-					Subject = "Invitation to join " + businessName,
+					Subject = "Invitation to join " + business.Name,
 					From = "hello@myvipcity.com",
-					ClubName = businessName,
+					ClubName = business.Name,
 					Name = invitation.Name,
 					AcceptInvitationUrl = string.Format(baseUrl, invitation.ClubFriendlyId)
 				};
@@ -61,7 +95,7 @@ namespace MyVipCity.BusinessLogic {
 				invitation.Status = PromoterInvitationStatusDto.Sent;
 			});
 			// convert from dto to model
-			var modelInvitations = Mapper.Map<PromoterInvitationDto[], PromoterInvitation[]>(invitations);
+			var modelInvitations = Mapper.Map<PromoterInvitationDto[], PromoterInvitation[]>(invitationsToSend.ToArray());
 			// add the new invitations
 			DbContext.Set<PromoterInvitation>().AddRange(modelInvitations.Where(i => i.Id == 0));
 			// find the existing invitations
@@ -72,7 +106,14 @@ namespace MyVipCity.BusinessLogic {
 			}
 			// save the changes
 			DbContext.SaveChanges();
-			return true;
+			var result =  new ResultDto<bool> {
+				Error = false,
+				Result = true
+			};
+			if (existingEmails.Any()) {
+				result.Messages = new[] { "Invitation was not sent to the following emails: " + string.Join(", ", existingEmails) + "\nEither a pending invitation or a promoter exists for those emails." };
+			}
+			return result;
 		}
 
 		public PromoterInvitationDto[] GetPendingPromoterInvitations(string businessFriendlyId) {
@@ -125,6 +166,7 @@ namespace MyVipCity.BusinessLogic {
 			// create the promoter profile
 			var profile = new PromoterProfile {
 				UserId = userId,
+				Email = userEmail,
 				Business = business,
 				FirstName = firstName,
 				LastName = lastName,

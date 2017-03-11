@@ -17,6 +17,12 @@ namespace MyVipCity.Domain {
 			set;
 		}
 
+		public string Email
+		{
+			get;
+			set;
+		}
+
 		public virtual Business Business
 		{
 			get;

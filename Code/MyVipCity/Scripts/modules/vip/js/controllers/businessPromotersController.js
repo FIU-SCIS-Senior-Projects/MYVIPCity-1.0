@@ -31,9 +31,18 @@
 		};
 
 		var sendInvitationToPromoters = function (invitations, successMessage) {
-			return $http.post('api/PromoterInvitation/SendInvitation', invitations).then(function () {
+			return $http.post('api/PromoterInvitation/SendInvitation', invitations).then(function (response) {
 				$scope.newPromoterInvitations = [];
-				swal('Success', successMessage || 'Invitation sent successfully', 'success');
+				var msg = successMessage || 'Invitation sent successfully';
+				var result = response.data;
+				if (result.Error) {
+					showErrorPopup('Oops', 'An error has occurred sending the invitations');
+				}
+				else if (result.Messages) {
+					var details = result.Messages.join('\n');
+					msg += '\n\nDetails:\n' + details;
+				}
+				swal('Success', msg, 'success');
 			}, function () {
 				showErrorPopup('Oops', 'An error has occurred sending the invitations');
 			});

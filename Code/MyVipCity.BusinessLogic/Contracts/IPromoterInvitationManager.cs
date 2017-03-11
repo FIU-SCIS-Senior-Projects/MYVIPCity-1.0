@@ -4,7 +4,7 @@ namespace MyVipCity.BusinessLogic.Contracts {
 
 	public interface IPromoterInvitationManager {
 		
-		bool SendPromoterInvitations(PromoterInvitationDto[] invitations, string baseUrl);
+		ResultDto<bool> SendPromoterInvitations(PromoterInvitationDto[] invitations, string baseUrl);
 
 		PromoterInvitationDto[] GetPendingPromoterInvitations(string businessFriendlyId);
 
