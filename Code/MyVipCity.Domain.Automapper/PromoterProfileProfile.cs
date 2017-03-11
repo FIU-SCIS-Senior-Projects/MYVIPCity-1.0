@@ -18,6 +18,7 @@ namespace MyVipCity.Domain.Automapper {
 
 		private void DtoToModel() {
 			CreateMap<PromoterProfileDto, PromoterProfile>()
+				.ForMember(p => p.CreatedOn, opts => opts.Ignore())
 				.ForMember(p => p.Business, opts => opts.ResolveUsing(new ReferenceValueResolver<PromoterProfileDto, PromoterProfile, BusinessDto, Business>(x => x.Business)))
 				.ForMember(p => p.ProfilePicture, opts => opts.ResolveUsing(new ReferenceValueResolver<PromoterProfileDto, PromoterProfile, ProfilePictureDto, ProfilePicture>(x => x.ProfilePicture)));
 		}

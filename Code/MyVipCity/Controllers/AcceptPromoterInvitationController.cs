@@ -70,7 +70,8 @@ namespace MyVipCity.Controllers {
 			var user = ApplicationUserManager.FindById(UserId);
 			var identity = ApplicationUserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
 			authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
-
+			
+			
 			return Redirect($"#/promoter-profile/{profileDto.Id}");
 		}
 	}

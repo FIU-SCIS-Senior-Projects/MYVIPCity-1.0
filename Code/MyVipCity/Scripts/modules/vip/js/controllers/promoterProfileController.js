@@ -1,4 +1,4 @@
-﻿define(['vip/js/vip', 'sweet-alert'], function (vip, swal) {
+﻿define(['vip/js/vip', 'sweet-alert', 'moment'], function (vip, swal, moment) {
 	'use strict';
 
 	vip.controller('vip.promoterProfileController', ['$scope', '$routeParams', '$http', '$location', 'vipConfig', '$route', function ($scope, $routeParams, $http, $location, vipConfig, $route) {
@@ -51,6 +51,26 @@
 			});
 		};
 
+		// assumes that this function is invoked only if the current user is the owner of this profile
+		var showWelcomeToProfilePopup = function (promoter) {
+			// get the date when the promoter profile was created
+			var createdOn = promoter.CreatedOn;
+			var then = moment(createdOn);
+			var now = moment();
+			var difference = now.diff(then);
+			var duration = moment.duration(difference);
+			var seconds = duration.asSeconds();
+			// if the promoter profile was created no more than 30 seconds ago, then show a welcome to profile popup
+			if (seconds < 30) {
+				swal({
+					type: 'success',
+					title: 'Welcome to your new profile for ' + promoter.Business.Name + '!',
+					html: '<br/><p>Please add an awesome profile picture and some information about yourself. <i>That is what user will see</i>.</p>' +
+						'<p>You can also start posting your activity under the <strong>POST</strong> section.</p>',
+				});
+			}
+		};
+
 		// make request to get the profile info
 		$http.get('api/PromoterProfile/' + promoterProfileId).then(function (response) {
 			// if no response data then redirect to home
@@ -63,6 +83,7 @@
 				// check if there is a list of the ids of all the profiles owned by the current user
 				if (vipConfig.PromoterProfileIds && vipConfig.PromoterProfileIds.indexOf($scope.model.Id) > -1) {
 					canEditPromoterProfile();
+					showWelcomeToProfilePopup($scope.model);
 				}
 				// TODO: fix retrieval of average rating
 				$scope.model.AverageRating = 5;
