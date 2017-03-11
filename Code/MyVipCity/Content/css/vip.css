@@ -4242,7 +4242,7 @@ div[vip-promoter-name] .vip-promoter-name__name-part.vip-promoter-name__nick-nam
     margin: -35px 0 0 -105px;
   }
 }
-div[vip-existing-promoters] .vip-existing-promoters__img {
+div[vip-existing-promoters] .vip-existing-promoters__img-container {
   background: url(../img/noprofilepic.png);
   background-size: cover;
 }

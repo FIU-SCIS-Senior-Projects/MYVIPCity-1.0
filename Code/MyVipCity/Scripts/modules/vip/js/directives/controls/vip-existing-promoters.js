@@ -13,7 +13,7 @@
 					'<i ng-show="renderingMode == 2" class="zmdi zmdi-close vip-existing-promoters__delete" ng-click="removePromoter($event, promoter)"></i>' +
 
 					'<a class="list-group-item media" href="#/promoter-profile/{{promoter.Id}}">' +
-						'<div class="pull-left" style="width:70px !important; height: 70px !important; overflow: hidden !important; border-radius:50% !important;">' +
+						'<div class="vip-existing-promoters__img-container pull-left" style="width:70px !important; height: 70px !important; overflow: hidden !important; border-radius:50% !important;">' +
 							'<img alt="" class="list-group__img img-circle vip-existing-promoters__img" ng-src="api/Pictures/{{promoter.ProfilePicture.BinaryDataId}}" style="{{::getStyle(promoter, $element)}}">' +
 						'</div>' +
 						'<div class="media-body">' +
