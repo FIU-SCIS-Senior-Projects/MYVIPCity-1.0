@@ -39,8 +39,11 @@ namespace MyVipCity.Controllers {
 			// set configuration
 			dynamic config = new ExpandoObject();
 
-			config.Name = User.Identity.GetUserName();
-			config.Roles = roles;
+			config.IsAuthenticated = Request.IsAuthenticated;
+			if (config.IsAuthenticated) {
+				config.Name = User.Identity.GetUserName();
+				config.Roles = roles;
+			}
 			config.Menu = GetNavigationMenu();
 			config.Routes = GetRoutes();
 

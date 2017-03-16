@@ -4138,6 +4138,17 @@ ul.vip-new-promoter__list form .vip-new-promoter__field-container {
 .vip-promoter-profile .vip-wysiwyg-container {
   margin-top: -20px;
 }
+.vip-promoter-profile .vip-promoter-reviews .vip-promoter-reviews__add-review-container,
+.vip-promoter-profile .vip-promoter-reviews .vip-promoter-reviews__values {
+  padding-bottom: 20px;
+}
+.vip-promoter-profile .vip-promoter-reviews .vip-promoter-reviews__add-review-btn {
+  color: white;
+  background-color: #FF9800;
+}
+.vip-promoter-profile .vip-promoter-reviews .vip-promoter-reviews__add-review-actions .btn {
+  margin-right: 5px;
+}
 div[vip-promoter-name] {
   margin-bottom: 3px;
 }

@@ -137,6 +137,7 @@ div[vip-address] {
 .vip-save-button-container {
     text-align: center;
     padding-bottom: 20px;
+
     button {
         width: 30%;
     }
@@ -276,6 +277,23 @@ ul.vip-new-promoter__list {
 
     .vip-wysiwyg-container {
         margin-top: -20px;
+    }
+
+    .vip-promoter-reviews {
+        .vip-promoter-reviews__add-review-container, .vip-promoter-reviews__values {
+            padding-bottom: 20px;
+        }
+
+        .vip-promoter-reviews__add-review-btn {
+            color: white;
+            background-color: @mdc-orange-500;
+        }
+      
+        .vip-promoter-reviews__add-review-actions {           
+            .btn {
+                margin-right: 5px;
+            }
+        }
     }
 }
 
@@ -422,16 +440,17 @@ div[vip-existing-promoters] {
             transform: rotate(90deg);
             color: @mdc-red-500;
         }
-        &:hover + a{
+
+        &:hover + a {
             background-color: @mdc-light-blue-50;
-        }        
+        }
     }
 
-    .media-body{
+    .media-body {
         padding-left: 8px;
     }
 
-    div[vip-promoter-name], .vip-existing-promoter__email{
+    div[vip-promoter-name], .vip-existing-promoter__email {
         padding-top: 5px;
     }
 

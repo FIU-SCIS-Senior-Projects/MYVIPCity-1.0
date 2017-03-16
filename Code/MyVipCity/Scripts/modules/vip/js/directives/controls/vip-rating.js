@@ -14,9 +14,10 @@
 				var listeners = [];
 
 				jQuery(element).rateYo({
-					starWidth: '18px',
+					starWidth: attrs.starWidth || '18px',
 					ratedFill: '#fcd461',
 					normalFill: '#eee',
+					halfStar: attrs.halfStar === 'true',
 					readOnly: attrs.readOnly === 'true',
 					onSet: function (rating) {
 						$timeout(function () {

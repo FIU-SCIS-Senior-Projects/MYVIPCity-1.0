@@ -36,7 +36,7 @@
                     <ul>
                         <li class="active"><a data-toggle="tab" href="#promoter-posts">Posts</a></li>
                         <li><a data-toggle="tab" href="#promoter-about">About</a></li>
-                        <li><a data-toggle="tab" href="#promoter-reviews">Reviews</a></li>
+                        <li><a data-toggle="tab" href="#promoter-reviews" ng-on="{'show.bs.tab': reviewsTabShow}">Reviews</a></li>
                     </ul>
                 </div>
             </div>
@@ -49,8 +49,33 @@
                     <div vip-wysiwyg ng-model="model.About" placeholder="Write something about yourself here..."></div>
                 </div>
 
-                <div id="promoter-reviews" class="tab-pane">
-                    Reviews
+                <div id="promoter-reviews" class="tab-pane vip-promoter-reviews">
+                    <div ng-if="!canEditPromoterProfile" class="vip-promoter-reviews__add-review-container">
+                        <div ng-show="addingReview" class="vip-promoter-reviews__values">
+                            <span class="rmd-rate" vip-rating ng-model="newReview.Rating" star-width="45px" half-star="true"></span>
+                            <div class="form-group form-group--float">
+                                <div vip-textarea ng-model="newReview.Text" ng-show="newReview.Rating !== undefined" edit-mode-class="form-control textarea-autoheight" vip-edit-only maxlength="3000" placeholder="Write your review here..."></div>
+                            </div>
+                        </div>
+                        <div class="vip-promoter-reviews__add-review-actions">
+                            <button class="btn vip-promoter-reviews__add-review-btn" ng-click="addReview()" ng-show="addingReview !== true">Add review</button>
+                            <button class="btn btn-primary vip-promoter-reviews__submit-review-btn" ng-click="submitReview()" ng-show="addingReview" ng-disabled="!newReview.Rating">Submit review</button>
+                            <button class="btn btn-secondary vip-promoter-reviews__cancel-review-btn" ng-click="cancelReview()" ng-show="addingReview">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="agent-reviews__item">
+                        <div class="text-strong">By Cammy Tubman on 15th June 2016</div>
+                        <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
+                        <p>Cras mattis consectetur purus sit amet fermentum Vestibulum id ligula porta felis euismod semper Cras mattis consectetur purus sit amet fermentum.</p>
+                    </div>
+                    <div class="agent-reviews__item">
+                        <div class="text-strong">By Jayson Leffingwell on 2nd May 2016</div>
+                        <div class="rmd-rate" data-rate-value="4" data-rate-readonly="true"></div>
+                        <p>Maecenas faucibus mollis interdum. Nullam quis risus eget urna mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus.</p>
+                        <p>Donec id elit non mi porta gravida at eget metus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p>
+                    </div>
                 </div>
             </div>
         </div>

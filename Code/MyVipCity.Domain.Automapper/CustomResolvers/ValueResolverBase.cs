@@ -28,18 +28,11 @@ namespace MyVipCity.Domain.Automapper.CustomResolvers {
 			where TModel : class, IIdentifiable {
 			TModel model;
 			// check if the reference property is new
-			if (dto.Id == 0) {
-				// create a new instance of the model property
-				model = Activator.CreateInstance<TModel>();
-			}
-			else {
-				// the reference property is not null, so it must be retrieved 
-				model = existingModelFinder(dto);
-			}
+			model = dto.Id == 0 ? Activator.CreateInstance<TModel>() : existingModelFinder(dto);
 			// store the mapped instance in the context
 			dtoToModelContext.SetMappedObjectInContext(dto, model);
 			// map from the dto property to the model property
-			var result = mapper.Map<TDto, TModel>(dto, model,
+			var result = mapper.Map(dto, model,
 				opts => {
 					opts.Items.Add(typeof(DtoToModelContext).Name, dtoToModelContext);
 					opts.Items.Add(typeof(DbContext).Name, dbContext);

@@ -27,6 +27,7 @@
 	'vip/js/directives/controls/vip-promoter-name',
 	'vip/js/directives/controls/vip-rating',
 	'vip/js/directives/controls/vip-tags',
+	'vip/js/directives/controls/vip-textarea',
 	'vip/js/directives/controls/vip-textbox',
 	'vip/js/directives/controls/vip-time-picker',
 	'vip/js/directives/controls/vip-week-hours',

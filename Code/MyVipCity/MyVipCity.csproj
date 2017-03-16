@@ -442,6 +442,7 @@
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-control.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-gallery.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-upload.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-textarea.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-hosts-card.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-new-promoters.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-week-hours.js" />
@@ -5079,6 +5080,10 @@
     <Content Include="Scripts\vendors\bower_components\Waves\docs\_pages\source.html" />
     <Content Include="Scripts\vendors\bower_components\Waves\Gruntfile.js" />
     <Content Include="Scripts\vendors\bower_components\Waves\src\js\waves.js" />
+    <Content Include="Scripts\vendors\ng-on\karma.conf.js" />
+    <Content Include="Scripts\vendors\ng-on\src\ng-on.js" />
+    <Content Include="Scripts\vendors\ng-on\test\bind.polyfill.js" />
+    <Content Include="Scripts\vendors\ng-on\test\ng-on.test.js" />
     <Content Include="Scripts\vendors\TODO.txt" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -5756,6 +5761,9 @@
     <Content Include="Scripts\vendors\bower_components\jquery\README.md" />
     <Content Include="Scripts\vendors\bower_components\jquery\src\.jshintrc" />
     <Content Include="Views\PromoterProfile\Index.cshtml" />
+    <Content Include="Scripts\vendors\ng-on\.npmignore" />
+    <Content Include="Scripts\vendors\ng-on\package.json" />
+    <Content Include="Scripts\vendors\ng-on\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

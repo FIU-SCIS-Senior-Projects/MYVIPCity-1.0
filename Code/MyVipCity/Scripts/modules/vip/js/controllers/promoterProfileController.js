@@ -8,6 +8,10 @@
 		var promoterProfileId = $routeParams.promoterProfileId;
 		// set empty model
 		$scope.model = {};
+		// set reviews
+		$scope.reviews = null;
+		// set new review
+		$scope.newReview = {};
 
 		$scope.editClick = function () {
 			$scope.renderingMode = vip.renderingModes.edit;
@@ -27,6 +31,26 @@
 			$scope.canEditPromoterProfile = true;
 			$scope.showReadModeButton = false;
 			$scope.showEditButton = true;
+		};
+
+		$scope.reviewsTabShow = function () {
+		};
+
+		// handles add review click
+		$scope.addReview = function () {
+			$scope.addingReview = true;
+			$scope.newReview = {};
+
+		};
+
+		// handles cancel review click
+		$scope.cancelReview = function () {
+			$scope.addingReview = false;
+		};
+
+		// handles submit review click
+		$scope.submitReview = function () {
+			$scope.addingReview = false;
 		};
 
 		$scope.save = function () {

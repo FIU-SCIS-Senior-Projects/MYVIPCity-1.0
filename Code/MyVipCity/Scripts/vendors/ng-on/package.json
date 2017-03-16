@@ -1,0 +1,65 @@
+{
+  "name": "ng-on",
+  "version": "0.0.5",
+  "description": "Directive for Angular 1.x to easily bind custom (or not) events",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/argshook/ng-on.git"
+  },
+  "keywords": [
+    "angular",
+    "ngOn",
+    "directive",
+    "event",
+    "bind",
+    "custom"
+  ],
+  "author": {
+    "name": "Arijus",
+    "url": "argshook@gmail.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "^1.5.8",
+    "angular-mocks": "^1.5.8",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.2",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "ng-directive-compiler-helper": "^1.0.0"
+  },
+  "gitHead": "3cd723df3dba46a06150072ecc8fd698627e37e1",
+  "bugs": {
+    "url": "https://github.com/argshook/ng-on/issues"
+  },
+  "homepage": "https://github.com/argshook/ng-on#readme",
+  "_id": "ng-on@0.0.5",
+  "_shasum": "b8a8892861ba19f0b02c1e848a629a2078ca1c4d",
+  "_from": "ng-on@latest",
+  "_npmVersion": "3.10.5",
+  "_nodeVersion": "6.2.1",
+  "_npmUser": {
+    "name": "argshook",
+    "email": "argshook@gmail.com"
+  },
+  "dist": {
+    "shasum": "b8a8892861ba19f0b02c1e848a629a2078ca1c4d",
+    "tarball": "https://registry.npmjs.org/ng-on/-/ng-on-0.0.5.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "argshook",
+      "email": "argshook@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/ng-on-0.0.5.tgz_1471539738574_0.8111038736533374"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ng-on/-/ng-on-0.0.5.tgz"
+}

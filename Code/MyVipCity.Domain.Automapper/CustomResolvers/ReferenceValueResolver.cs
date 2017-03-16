@@ -14,7 +14,7 @@ namespace MyVipCity.Domain.Automapper.CustomResolvers {
 		where TDto : class
 		where TModel : class {
 
-		private Func<TDto, TDtoProperty> getDtoProperty;
+		private readonly Func<TDto, TDtoProperty> getDtoProperty;
 
 		public ReferenceValueResolver(Func<TDto, TDtoProperty> getDtoProperty) {
 			this.getDtoProperty = getDtoProperty;
@@ -37,8 +37,6 @@ namespace MyVipCity.Domain.Automapper.CustomResolvers {
 			// if the dto property is null then return null as well
 			if (dtoProperty == null)
 				return null;
-			// to store the model property object
-			TModelProperty modelProperty = null;
 			// see if the property has been mapped before
 			var mappedInstance = dtoToModelContext.TryGetMappedInstance<TDtoProperty, TModelProperty>(dtoProperty);
 			if (mappedInstance != null)
