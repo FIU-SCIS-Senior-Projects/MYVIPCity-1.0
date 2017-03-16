@@ -43,11 +43,13 @@
     <Compile Include="Address.cs" />
     <Compile Include="Business.cs" />
     <Compile Include="Contracts\IIdentifiable.cs" />
+    <Compile Include="Contracts\IReviewable.cs" />
     <Compile Include="DayHours.cs" />
     <Compile Include="IndexedPicture.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="PromoterInvitation.cs" />
     <Compile Include="PromoterProfile.cs" />
+    <Compile Include="Review.cs" />
     <Compile Include="WeekHours.cs" />
     <Compile Include="ProfilePicture.cs" />
     <Compile Include="File.cs" />

@@ -51,6 +51,7 @@
     <Compile Include="PromoterInvitationDto.cs" />
     <Compile Include="PromoterProfileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReviewDto.cs" />
     <Compile Include="UploadedFileDto.cs" />
     <Compile Include="WeekHoursDto.cs" />
   </ItemGroup>

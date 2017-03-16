@@ -90,11 +90,7 @@
 						// make a request to bring all the promoters associated to this business
 						$http.get('/api/Business/' + id + '/Promoters').then(function (response) {
 							scope.promoters = response.data;
-							// TODO: Get actual average rating
-							angular.forEach(scope.promoters, function (promoter) {
-								promoter.AverageRating = 5;
-							});
-
+							
 							// watch for changes in rendering mode
 							var unregister = scope.$watch('renderingMode', function (value) {
 								// check edit

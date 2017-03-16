@@ -85,8 +85,6 @@
 					canEditPromoterProfile();
 					showWelcomeToProfilePopup($scope.model);
 				}
-				// TODO: fix retrieval of average rating
-				$scope.model.AverageRating = 5;
 			}
 		});
 

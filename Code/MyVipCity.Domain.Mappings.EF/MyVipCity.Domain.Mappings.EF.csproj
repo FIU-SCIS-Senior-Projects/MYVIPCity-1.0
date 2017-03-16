@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReviewConfiguration.cs" />
     <Compile Include="DayHoursConfiguration.cs" />
     <Compile Include="PromoterProfileConfiguration.cs" />
     <Compile Include="PromoterInvitationConfiguration.cs" />

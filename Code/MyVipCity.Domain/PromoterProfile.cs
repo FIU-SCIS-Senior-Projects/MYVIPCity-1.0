@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using MyVipCity.Domain.Contracts;
 
 namespace MyVipCity.Domain {
 
-	public class PromoterProfile: IIdentifiable {
+	public class PromoterProfile: IIdentifiable, IReviewable {
 
 		public int Id
 		{
@@ -60,6 +61,12 @@ namespace MyVipCity.Domain {
 		}
 
 		public DateTimeOffset CreatedOn
+		{
+			get;
+			set;
+		}
+
+		public virtual ICollection<Review> Reviews
 		{
 			get;
 			set;
