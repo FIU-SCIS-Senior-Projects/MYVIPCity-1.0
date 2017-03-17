@@ -8,6 +8,8 @@
 
 		public const string PromoterInvitationTemplateId = "ee301a81-055a-4263-9ad5-37eb69b3cfb7";
 
+		public const string PromoterReviewNotificationTemplateId = "565e54d2-3883-4fa9-9aba-562fc1c60c12";
+
 		public const string TestTemplateId = "865015c4-f2ae-4e17-84fe-20f41e06045f";
 
 	}

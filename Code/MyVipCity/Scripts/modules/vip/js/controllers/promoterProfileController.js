@@ -101,8 +101,9 @@
 				}
 				else {
 					// review was added
-					swal('Thank you!', "You review has been added successfully.", 'success');
+					swal('Thank you!', "Your review has been added successfully.", 'success');
 					$scope.addingReview = false;
+					$scope.model.ReviewsCount++;
 					refreshReviews();
 				}
 			}, function (error) {

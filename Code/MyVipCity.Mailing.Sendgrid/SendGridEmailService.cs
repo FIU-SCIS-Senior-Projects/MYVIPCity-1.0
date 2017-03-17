@@ -67,6 +67,20 @@ namespace MyVipCity.Mailing.Sendgrid {
 			});
 		}
 
+		public async Task SendPromoterReviewNotificationEmailAsync(PromoterReviewNotificationEmailModel model) {
+			await Task.Run(async () => {
+				Content content = new Content("text/html", model.Body ?? "!");
+				Email to = new Email(model.To);
+				Email from = new Email(model.From);
+				Mail mail = new Mail(from, model.Subject, to, content) { TemplateId = SendGridTemplateIds.PromoterReviewNotificationTemplateId };
+				// add substitutions
+				mail.Personalization[0].AddSubstitution("-businessName-", model.BusinessName);
+				mail.Personalization[0].AddSubstitution("-rating-", model.Rating);
+				mail.Personalization[0].AddSubstitution("-comment-", model.Comment);
+				await SendEmail(mail);
+			});
+		}
+
 		public async Task SendTestEmailAsync(TestEmailModel model) {
 			await Task.Run(async () => {
 				Content content = new Content("text/html", "!");

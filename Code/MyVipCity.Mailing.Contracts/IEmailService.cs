@@ -17,6 +17,10 @@ namespace MyVipCity.Mailing.Contracts {
 		// Sends an email to invite a promoter to join a club.
 		Task SendPromoterInvitationEmailAsync(PromoterInvitationEmailModel model);
 
+		// Sends an email to notify a new review has been submitted.
+		Task SendPromoterReviewNotificationEmailAsync(PromoterReviewNotificationEmailModel model);
+
+
 		// This sends a test email
 		Task SendTestEmailAsync(TestEmailModel model);
 	}

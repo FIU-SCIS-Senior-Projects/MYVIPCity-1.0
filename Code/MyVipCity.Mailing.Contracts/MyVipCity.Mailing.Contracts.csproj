@@ -44,6 +44,7 @@
     <Compile Include="EmailModels\PromoterInvitationEmailModel.cs" />
     <Compile Include="EmailModels\ForgotPasswordEmailModel.cs" />
     <Compile Include="EmailModels\ConfirmationEmailModel.cs" />
+    <Compile Include="EmailModels\PromoterReviewNotificationEmailModel.cs" />
     <Compile Include="EmailModels\TestEmailModel.cs" />
     <Compile Include="IEmailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

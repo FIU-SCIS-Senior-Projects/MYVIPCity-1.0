@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.Domain;
+using MyVipCity.Mailing.Contracts;
+using MyVipCity.Mailing.Contracts.EmailModels;
 using Ninject;
 using Ninject.Extensions.Logging;
 
@@ -19,6 +21,13 @@ namespace MyVipCity.BusinessLogic {
 
 		[Inject]
 		public ILogger Logger
+		{
+			get;
+			set;
+		}
+
+		[Inject]
+		public IEmailService EmailService
 		{
 			get;
 			set;
@@ -142,6 +151,16 @@ namespace MyVipCity.BusinessLogic {
 			var reviewModel = Mapper.Map<Review>(review);
 			profile.Reviews.Add(reviewModel);
 			DbContext.SaveChanges();
+
+			// notify the promoter by email about the review
+			EmailService.SendPromoterReviewNotificationEmailAsync(new PromoterReviewNotificationEmailModel {
+				To = profile.Email,
+				Subject = "New user review for profile " + profile.Business.Name,
+				From = "hello@myvipcity.com",
+				BusinessName = profile.Business.Name,
+				Rating = review.Rating.ToString("0.#"),
+				Comment = review.Text ?? ""
+			});
 
 			return new ResultDto<bool>(true);
 		}
