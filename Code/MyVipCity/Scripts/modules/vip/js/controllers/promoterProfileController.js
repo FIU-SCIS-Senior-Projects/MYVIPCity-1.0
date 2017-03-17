@@ -1,4 +1,4 @@
-﻿define(['vip/js/vip', 'sweet-alert', 'moment'], function (vip, swal, moment) {
+﻿define(['vip/js/vip', 'sweet-alert', 'moment', 'swearjar'], function (vip, swal, moment, swearjar) {
 	'use strict';
 
 	vip.controller('vip.promoterProfileController', ['$scope', '$routeParams', '$http', '$location', 'vipConfig', '$route', function ($scope, $routeParams, $http, $location, vipConfig, $route) {
@@ -9,9 +9,10 @@
 		// set empty model
 		$scope.model = {};
 		// set reviews
-		$scope.reviews = null;
+		$scope.reviews = [];
 		// set new review
 		$scope.newReview = {};
+		var top = 5;
 
 		$scope.editClick = function () {
 			$scope.renderingMode = vip.renderingModes.edit;
@@ -38,9 +39,15 @@
 
 		// handles add review click
 		$scope.addReview = function () {
+			// make sure the user is authenticated
+			if (!vipConfig.IsAuthenticated) {
+				swal('Log in first', 'You need to login to leave a review. You can register if you do not have an account yet.', 'info');
+				return;
+			}
+			// flag to indicate a review is being added
 			$scope.addingReview = true;
+			// reset the review
 			$scope.newReview = {};
-
 		};
 
 		// handles cancel review click
@@ -48,9 +55,59 @@
 			$scope.addingReview = false;
 		};
 
+		$scope.loadMoreReviews = function () {
+			var url = ('api/PromoterProfile/Reviews/' + promoterProfileId + '/' + top) + ($scope.reviews === null || !$scope.reviews.length ? '' : '/' + $scope.reviews[$scope.reviews.length - 1].Id);
+			$http.get(url).then(function(response) {
+				if (response.data) {
+					$scope.reviews = $scope.reviews.concat(response.data);
+				}
+			});
+		}
+
+		var refreshReviews = function () {
+			// set reviews
+			$scope.reviews = [];
+			$scope.loadMoreReviews();
+		}
+
+		refreshReviews();
+
 		// handles submit review click
 		$scope.submitReview = function () {
-			$scope.addingReview = false;
+			// check if there is a review text
+			if ($scope.newReview.Text) {
+				// censor the text
+				var cleanedText = swearjar.censor($scope.newReview.Text);
+				// check if the text had indeed swear words
+				if (cleanedText !== $scope.newReview.Text) {
+					swal({
+						type: 'error',
+						title: 'Hey, watch your writing!',
+						html: '<p>We have identified some inappropiate words in your review, please change the words masked with *.</p><i>' + cleanedText + '</i>'
+					});
+					return;
+				}
+			}
+
+			// submit the review
+			$http.post('api/PromoterProfile/Review/' + promoterProfileId, $scope.newReview).then(function (response) {
+				// get the result of adding the review
+				var result = response.data;
+				// check if the review was not added
+				if (!result.Result) {
+					// show reason
+					var msg = (result.Messages || []).join("\n");
+					swal('Review was not added', msg, 'error');
+				}
+				else {
+					// review was added
+					swal('Thank you!', "You review has been added successfully.", 'success');
+					$scope.addingReview = false;
+					refreshReviews();
+				}
+			}, function (error) {
+				swal('Oops!', 'Something went wrong adding the review!', 'error');
+			});
 		};
 
 		$scope.save = function () {

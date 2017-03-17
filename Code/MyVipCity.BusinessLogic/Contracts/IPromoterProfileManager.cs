@@ -13,5 +13,11 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		string GetPromoterEmail(int id);
 
 		void Delete(int id);
+
+		ResultDto<bool> AddReview(int id, ReviewDto review);
+
+		ReviewDto[] GetReviews(int id, int top);
+
+		ReviewDto[] GetReviews(int id, int top, int afterReviewId);
 	}
 }

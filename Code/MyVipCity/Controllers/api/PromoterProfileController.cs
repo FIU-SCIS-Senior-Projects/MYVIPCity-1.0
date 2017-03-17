@@ -21,7 +21,7 @@ namespace MyVipCity.Controllers.api {
 			get;
 			set;
 		}
-		
+
 		[HttpGet]
 		[AllowAnonymous]
 		[Route("{id:int}")]
@@ -59,6 +59,37 @@ namespace MyVipCity.Controllers.api {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
 				var email = PromoterProfileManager.GetPromoterEmail(id);
 				return Ok(email);
+			});
+		}
+
+		[HttpPost]
+		[Authorize]
+		[Route("Review/{id:int}")]
+		public async Task<IHttpActionResult> AddReview(int id, ReviewDto review) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				review.ReviewerEmail = User.Identity.Name;
+				var result = PromoterProfileManager.AddReview(id, review);
+				return Ok(result);
+			});
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route("Reviews/{id:int}/{top:int}")]
+		public async Task<IHttpActionResult> GetReviews(int id, int top) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var reviews = PromoterProfileManager.GetReviews(id, top);
+				return Ok(reviews);
+			});
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route("Reviews/{id:int}/{top:int}/{afterReviewId:int}")]
+		public async Task<IHttpActionResult> GetReviews(int id, int top, int afterReviewId) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var reviews = PromoterProfileManager.GetReviews(id, top, afterReviewId);
+				return Ok(reviews);
 			});
 		}
 	}

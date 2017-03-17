@@ -2,6 +2,14 @@
 
 	public class ResultDto<T> {
 
+		public ResultDto() {
+			
+		}
+
+		public ResultDto(T result) {
+			Result = result;
+		}
+
 		public T Result
 		{
 			get;

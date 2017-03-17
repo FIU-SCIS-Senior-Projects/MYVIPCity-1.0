@@ -2,8 +2,10 @@
 using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Threading;
+using Censored;
 using Microsoft.AspNet.Identity;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
@@ -93,6 +95,76 @@ namespace MyVipCity.BusinessLogic {
 			if (promoter != null)
 				promoters.Remove(promoter);
 			DbContext.SaveChanges();
+		}
+
+		public ResultDto<bool> AddReview(int id, ReviewDto review) {
+			if (string.IsNullOrWhiteSpace(review.ReviewerEmail)) {
+				Logger.Warn("Review requires a reviewer email");
+				return new ResultDto<bool> {
+					Result = false,
+					Messages = new[] { "Review requires a reviewer email" }
+				};
+			}
+
+			var profile = DbContext.Set<PromoterProfile>().Find(id);
+			if (profile == null) {
+				Logger.Warn("Promoter not found");
+				return new ResultDto<bool> {
+					Result = false,
+					Messages = new[] { "Promoter not found" }
+				};
+			}
+
+			// set the date
+			review.CreatedOn = DateTimeOffset.UtcNow;
+
+			if (profile.Reviews != null) {
+				var daysBeforeNewReview = 3;
+				var recentReview = profile.Reviews.AsQueryable().FirstOrDefault(r => r.ReviewerEmail == review.ReviewerEmail && (review.CreatedOn - r.CreatedOn).Days < daysBeforeNewReview);
+				if (recentReview != null) {
+					Logger.Warn($"Review added to same promoter less than {daysBeforeNewReview} days ago");
+					return new ResultDto<bool> {
+						Result = false,
+						Messages = new[] { $"A review was added to the same promoter less than {daysBeforeNewReview} days ago" }
+					};
+				}
+			}
+
+			// this is a new review
+			review.Id = 0;
+
+			// censor text in case there are some swear words
+			if (!string.IsNullOrWhiteSpace(review.Text)) {
+				var censored = new Censor(Utils.Constants.SwearWords);
+				review.Text = censored.CensorText(review.Text);
+			}
+
+			var reviewModel = Mapper.Map<Review>(review);
+			profile.Reviews.Add(reviewModel);
+			DbContext.SaveChanges();
+
+			return new ResultDto<bool>(true);
+		}
+
+		private ReviewDto[] GetReviews(int id, int top, Expression<Func<Review, bool>> whereExpression) {
+			var profile = DbContext.Set<PromoterProfile>().Find(id);
+			if (profile == null)
+				return null;
+			IQueryable<Review> reviewsQueryable = profile.Reviews.AsQueryable();
+			if (whereExpression != null)
+				reviewsQueryable = reviewsQueryable.Where(whereExpression);
+
+			var reviews = reviewsQueryable.OrderByDescending(r => r.Id).Take(top).ToArray();
+			var reviewsDto = Mapper.Map<ReviewDto[]>(reviews);
+			return reviewsDto;
+		}
+
+		public ReviewDto[] GetReviews(int id, int top) {
+			return GetReviews(id, top, null);
+		}
+
+		public ReviewDto[] GetReviews(int id, int top, int afterReviewId) {
+			return GetReviews(id, top, r => r.Id < afterReviewId);
 		}
 	}
 }

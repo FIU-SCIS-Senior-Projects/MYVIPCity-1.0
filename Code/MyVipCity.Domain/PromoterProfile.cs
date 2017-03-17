@@ -6,6 +6,12 @@ namespace MyVipCity.Domain {
 
 	public class PromoterProfile: IIdentifiable, IReviewable {
 
+		private ICollection<Review> reviews;
+
+		public PromoterProfile() {
+			reviews = new List<Review>();
+		}
+
 		public int Id
 		{
 			get;
@@ -68,8 +74,8 @@ namespace MyVipCity.Domain {
 
 		public virtual ICollection<Review> Reviews
 		{
-			get;
-			set;
+			get { return reviews; }
+			protected set { reviews = value; }
 		}
 	}
 }

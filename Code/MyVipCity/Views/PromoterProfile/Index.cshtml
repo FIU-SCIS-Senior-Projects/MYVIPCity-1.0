@@ -19,7 +19,7 @@
                 <!--Review-->
                 <div class="profile__review">
                     <span class="rmd-rate" vip-rating ng-model="model.AverageRating" read-only="true"></span>
-                    <span>(0 Review)</span>
+                    <span>({{model.ReviewsCount}} Reviews)</span>
                 </div>
                 <span class="label label-warning">VIP Promoter</span>
                 <span class="label label-success vip-promoter-profile__business-link">
@@ -64,17 +64,14 @@
                         </div>
                     </div>
 
-                    <div class="agent-reviews__item">
-                        <div class="text-strong">By Cammy Tubman on 15th June 2016</div>
-                        <div class="rmd-rate" data-rate-value="5" data-rate-readonly="true"></div>
-                        <p>Cras mattis consectetur purus sit amet fermentum Vestibulum id ligula porta felis euismod semper Cras mattis consectetur purus sit amet fermentum.</p>
+                    <div class="agent-reviews__item" ng-repeat="review in reviews">
+                        <div class="text-strong">By <strong>{{::review.ReviewerEmail}}</strong> on {{review.CreatedOn | date: 'longDate'}}</div>
+                        <div class="rmd-rate" vip-rating ng-model="review.Rating" read-only="true"></div>
+                        <p>{{::review.Text}}</p>
                     </div>
-                    <div class="agent-reviews__item">
-                        <div class="text-strong">By Jayson Leffingwell on 2nd May 2016</div>
-                        <div class="rmd-rate" data-rate-value="4" data-rate-readonly="true"></div>
-                        <p>Maecenas faucibus mollis interdum. Nullam quis risus eget urna mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus.</p>
-                        <p>Donec id elit non mi porta gravida at eget metus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p>
+
+                    <div class="load-more">
+                        <a href="" ng-click="loadMoreReviews()"><i class="zmdi zmdi-refresh-alt"></i> Load more reviews</a>
                     </div>
                 </div>
             </div>

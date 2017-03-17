@@ -7,7 +7,6 @@ namespace MyVipCity.Domain.Contracts {
 		ICollection<Review> Reviews
 		{
 			get;
-			set;
 		}
 	}
 }
