@@ -5085,6 +5085,7 @@
     <Content Include="Scripts\vendors\ng-on\test\bind.polyfill.js" />
     <Content Include="Scripts\vendors\ng-on\test\ng-on.test.js" />
     <Content Include="Scripts\vendors\swearjar.js" />
+    <Content Include="Scripts\vendors\swearjar.min.js" />
     <Content Include="Scripts\vendors\TODO.txt" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
