@@ -165,6 +165,20 @@ namespace MyVipCity.BusinessLogic {
 			return new ResultDto<bool>(true);
 		}
 
+		public ResultDto<bool> RemoveReview(int id) {
+			// find the review
+			var review = DbContext.Set<Review>().Find(id);
+			// check if the review does not exist
+			if (review == null)
+				return new ResultDto<bool>(false) { Messages = new[] { "Review not found" } };
+			// remove the review
+			DbContext.Set<Review>().Remove(review);
+			// save the changes
+			DbContext.SaveChanges();
+			// return
+			return new ResultDto<bool>(true);
+		}
+
 		private ReviewDto[] GetReviews(int id, int top, Expression<Func<Review, bool>> whereExpression) {
 			var profile = DbContext.Set<PromoterProfile>().Find(id);
 			if (profile == null)

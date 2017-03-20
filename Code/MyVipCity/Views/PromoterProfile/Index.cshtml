@@ -65,7 +65,9 @@
                     </div>
 
                     <div class="agent-reviews__item" ng-repeat="review in reviews">
-                        <div class="text-strong">By <strong>{{::review.ReviewerEmail}}</strong> on {{review.CreatedOn | date: 'longDate'}}</div>
+                        <i ng-show="canRemoveReviews" class="zmdi zmdi-close vip-promoter-reviews__delete" ng-click="removeReview($event, review)"></i>
+                        <div class="text-strong">By <strong>{{::review.ReviewerEmail}}</strong> on {{review.CreatedOn | date: 'longDate'}}
+                        </div>
                         <div class="rmd-rate" vip-rating ng-model="review.Rating" read-only="true"></div>
                         <p>{{::review.Text}}</p>
                     </div>

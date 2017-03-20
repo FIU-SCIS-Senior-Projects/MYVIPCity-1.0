@@ -5,7 +5,7 @@
 		$scope.renderingMode = vip.renderingModes.read;
 		$scope.model = {};
 
-		if (vipConfig && vipConfig.Roles && vipConfig.Roles.indexOf("Admin") > -1) {
+		if (vipConfig && vipConfig.Roles && vipConfig.Roles.indexOf('Admin') > -1) {
 			$scope.showEditButton = true;
 			$scope.showReadModeButton = false;
 			$scope.showSaveButton = false;

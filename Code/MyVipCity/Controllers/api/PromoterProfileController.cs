@@ -73,6 +73,16 @@ namespace MyVipCity.Controllers.api {
 			});
 		}
 
+		[HttpDelete]
+		[Authorize(Roles = "Admin")]
+		[Route("Review/{id:int}")]
+		public async Task<IHttpActionResult> RemoveReview(int id) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var result = PromoterProfileManager.RemoveReview(id);
+				return Ok(result);
+			});
+		}
+
 		[HttpGet]
 		[AllowAnonymous]
 		[Route("Reviews/{id:int}/{top:int}")]

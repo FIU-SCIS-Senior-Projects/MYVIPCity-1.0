@@ -55,15 +55,17 @@
 			$scope.addingReview = false;
 		};
 
+		// loads more review
 		$scope.loadMoreReviews = function () {
 			var url = ('api/PromoterProfile/Reviews/' + promoterProfileId + '/' + top) + ($scope.reviews === null || !$scope.reviews.length ? '' : '/' + $scope.reviews[$scope.reviews.length - 1].Id);
-			$http.get(url).then(function(response) {
+			$http.get(url).then(function (response) {
 				if (response.data) {
 					$scope.reviews = $scope.reviews.concat(response.data);
 				}
 			});
 		}
 
+		// refresh the reviews
 		var refreshReviews = function () {
 			// set reviews
 			$scope.reviews = [];
@@ -71,6 +73,38 @@
 		}
 
 		refreshReviews();
+
+		var showErrorPopup = function (title, errorMsg) {
+			swal(title || 'Oops', errorMsg || 'An error has occurred', 'error');
+		};
+
+		// removes a review
+		$scope.removeReview = function (e, review) {
+			swal({
+				type: 'warning',
+				title: 'Delete review?',
+				text: 'Are you sure you want to delete this review?',
+				confirmButtonText: "Yes, delete it",
+				showCancelButton: true
+			}).then(function () {
+				$http.delete('api/PromoterProfile/Review/' + review.Id).then(function (response) {
+					if (response.data.Result) {
+						// decrease number of reviews
+						$scope.model.ReviewsCount--;
+						// remove the review from the list
+						_.remove($scope.reviews, function (r) {
+							return r.Id === review.Id;
+						});
+					}
+					else {
+						var msg = (result.Messages || []).join("\n");
+						showErrorPopup('Review was not deleted', msg);
+					}
+				}, function () {
+					showErrorPopup();
+				});
+			}, angular.noop);
+		};
 
 		// handles submit review click
 		$scope.submitReview = function () {
@@ -97,7 +131,7 @@
 				if (!result.Result) {
 					// show reason
 					var msg = (result.Messages || []).join("\n");
-					swal('Review was not added', msg, 'error');
+					showErrorPopup('Review was not added', msg);
 				}
 				else {
 					// review was added
@@ -107,7 +141,7 @@
 					refreshReviews();
 				}
 			}, function (error) {
-				swal('Oops!', 'Something went wrong adding the review!', 'error');
+				showErrorPopup('Oops!', 'Something went wrong adding the review!');
 			});
 		};
 
@@ -129,7 +163,7 @@
 					$route.reload();
 				});
 			}, function (error) {
-				swal('Oops!', 'Something went wrong!', 'error');
+				showErrorPopup('Oops!', 'Something went wrong!');
 			});
 		};
 
@@ -167,8 +201,14 @@
 					canEditPromoterProfile();
 					showWelcomeToProfilePopup($scope.model);
 				}
+				// check if the user is an admin
+				if (vipConfig && vipConfig.Roles && vipConfig.Roles.indexOf('Admin') > -1) {
+					$scope.canRemoveReviews = true;
+				}
 			}
 		});
+
+
 
 
 		$scope.toggleRenderingMode = function () {

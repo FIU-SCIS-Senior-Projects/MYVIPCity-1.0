@@ -16,6 +16,8 @@ namespace MyVipCity.BusinessLogic.Contracts {
 
 		ResultDto<bool> AddReview(int id, ReviewDto review);
 
+		ResultDto<bool> RemoveReview(int id);
+
 		ReviewDto[] GetReviews(int id, int top);
 
 		ReviewDto[] GetReviews(int id, int top, int afterReviewId);

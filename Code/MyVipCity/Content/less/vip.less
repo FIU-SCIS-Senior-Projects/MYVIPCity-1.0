@@ -288,8 +288,8 @@ ul.vip-new-promoter__list {
             color: white;
             background-color: @mdc-orange-500;
         }
-      
-        .vip-promoter-reviews__add-review-actions {           
+
+        .vip-promoter-reviews__add-review-actions {
             .btn {
                 margin-right: 5px;
             }
@@ -420,6 +420,22 @@ div[vip-promoter-name] {
     }
 }
 
+.vip-delete-mixin(@marginLeft) {
+    font-size: large;
+    cursor: pointer;
+    position: absolute;
+    left: 100%;
+    margin-top: 10px;
+    margin-left: @marginLeft;
+    z-index: 100;
+
+    &:hover {
+        transition: 0.4s;
+        transform: rotate(90deg);
+        color: @mdc-red-500;
+    }
+}
+
 div[vip-existing-promoters] {
     .vip-existing-promoters__img-container {
         background: url(../img/noprofilepic.png);
@@ -427,20 +443,7 @@ div[vip-existing-promoters] {
     }
 
     .vip-existing-promoters__delete {
-        font-size: large;
-        cursor: pointer;
-        position: absolute;
-        left: 100%;
-        margin-top: 10px;
-        margin-left: -23px;
-        z-index: 100;
-
-        &:hover {
-            transition: 0.4s;
-            transform: rotate(90deg);
-            color: @mdc-red-500;
-        }
-
+        .vip-delete-mixin(-23px);
         &:hover + a {
             background-color: @mdc-light-blue-50;
         }
@@ -456,5 +459,11 @@ div[vip-existing-promoters] {
 
     a.list-group-item:hover {
         background-color: @mdc-light-blue-50;
+    }
+}
+
+.vip-promoter-reviews {
+    .vip-promoter-reviews__delete {
+        .vip-delete-mixin(-30px);
     }
 }
