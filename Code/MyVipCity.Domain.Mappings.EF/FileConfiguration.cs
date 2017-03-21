@@ -1,7 +1,7 @@
-﻿using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace MyVipCity.Domain.Mappings.EF {
+
 	public class FileConfiguration: EntityTypeConfiguration<File> {
 
 		public FileConfiguration() {

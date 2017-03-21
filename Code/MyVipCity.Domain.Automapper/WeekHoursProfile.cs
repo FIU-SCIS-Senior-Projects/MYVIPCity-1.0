@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.Domain.Automapper.CustomResolvers;
-using Ninject;
 
 namespace MyVipCity.Domain.Automapper {
 
@@ -11,14 +10,6 @@ namespace MyVipCity.Domain.Automapper {
 			DtoToModel();
 			ModelToDto();
 		}
-
-		[Inject]
-		IKernel Kernel
-		{
-			get;
-			set;
-		}
-
 
 		private void ModelToDto() {
 			CreateMap<WeekHours, WeekHoursDto>();

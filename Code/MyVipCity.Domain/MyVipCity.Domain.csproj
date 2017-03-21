@@ -47,9 +47,13 @@
     <Compile Include="DayHours.cs" />
     <Compile Include="IndexedPicture.cs" />
     <Compile Include="Picture.cs" />
+    <Compile Include="Social\CommentPost.cs" />
+    <Compile Include="Social\Post.cs" />
     <Compile Include="PromoterInvitation.cs" />
     <Compile Include="PromoterProfile.cs" />
     <Compile Include="Review.cs" />
+    <Compile Include="Social\PicturePost.cs" />
+    <Compile Include="Social\VideoPost.cs" />
     <Compile Include="WeekHours.cs" />
     <Compile Include="ProfilePicture.cs" />
     <Compile Include="File.cs" />

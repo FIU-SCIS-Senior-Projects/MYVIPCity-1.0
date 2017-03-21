@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
 using MyVipCity.Domain.Contracts;
+using MyVipCity.Domain.Social;
 
 namespace MyVipCity.Domain {
 
 	public class Business : IIdentifiable {
 
 		private ICollection<IndexedPicture> pictures;
+		private ICollection<Post> posts;
 
 		public Business() {
 			pictures = new List<IndexedPicture>();
+			posts = new  List<Post>();
 		}
 
 		public int Id
@@ -153,6 +156,15 @@ namespace MyVipCity.Domain {
 		{
 			get { return pictures; }
 			protected set { pictures = value; }
+		}
+
+		/// <summary>
+		/// List of posts for the business.
+		/// </summary>
+		public virtual ICollection<Post> Posts
+		{
+			get { return posts; }
+			protected set { posts = value; }
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace MyVipCity.Domain.Automapper {
 			CreateMap<PromoterProfile, PromoterProfileDto>()
 				.ForMember(p => p.ReviewsCount,
 					opts => {
-						// guarantee that this property is mapped befor mapping Average rating
+						// guarantee that this property is mapped before mapping Average rating
 						opts.SetMappingOrder(0);
 						opts.MapFrom(src => src.Reviews == null ? 0 : src.Reviews.Count());
 					})

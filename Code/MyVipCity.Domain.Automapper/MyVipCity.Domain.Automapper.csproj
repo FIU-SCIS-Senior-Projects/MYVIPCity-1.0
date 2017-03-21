@@ -71,6 +71,7 @@
     <Compile Include="AddressProfile.cs" />
     <Compile Include="DayHoursProfile.cs" />
     <Compile Include="MappingContext\DtoToModelContext.cs" />
+    <Compile Include="SocialProfile.cs" />
     <Compile Include="WeekHoursProfile.cs" />
     <Compile Include="BusinessProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace MyVipCity.Domain.Mappings.EF {
 
@@ -32,6 +30,14 @@ namespace MyVipCity.Domain.Mappings.EF {
 				m.MapLeftKey("BusinessId");
 				m.MapRightKey("FileId");
 			});
+
+			// relationships
+			HasMany(b => b.Posts).WithMany().Map(m => {
+				m.ToTable("BusinessesPosts");
+				m.MapLeftKey("BusinessId");
+				m.MapRightKey("PostId");
+			});
+
 			HasRequired(b => b.WeekHours).WithRequiredDependent().Map(m => m.MapKey("WeekHoursId")).WillCascadeOnDelete(false);
 		}
 	}

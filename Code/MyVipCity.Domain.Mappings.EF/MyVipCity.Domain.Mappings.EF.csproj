@@ -53,6 +53,10 @@
     <Compile Include="DayHoursConfiguration.cs" />
     <Compile Include="PromoterProfileConfiguration.cs" />
     <Compile Include="PromoterInvitationConfiguration.cs" />
+    <Compile Include="Social\PicturePostConfiguration.cs" />
+    <Compile Include="Social\VideoPostConfiguration.cs" />
+    <Compile Include="Social\CommentPostConfiguration.cs" />
+    <Compile Include="Social\PostConfiguration.cs" />
     <Compile Include="WeekHoursConfiguration.cs" />
     <Compile Include="FileConfiguration.cs" />
     <Compile Include="BusinessConfiguration.cs" />
