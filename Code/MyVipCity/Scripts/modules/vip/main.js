@@ -11,6 +11,7 @@
 	'vip/js/controllers/clubListController',
 	'vip/js/controllers/forgotPasswordFormController',
 	'vip/js/controllers/loginFormController',
+	'vip/js/controllers/mainController',
 	'vip/js/controllers/promoterProfileController',
 	'vip/js/controllers/registerFormController',
 	'vip/js/controllers/viewBusinessController',
@@ -44,6 +45,7 @@
 	'vip/js/services/vipControlRenderingService',
 	'vip/js/services/vipFactoryService',
 	'vip/js/services/vipNavigationService',
+	'vip/js/services/vipPageLoaderService',
 	'vip/js/services/vipServerErrorProcessorService',
 	'vip/js/services/vipUtilsService'
 ], function (require, angular, vip) {

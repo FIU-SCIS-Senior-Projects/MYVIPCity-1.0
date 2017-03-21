@@ -428,6 +428,7 @@
     <Content Include="Scripts\modules\vip\js\config\vipRouteConfig.js" />
     <Content Include="Scripts\modules\vip\js\controllers\clubListController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\businessPromotersController.js" />
+    <Content Include="Scripts\modules\vip\js\controllers\mainController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\promoterProfileController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\viewBusinessController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\addBusinessController.js" />
@@ -460,6 +461,7 @@
     <Content Include="Scripts\modules\vip\js\services\factories\business.js" />
     <Content Include="Scripts\modules\vip\js\services\vipFactoryService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipNavigationService.js" />
+    <Content Include="Scripts\modules\vip\js\services\vipPageLoaderService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipUtilsService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipControlRenderingService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipColorsService.js" />
