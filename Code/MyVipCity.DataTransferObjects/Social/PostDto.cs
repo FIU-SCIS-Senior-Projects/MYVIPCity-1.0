@@ -3,7 +3,7 @@ using MyVipCity.DataTransferObjects.Contracts;
 
 namespace MyVipCity.DataTransferObjects.Social {
 
-	public abstract class PostDto : IIdentifiableDto {
+	public abstract class PostDto: IIdentifiableDto {
 
 		public int Id
 		{
@@ -18,6 +18,12 @@ namespace MyVipCity.DataTransferObjects.Social {
 		}
 
 		public string PostedBy
+		{
+			get;
+			set;
+		}
+
+		public string PostType
 		{
 			get;
 			set;

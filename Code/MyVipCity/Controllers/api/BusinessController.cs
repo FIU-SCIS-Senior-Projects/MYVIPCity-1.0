@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
+using MyVipCity.DataTransferObjects.Social;
 using Ninject;
 
 namespace MyVipCity.Controllers.api {
@@ -75,6 +77,41 @@ namespace MyVipCity.Controllers.api {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
 				var promoters = BusinessManager.GetPromoters(id);
 				return Ok(promoters);
+			});
+		}
+
+		private void AddPost(int id, PostDto post) {
+			post.PostedBy = User.Identity.GetUserId();
+			BusinessManager.AddPost(id, post);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		[Route("{id:int}/PostComment")]
+		public async Task<IHttpActionResult> PostComment(int id, CommentPostDto post) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				AddPost(id, post);
+				return Ok();
+			});
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route("Posts/{id:int}/{top:int}")]
+		public async Task<IHttpActionResult> GetPosts(int id, int top) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var result = BusinessManager.GetPosts(id, top);
+				return Ok(result);
+			});
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route("Posts/{id:int}/{top:int}/{afterPostId:int}")]
+		public async Task<IHttpActionResult> GetPosts(int id, int top, int afterPostId) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var result = BusinessManager.GetPosts(id, top, afterPostId);
+				return Ok(result);
 			});
 		}
 	}

@@ -5,7 +5,7 @@
 }
 
 @*<button ng-click="toggleRenderingMode()" ng-show="showToggleButton" style="position: fixed; top: 180px; left: 20px">Toggle Rendering Mode</button>
-<button ng-click="resetForm()" ng-show="showResetButton" style="position: fixed; top: 220px; left: 20px">Reset Form</button>*@
+    <button ng-click="resetForm()" ng-show="showResetButton" style="position: fixed; top: 220px; left: 20px">Reset Form</button>*@
 <div>
     <button class="btn btn-primary" ng-show="showEditButton" ng-click="editClick()">Edit</button>
     <button class="btn btn-primary" ng-show="showReadModeButton" ng-click="readModeClick()">View Read Mode</button>
@@ -146,7 +146,13 @@
         <div class="vip-save-button-container">
             <button class="btn btn-primary" ng-show="showSaveButton" ng-click="save()">Save</button>
         </div>
+        <!--VIP Hosts for small screens-->
         <div vip-hosts-card class="hidden-md hidden-lg hidden-print"></div>
+
+        <!--Social Posts-->
+        <div>
+            <div vip-posts></div>
+        </div>
     </div>
     <div id="inquire" class="col-md-4 rmd-sidebar-mobile">
         <form class="card hidden-print">

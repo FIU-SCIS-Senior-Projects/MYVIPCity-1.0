@@ -179,6 +179,14 @@ namespace MyVipCity.BusinessLogic {
 			return new ResultDto<bool>(true);
 		}
 
+		public ReviewDto[] GetReviews(int id, int top) {
+			return GetReviews(id, top, null);
+		}
+
+		public ReviewDto[] GetReviews(int id, int top, int afterReviewId) {
+			return GetReviews(id, top, r => r.Id < afterReviewId);
+		}
+
 		private ReviewDto[] GetReviews(int id, int top, Expression<Func<Review, bool>> whereExpression) {
 			var profile = DbContext.Set<PromoterProfile>().Find(id);
 			if (profile == null)
@@ -190,14 +198,6 @@ namespace MyVipCity.BusinessLogic {
 			var reviews = reviewsQueryable.OrderByDescending(r => r.Id).Take(top).ToArray();
 			var reviewsDto = Mapper.Map<ReviewDto[]>(reviews);
 			return reviewsDto;
-		}
-
-		public ReviewDto[] GetReviews(int id, int top) {
-			return GetReviews(id, top, null);
-		}
-
-		public ReviewDto[] GetReviews(int id, int top, int afterReviewId) {
-			return GetReviews(id, top, r => r.Id < afterReviewId);
 		}
 	}
 }

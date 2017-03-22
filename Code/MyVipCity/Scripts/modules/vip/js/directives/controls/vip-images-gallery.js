@@ -1,7 +1,5 @@
-﻿define(['vip/js/vip', 'jquery', 'angular', 'dropzone', 'sortable'], function (vip, jQuery, angular, dropzone, sortable) {
+﻿define(['vip/js/vip', 'jquery', 'angular'], function (vip, jQuery, angular) {
 	'use strict';
-
-	dropzone.autoDiscover = false;
 
 	vip.directive('vipImagesGallery', ['$compile', function ($compile) {
 		return {
@@ -59,11 +57,11 @@
 					// build the array lightGallery plugin understands
 					var files = buildFilesArrayForLightGallery(ngModelCtrl.$viewValue || []);
 
-
 					initializePreviewPicturesArray();
 					// get first picture if any
-					if (files && files.length)
+					if (files && files.length) {
 						scope.previewPictures.push(files[0]);
+					}
 
 					element.append(galleryElement);
 					$compile(galleryElement)(scope);

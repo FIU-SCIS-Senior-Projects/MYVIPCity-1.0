@@ -33,11 +33,14 @@ namespace MyVipCity.Domain.Automapper {
 
 		private void ModelToDto() {
 			CreateMap<Post, PostDto>()
+				.ForMember(p => p.PostType, opts => opts.MapFrom(src => src.GetType().Name))
+				.ForMember(p => p.PostedBy, opts => opts.Ignore())
 				.Include<CommentPost, CommentPostDto>()
 				.Include<VideoPost, VideoPostDto>()
 				.Include<PicturePost, PicturePostDto>();
 
 			CreateMap<CommentPost, CommentPostDto>()
+				.ForMember(p => p.PostedBy, opts => opts.Ignore())
 				.Include<VideoPost, VideoPostDto>()
 				.Include<PicturePost, PicturePostDto>();
 

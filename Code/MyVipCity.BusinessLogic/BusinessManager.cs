@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
+using MyVipCity.DataTransferObjects.Social;
 using MyVipCity.Domain;
+using MyVipCity.Domain.Social;
 using Ninject;
 using Ninject.Extensions.Logging;
 
@@ -67,6 +70,37 @@ namespace MyVipCity.BusinessLogic {
 			var promoterProfiles = DbContext.Set<PromoterProfile>().Where(p => p.Business.Id == id).ToArray();
 			var promoterProfilesDto = Mapper.Map<PromoterProfileDto[]>(promoterProfiles);
 			return promoterProfilesDto;
+		}
+
+		public void AddPost(int id, PostDto post) {
+			var business = DbContext.Set<Business>().Find(id);
+			if (business != null) {
+				var postDomain = Mapper.Map<Post>(post);
+				postDomain.PostedOn = DateTimeOffset.UtcNow;
+				business.Posts.Add(postDomain);
+				DbContext.SaveChanges();
+			}
+		}
+
+		public PostDto[] GetPosts(int id, int top) {
+			return GetPosts(id, top, null);
+		}
+
+		public PostDto[] GetPosts(int id, int top, int afterPostId) {
+			return GetPosts(id, top, p => p.Id < afterPostId);
+		}
+
+		private PostDto[] GetPosts(int id, int top, Expression<Func<Post, bool>> whereExpression) {
+			var business = DbContext.Set<Business>().Find(id);
+			if (business == null)
+				return null;
+			IQueryable<Post> postsQueryable = business.Posts.AsQueryable();
+			if (whereExpression != null)
+				postsQueryable = postsQueryable.Where(whereExpression);
+
+			var posts = postsQueryable.OrderByDescending(r => r.Id).Take(top).ToArray();
+			var postsDto = Mapper.Map<PostDto[]>(posts);
+			return postsDto;
 		}
 
 		private void BuildFriendlyIdForBusiness(Business business) {

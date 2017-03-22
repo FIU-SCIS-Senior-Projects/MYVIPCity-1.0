@@ -136,10 +136,10 @@ div[vip-address] {
 
 .vip-save-button-container {
     text-align: center;
-    padding-bottom: 20px;
 
     button {
         width: 30%;
+        margin-bottom: 20px;
     }
 }
 
@@ -444,6 +444,7 @@ div[vip-existing-promoters] {
 
     .vip-existing-promoters__delete {
         .vip-delete-mixin(-23px);
+
         &:hover + a {
             background-color: @mdc-light-blue-50;
         }
@@ -465,5 +466,37 @@ div[vip-existing-promoters] {
 .vip-promoter-reviews {
     .vip-promoter-reviews__delete {
         .vip-delete-mixin(-30px);
+    }
+}
+
+/*VIP POSTS*/
+div[vip-posts] {
+    .vip-posts__post-actions {
+        text-align: center;
+
+        button {
+            min-width: 140px;
+            width: 27%;
+            margin-right: 10px;
+            margin-bottom: 20px;
+            color: white;
+
+            i {
+                font-size: large;
+                margin-right: 5px;
+            }
+
+            &.vip-posts__post-picture-btn {
+                background-color: @mdc-blue-500;
+            }
+
+            &.vip-posts__post-video-btn {
+                background-color: @mdc-red-500;
+            }
+
+            &.vip-posts__post-comment-btn {
+                background-color: @mdc-orange-700;
+            }
+        }
     }
 }
