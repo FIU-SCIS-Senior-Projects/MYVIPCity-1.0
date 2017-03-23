@@ -5083,6 +5083,8 @@
     <Content Include="Scripts\vendors\bower_components\Waves\docs\_pages\source.html" />
     <Content Include="Scripts\vendors\bower_components\Waves\Gruntfile.js" />
     <Content Include="Scripts\vendors\bower_components\Waves\src\js\waves.js" />
+    <Content Include="Scripts\vendors\ng-infinite-scroll.js" />
+    <Content Include="Scripts\vendors\ng-infinite-scroll.min.js" />
     <Content Include="Scripts\vendors\ng-on\karma.conf.js" />
     <Content Include="Scripts\vendors\ng-on\src\ng-on.js" />
     <Content Include="Scripts\vendors\ng-on\test\bind.polyfill.js" />
