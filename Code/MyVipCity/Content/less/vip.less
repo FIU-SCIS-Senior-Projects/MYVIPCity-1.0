@@ -469,7 +469,7 @@ div[vip-existing-promoters] {
     }
 }
 
-/*VIP POSTS*/
+/*VIP POSTS (plural)*/
 div[vip-posts] {
     .vip-posts__post-actions {
         text-align: center;
@@ -498,5 +498,18 @@ div[vip-posts] {
                 background-color: @mdc-orange-700;
             }
         }
+    }
+}
+
+/*VIP POST (singular)*/
+div[vip-post]{
+    .vip-post__footer{
+        text-align: center;
+         button {
+            min-width: 80px;
+            width: 10%;
+            margin-right: 10px;
+            padding: 5px;
+         }
     }
 }

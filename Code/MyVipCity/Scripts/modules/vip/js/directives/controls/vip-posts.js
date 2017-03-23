@@ -1,4 +1,4 @@
-﻿define(['vip/js/vip'], function (vip) {
+﻿define(['vip/js/vip', 'angular'], function (vip, angular) {
 	'use strict';
 
 	vip.postsTypes = {
@@ -13,7 +13,7 @@
 
 			// new scope
 			scope: true,
-
+			 
 			template:
 				'<div class="vip-posts__post-actions">' +
 					'<button class="btn vip-posts__post-picture-btn"><i class="zmdi zmdi-image"></i>Post Picture</button>' +
@@ -114,17 +114,41 @@
 		};
 	}]);
 
-	vip.directive('vipPost', [function () {
+	vip.directive('vipPost', ['$compile', function ($compile) {
 		return {
 			restrict: 'ACE',
 
 			// new scope
 			scope: true,
 
-			template: '{{post.Comment}}',
+			link: function (scope, element, attrs) {
+				var content = angular.element(
+					'<div>' +
+						'<span class="vip-post__posted-on">{{::post.PostedOn | date: \'short\'}}</span>' +
+						'<div class="actions pull-right">' +
+							'<a href="" title="Edit" ng-click="edit()"><i class="zmdi zmdi-edit"></i></a>' +
+							'<a href="" title="Delete" ng-click="delete()"><i class="zmdi zmdi-delete"></i></a>' +
+						'</div>' +
+						'<form name="formPost">' +
+							'{{post.Comment}}' +
+						'</form>' +
+						'<div class="vip-post__footer">' +
+							'<button class="btn btn-primary vip-post__save-btn" ng-disabled="formPost.$invalid">Save</button>' +
+							'<button class="btn btn-secondary vip-post__cancel-btn">Cancel</button>' +
+						'</div>' +
+					'</div>'
+				);
+				element.append(content);
+				$compile(content)(scope);
+				// handles edit
+				scope.edit = function() {
 
-			link: function(scope, element, attrs) {
-				
+				};
+
+				// handles delete
+				scope.delete = function () {
+
+				};
 			}
 		};
 	}]);
