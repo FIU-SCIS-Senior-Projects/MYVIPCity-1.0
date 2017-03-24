@@ -32,6 +32,8 @@
 	'vip/js/directives/controls/vip-textarea',
 	'vip/js/directives/controls/vip-textbox',
 	'vip/js/directives/controls/vip-time-picker',
+	'vip/js/directives/controls/vip-video-control',
+	'vip/js/directives/controls/vip-video',
 	'vip/js/directives/controls/vip-week-hours',
 	'vip/js/directives/controls/vip-wysiwyg',
 	'vip/js/directives/vip-auto-grow-input',
@@ -45,14 +47,16 @@
 	'vip/js/services/factories/business',
 	'vip/js/services/factories/comment-post',
 	'vip/js/services/factories/picture-posts',
+	'vip/js/services/factories/video-posts',
 	'vip/js/services/vipColorsService',
 	'vip/js/services/vipControlRenderingService',
 	'vip/js/services/vipFactoryService',
 	'vip/js/services/vipNavigationService',
 	'vip/js/services/vipPageLoaderService',
 	'vip/js/services/vipServerErrorProcessorService',
-	'vip/js/services/vipUtilsService'
-], function (require, angular, vip) {
+	'vip/js/services/vipUtilsService',
+	'vip/js/services/vipVideoService'
+], function(require, angular, vip) {
 	return vip;
 });
 

@@ -23,7 +23,7 @@
 				// add post buttons
 				'<div class="vip-posts__post-actions">' +
 					'<button class="btn vip-posts__post-picture-btn" ng-click="clickPostPicture($event)"><i class="zmdi zmdi-image"></i>Post Picture</button>' +
-					'<button class="btn vip-posts__post-video-btn"><i class="zmdi zmdi-play"></i>Post Video</button>' +
+					'<button class="btn vip-posts__post-video-btn" ng-click="clickPostVideo($event)"><i class="zmdi zmdi-play"></i>Post Video</button>' +
 					'<button class="btn vip-posts__post-comment-btn" ng-click="clickPostComment($event)"><i class="zmdi zmdi-comment"></i>Post Comment</button>' +
 				'</div>' +
 				// add post container
@@ -40,7 +40,7 @@
 						'</div>' +
 					'</div>' +
 					'<div class="load-more">' +
-                        '<a href="" ng-click="loadMorePosts()"><i class="zmdi zmdi-refresh-alt"></i> Load more</a>' +
+                        '<a href="" ng-click="loadMorePosts()" ng-disabled="loadingPosts"><i class="zmdi zmdi-refresh-alt"></i> Load more</a>' +
                     '</div>' +
 				'</div>'
 				,
@@ -110,6 +110,11 @@
 				scope.clickPostPicture = function () {
 					scope._newPost = { Comment: null, Pictures: [], PostType: 'PicturePostDto' };
 					scope._showPost = vip.postsTypes.picture;
+				};
+
+				scope.clickPostVideo = function () {
+					scope._newPost = { Comment: null, VideoUrl: null, PostType: 'VideoPostDto' };
+					scope._showPost = vip.postsTypes.video;
 				};
 
 				// listen for event to save new post

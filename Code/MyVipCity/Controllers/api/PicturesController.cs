@@ -61,7 +61,7 @@ namespace MyVipCity.Controllers.api {
 			result.Content.Headers.Expires = DateTimeOffset.Now.AddDays(365);
 			result.Headers.CacheControl = new CacheControlHeaderValue {
 				Public = true,
-				// MaxAge = TimeSpan.FromSeconds(31536000)
+				MaxAge = TimeSpan.FromSeconds(31536000)
 			};
 			return ResponseMessage(result);
 		}

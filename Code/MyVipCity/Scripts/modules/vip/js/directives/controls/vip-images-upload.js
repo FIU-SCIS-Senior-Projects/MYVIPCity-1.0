@@ -15,7 +15,7 @@
 			template:
 					'<div class="vip-image-preview">' +
 						'<ul class="vip-image-preview__img-list" ng-show="files.length">' +
-							'<li ng-repeat="pic in files track by pic.BinaryDataId" class="id_{{pic.BinaryDataId}} animated bounceIn">' +
+							'<li ng-repeat="pic in files track by pic.BinaryDataId" class="id_{{pic.BinaryDataId}} animated fadeIn">' +
 								'<div class="vip-image-preview__remove-img"><i class="zmdi zmdi-close" ng-click="removePicture($event, pic)"></i></div>' +
 								'<img class="vip-image-preview__img" ng-src="api/Pictures/{{pic.BinaryDataId}}" alt="{{pic.FileName}}"/>' +
 							'</li>' +
@@ -41,7 +41,7 @@
 					}, waitTimeInSeconds || 1000, false);
 				};
 
-				clearAnimations(2000);
+				clearAnimations(1000);
 
 				var updateNgModel = function () {
 					// update the index of the pictures

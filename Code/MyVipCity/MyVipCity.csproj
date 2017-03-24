@@ -432,6 +432,8 @@
     <Content Include="Scripts\modules\vip\js\controllers\forgotPasswordFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-address.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-video.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-video-control.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-existing-promoters.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-posts.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-profile-picture.js" />
@@ -457,11 +459,13 @@
     <Content Include="Scripts\modules\vip\js\directives\vip-navigation-menu.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\business.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\business-posts-manager.js" />
+    <Content Include="Scripts\modules\vip\js\services\factories\video-posts.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\picture-posts.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\comment-post.js" />
     <Content Include="Scripts\modules\vip\js\services\vipFactoryService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipNavigationService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipPageLoaderService.js" />
+    <Content Include="Scripts\modules\vip\js\services\vipVideoService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipUtilsService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipControlRenderingService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipColorsService.js" />
