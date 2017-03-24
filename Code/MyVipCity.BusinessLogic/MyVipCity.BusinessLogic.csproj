@@ -78,6 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractEntityManager.cs" />
+    <Compile Include="PostsEntityManager.cs" />
+    <Compile Include="Contracts\IPostsEntityManager.cs" />
     <Compile Include="Contracts\IPromoterInvitationManager.cs" />
     <Compile Include="Contracts\IPromoterProfileManager.cs" />
     <Compile Include="Contracts\ResultDto.cs" />

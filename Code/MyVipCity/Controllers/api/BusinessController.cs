@@ -80,19 +80,26 @@ namespace MyVipCity.Controllers.api {
 			});
 		}
 
-		private void AddPost(int id, PostDto post) {
-			post.PostedBy = User.Identity.GetUserId();
-			BusinessManager.AddPost(id, post);
-		}
 
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
 		[Route("{id:int}/PostComment")]
 		public async Task<IHttpActionResult> PostComment(int id, CommentPostDto post) {
-			return await Task<IHttpActionResult>.Factory.StartNew(() => {
-				AddPost(id, post);
-				return Ok();
-			});
+			return await AddPost(id, post);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		[Route("{id:int}/PostPicture")]
+		public async Task<IHttpActionResult> PostPicture(int id, PicturePostDto post) {
+			return await AddPost(id, post);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		[Route("{id:int}/PostVideo")]
+		public async Task<IHttpActionResult> PostVideo(int id, VideoPostDto post) {
+			return await AddPost(id, post);
 		}
 
 		[HttpGet]
@@ -112,6 +119,14 @@ namespace MyVipCity.Controllers.api {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
 				var result = BusinessManager.GetPosts(id, top, afterPostId);
 				return Ok(result);
+			});
+		}
+
+		private async Task<IHttpActionResult> AddPost(int id, PostDto post) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				post.PostedBy = User.Identity.GetUserId();
+				post = BusinessManager.AddPost(id, post);
+				return Ok(post);
 			});
 		}
 	}

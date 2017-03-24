@@ -15,7 +15,7 @@
 			scope: {
 				entityId: '='
 			},
-			 
+
 			template:
 				'<div class="vip-posts__post-actions">' +
 					'<button class="btn vip-posts__post-picture-btn"><i class="zmdi zmdi-image"></i>Post Picture</button>' +
@@ -34,7 +34,7 @@
 				'<div class="vip-posts__posts">' +
 					'<div class="card {{::post.PostType}}" ng-repeat="post in posts track by post.Id">' +
 						'<div class="card__body">' +
-							'<div vip-post ng-model="post"></div>' +
+							'<div vip-post></div>' +
 						'</div>' +
 					'</div>' +
 					'<div class="load-more">' +
@@ -44,13 +44,13 @@
 				,
 
 			link: function (scope, element, attrs) {
-				if (!attrs.postsConfigId)
-					$log.error('vip-posts directive, attribute "posts-config-id" not specified');
-				// get the post configuration
-				var postsConfig = vipFactoryService(attrs.postsConfigId);
+				if (!attrs.postsManagerId)
+					$log.error('vip-posts directive, attribute "posts-manager-id" not specified');
+				// get the post manager
+				var postsManager = vipFactoryService(attrs.postsManagerId);
 
 				var listeners = [];
-				
+
 				var topLoad = 3;
 				var entityId;
 				scope.posts = [];
@@ -63,7 +63,7 @@
 						// indicate a new loading operation is in progress (about to start)
 						scope.loadingPosts = true;
 						// get the url to retrieve the posts
-						var url = postsConfig.getLoadPostsUrl(entityId, topLoad, scope.posts && scope.posts.length ? scope.posts[scope.posts.length - 1].Id : undefined);
+						var url = postsManager.getLoadPostsUrl(entityId, topLoad, scope.posts && scope.posts.length ? scope.posts[scope.posts.length - 1].Id : undefined);
 						// make request to retrieve the posts
 						$http.get(url).then(function (response) {
 							// update posts array
@@ -104,6 +104,10 @@
 					});
 				};
 
+				////scope.saveCommentPost = function(post) {
+				////	postsManager.savePost(post);
+				////};
+
 				var unregister = scope.$watch('entityId', function (id) {
 					if (id) {
 						entityId = id;
@@ -121,45 +125,62 @@
 		};
 	}]);
 
-	vip.directive('vipPost', ['$compile', function ($compile) {
+	vip.directive('vipPost', ['$compile', 'vipFactoryService', function ($compile, vipFactoryService) {
 		return {
 			restrict: 'ACE',
 
 			// new scope
 			scope: true,
 
-			require: 'ngModel',
+			link: function (scope, element, attrs) {
+				// make a copy of the original post (so that it can be restored if cancel edit) TODO: Do this only if editing is allowed
+				var originalPost = angular.copy(scope.post);
+				// get the 
+				var postFactory = vipFactoryService(scope.post.PostType);
+				var postElement = postFactory.getElement('post');
+				// set rendering mode
+				scope.renderingMode = vip.renderingModes.read;
 
-			link: function (scope, element, attrs, ngModelCtrl) {
+				// TODO: Do not compile buttons when editing is not allowed
 				var content = angular.element(
 					'<div>' +
 						'<span class="vip-post__posted-on">{{::post.PostedOn | date: \'short\'}}</span>' +
 						'<div class="actions pull-right">' +
-							'<a href="" title="Edit" ng-click="edit()"><i class="zmdi zmdi-edit"></i></a>' +
+							'<a href="" title="Edit" ng-click="edit()"><i class="zmdi zmdi-edit" ng-show="renderingMode == ' + vip.renderingModes.read + '"></i></a>' +
 							'<a href="" title="Delete" ng-click="delete()"><i class="zmdi zmdi-delete"></i></a>' +
 						'</div>' +
 						'<form name="formPost">' +
-							'{{post.Comment}}' +
 						'</form>' +
 						'<div class="vip-post__footer">' +
-							'<button class="btn btn-primary vip-post__save-btn" ng-disabled="formPost.$invalid">Save</button>' +
-							'<button class="btn btn-secondary vip-post__cancel-btn">Cancel</button>' +
+							'<button class="btn btn-primary vip-post__save-btn" ng-disabled="formPost.$invalid" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Save</button>' +
+							'<button class="btn btn-secondary vip-post__cancel-btn" ng-click="cancel()" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Cancel</button>' +
 						'</div>' +
 					'</div>'
 				);
+				// append the post element to the content element under the form element
+				content.find('form').append(postElement);
 				// append the post content
 				element.append(content);
 				// compile it
 				$compile(content)(scope);
 
 				// handles edit
-				scope.edit = function() {
-
+				scope.edit = function () {
+					// set edit rendering mode
+					scope.renderingMode = vip.renderingModes.edit;
 				};
 
 				// handles delete
 				scope.delete = function () {
 
+				};
+
+				// handles cancel
+				scope.cancel = function() {
+					// set read rendering mode
+					scope.renderingMode = vip.renderingModes.read;
+					// restore the post
+					scope.post = angular.extend(scope.post, originalPost);
 				};
 			}
 		};

@@ -4,7 +4,7 @@ using MyVipCity.Domain.Social;
 
 namespace MyVipCity.Domain {
 
-	public class Business : IIdentifiable {
+	public class Business : IIdentifiable, IPostsEntity {
 
 		private ICollection<IndexedPicture> pictures;
 		private ICollection<Post> posts;

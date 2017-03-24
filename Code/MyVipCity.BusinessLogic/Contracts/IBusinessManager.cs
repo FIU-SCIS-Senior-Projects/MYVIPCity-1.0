@@ -17,7 +17,7 @@ namespace MyVipCity.BusinessLogic.Contracts {
 
 		PromoterProfileDto[] GetPromoters(int id);
 
-		void AddPost(int id, PostDto post);
+		PostDto AddPost(int id, PostDto post);
 
 		PostDto[] GetPosts(int id, int top);
 

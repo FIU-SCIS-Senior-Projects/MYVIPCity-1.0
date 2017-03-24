@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="Business.cs" />
+    <Compile Include="Contracts\IPostsEntity.cs" />
     <Compile Include="Contracts\IIdentifiable.cs" />
     <Compile Include="Contracts\IReviewable.cs" />
     <Compile Include="DayHours.cs" />

@@ -39,6 +39,7 @@ namespace MyVipCity.CompositionRoot {
 		}
 
 		private static void BusinessLayerBindings(IKernel kernel) {
+			kernel.Bind<IPostsEntityManager>().To<PostsEntityManager>().InRequestScope();
 			kernel.Bind<IBusinessManager>().To<BusinessManager>().InRequestScope();
 			kernel.Bind<IPromoterInvitationManager>().To<PromoterInvitationManager>().InRequestScope();
 			kernel.Bind<IPromoterProfileManager>().To<PromoterProfileManager>().InRequestScope();

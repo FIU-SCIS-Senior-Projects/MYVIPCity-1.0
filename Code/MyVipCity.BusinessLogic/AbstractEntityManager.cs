@@ -41,7 +41,7 @@ namespace MyVipCity.BusinessLogic {
 
 		protected TModel ToModel<TModel, TDto>(TDto dto, TModel model)
 			where TDto : class, IIdentifiableDto
-			where TModel : class, new() {
+			where TModel : class {
 			var result = Mapper.Map<TDto, TModel>(dto, model,
 				opts => {
 					opts.Items.Add(typeof(DtoToModelContext).Name, new DtoToModelContext());
