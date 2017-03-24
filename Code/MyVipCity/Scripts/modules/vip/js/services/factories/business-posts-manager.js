@@ -3,6 +3,14 @@
 
 	vip.config(['vipFactoryServiceProvider', function (vipFactoryServiceProvider) {
 		vipFactoryServiceProvider.registerFactory('business-posts-manager', ['$http', '$log', '$q', function ($http, $log, $q) {
+			var wrapHttpPromise = function (httpPromise) {
+				return httpPromise.then(function (response) {
+					return response.data;
+				}, function (error) {
+					return $q.reject(error);
+				});
+			};
+
 			return {
 				getLoadPostsUrl: function (businessId, top, lastPostId) {
 					var url = ('api/Business/Posts/' + businessId + '/' + top) + (angular.isUndefined(lastPostId) ? '' : '/' + lastPostId);
@@ -14,13 +22,13 @@
 
 					switch (post.PostType) {
 						case 'CommentPost':
-							savePromise = $http.post('api/Business/' + businessId + '/PostComment', post);
+							savePromise = wrapHttpPromise($http.post('api/Business/' + businessId + '/PostComment', post));
 							break;
 						case 'PicturePost':
-							savePromise = $http.post('api/Business/' + businessId + '/PostPicture', post);
+							savePromise = wrapHttpPromise($http.post('api/Business/' + businessId + '/PostPicture', post));
 							break;
 						case 'VideoPost':
-							savePromise = $http.post('api/Business/' + businessId + '/PostVideo', post);
+							savePromise = wrapHttpPromise($http.post('api/Business/' + businessId + '/PostVideo', post));
 							break;
 						default:
 							$log.error('Unknown PostType = "' + post.PostType + '"');
@@ -31,7 +39,7 @@
 				},
 
 				deletePost: function (businessId, postId) {
-					return $http.delete('api/Business/' + businessId + '/DeletePost/' + postId);
+					return wrapHttpPromise($http.delete('api/Business/' + businessId + '/DeletePost/' + postId));
 				}
 			};
 		}]);

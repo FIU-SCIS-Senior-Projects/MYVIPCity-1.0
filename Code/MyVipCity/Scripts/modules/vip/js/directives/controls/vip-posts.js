@@ -25,22 +25,12 @@
 					'<button class="btn vip-posts__post-video-btn"><i class="zmdi zmdi-play"></i>Post Video</button>' +
 					'<button class="btn vip-posts__post-comment-btn" ng-click="clickPostComment($event)"><i class="zmdi zmdi-comment"></i>Post Comment</button>' +
 				'</div>' +
-				'<div class="card">' +
+				'<div class="card" ng-show="_showPost">' +
 					'<div class="card__body">' +
 
 						'<div ng-show="_showPost == \'C\'">' +
-							'<div vip-post ng-model="_commentPost" show-edit-button="false" show-delete-button="false"></div>' +
+							'<div vip-post ng-model="_commentPost" show-edit-button="false" show-delete-button="false" save-caption="Post" on-save-event="vipPostSave" on-cancel-event="vipPostCancel" vip-rendering-mode="' + vip.renderingModes.edit + '"></div>' +
 						'</div>' +
-
-						//'<form name="postCommentForm" ng-show="_showPost == \'C\'">' +
-						//	'<div required vip-textarea ng-model="_commentPost.Comment" edit-mode-class="form-control textarea-autoheight" vip-edit-only maxlength="1000" placeholder="Write your comment here..."></div>' +
-						//	'<button class="btn vip-posts__save-post-btn" ng-disabled="postCommentForm.$invalid" ng-click="addPost(_commentPost)">Post Comment</button>' +
-						//'</form>' +
-
-						//'<form name="postCommentForm" ng-show="_showPost == \'P\'">' +
-
-						//	'<button class="btn vip-posts__save-post-btn" ng-disabled="postCommentForm.$invalid" ng-click="addPost(_picturePost)">Post Picture</button>' +
-						//'</form>' +
 
 					'</div>' +
 				'</div>' +
@@ -60,14 +50,17 @@
 			link: function (scope, element, attrs) {
 				if (!attrs.postsManagerId)
 					$log.error('vip-posts directive, attribute "posts-manager-id" not specified');
+				// set listeners array, see $destroy
+				var listeners = [];
 				// get the post manager
 				var postsManager = vipFactoryService(attrs.postsManagerId);
-
-				var listeners = [];
-
+				// number of post to load when load more is clicked
 				var topLoad = 3;
+				// id of the entity owner of the posts
 				var entityId;
+				// store the list of posts
 				scope.posts = [];
+				// indicate if posts are being loaded
 				scope.loadingPosts = false;
 
 				// load more posts
@@ -100,13 +93,17 @@
 					scope.loadMorePosts();
 				}
 
-				var afterPostAdded = function () {
-					// clear new posts
+				var clearNewPosts = function() {
 					scope._commentPost = angular.extend(scope._commentPost || {}, { Comment: null, PostType: 'CommentPost' });
 					scope._picturePost = angular.extend(scope._picturePost || {}, { Comment: null, Pictures: [], PostType: 'PicturePost' });
 					scope._showPost = null;
+				};
 
-					// TODO: Refresh posts
+				var afterPostAdded = function (addedPost) {
+					// insert added post at the beginning of the array
+					scope.posts.splice(0, 0, addedPost);
+					// clear new posts
+					clearNewPosts();
 				};
 
 				scope.clickPostComment = function () {
@@ -119,12 +116,28 @@
 					scope._showPost = vip.postsTypes.picture;
 				};
 
-				// adds a new post
-				scope.addPost = function (post) {
-					postsManager.savePost(entityId, post).then(function () {
-						afterPostAdded();
+				// listen for event to save new post
+				listeners.push(scope.$on('vipPostSave', function (event, post) {
+					// prevent default behavior of saving operation
+					event.preventDefault();
+					// stop event propagation
+					if (event.stopPropagation)
+						event.stopPropagation();
+					// save the post
+					postsManager.savePost(entityId, post).then(afterPostAdded, function () {
+						swal('Oops', 'An error has occurred saving the post.', 'error');
 					});
-				};
+				}));
+
+				// listen for event to cancel adding new post
+				listeners.push(scope.$on('vipPostCancel', function (event) {
+					// prevent default behavior of saving operation
+					event.preventDefault();
+					// stop event propagation
+					if (event.stopPropagation)
+						event.stopPropagation();
+					clearNewPosts();
+				}));
 
 				// updates an existing post
 				scope.updatePost = function (post) {
@@ -158,6 +171,9 @@
 		};
 	}]);
 
+	/*
+		Directive to display a specific post
+	*/
 	vip.directive('vipPost', ['$compile', 'vipFactoryService', function ($compile, vipFactoryService) {
 		return {
 			restrict: 'ACE',
@@ -167,8 +183,6 @@
 
 			require: 'ngModel',
 
-			priority: 10,
-
 			link: function (scope, element, attrs, ngModelCtrl) {
 				var listeners = [];
 				var innerScope;
@@ -177,6 +191,7 @@
 				scope.showDeleteButton = attrs.showDeleteButton !== 'false';
 				scope.showSaveButton = attrs.showSaveButton !== 'false';
 				scope.showCancelButton = attrs.showCancelButton !== 'false';
+				scope.saveButtonCaption = attrs.saveCaption || 'Save';
 
 				var initialize = function () {
 					// make a copy of the original post (so that it can be restored if cancel edit) TODO: Do this only if editing is allowed
@@ -185,8 +200,8 @@
 					var postFactory = vipFactoryService(scope.post.PostType);
 					// build the actual post element
 					var postElement = postFactory.buildElement(attrs.ngModel);
-					// set rendering mode to read
-					scope.renderingMode = vip.renderingModes.edit;
+					// set initial rendering mode (read by default)
+					scope.renderingMode = (vip.renderingModes.edit + '') === attrs.vipRenderingMode ? vip.renderingModes.edit : vip.renderingModes.read;
 
 					// TODO: Do not compile buttons when editing is not allowed
 					var content = angular.element(
@@ -199,8 +214,8 @@
 							'<form name="formPost">' +
 							'</form>' +
 							'<div class="vip-post__footer">' +
-								'<button class="btn btn-primary vip-post__save-btn" ng-click="update(post)" ng-if="showSaveButton" ng-disabled="formPost.$invalid" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Save</button>' +
-								'<button class="btn btn-secondary vip-post__cancel-btn" ng-click="cancel()" ng-if="showCancelButton" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Cancel</button>' +
+								'<button class="btn btn-primary vip-post__save-btn" ng-click="_save(post)" ng-if="showSaveButton" ng-disabled="formPost.$invalid" ng-hide="renderingMode == ' + vip.renderingModes.read + '">{{::saveButtonCaption}}</button>' +
+								'<button class="btn btn-secondary vip-post__cancel-btn" ng-click="cancel(post)" ng-if="showCancelButton" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Cancel</button>' +
 							'</div>' +
 						'</div>'
 					);
@@ -225,9 +240,16 @@
 						scope.deletePost(scope.post);
 					};
 
-					// updates the post
-					scope.update = function (post) {
-						// save the post by calling savePost() in parent scope
+					// saves the post
+					scope._save = function (post) {
+						// check if we need to emit an event
+						if (attrs.onSaveEvent) {
+							var event = scope.$emit(attrs.onSaveEvent, post);
+							if (event.defaultPrevented) {
+								return;
+							}
+						}
+						// save the post by calling updatePost() in parent scope
 						scope.updatePost(post).then(function () {
 							// set rendering mode back to read
 							scope.renderingMode = vip.renderingModes.read;
@@ -239,7 +261,14 @@
 					};
 
 					// handles cancel
-					scope.cancel = function () {
+					scope.cancel = function (post) {
+						// check if we need to emit an event
+						if (attrs.onCancelEvent) {
+							var event = scope.$emit(attrs.onCancelEvent, post);
+							if (event.defaultPrevented) {
+								return;
+							}
+						}
 						// set read rendering mode
 						scope.renderingMode = vip.renderingModes.read;
 						// restore the post
