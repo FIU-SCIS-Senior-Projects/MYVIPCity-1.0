@@ -308,10 +308,6 @@
     <Content Include="Content\img\logo.svg" />
     <Content Include="Content\img\noprofilepic.png" />
     <Content Include="Content\img\ring.gif" />
-    <Content Include="Content\img\tempPics\1.jpg" />
-    <Content Include="Content\img\tempPics\2.jpg" />
-    <Content Include="Content\img\tempPics\3.jpg" />
-    <Content Include="Content\img\tempPics\therock.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -461,6 +457,7 @@
     <Content Include="Scripts\modules\vip\js\directives\vip-navigation-menu.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\business.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\business-posts-manager.js" />
+    <Content Include="Scripts\modules\vip\js\services\factories\picture-posts.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\comment-post.js" />
     <Content Include="Scripts\modules\vip\js\services\vipFactoryService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipNavigationService.js" />

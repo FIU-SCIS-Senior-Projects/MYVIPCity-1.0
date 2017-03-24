@@ -44,6 +44,7 @@
 	'vip/js/services/factories/business-posts-manager',
 	'vip/js/services/factories/business',
 	'vip/js/services/factories/comment-post',
+	'vip/js/services/factories/picture-posts',
 	'vip/js/services/vipColorsService',
 	'vip/js/services/vipControlRenderingService',
 	'vip/js/services/vipFactoryService',

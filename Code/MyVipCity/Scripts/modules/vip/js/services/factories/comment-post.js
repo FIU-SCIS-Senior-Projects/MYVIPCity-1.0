@@ -2,7 +2,7 @@
 	'use strict';
 
 	vip.config(['vipFactoryServiceProvider', function (vipFactoryServiceProvider) {
-		vipFactoryServiceProvider.registerFactory(['comment-post', 'CommentPost'], [function () {
+		vipFactoryServiceProvider.registerFactory(['comment-post', 'CommentPost', 'CommentPostDto'], [function () {
 			return {
 				buildElement: function (ngModelBind) {
 					var element = angular.element(

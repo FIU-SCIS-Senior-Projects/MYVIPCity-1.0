@@ -4304,7 +4304,7 @@ div[vip-posts] .vip-posts__post-actions {
 }
 div[vip-posts] .vip-posts__post-actions button {
   min-width: 140px;
-  width: 27%;
+  width: 31%;
   margin-right: 10px;
   margin-bottom: 20px;
   color: white;
@@ -4325,6 +4325,7 @@ div[vip-posts] .vip-posts__post-actions button.vip-posts__post-comment-btn {
 /*VIP POST (singular)*/
 div[vip-post] .vip-post__footer {
   text-align: center;
+  margin-top: 8px;
 }
 div[vip-post] .vip-post__footer button {
   min-width: 80px;

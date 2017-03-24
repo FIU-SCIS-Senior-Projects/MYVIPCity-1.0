@@ -20,21 +20,19 @@
 			},
 
 			template:
+				// add post buttons
 				'<div class="vip-posts__post-actions">' +
 					'<button class="btn vip-posts__post-picture-btn" ng-click="clickPostPicture($event)"><i class="zmdi zmdi-image"></i>Post Picture</button>' +
 					'<button class="btn vip-posts__post-video-btn"><i class="zmdi zmdi-play"></i>Post Video</button>' +
 					'<button class="btn vip-posts__post-comment-btn" ng-click="clickPostComment($event)"><i class="zmdi zmdi-comment"></i>Post Comment</button>' +
 				'</div>' +
+				// add post container
 				'<div class="card" ng-show="_showPost">' +
 					'<div class="card__body">' +
-
-						'<div ng-show="_showPost == \'C\'">' +
-							'<div vip-post ng-model="_commentPost" show-edit-button="false" show-delete-button="false" save-caption="Post" on-save-event="vipPostSave" on-cancel-event="vipPostCancel" vip-rendering-mode="' + vip.renderingModes.edit + '"></div>' +
-						'</div>' +
-
+						'<div vip-post ng-model="_newPost" show-edit-button="false" show-delete-button="false" save-caption="Post" on-save-event="vipPostSave" on-cancel-event="vipPostCancel" vip-rendering-mode="' + vip.renderingModes.edit + '"></div>' +
 					'</div>' +
 				'</div>' +
-				// '<div infinite-scroll="loadMorePosts()" infinite-scroll-distance="0" infinite-scroll-immediate-check="false">' +
+				// existing posts
 				'<div class="vip-posts__posts">' +
 					'<div class="card {{::post.PostType}}" ng-repeat="post in posts track by post.Id">' +
 						'<div class="card__body">' +
@@ -93,9 +91,7 @@
 					scope.loadMorePosts();
 				}
 
-				var clearNewPosts = function() {
-					scope._commentPost = angular.extend(scope._commentPost || {}, { Comment: null, PostType: 'CommentPost' });
-					scope._picturePost = angular.extend(scope._picturePost || {}, { Comment: null, Pictures: [], PostType: 'PicturePost' });
+				var clearNewPosts = function () {
 					scope._showPost = null;
 				};
 
@@ -107,12 +103,12 @@
 				};
 
 				scope.clickPostComment = function () {
-					scope._commentPost = angular.extend(scope._commentPost || {}, { Comment: null, PostType: 'CommentPost' });
+					scope._newPost = { Comment: null, PostType: 'CommentPostDto' };
 					scope._showPost = vip.postsTypes.comment;
 				};
 
 				scope.clickPostPicture = function () {
-					scope._picturePost = angular.extend(scope._picturePost || {}, { Comment: null, Pictures: [], PostType: 'PicturePost' });
+					scope._newPost = { Comment: null, Pictures: [], PostType: 'PicturePostDto' };
 					scope._showPost = vip.postsTypes.picture;
 				};
 
@@ -147,13 +143,14 @@
 				// deletes an exising post
 				scope.deletePost = function (post) {
 					postsManager.deletePost(entityId, post.Id).then(function () {
-						// remove the removed post from the array of posts
+						// remove the post from the array of posts
 						_.remove(scope.posts, function (p) {
 							return p.Id === post.Id;
 						});
 					});
 				};
 
+				// watches for an entity id (this is the id of the entity owner of the posts)
 				var unregister = scope.$watch('entityId', function (id) {
 					if (id) {
 						entityId = id;
@@ -250,11 +247,12 @@
 							}
 						}
 						// save the post by calling updatePost() in parent scope
-						scope.updatePost(post).then(function () {
+						scope.updatePost(post).then(function (savedPost) {
+							angular.extend(post, savedPost);
 							// set rendering mode back to read
 							scope.renderingMode = vip.renderingModes.read;
 							// make a copy of the new post
-							originalPost = angular.copy(post);
+							originalPost = angular.copy(savedPost);
 						}, function () {
 							swal('Oops', 'An error has occurred saving the post.', 'error');
 						});

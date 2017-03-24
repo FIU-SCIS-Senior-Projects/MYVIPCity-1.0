@@ -21,13 +21,13 @@
 					var savePromise;
 
 					switch (post.PostType) {
-						case 'CommentPost':
+						case 'CommentPostDto':
 							savePromise = wrapHttpPromise($http.post('api/Business/' + businessId + '/PostComment', post));
 							break;
-						case 'PicturePost':
+						case 'PicturePostDto':
 							savePromise = wrapHttpPromise($http.post('api/Business/' + businessId + '/PostPicture', post));
 							break;
-						case 'VideoPost':
+						case 'VideoPostDto':
 							savePromise = wrapHttpPromise($http.post('api/Business/' + businessId + '/PostVideo', post));
 							break;
 						default:
