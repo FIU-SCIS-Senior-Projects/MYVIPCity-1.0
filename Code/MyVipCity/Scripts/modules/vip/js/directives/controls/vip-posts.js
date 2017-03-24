@@ -7,6 +7,9 @@
 		picture: 'P'
 	};
 
+	/*
+		Directive to maintain a collection of posts 
+	*/
 	vip.directive('vipPosts', ['$http', '$log', 'vipFactoryService', function ($http, $log, vipFactoryService) {
 		return {
 			restrict: 'ACE',
@@ -25,15 +28,19 @@
 				'<div class="card">' +
 					'<div class="card__body">' +
 
-						'<form name="postCommentForm" ng-show="_showPost == \'C\'">' +
-							'<div required vip-textarea ng-model="_commentPost.Comment" edit-mode-class="form-control textarea-autoheight" vip-edit-only maxlength="1000" placeholder="Write your comment here..."></div>' +
-							'<button class="btn vip-posts__save-post-btn" ng-disabled="postCommentForm.$invalid" ng-click="addPost(_commentPost)">Post Comment</button>' +
-						'</form>' +
+						'<div ng-show="_showPost == \'C\'">' +
+							'<div vip-post ng-model="_commentPost" show-edit-button="false" show-delete-button="false"></div>' +
+						'</div>' +
 
-						'<form name="postCommentForm" ng-show="_showPost == \'P\'">' +
+						//'<form name="postCommentForm" ng-show="_showPost == \'C\'">' +
+						//	'<div required vip-textarea ng-model="_commentPost.Comment" edit-mode-class="form-control textarea-autoheight" vip-edit-only maxlength="1000" placeholder="Write your comment here..."></div>' +
+						//	'<button class="btn vip-posts__save-post-btn" ng-disabled="postCommentForm.$invalid" ng-click="addPost(_commentPost)">Post Comment</button>' +
+						//'</form>' +
 
-							'<button class="btn vip-posts__save-post-btn" ng-disabled="postCommentForm.$invalid" ng-click="addPost(_picturePost)">Post Picture</button>' +
-						'</form>' +
+						//'<form name="postCommentForm" ng-show="_showPost == \'P\'">' +
+
+						//	'<button class="btn vip-posts__save-post-btn" ng-disabled="postCommentForm.$invalid" ng-click="addPost(_picturePost)">Post Picture</button>' +
+						//'</form>' +
 
 					'</div>' +
 				'</div>' +
@@ -95,20 +102,20 @@
 
 				var afterPostAdded = function () {
 					// clear new posts
-					scope._commentPost = { Comment: null, PostType: 'CommentPost' };
-					scope._picturePost = { Comment: null, Pictures: [], PostType: 'PicturePost' };
+					scope._commentPost = angular.extend(scope._commentPost || {}, { Comment: null, PostType: 'CommentPost' });
+					scope._picturePost = angular.extend(scope._picturePost || {}, { Comment: null, Pictures: [], PostType: 'PicturePost' });
 					scope._showPost = null;
 
 					// TODO: Refresh posts
 				};
 
 				scope.clickPostComment = function () {
-					scope._commentPost = { Comment: null, PostType: 'CommentPost' };
+					scope._commentPost = angular.extend(scope._commentPost || {}, { Comment: null, PostType: 'CommentPost' });
 					scope._showPost = vip.postsTypes.comment;
 				};
 
 				scope.clickPostPicture = function () {
-					scope._picturePost = { Comment: null, Pictures: [], PostType: 'PicturePost' };
+					scope._picturePost = angular.extend(scope._picturePost || {}, { Comment: null, Pictures: [], PostType: 'PicturePost' });
 					scope._showPost = vip.postsTypes.picture;
 				};
 
@@ -166,29 +173,34 @@
 				var listeners = [];
 				var innerScope;
 
+				scope.showEditButton = attrs.showEditButton !== 'false';
+				scope.showDeleteButton = attrs.showDeleteButton !== 'false';
+				scope.showSaveButton = attrs.showSaveButton !== 'false';
+				scope.showCancelButton = attrs.showCancelButton !== 'false';
+
 				var initialize = function () {
 					// make a copy of the original post (so that it can be restored if cancel edit) TODO: Do this only if editing is allowed
-					var originalPost = angular.copy(ngModelCtrl.$modelValue);
+					var originalPost = angular.copy(scope.post);
 					// get the factory for the type of post (post.PostType)
-					var postFactory = vipFactoryService(ngModelCtrl.$modelValue.PostType);
+					var postFactory = vipFactoryService(scope.post.PostType);
 					// build the actual post element
 					var postElement = postFactory.buildElement(attrs.ngModel);
 					// set rendering mode to read
-					scope.renderingMode = vip.renderingModes.read;
+					scope.renderingMode = vip.renderingModes.edit;
 
 					// TODO: Do not compile buttons when editing is not allowed
 					var content = angular.element(
 						'<div>' +
-							'<span class="vip-post__posted-on" ng-cloak>{{::' + attrs.ngModel + '.PostedOn | date: \'short\'}}</span>' +
+							'<span class="vip-post__posted-on" ng-cloak>{{::post.PostedOn | date: \'short\'}}</span>' +
 							'<div class="actions pull-right">' +
-								'<a href="" title="Edit" ng-click="edit()"><i class="zmdi zmdi-edit" ng-show="renderingMode == ' + vip.renderingModes.read + '"></i></a>' +
-								'<a href="" title="Delete" ng-click="delete()"><i class="zmdi zmdi-delete"></i></a>' +
+								'<a href="" title="Edit" ng-click="edit()" ng-if="showEditButton"><i class="zmdi zmdi-edit" ng-show="renderingMode == ' + vip.renderingModes.read + '"></i></a>' +
+								'<a href="" title="Delete" ng-click="delete()" ng-if="showDeleteButton"><i class="zmdi zmdi-delete"></i></a>' +
 							'</div>' +
 							'<form name="formPost">' +
 							'</form>' +
 							'<div class="vip-post__footer">' +
-								'<button class="btn btn-primary vip-post__save-btn" ng-click="update()" ng-disabled="formPost.$invalid" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Save</button>' +
-								'<button class="btn btn-secondary vip-post__cancel-btn" ng-click="cancel()" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Cancel</button>' +
+								'<button class="btn btn-primary vip-post__save-btn" ng-click="update(post)" ng-if="showSaveButton" ng-disabled="formPost.$invalid" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Save</button>' +
+								'<button class="btn btn-secondary vip-post__cancel-btn" ng-click="cancel()" ng-if="showCancelButton" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Cancel</button>' +
 							'</div>' +
 						'</div>'
 					);
@@ -210,19 +222,19 @@
 					// deletes the post
 					scope.delete = function () {
 						// call delete post on parent scope
-						scope.deletePost(ngModelCtrl.$viewValue);
+						scope.deletePost(scope.post);
 					};
 
 					// updates the post
-					scope.update = function () {
+					scope.update = function (post) {
 						// save the post by calling savePost() in parent scope
-						scope.updatePost(ngModelCtrl.$viewValue).then(function () {
+						scope.updatePost(post).then(function () {
 							// set rendering mode back to read
 							scope.renderingMode = vip.renderingModes.read;
 							// make a copy of the new post
-							originalPost = angular.copy(ngModelCtrl.$modelValue);
+							originalPost = angular.copy(post);
 						}, function () {
-							swal('Oops', 'An error has occurred updating the post.', 'error');
+							swal('Oops', 'An error has occurred saving the post.', 'error');
 						});
 					};
 
@@ -235,7 +247,8 @@
 					};
 				};
 
-				var destroyInnerScope = function() {
+				// destroys the scope used to compile the specific post element
+				var destroyInnerScope = function () {
 					if (innerScope) {
 						innerScope.$destroy();
 						innerScope = null;
@@ -245,10 +258,15 @@
 
 				// define $render function
 				ngModelCtrl.$render = function () {
+					// save post in scope
+					scope.post = ngModelCtrl.$modelValue;
 					// destroy the inner scope in case it exists
 					destroyInnerScope();
-					// initialize the directive
-					initialize();
+					// make sure there is a value
+					if (scope.post) {
+						// initialize the directive
+						initialize();
+					}
 				};
 
 				listeners.push(scope.$on('$destroy', function () {
