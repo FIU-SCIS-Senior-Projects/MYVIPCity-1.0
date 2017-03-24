@@ -17,11 +17,13 @@
 			}
 		};
 
-		self.$get = ['$injector', function($injector) {
+		self.$get = ['$injector', '$log', function($injector, $log) {
 			return function(factoryName) {
 				var instance = {};
-				if (!map[factoryName])
+				if (!map[factoryName]) {
+					$log.warn('vipFactoryService - factory with name [' + factoryName + '] not found');
 					return null;
+				}
 				instance = $injector.instantiate(map[factoryName], { instance: instance });
 				return instance;
 			};

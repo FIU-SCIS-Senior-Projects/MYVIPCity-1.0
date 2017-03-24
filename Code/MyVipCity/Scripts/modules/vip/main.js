@@ -41,6 +41,7 @@
 	'vip/js/directives/vip-navigation-menu',
 	'vip/js/directives/vip-new-promoters',
 	// services
+	'vip/js/services/factories/business-posts-config',
 	'vip/js/services/factories/business',
 	'vip/js/services/vipColorsService',
 	'vip/js/services/vipControlRenderingService',

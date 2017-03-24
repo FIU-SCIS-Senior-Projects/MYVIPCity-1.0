@@ -149,9 +149,9 @@
         <!--VIP Hosts for small screens-->
         <div vip-hosts-card class="hidden-md hidden-lg hidden-print"></div>
 
-        <!--Social Posts-->
-        <div>
-            <div vip-posts></div>
+        <!--Social Posts, show only for existing businesses-->
+        <div ng-if="model.Id">
+            <div vip-posts posts-config-id="business-posts-config" entity-id="model.Id"></div>
         </div>
     </div>
     <div id="inquire" class="col-md-4 rmd-sidebar-mobile">

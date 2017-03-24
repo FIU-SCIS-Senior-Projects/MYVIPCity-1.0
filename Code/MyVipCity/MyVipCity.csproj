@@ -460,6 +460,7 @@
     <Content Include="Scripts\modules\vip\js\directives\vip-mvc-antiforgery-token.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-navigation-menu.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\business.js" />
+    <Content Include="Scripts\modules\vip\js\services\factories\business-posts-config.js" />
     <Content Include="Scripts\modules\vip\js\services\vipFactoryService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipNavigationService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipPageLoaderService.js" />

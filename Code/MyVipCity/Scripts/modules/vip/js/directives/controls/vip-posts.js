@@ -7,12 +7,14 @@
 		picture: 'P'
 	};
 
-	vip.directive('vipPosts', ['$http', function ($http) {
+	vip.directive('vipPosts', ['$http', '$log', 'vipFactoryService', function ($http, $log, vipFactoryService) {
 		return {
 			restrict: 'ACE',
 
 			// new scope
-			scope: true,
+			scope: {
+				entityId: '='
+			},
 			 
 			template:
 				'<div class="vip-posts__post-actions">' +
@@ -32,7 +34,7 @@
 				'<div class="vip-posts__posts">' +
 					'<div class="card {{::post.PostType}}" ng-repeat="post in posts track by post.Id">' +
 						'<div class="card__body">' +
-							'<div vip-post></div>' +
+							'<div vip-post ng-model="post"></div>' +
 						'</div>' +
 					'</div>' +
 					'<div class="load-more">' +
@@ -41,11 +43,16 @@
 				'</div>'
 				,
 
-			link: function (scope) {
-				var listeners = [];
+			link: function (scope, element, attrs) {
+				if (!attrs.postsConfigId)
+					$log.error('vip-posts directive, attribute "posts-config-id" not specified');
+				// get the post configuration
+				var postsConfig = vipFactoryService(attrs.postsConfigId);
 
+				var listeners = [];
+				
 				var topLoad = 3;
-				var businessId;
+				var entityId;
 				scope.posts = [];
 				scope.loadingPosts = false;
 
@@ -53,16 +60,16 @@
 				scope.loadMorePosts = function () {
 					// check if there is not a loading operation currently in progress
 					if (!scope.loadingPosts) {
-						// indicate a new loading operation
+						// indicate a new loading operation is in progress (about to start)
 						scope.loadingPosts = true;
 						// get the url to retrieve the posts
-						var url = ('api/Business/Posts/' + businessId + '/' + topLoad) + (scope.posts === null || !scope.posts.length ? '' : '/' + scope.posts[scope.posts.length - 1].Id);
+						var url = postsConfig.getLoadPostsUrl(entityId, topLoad, scope.posts && scope.posts.length ? scope.posts[scope.posts.length - 1].Id : undefined);
 						// make request to retrieve the posts
 						$http.get(url).then(function (response) {
 							// update posts array
 							if (response.data) {
+								// add posts at the end of the array
 								scope.posts = scope.posts.concat(response.data);
-								// TODO: Should we scroll to after the element before adding the new posts, i.e current 5, added 3, scroll to item 6
 							}
 						})['finally'](function () {
 							// indicate that loading operation has finished
@@ -92,14 +99,14 @@
 				};
 
 				scope.saveCommentPost = function () {
-					$http.post('api/Business/' + businessId + '/PostComment', scope._commentPost).then(function () {
+					$http.post('api/Business/' + entityId + '/PostComment', scope._commentPost).then(function () {
 						afterPostAdded();
 					});
 				};
 
-				var unregister = scope.$watch('model.Id', function (id) {
+				var unregister = scope.$watch('entityId', function (id) {
 					if (id) {
-						businessId = id;
+						entityId = id;
 						refreshPosts();
 						unregister();
 					}
@@ -121,7 +128,9 @@
 			// new scope
 			scope: true,
 
-			link: function (scope, element, attrs) {
+			require: 'ngModel',
+
+			link: function (scope, element, attrs, ngModelCtrl) {
 				var content = angular.element(
 					'<div>' +
 						'<span class="vip-post__posted-on">{{::post.PostedOn | date: \'short\'}}</span>' +
@@ -138,8 +147,11 @@
 						'</div>' +
 					'</div>'
 				);
+				// append the post content
 				element.append(content);
+				// compile it
 				$compile(content)(scope);
+
 				// handles edit
 				scope.edit = function() {
 
