@@ -26,7 +26,7 @@
 					'<div class="card__body">' +
 						'<form name="postCommentForm" ng-show="_showPost == \'C\'">' +
 							'<div required vip-textarea ng-model="_commentPost.Comment" edit-mode-class="form-control textarea-autoheight" vip-edit-only maxlength="1000" placeholder="Write your comment here..."></div>' +
-							'<button class="btn vip-posts__save-post-btn" ng-disabled="postCommentForm.$invalid" ng-click="saveCommentPost(_commentPost)">Post</button>' +
+							'<button class="btn vip-posts__save-post-btn" ng-disabled="postCommentForm.$invalid" ng-click="addPost(_commentPost)">Post</button>' +
 						'</form>' +
 					'</div>' +
 				'</div>' +
@@ -98,11 +98,16 @@
 					scope._showPost = vip.postsTypes.comment;
 				};
 
-				scope.saveCommentPost = function (post) {
+				scope.addPost = function (post) {
 					postsManager.savePost(entityId, post).then(function () {
 						afterPostAdded();
 					});
 				};
+
+				// updates an existing post
+				scope.updatePost = function(post) {
+					return postsManager.savePost(entityId, post);
+				}
 
 				scope.deletePost = function (post) {
 					postsManager.deletePost(entityId, post.Id).then(function () {
@@ -158,7 +163,7 @@
 						'<form name="formPost">' +
 						'</form>' +
 						'<div class="vip-post__footer">' +
-							'<button class="btn btn-primary vip-post__save-btn" ng-disabled="formPost.$invalid" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Save</button>' +
+							'<button class="btn btn-primary vip-post__save-btn" ng-click="update(post)" ng-disabled="formPost.$invalid" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Save</button>' +
 							'<button class="btn btn-secondary vip-post__cancel-btn" ng-click="cancel()" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Cancel</button>' +
 						'</div>' +
 					'</div>'
@@ -176,6 +181,17 @@
 					scope.renderingMode = vip.renderingModes.edit;
 				};
 
+				scope.update = function (post) {
+					// save the post by calling savePost() in parent scope
+					scope.updatePost(post).then(function () {
+						// set rendering mode back to read
+						scope.renderingMode = vip.renderingModes.read;
+						// make a copy of the new post
+						originalPost = angular.copy(post);
+					}, function(error) {
+						
+					});
+				};
 
 				// handles cancel
 				scope.cancel = function () {
