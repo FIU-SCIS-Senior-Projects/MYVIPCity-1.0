@@ -19,7 +19,7 @@ namespace MyVipCity.BusinessLogic {
 			set;
 		}
 
-		public PostDto AddPost<T>(int id, PostDto postDto) where T : class, IPostsEntity {
+		public PostDto AddPost<T>(int entityId, PostDto postDto) where T : class, IPostsEntity {
 			// make sure this is a new post
 			if (postDto.Id != 0) {
 				var msg = $"[AddPost] Expected post with Id = 0. Received post with Id={postDto.Id}";
@@ -27,10 +27,10 @@ namespace MyVipCity.BusinessLogic {
 				throw new InvalidOperationException(msg);
 			}
 			// find the entity with the given id
-			var entity = DbContext.Set<T>().Find(id);
+			var entity = DbContext.Set<T>().Find(entityId);
 			// check if the entity does not exist
 			if (entity == null) {
-				var msg = $"[AddPost] Entity with Id={id} not found";
+				var msg = $"[AddPost] Entity with Id={entityId} not found";
 				Logger.Error(msg);
 				throw new InvalidOperationException(msg);
 			}
@@ -47,7 +47,7 @@ namespace MyVipCity.BusinessLogic {
 			return postDto;
 		}
 
-		public PostDto UpdatePost<T>(int id, PostDto postDto) where T : class, IPostsEntity {
+		public PostDto UpdatePost<T>(int entityId, PostDto postDto) where T : class, IPostsEntity {
 			// check the post has a valid id
 			if (postDto.Id == 0) {
 				var msg = $"[UpdatePost] Expected post with Id <> 0. Received post with Id=0";
@@ -55,10 +55,10 @@ namespace MyVipCity.BusinessLogic {
 				throw new InvalidOperationException(msg);
 			}
 			// find the entity with the given id
-			var entity = DbContext.Set<T>().Find(id);
+			var entity = DbContext.Set<T>().Find(entityId);
 			// check if the entity does not exist
 			if (entity == null) {
-				var msg = $"[UpdatePost] Entity with Id={id} not found";
+				var msg = $"[UpdatePost] Entity with Id={entityId} not found";
 				Logger.Error(msg);
 				throw new InvalidOperationException(msg);
 			}
@@ -66,7 +66,7 @@ namespace MyVipCity.BusinessLogic {
 			// find the post
 			var existingPost = entity.Posts.AsQueryable().FirstOrDefault(p => p.Id == postDto.Id);
 			if (existingPost == null) {
-				var msg = $"[UpdatePost] Post with Id={postDto.Id} not found for entity with Id={id}";
+				var msg = $"[UpdatePost] Post with Id={postDto.Id} not found for entity with Id={entityId}";
 				Logger.Error(msg);
 				throw new InvalidOperationException(msg);
 			}
@@ -76,17 +76,40 @@ namespace MyVipCity.BusinessLogic {
 			return postDto;
 		}
 
-		public PostDto[] GetPosts<T>(int id, int top) where T : class, IPostsEntity {
-			return GetPosts<T>(id, top, null);
+		public PostDto AddOrUpdatePost<T>(int entityId, PostDto postDto) where T : class, IPostsEntity {
+			return postDto.Id == 0 ? AddPost<T>(entityId, postDto) : UpdatePost<T>(entityId, postDto);
 		}
 
-		public PostDto[] GetPosts<T>(int id, int top, int afterPostId) where T : class, IPostsEntity {
-			return GetPosts<T>(id, top, p => p.Id < afterPostId);
+		public ResultDto<bool> DeletePost<T>(int entityId, int postId) where T : class, IPostsEntity {
+			// find the entity with the given id
+			var entity = DbContext.Set<T>().Find(entityId);
+			// check if the entity does not exist
+			if (entity == null) {
+				var msg = $"[DeletePost] Entity with Id={entityId} not found";
+				Logger.Warn(msg);
+				return new ResultDto<bool>(false) {
+					Messages = new[] { msg }
+				};
+			}
+
+			var existingPost = entity.Posts.AsQueryable().FirstOrDefault(p => p.Id == postId);
+			if (existingPost != null)
+				DbContext.Set<Post>().Remove(existingPost);
+			DbContext.SaveChanges();
+			return new ResultDto<bool>(true);
 		}
 
-		private PostDto[] GetPosts<T>(int id, int top, Expression<Func<Post, bool>> whereExpression) where T : class, IPostsEntity {
+		public PostDto[] GetPosts<T>(int entityId, int top) where T : class, IPostsEntity {
+			return GetPosts<T>(entityId, top, null);
+		}
+
+		public PostDto[] GetPosts<T>(int entityId, int top, int afterPostId) where T : class, IPostsEntity {
+			return GetPosts<T>(entityId, top, p => p.Id < afterPostId);
+		}
+
+		private PostDto[] GetPosts<T>(int entityId, int top, Expression<Func<Post, bool>> whereExpression) where T : class, IPostsEntity {
 			// find the entity
-			var entity = DbContext.Set<T>().Find(id);
+			var entity = DbContext.Set<T>().Find(entityId);
 			// if the entity does not exists, then return null
 			if (entity == null)
 				return null;

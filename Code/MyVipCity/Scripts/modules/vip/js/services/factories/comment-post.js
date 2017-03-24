@@ -4,7 +4,7 @@
 	vip.config(['vipFactoryServiceProvider', function (vipFactoryServiceProvider) {
 		vipFactoryServiceProvider.registerFactory(['comment-post', 'CommentPost'], [function () {
 			return {
-				getElement: function (ngModelBind) {
+				buildElement: function (ngModelBind) {
 					var element = angular.element(
 						'<div required vip-textarea ng-model="' + ngModelBind + '.Comment" edit-mode-class="form-control textarea-autoheight" maxlength="1000" placeholder="Write your comment here..."></div>'
 					);

@@ -78,8 +78,12 @@ namespace MyVipCity.BusinessLogic {
 			return promoterProfilesDto;
 		}
 
-		public PostDto AddPost(int id, PostDto postDto) {
-			return PostsEntityManager.AddPost<Business>(id, postDto);
+		public PostDto AddOrUpdatePost(int id, PostDto postDto) {
+			return PostsEntityManager.AddOrUpdatePost<Business>(id, postDto);
+		}
+
+		public ResultDto<bool> DeletePost(int id, int postId) {
+			return PostsEntityManager.DeletePost<Business>(id, postId);
 		}
 
 		public PostDto[] GetPosts(int id, int top) {

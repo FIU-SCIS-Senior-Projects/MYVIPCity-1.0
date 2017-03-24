@@ -1,4 +1,4 @@
-﻿define(['vip/js/vip', 'angular'], function (vip, angular) {
+﻿define(['vip/js/vip', 'angular', 'lodash'], function (vip, angular, _) {
 	'use strict';
 
 	vip.postsTypes = {
@@ -11,7 +11,7 @@
 		return {
 			restrict: 'ACE',
 
-			// new scope
+			// isolated scope
 			scope: {
 				entityId: '='
 			},
@@ -26,7 +26,7 @@
 					'<div class="card__body">' +
 						'<form name="postCommentForm" ng-show="_showPost == \'C\'">' +
 							'<div required vip-textarea ng-model="_commentPost.Comment" edit-mode-class="form-control textarea-autoheight" vip-edit-only maxlength="1000" placeholder="Write your comment here..."></div>' +
-							'<button class="btn vip-posts__save-post-btn" ng-disabled="postCommentForm.$invalid" ng-click="saveCommentPost($event)">Post</button>' +
+							'<button class="btn vip-posts__save-post-btn" ng-disabled="postCommentForm.$invalid" ng-click="saveCommentPost(_commentPost)">Post</button>' +
 						'</form>' +
 					'</div>' +
 				'</div>' +
@@ -87,26 +87,31 @@
 				}
 
 				var afterPostAdded = function () {
-					scope._commentPost = { Comment: null };
+					scope._commentPost = { Comment: null, PostType: 'CommentPost' };
 					scope._showPost = null;
 
 					// TODO: Refresh posts
 				};
 
 				scope.clickPostComment = function () {
-					scope._commentPost = { Comment: null };
+					scope._commentPost = { Comment: null, PostType: 'CommentPost' };
 					scope._showPost = vip.postsTypes.comment;
 				};
 
-				scope.saveCommentPost = function () {
-					$http.post('api/Business/' + entityId + '/PostComment', scope._commentPost).then(function () {
+				scope.saveCommentPost = function (post) {
+					postsManager.savePost(entityId, post).then(function () {
 						afterPostAdded();
 					});
 				};
 
-				////scope.saveCommentPost = function(post) {
-				////	postsManager.savePost(post);
-				////};
+				scope.deletePost = function (post) {
+					postsManager.deletePost(entityId, post.Id).then(function () {
+						// remove the removed post from the array of posts
+						_.remove(scope.posts, function (p) {
+							return p.Id === post.Id;
+						});
+					});
+				};
 
 				var unregister = scope.$watch('entityId', function (id) {
 					if (id) {
@@ -132,13 +137,14 @@
 			// new scope
 			scope: true,
 
-			link: function (scope, element, attrs) {
+			link: function (scope, element) {
 				// make a copy of the original post (so that it can be restored if cancel edit) TODO: Do this only if editing is allowed
 				var originalPost = angular.copy(scope.post);
-				// get the 
+				// get the factory for the type of post (post.PostType)
 				var postFactory = vipFactoryService(scope.post.PostType);
-				var postElement = postFactory.getElement('post');
-				// set rendering mode
+				// build the actual post element
+				var postElement = postFactory.buildElement('post');
+				// set rendering mode to read
 				scope.renderingMode = vip.renderingModes.read;
 
 				// TODO: Do not compile buttons when editing is not allowed
@@ -147,7 +153,7 @@
 						'<span class="vip-post__posted-on">{{::post.PostedOn | date: \'short\'}}</span>' +
 						'<div class="actions pull-right">' +
 							'<a href="" title="Edit" ng-click="edit()"><i class="zmdi zmdi-edit" ng-show="renderingMode == ' + vip.renderingModes.read + '"></i></a>' +
-							'<a href="" title="Delete" ng-click="delete()"><i class="zmdi zmdi-delete"></i></a>' +
+							'<a href="" title="Delete" ng-click="deletePost(post)"><i class="zmdi zmdi-delete"></i></a>' +
 						'</div>' +
 						'<form name="formPost">' +
 						'</form>' +
@@ -170,13 +176,9 @@
 					scope.renderingMode = vip.renderingModes.edit;
 				};
 
-				// handles delete
-				scope.delete = function () {
-
-				};
 
 				// handles cancel
-				scope.cancel = function() {
+				scope.cancel = function () {
 					// set read rendering mode
 					scope.renderingMode = vip.renderingModes.read;
 					// restore the post

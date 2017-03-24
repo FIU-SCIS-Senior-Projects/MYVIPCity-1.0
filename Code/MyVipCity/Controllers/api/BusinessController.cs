@@ -85,21 +85,31 @@ namespace MyVipCity.Controllers.api {
 		[Authorize(Roles = "Admin")]
 		[Route("{id:int}/PostComment")]
 		public async Task<IHttpActionResult> PostComment(int id, CommentPostDto post) {
-			return await AddPost(id, post);
+			return await AddOrUpdatePost(id, post);
 		}
 
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
 		[Route("{id:int}/PostPicture")]
 		public async Task<IHttpActionResult> PostPicture(int id, PicturePostDto post) {
-			return await AddPost(id, post);
+			return await AddOrUpdatePost(id, post);
 		}
 
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
 		[Route("{id:int}/PostVideo")]
 		public async Task<IHttpActionResult> PostVideo(int id, VideoPostDto post) {
-			return await AddPost(id, post);
+			return await AddOrUpdatePost(id, post);
+		}
+
+		[HttpDelete]
+		[Authorize(Roles = "Admin")]
+		[Route("{id:int}/DeletePost/{postId:int}")]
+		public async Task<IHttpActionResult> DeletePost(int id, int postId) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var result = BusinessManager.DeletePost(id, postId);
+				return Ok(result);
+			});
 		}
 
 		[HttpGet]
@@ -122,10 +132,10 @@ namespace MyVipCity.Controllers.api {
 			});
 		}
 
-		private async Task<IHttpActionResult> AddPost(int id, PostDto post) {
+		private async Task<IHttpActionResult> AddOrUpdatePost(int id, PostDto post) {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
 				post.PostedBy = User.Identity.GetUserId();
-				post = BusinessManager.AddPost(id, post);
+				post = BusinessManager.AddOrUpdatePost(id, post);
 				return Ok(post);
 			});
 		}
