@@ -64,26 +64,10 @@ namespace MyVipCity.BusinessLogic {
 				Logger.Error("Promoter profile Id cannot be 0");
 				throw new InvalidOperationException("Promoter profile Id cannot be 0");
 			}
-
-			if (Thread.CurrentPrincipal == null) {
-				Logger.Error("There is no current principal");
-				throw new InvalidOperationException();
-			}
-
-			var userIdentity = (ClaimsIdentity)Thread.CurrentPrincipal.Identity;
-			var userId = userIdentity.GetUserId();
-			// find the promoter profile with the given id
+			// only the owner of the profile can edit it
+			ValidateCurrentUserIsOwnerOfPromoterProfile(promoterProfileDto.Id);
+			// find the profile
 			var promoterProfile = DbContext.Set<PromoterProfile>().Find(promoterProfileDto.Id);
-			// check if it does not exist
-			if (promoterProfile == null) {
-				Logger.Error($"Promoter profile with Id: {promoterProfileDto.Id} not found");
-				throw new ObjectNotFoundException($"Promoter profile with Id: {promoterProfileDto.Id} not found");
-			}
-			// only the user associated to the profile can edit it
-			if (promoterProfile.UserId != userId) {
-				Logger.Error($"User with id: {userId} tried to edit Promoter Profile with id: {promoterProfile.Id} which is associated to user: {promoterProfile.UserId}");
-				throw new InvalidOperationException();
-			}
 			// convert from dto to model
 			var promoterProfileToUpdate = ToModel(promoterProfileDto, promoterProfile);
 			// persist changes
@@ -197,10 +181,14 @@ namespace MyVipCity.BusinessLogic {
 
 		// TODO: Only self promoter can edit own posts
 		public PostDto AddOrUpdatePost(int id, PostDto postDto) {
+			// only the owner of the profile can add a post to the profile
+			ValidateCurrentUserIsOwnerOfPromoterProfile(id);
 			return PostsEntityManager.AddOrUpdatePost<PromoterProfile>(id, postDto);
 		}
 
 		public ResultDto<bool> DeletePost(int id, int postId) {
+			// only the owner of the profile can delete a post from profile
+			ValidateCurrentUserIsOwnerOfPromoterProfile(id);
 			return PostsEntityManager.DeletePost<PromoterProfile>(id, postId);
 		}
 
@@ -223,6 +211,30 @@ namespace MyVipCity.BusinessLogic {
 			var reviews = reviewsQueryable.OrderByDescending(r => r.Id).Take(top).ToArray();
 			var reviewsDto = Mapper.Map<ReviewDto[]>(reviews);
 			return reviewsDto;
+		}
+
+		private void ValidateCurrentUserIsOwnerOfPromoterProfile(int promoterProfileId) {
+			if (Thread.CurrentPrincipal == null) {
+				Logger.Error("There is no current principal");
+				throw new InvalidOperationException();
+			}
+			// get the id of the currently authenticated user
+			var userIdentity = (ClaimsIdentity)Thread.CurrentPrincipal.Identity;
+			var userId = userIdentity.GetUserId();
+			// find the promoter profile with the given id
+			var promoterProfile = DbContext.Set<PromoterProfile>().Find(promoterProfileId);
+			// check if it does not exist
+			if (promoterProfile == null) {
+				var msg = $"Promoter profile with Id: {promoterProfileId} not found";
+				Logger.Error(msg);
+				throw new ObjectNotFoundException(msg);
+			}
+			// only the user associated to the profile can edit it
+			if (promoterProfile.UserId != userId) {
+				var msg = $"User with id: {userId} tried to edit Promoter Profile with Id: {promoterProfileId} which is associated to user: {promoterProfile.UserId}";
+				Logger.Error(msg);
+				throw new InvalidOperationException();
+			}
 		}
 	}
 }
