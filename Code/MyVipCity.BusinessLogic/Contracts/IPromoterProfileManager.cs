@@ -1,4 +1,5 @@
 ﻿using MyVipCity.DataTransferObjects;
+using MyVipCity.DataTransferObjects.Social;
 
 namespace MyVipCity.BusinessLogic.Contracts {
 
@@ -21,5 +22,13 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		ReviewDto[] GetReviews(int id, int top);
 
 		ReviewDto[] GetReviews(int id, int top, int afterReviewId);
+
+		PostDto AddOrUpdatePost(int id, PostDto postDto);
+
+		ResultDto<bool> DeletePost(int id, int postId);
+
+		PostDto[] GetPosts(int id, int top);
+
+		PostDto[] GetPosts(int id, int top, int afterPostId);
 	}
 }

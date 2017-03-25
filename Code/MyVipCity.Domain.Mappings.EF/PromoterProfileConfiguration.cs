@@ -17,10 +17,17 @@ namespace MyVipCity.Domain.Mappings.EF {
 
 			// relationships
 			HasRequired(p => p.Business).WithMany();
+
 			HasMany(p => p.Reviews).WithMany().Map(m => {
 				m.ToTable("PromoterProfileReviews");
 				m.MapLeftKey("PromoterProfileId");
 				m.MapRightKey("ReviewId");
+			});
+
+			HasMany(b => b.Posts).WithMany().Map(m => {
+				m.ToTable("PromoterProfilesPosts");
+				m.MapLeftKey("PromoterProfileId");
+				m.MapRightKey("PostId");
 			});
 		}
 	}

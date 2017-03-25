@@ -459,6 +459,7 @@
     <Content Include="Scripts\modules\vip\js\directives\vip-match.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-mvc-antiforgery-token.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-navigation-menu.js" />
+    <Content Include="Scripts\modules\vip\js\services\factories\promoter-posts-manager.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\business.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\business-posts-manager.js" />
     <Content Include="Scripts\modules\vip\js\services\factories\video-posts.js" />

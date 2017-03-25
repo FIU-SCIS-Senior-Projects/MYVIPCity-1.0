@@ -5,7 +5,7 @@
 		// set rendering mode to read mode by default
 		$scope.renderingMode = vip.renderingModes.read;
 		// get the id of the profile from the route parameters
-		var promoterProfileId = $routeParams.promoterProfileId;
+		var promoterProfileId = parseInt($routeParams.promoterProfileId);
 		// set empty model
 		$scope.model = {};
 		// set reviews
@@ -34,13 +34,18 @@
 			$scope.showEditButton = true;
 		};
 
+		// check if there is a list of the ids of all the profiles owned by the current user
+		if (vipConfig.PromoterProfileIds && vipConfig.PromoterProfileIds.indexOf(promoterProfileId) > -1) {
+			canEditPromoterProfile();
+		}
+
 		$scope.reviewsTabShow = function () {
 		};
 
 		// handles add review click
 		$scope.addReview = function () {
 			// make sure the user is authenticated
-			if (!vipUserService.IsAuthenticated()) {
+			if (!vipUserService.isAuthenticated()) {
 				swal('Log in first', 'You need to login to leave a review. You can register if you do not have an account yet.', 'info');
 				return;
 			}
@@ -198,7 +203,7 @@
 				$scope.model = response.data;
 				// check if there is a list of the ids of all the profiles owned by the current user
 				if (vipConfig.PromoterProfileIds && vipConfig.PromoterProfileIds.indexOf($scope.model.Id) > -1) {
-					canEditPromoterProfile();
+					// canEditPromoterProfile();
 					showWelcomeToProfilePopup($scope.model);
 				}
 				// check if the user is an admin

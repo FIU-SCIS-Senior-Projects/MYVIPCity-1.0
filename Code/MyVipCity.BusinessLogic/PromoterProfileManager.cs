@@ -9,6 +9,7 @@ using Censored;
 using Microsoft.AspNet.Identity;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
+using MyVipCity.DataTransferObjects.Social;
 using MyVipCity.Domain;
 using MyVipCity.Mailing.Contracts;
 using MyVipCity.Mailing.Contracts.EmailModels;
@@ -28,6 +29,13 @@ namespace MyVipCity.BusinessLogic {
 
 		[Inject]
 		public IEmailService EmailService
+		{
+			get;
+			set;
+		}
+
+		[Inject]
+		public IPostsEntityManager PostsEntityManager
 		{
 			get;
 			set;
@@ -185,6 +193,23 @@ namespace MyVipCity.BusinessLogic {
 
 		public ReviewDto[] GetReviews(int id, int top, int afterReviewId) {
 			return GetReviews(id, top, r => r.Id < afterReviewId);
+		}
+
+		// TODO: Only self promoter can edit own posts
+		public PostDto AddOrUpdatePost(int id, PostDto postDto) {
+			return PostsEntityManager.AddOrUpdatePost<PromoterProfile>(id, postDto);
+		}
+
+		public ResultDto<bool> DeletePost(int id, int postId) {
+			return PostsEntityManager.DeletePost<PromoterProfile>(id, postId);
+		}
+
+		public PostDto[] GetPosts(int id, int top) {
+			return PostsEntityManager.GetPosts<PromoterProfile>(id, top);
+		}
+
+		public PostDto[] GetPosts(int id, int top, int afterPostId) {
+			return PostsEntityManager.GetPosts<PromoterProfile>(id, top, afterPostId);
 		}
 
 		private ReviewDto[] GetReviews(int id, int top, Expression<Func<Review, bool>> whereExpression) {

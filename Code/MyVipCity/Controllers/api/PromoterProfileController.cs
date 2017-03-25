@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
+using MyVipCity.DataTransferObjects.Social;
 using Ninject;
 
 namespace MyVipCity.Controllers.api {
@@ -100,6 +102,65 @@ namespace MyVipCity.Controllers.api {
 			return await Task<IHttpActionResult>.Factory.StartNew(() => {
 				var reviews = PromoterProfileManager.GetReviews(id, top, afterReviewId);
 				return Ok(reviews);
+			});
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Promoter")]
+		[Route("{id:int}/PostComment")]
+		public async Task<IHttpActionResult> PostComment(int id, CommentPostDto post) {
+			return await AddOrUpdatePost(id, post);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Promoter")]
+		[Route("{id:int}/PostPicture")]
+		public async Task<IHttpActionResult> PostPicture(int id, PicturePostDto post) {
+			return await AddOrUpdatePost(id, post);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Promoter")]
+		[Route("{id:int}/PostVideo")]
+		public async Task<IHttpActionResult> PostVideo(int id, VideoPostDto post) {
+			return await AddOrUpdatePost(id, post);
+		}
+
+		[HttpDelete]
+		[Authorize(Roles = "Promoter")]
+		[Route("{id:int}/DeletePost/{postId:int}")]
+		public async Task<IHttpActionResult> DeletePost(int id, int postId) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var result = PromoterProfileManager.DeletePost(id, postId);
+				return Ok(result);
+			});
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route("Posts/{id:int}/{top:int}")]
+		public async Task<IHttpActionResult> GetPosts(int id, int top) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var result = PromoterProfileManager.GetPosts(id, top);
+				return Ok(result);
+			});
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route("Posts/{id:int}/{top:int}/{afterPostId:int}")]
+		public async Task<IHttpActionResult> GetPosts(int id, int top, int afterPostId) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				var result = PromoterProfileManager.GetPosts(id, top, afterPostId);
+				return Ok(result);
+			});
+		}
+
+		private async Task<IHttpActionResult> AddOrUpdatePost(int id, PostDto post) {
+			return await Task<IHttpActionResult>.Factory.StartNew(() => {
+				post.PostedBy = User.Identity.GetUserId();
+				post = PromoterProfileManager.AddOrUpdatePost(id, post);
+				return Ok(post);
 			});
 		}
 	}

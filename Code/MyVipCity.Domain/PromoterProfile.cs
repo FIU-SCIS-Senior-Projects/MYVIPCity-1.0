@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using MyVipCity.Domain.Contracts;
+using MyVipCity.Domain.Social;
 
 namespace MyVipCity.Domain {
 
-	public class PromoterProfile: IIdentifiable, IReviewable {
+	public class PromoterProfile: IIdentifiable, IReviewable, IPostsEntity {
 
 		private ICollection<Review> reviews;
+		private ICollection<Post> posts;
 
 		public PromoterProfile() {
 			reviews = new List<Review>();
+			posts = new List<Post>();
 		}
 
 		public int Id
@@ -76,6 +79,15 @@ namespace MyVipCity.Domain {
 		{
 			get { return reviews; }
 			protected set { reviews = value; }
+		}
+
+		/// <summary>
+		/// List of posts for the profile.
+		/// </summary>
+		public virtual ICollection<Post> Posts
+		{
+			get { return posts; }
+			protected set { posts = value; }
 		}
 	}
 }

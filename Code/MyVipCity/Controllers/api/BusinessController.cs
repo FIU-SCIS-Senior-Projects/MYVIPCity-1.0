@@ -80,7 +80,6 @@ namespace MyVipCity.Controllers.api {
 			});
 		}
 
-
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
 		[Route("{id:int}/PostComment")]

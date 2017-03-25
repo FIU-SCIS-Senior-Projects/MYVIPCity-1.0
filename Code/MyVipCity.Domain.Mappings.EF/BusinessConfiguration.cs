@@ -31,7 +31,6 @@ namespace MyVipCity.Domain.Mappings.EF {
 				m.MapRightKey("FileId");
 			});
 
-			// relationships
 			HasMany(b => b.Posts).WithMany().Map(m => {
 				m.ToTable("BusinessesPosts");
 				m.MapLeftKey("BusinessId");
