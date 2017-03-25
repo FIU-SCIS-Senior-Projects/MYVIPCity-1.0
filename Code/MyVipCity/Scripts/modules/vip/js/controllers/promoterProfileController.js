@@ -145,14 +145,14 @@
 					$scope.model.ReviewsCount++;
 					refreshReviews();
 				}
-			}, function (error) {
+			}, function () {
 				showErrorPopup('Oops!', 'Something went wrong adding the review!');
 			});
 		};
 
 		$scope.save = function () {
 			// make request to get the profile info
-			$http.put('api/PromoterProfile', $scope.model).then(function (response) {
+			$http.put('api/PromoterProfile', $scope.model).then(function () {
 				// let the user know save was successful
 				swal({
 					type: 'success',
@@ -167,7 +167,7 @@
 				}, function () {
 					$route.reload();
 				});
-			}, function (error) {
+			}, function () {
 				showErrorPopup('Oops!', 'Something went wrong!');
 			});
 		};
@@ -187,7 +187,7 @@
 					type: 'success',
 					title: 'Welcome to your new profile for ' + promoter.Business.Name + '!',
 					html: '<br/><p>Please add an awesome profile picture and some information about yourself. <i>That is what user will see</i>.</p>' +
-						'<p>You can also start posting your activity under the <strong>POST</strong> section.</p>',
+						'<p>You can also start posting your activity under the <strong>POST</strong> section.</p>'
 				});
 			}
 		};
@@ -212,9 +212,6 @@
 				}
 			}
 		});
-
-
-
 
 		$scope.toggleRenderingMode = function () {
 			if ($scope.renderingMode === vip.renderingModes.read)
