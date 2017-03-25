@@ -30,8 +30,8 @@
 					// let the user know save was successful, and prompt if want to display the view mode for this club
 					swal({
 						type: 'success',
-						title: 'Club created successfully!',
-						text: 'Do you want to view the club?',
+						title: 'Business created successfully!',
+						text: 'Do you want to view the business page?',
 						showCancelButton: true,
 						confirmButtonText: "Yes",
 						cancelButtonText: "No"

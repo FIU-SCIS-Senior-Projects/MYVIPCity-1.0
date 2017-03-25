@@ -62,7 +62,7 @@
 			swal({
 				type: 'warning',
 				title: 'Delete Invitation?',
-				text: 'If you delete this pending invitation the promoter will not be able to join the club. Are you sure you want to continue?',
+				text: 'If you delete this pending invitation the promoter will not be able to join the business. Are you sure you want to continue?',
 				confirmButtonText: "Yes, delete it",
 				showCancelButton: true
 			}).then(function () {

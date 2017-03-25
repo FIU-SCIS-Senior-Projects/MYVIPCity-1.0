@@ -9,7 +9,7 @@
 
 		return {
 			goToClub: function(friendlyId) {
-				var url = '/viewClub/' + friendlyId;
+				var url = '/view-business/' + friendlyId;
 				changeLocation(url);
 			}
 		};

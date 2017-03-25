@@ -31,7 +31,7 @@
 					swal({
 						type: 'success',
 						title: 'Success!',
-						text: 'The club has been updated successfully',
+						text: 'The business has been updated successfully',
 						confirmButtonText: "Ok"
 					}).then(function () {
 						$scope.$apply(function () {

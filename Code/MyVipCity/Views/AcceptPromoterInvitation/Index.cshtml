@@ -8,7 +8,7 @@
         <h2>You have been invited to join @Model.Name as a promoter</h2>
     </div>
     <div class="card__body">
-        <a href="#/viewClub/@Model.FriendlyId">
+        <a href="#/view-business/@Model.FriendlyId">
             @if (Model.Pictures != null && Model.Pictures.Any()) {
                 <img src="api/Pictures/@Model.Pictures.OrderBy(p => p.Index).ElementAt(0).BinaryDataId"/>
             }

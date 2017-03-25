@@ -107,19 +107,19 @@ namespace MyVipCity.Controllers {
 					Path ="/"
 				},
 				new {
-					Title = "Clubs",
+					Title = "Restaurants",
 					Path ="/",
 					Submenu = new object[] {
 						new {
-							Title = "Club Detail",
+							Title = "Restaurant Detail",
 							Path = "/"
 						},
 						new {
-							Title = "Club Reviews",
+							Title = "Restaurant Reviews",
 							Path = "/"
 						},
 						new {
-							Title = "Club Disclaimer",
+							Title = "Restaurant Disclaimer",
 							Path = "/"
 						}
 					}
@@ -152,7 +152,7 @@ namespace MyVipCity.Controllers {
 						Path = "/",
 						Submenu = new object[] {
 							new {
-								Title = "Add Club",
+								Title = "Add Restaurant",
 								Path = "#/addbusiness"
 							}
 						}
@@ -169,7 +169,7 @@ namespace MyVipCity.Controllers {
 					TemplateUrl = "/Home/Home"
 				},
 				new {
-					Path = "/viewClub/:friendlyId",
+					Path = "/view-business/:friendlyId",
 					TemplateUrl = "/ViewBusiness",
 					Controller = "vip.viewBusinessController"
 				},
