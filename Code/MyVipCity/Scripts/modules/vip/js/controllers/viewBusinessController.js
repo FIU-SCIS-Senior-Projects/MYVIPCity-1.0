@@ -1,11 +1,11 @@
 ﻿define(['vip/js/vip', 'sweet-alert'], function (vip, swal) {
 	'use strict';
 
-	vip.controller('vip.viewBusinessController', ['$scope', '$routeParams', '$http', 'vipConfig', '$route', 'vipNavigationService', function ($scope, $routeParams, $http, vipConfig, $route, vipNavigationService) {
+	vip.controller('vip.viewBusinessController', ['$scope', '$routeParams', '$http', 'vipConfig', '$route', 'vipUserService', function ($scope, $routeParams, $http, vipConfig, $route, vipUserService) {
 		$scope.renderingMode = vip.renderingModes.read;
 		$scope.model = {};
 
-		if (vipConfig && vipConfig.Roles && vipConfig.Roles.indexOf('Admin') > -1) {
+		if (vipUserService.isAdmin()) {
 			$scope.showEditButton = true;
 			$scope.showReadModeButton = false;
 			$scope.showSaveButton = false;
@@ -26,9 +26,7 @@
 
 			$scope.save = function () {
 				$http.put('api/Business', $scope.model)
-				.then(function (response) {
-					// get the response
-					var business = response.data;
+				.then(function () {
 					// let the user know save was successful
 					swal({
 						type: 'success',
@@ -44,7 +42,7 @@
 						// setNewBusinessModel();
 						$route.reload();
 					});
-				}, function (error) {
+				}, function () {
 					swal('Oops!', 'Something went wrong!', 'error');
 				});
 			};

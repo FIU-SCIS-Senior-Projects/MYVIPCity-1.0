@@ -1,7 +1,7 @@
 ﻿define(['vip/js/vip'], function (vip) {
 	'use strict';
 
-	vip.controller('vip.mainController', ['$scope', 'vipPageLoaderService', function ($scope, vipPageLoaderService) {
+	vip.controller('vip.mainController', ['$scope', 'vipPageLoaderService', 'vipUserService', function ($scope, vipPageLoaderService, vipUserService) {
 		var listeners = [];
 
 		listeners.push($scope.$on('$routeChangeStart', function (e) {
@@ -17,5 +17,7 @@
 			for (var i = 0; i < listeners.length; i++)
 				listeners[i]();
 		}));
+
+		$scope.userIsAdmin = vipUserService.isAdmin();
 	}]);
 });

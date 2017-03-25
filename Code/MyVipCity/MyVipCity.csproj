@@ -465,6 +465,7 @@
     <Content Include="Scripts\modules\vip\js\services\vipFactoryService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipNavigationService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipPageLoaderService.js" />
+    <Content Include="Scripts\modules\vip\js\services\vipUserService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipVideoService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipUtilsService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipControlRenderingService.js" />

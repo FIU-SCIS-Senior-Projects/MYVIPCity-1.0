@@ -4333,3 +4333,15 @@ div[vip-post] .vip-post__footer button {
   margin-right: 10px;
   padding: 5px;
 }
+div[vip-post] .vip-post__posted-on {
+  color: #2196F3;
+}
+div[vip-post] iframe {
+  width: 100%;
+  min-height: 480px;
+}
+@media (max-width: 767px) {
+  div[vip-post] iframe {
+    min-height: 260px;
+  }
+}

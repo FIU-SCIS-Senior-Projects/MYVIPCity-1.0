@@ -16,12 +16,13 @@
 
 			// isolated scope
 			scope: {
-				entityId: '='
+				entityId: '=',
+				readModeOnly: '=vipReadOnly'
 			},
 
 			template:
 				// add post buttons
-				'<div class="vip-posts__post-actions">' +
+				'<div class="vip-posts__post-actions" ng-if="!readModeOnly">' +
 					'<button class="btn vip-posts__post-picture-btn" ng-click="clickPostPicture($event)"><i class="zmdi zmdi-image"></i>Post Picture</button>' +
 					'<button class="btn vip-posts__post-video-btn" ng-click="clickPostVideo($event)"><i class="zmdi zmdi-play"></i>Post Video</button>' +
 					'<button class="btn vip-posts__post-comment-btn" ng-click="clickPostComment($event)"><i class="zmdi zmdi-comment"></i>Post Comment</button>' +
@@ -45,6 +46,13 @@
 				'</div>'
 				,
 
+			controller: ['$scope', '$attrs', function($scope, $attrs) {
+				// store the list of posts
+				$scope.posts = [];
+				// indicate if posts are being loaded
+				$scope.loadingPosts = false;
+			}],
+
 			link: function (scope, element, attrs) {
 				if (!attrs.postsManagerId)
 					$log.error('vip-posts directive, attribute "posts-manager-id" not specified');
@@ -56,10 +64,6 @@
 				var topLoad = 3;
 				// id of the entity owner of the posts
 				var entityId;
-				// store the list of posts
-				scope.posts = [];
-				// indicate if posts are being loaded
-				scope.loadingPosts = false;
 
 				// load more posts
 				scope.loadMorePosts = function () {
@@ -209,13 +213,13 @@
 					var content = angular.element(
 						'<div>' +
 							'<span class="vip-post__posted-on" ng-cloak>{{::post.PostedOn | date: \'short\'}}</span>' +
-							'<div class="actions pull-right">' +
+							'<div class="actions pull-right" ng-if="!readModeOnly">' +
 								'<a href="" title="Edit" ng-click="edit()" ng-if="showEditButton"><i class="zmdi zmdi-edit" ng-show="renderingMode == ' + vip.renderingModes.read + '"></i></a>' +
 								'<a href="" title="Delete" ng-click="delete()" ng-if="showDeleteButton"><i class="zmdi zmdi-delete"></i></a>' +
 							'</div>' +
 							'<form name="formPost">' +
 							'</form>' +
-							'<div class="vip-post__footer">' +
+							'<div class="vip-post__footer" ng-if="!readModeOnly">' +
 								'<button class="btn btn-primary vip-post__save-btn" ng-click="_save(post)" ng-if="showSaveButton" ng-disabled="formPost.$invalid" ng-hide="renderingMode == ' + vip.renderingModes.read + '">{{::saveButtonCaption}}</button>' +
 								'<button class="btn btn-secondary vip-post__cancel-btn" ng-click="cancel(post)" ng-if="showCancelButton" ng-hide="renderingMode == ' + vip.renderingModes.read + '">Cancel</button>' +
 							'</div>' +

@@ -1,7 +1,7 @@
 ﻿define(['vip/js/vip', 'sweet-alert', 'moment', 'swearjar'], function (vip, swal, moment, swearjar) {
 	'use strict';
 
-	vip.controller('vip.promoterProfileController', ['$scope', '$routeParams', '$http', '$location', 'vipConfig', '$route', function ($scope, $routeParams, $http, $location, vipConfig, $route) {
+	vip.controller('vip.promoterProfileController', ['$scope', '$routeParams', '$http', '$location', 'vipConfig', '$route', 'vipUserService', function ($scope, $routeParams, $http, $location, vipConfig, $route, vipUserService) {
 		// set rendering mode to read mode by default
 		$scope.renderingMode = vip.renderingModes.read;
 		// get the id of the profile from the route parameters
@@ -40,7 +40,7 @@
 		// handles add review click
 		$scope.addReview = function () {
 			// make sure the user is authenticated
-			if (!vipConfig.IsAuthenticated) {
+			if (!vipUserService.IsAuthenticated()) {
 				swal('Log in first', 'You need to login to leave a review. You can register if you do not have an account yet.', 'info');
 				return;
 			}
@@ -202,7 +202,7 @@
 					showWelcomeToProfilePopup($scope.model);
 				}
 				// check if the user is an admin
-				if (vipConfig && vipConfig.Roles && vipConfig.Roles.indexOf('Admin') > -1) {
+				if (vipUserService.isAdmin()) {
 					$scope.canRemoveReviews = true;
 				}
 			}

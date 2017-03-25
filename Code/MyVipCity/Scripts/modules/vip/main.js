@@ -54,6 +54,7 @@
 	'vip/js/services/vipNavigationService',
 	'vip/js/services/vipPageLoaderService',
 	'vip/js/services/vipServerErrorProcessorService',
+	'vip/js/services/vipUserService',
 	'vip/js/services/vipUtilsService',
 	'vip/js/services/vipVideoService'
 ], function(require, angular, vip) {

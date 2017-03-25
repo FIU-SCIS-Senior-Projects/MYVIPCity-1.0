@@ -514,4 +514,17 @@ div[vip-post] {
             padding: 5px;
         }
     }
+
+    .vip-post__posted-on {
+        color: @mdc-blue-500;
+    }
+    // for videos
+    iframe {
+        width: 100%;
+        min-height: 480px;
+        // small screen
+        @media(max-width: @screen-xs-max) {
+            min-height: 260px;
+        }       
+    }
 }
