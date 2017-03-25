@@ -1,7 +1,7 @@
 ﻿define(['vip/js/vip', 'jquery', 'angular', 'autosize'], function (vip, jQuery, angular, autosize) {
 	'use strict';
 
-	vip.directive('vipTextarea', ['vipControlRenderingService', function (vipControlRenderingService) {
+	vip.directive('vipTextarea', ['vipControlRenderingService', '$timeout', function (vipControlRenderingService, $timeout) {
 		return {
 			restrict: 'ACE',
 
@@ -30,7 +30,10 @@
 				controlRenderingService.setCreateEditModeElementFunction(function () {
 					// create edit mode element
 					var editElement = angular.element('<textarea placeholder="' + (attrs.placeholder || '') + '" ng-model="' + attrs.ngModel + '"' + (attrs.ngModelOptions ? ' ng-model-options="' + attrs.ngModelOptions + '"' : '') + (attrs.maxlength ? ' maxlength="' + attrs.maxlength + '"' : '') + '/>');
-					autosize(editElement);
+					// autosize after element has been compiled (because of css style white-space: pre)
+					$timeout(function () {
+						autosize(editElement);
+					}, 0, false);
 					// add css class
 					if (attrs.editModeClass)
 						editElement.addClass(attrs.editModeClass);

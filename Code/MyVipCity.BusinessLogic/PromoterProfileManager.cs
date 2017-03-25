@@ -99,6 +99,8 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		public ResultDto<bool> AddReview(int id, ReviewDto review) {
+			// make sure owner of profile is not adding a review to itself
+			ValidateCurrentUserIsNotOwnerOfPromoterProfile(id);
 			if (string.IsNullOrWhiteSpace(review.ReviewerEmail)) {
 				Logger.Warn("Review requires a reviewer email");
 				return new ResultDto<bool> {
@@ -214,6 +216,28 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		private void ValidateCurrentUserIsOwnerOfPromoterProfile(int promoterProfileId) {
+			var userId = ValidateUserIsAuthenticatedAndPromoterProfileExists(promoterProfileId);
+			var promoterProfile = DbContext.Set<PromoterProfile>().Find(promoterProfileId);
+			// only the user associated to the profile can edit it
+			if (promoterProfile.UserId != userId) {
+				var msg = $"User with id: {userId} tried to edit Promoter Profile with Id: {promoterProfileId} which is associated to user: {promoterProfile.UserId}";
+				Logger.Error(msg);
+				throw new InvalidOperationException();
+			}
+		}
+
+		private void ValidateCurrentUserIsNotOwnerOfPromoterProfile(int promoterProfileId) {
+			var userId = ValidateUserIsAuthenticatedAndPromoterProfileExists(promoterProfileId);
+			var promoterProfile = DbContext.Set<PromoterProfile>().Find(promoterProfileId);
+
+			if (promoterProfile.UserId == userId) {
+				var msg = $"User with id: {userId} tried to perform an unauthorized operation on self promoter profile with id {promoterProfileId}";
+				Logger.Error(msg);
+				throw new InvalidOperationException();
+			}
+		}
+
+		private string ValidateUserIsAuthenticatedAndPromoterProfileExists(int promoterProfileId) {
 			if (Thread.CurrentPrincipal == null) {
 				Logger.Error("There is no current principal");
 				throw new InvalidOperationException();
@@ -229,12 +253,7 @@ namespace MyVipCity.BusinessLogic {
 				Logger.Error(msg);
 				throw new ObjectNotFoundException(msg);
 			}
-			// only the user associated to the profile can edit it
-			if (promoterProfile.UserId != userId) {
-				var msg = $"User with id: {userId} tried to edit Promoter Profile with Id: {promoterProfileId} which is associated to user: {promoterProfile.UserId}";
-				Logger.Error(msg);
-				throw new InvalidOperationException();
-			}
+			return userId;
 		}
 	}
 }
