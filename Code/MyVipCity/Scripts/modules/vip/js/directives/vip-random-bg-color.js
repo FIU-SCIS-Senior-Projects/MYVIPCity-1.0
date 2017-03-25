@@ -5,7 +5,7 @@
 		return {
 			restrict: 'A',
 			link: function (scope, element) {
-				element[0].style.backgroundColor = vipColorsService.hexToRGB(vipColorsService.getRandomLightColor(), 0.6);
+				element[0].style.backgroundColor = vipColorsService.hexToRGB(vipColorsService.getRandomLightColor(), 0.4);
 			}
 		};
 	}]);

@@ -40,6 +40,7 @@
 					var galleryElement = angular.element(
 						'<div class="vip-light-gallery list-unstyled justified-gallery">' +
 							'<img ng-src="{{pic.src}}" alt="" ng-repeat="pic in previewPictures | orderBy: \'Index\'"/>' +
+							'<div class="vip-light-gallery__more-pics"ng-show="morePictures" title="More pictures in this gallery"><i class="zmdi zmdi-collection-image-o"></i></div>' +
 						'</div>'
 					);
 					// search for a previously added gallery element inside this element
@@ -62,6 +63,8 @@
 					if (files && files.length) {
 						scope.previewPictures.push(files[0]);
 					}
+
+					scope.morePictures = files && files.length > 1;
 
 					element.append(galleryElement);
 					$compile(galleryElement)(scope);

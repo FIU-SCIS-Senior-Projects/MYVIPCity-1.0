@@ -4009,6 +4009,7 @@ a.mdc-text-black-darker:focus {
 .vip-light-gallery {
   cursor: pointer;
   max-height: 600px;
+  position: relative;
 }
 .vip-light-gallery img {
   max-height: 100%;
@@ -4016,6 +4017,16 @@ a.mdc-text-black-darker:focus {
   object-fit: fill;
   margin: auto;
   display: block;
+}
+.vip-light-gallery .vip-light-gallery__more-pics {
+  font-size: 40px;
+  position: absolute;
+  line-height: 0;
+  top: 13px;
+  right: 10px;
+  opacity: 0.85;
+  padding: 5px;
+  color: white;
 }
 .dropzone {
   border: 2px dashed #0087F7;
@@ -4324,6 +4335,9 @@ div[vip-posts] .vip-posts__post-actions button.vip-posts__post-comment-btn {
 }
 div[vip-posts] .card {
   box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+div[vip-posts] .card.VideoPostDto .vip-post__header {
+  padding-bottom: 2px;
 }
 div[vip-posts] .card:hover {
   box-shadow: 0 1px 13px 2px rgba(0, 0, 0, 0.19);

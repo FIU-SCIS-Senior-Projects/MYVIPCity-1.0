@@ -61,7 +61,7 @@
 				// get the post manager
 				var postsManager = vipFactoryService(attrs.postsManagerId);
 				// number of post to load when load more is clicked
-				var topLoad = 3;
+				var topLoad = 6;
 				// id of the entity owner of the posts
 				var entityId;
 
@@ -212,7 +212,7 @@
 					// TODO: Do not compile buttons when editing is not allowed
 					var content = angular.element(
 						'<div>' +
-							'<div class="vip-post__header" ng-if="!readModeOnly">' +
+							'<div class="vip-post__header">' +
 								'<span class="vip-post__posted-on" ng-cloak>{{::post.PostedOn | date: \'short\'}}</span>' +
 								'<div class="actions pull-right" ng-if="!readModeOnly">' +
 									'<a href="" title="Edit" ng-click="edit()" ng-if="showEditButton"><i class="zmdi zmdi-edit" ng-show="renderingMode == ' + vip.renderingModes.read + '"></i></a>' +
