@@ -364,6 +364,29 @@
 					"#263238"
 			}
 		};
+
+		var lightColors = [
+				'#ffebee',
+				// '#fce4ec',
+				// '#f3e5f5',
+				// '#ede7f6',
+				'#e8eaf6',
+				'#e3f2fd',
+				'#e1f5fe',
+				'#e0f7fa',
+				'#e0f2f1',
+				'#e8f5e9',
+				'#f1f8e9',
+				'#f9fbe7',
+				'#fffde7',
+				'#fff8e1',
+				'#fff3e0',
+				'#fbe9e7',
+				'#efebe9',
+				'#fafafa',
+				'#eceff1'
+		];
+
 		return {
 			getColorsName: function () {
 				var colorNames = [];
@@ -391,6 +414,20 @@
 				var shade = shades[vipUtilsService.getRandomIntInclusive(0, shades.length - 1)];
 
 				return ('mdc-bg-' + colorName.toLowerCase() + '-' + shade);
+			},
+			getRandomLightColor: function() {
+				return vipUtilsService.getRandomFromArray(lightColors);
+			},
+			hexToRGB: function (hex, alpha) {
+				var r = parseInt(hex.slice(1, 3), 16),
+					g = parseInt(hex.slice(3, 5), 16),
+					b = parseInt(hex.slice(5, 7), 16);
+
+				if (alpha) {
+					return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+				} else {
+					return "rgb(" + r + ", " + g + ", " + b + ")";
+				}
 			}
 		};
 	}]);

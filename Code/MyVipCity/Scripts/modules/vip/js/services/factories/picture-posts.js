@@ -6,7 +6,7 @@
 			return {
 				buildElement: function (ngModelBind) {
 					var element = angular.element(
-						'<div required vip-images-control ng-model="' + ngModelBind + '.Pictures"></div>' +
+						'<div required vip-non-empty-array vip-images-control ng-model="' + ngModelBind + '.Pictures"></div>' +
 						'<div vip-textarea ng-model="' + ngModelBind + '.Comment" edit-mode-class="form-control textarea-autoheight" maxlength="1000" placeholder="Enter caption here..."></div>'
 					);
 					return element;

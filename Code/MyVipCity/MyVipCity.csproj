@@ -443,7 +443,9 @@
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-gallery.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-images-upload.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-textarea.js" />
+    <Content Include="Scripts\modules\vip\js\directives\validators\vip-non-empty-array.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-hosts-card.js" />
+    <Content Include="Scripts\modules\vip\js\directives\vip-random-bg-color.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-new-promoters.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-week-hours.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-time-picker.js" />

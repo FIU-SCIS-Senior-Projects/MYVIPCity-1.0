@@ -35,7 +35,7 @@
 				'</div>' +
 				// existing posts
 				'<div class="vip-posts__posts">' +
-					'<div class="card {{::post.PostType}}" ng-repeat="post in posts track by post.Id">' +
+					'<div class="card {{::post.PostType}}" ng-repeat="post in posts track by post.Id" vip-random-bg-color>' +
 						'<div class="card__body">' +
 							'<div vip-post ng-model="post"></div>' +
 						'</div>' +
@@ -212,10 +212,12 @@
 					// TODO: Do not compile buttons when editing is not allowed
 					var content = angular.element(
 						'<div>' +
-							'<span class="vip-post__posted-on" ng-cloak>{{::post.PostedOn | date: \'short\'}}</span>' +
-							'<div class="actions pull-right" ng-if="!readModeOnly">' +
-								'<a href="" title="Edit" ng-click="edit()" ng-if="showEditButton"><i class="zmdi zmdi-edit" ng-show="renderingMode == ' + vip.renderingModes.read + '"></i></a>' +
-								'<a href="" title="Delete" ng-click="delete()" ng-if="showDeleteButton"><i class="zmdi zmdi-delete"></i></a>' +
+							'<div class="vip-post__header" ng-if="!readModeOnly">' +
+								'<span class="vip-post__posted-on" ng-cloak>{{::post.PostedOn | date: \'short\'}}</span>' +
+								'<div class="actions pull-right" ng-if="!readModeOnly">' +
+									'<a href="" title="Edit" ng-click="edit()" ng-if="showEditButton"><i class="zmdi zmdi-edit" ng-show="renderingMode == ' + vip.renderingModes.read + '"></i></a>' +
+									'<a href="" title="Delete" ng-click="delete()" ng-if="showDeleteButton"><i class="zmdi zmdi-delete"></i></a>' +
+								'</div>' +
 							'</div>' +
 							'<form name="formPost">' +
 							'</form>' +

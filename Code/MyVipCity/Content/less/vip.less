@@ -499,14 +499,26 @@ div[vip-posts] {
             }
         }
     }
+
+    .card {
+        box-shadow: 0 1px 1px 2px rgba(0,0,0,.1);
+
+        &:hover {
+            box-shadow: 0 1px 13px 2px rgba(0, 0, 0, 0.19);
+        }
+
+        .card__body {
+            padding: 15px;
+        }
+    }
 }
 
 /*VIP POST (singular)*/
 div[vip-post] {
+
     .vip-post__footer {
         text-align: center;
         margin-top: 8px;
-
         button {
             min-width: 80px;
             width: 10%;
@@ -525,6 +537,11 @@ div[vip-post] {
         // small screen
         @media(max-width: @screen-xs-max) {
             min-height: 260px;
-        }       
+        }
+    }
+
+    div[vip-video]{
+        margin-left: -14px;
+        margin-right: -14px;
     }
 }

@@ -4322,6 +4322,15 @@ div[vip-posts] .vip-posts__post-actions button.vip-posts__post-video-btn {
 div[vip-posts] .vip-posts__post-actions button.vip-posts__post-comment-btn {
   background-color: #F57C00;
 }
+div[vip-posts] .card {
+  box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+div[vip-posts] .card:hover {
+  box-shadow: 0 1px 13px 2px rgba(0, 0, 0, 0.19);
+}
+div[vip-posts] .card .card__body {
+  padding: 15px;
+}
 /*VIP POST (singular)*/
 div[vip-post] .vip-post__footer {
   text-align: center;
@@ -4344,4 +4353,8 @@ div[vip-post] iframe {
   div[vip-post] iframe {
     min-height: 260px;
   }
+}
+div[vip-post] div[vip-video] {
+  margin-left: -14px;
+  margin-right: -14px;
 }
