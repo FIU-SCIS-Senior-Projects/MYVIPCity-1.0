@@ -1,9 +1,9 @@
 ﻿using System.Collections.Specialized;
-using System.Linq;
 using AutoMapper;
 using AutoMapper.Mappers;
 using MyVipCity.BusinessLogic;
 using MyVipCity.BusinessLogic.Contracts;
+using MyVipCity.Common;
 using MyVipCity.Domain.Automapper;
 using MyVipCity.Mailing.Contracts;
 using MyVipCity.Mailing.Sendgrid;
@@ -15,6 +15,9 @@ namespace MyVipCity.CompositionRoot {
 	public static class BindingsManager {
 
 		public static void SetBindings(IKernel kernel, NameValueCollection appSettings) {
+			// bind IResolver
+			kernel.Bind<IResolver>().To<NinjectResolver>().InSingletonScope().WithConstructorArgument("kernel", kernel);
+
 			// bind IEmailService -> SendGridEmailService
 			kernel.Bind<IEmailService>().To<SendGridEmailService>().InSingletonScope().WithConstructorArgument("sendGridApiKey", appSettings["myvipcity:send-grid-api"]);
 

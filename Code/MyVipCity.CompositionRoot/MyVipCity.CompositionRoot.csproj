@@ -84,6 +84,10 @@
       <Project>{4a0dc78f-9512-4f81-bc89-5810d9e20ea0}</Project>
       <Name>MyVipCity.BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyVipCity.Common\MyVipCity.Common.csproj">
+      <Project>{6b3e1992-2e32-4320-bb9c-979e54461cdf}</Project>
+      <Name>MyVipCity.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyVipCity.Domain.Automapper\MyVipCity.Domain.Automapper.csproj">
       <Project>{3fa92d54-2d2b-4965-8066-7d70012dc154}</Project>
       <Name>MyVipCity.Domain.Automapper</Name>
