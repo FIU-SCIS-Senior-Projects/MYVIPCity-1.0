@@ -4,7 +4,6 @@ using AutoMapper;
 using MyVipCity.DataTransferObjects.Contracts;
 using MyVipCity.Domain.Automapper.MappingContext;
 using MyVipCity.Domain.Contracts;
-using Ninject;
 
 namespace MyVipCity.Domain.Automapper.CustomResolvers {
 
