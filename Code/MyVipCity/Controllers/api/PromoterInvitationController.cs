@@ -3,20 +3,16 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
-using Ninject;
 
 namespace MyVipCity.Controllers.api {
 
 	[RoutePrefix("api/PromoterInvitation")]
 	public class PromoterInvitationController: ApiController {
 
-		[Inject]
-		public IKernel Kernel
-		{
-			get; set;
+		public PromoterInvitationController(IPromoterInvitationManager promoterInvitationManager) {
+			PromoterInvitationManager = promoterInvitationManager;
 		}
 
-		[Inject]
 		public IPromoterInvitationManager PromoterInvitationManager
 		{
 			get;

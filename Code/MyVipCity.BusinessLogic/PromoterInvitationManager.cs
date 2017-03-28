@@ -3,32 +3,30 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using MyVipCity.BusinessLogic.Contracts;
+using MyVipCity.Common;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.Domain;
 using MyVipCity.Mailing.Contracts;
 using MyVipCity.Mailing.Contracts.EmailModels;
-using Ninject;
 using Ninject.Extensions.Logging;
 
 namespace MyVipCity.BusinessLogic {
 
 	public class PromoterInvitationManager: AbstractEntityManager, IPromoterInvitationManager {
 
-		[Inject]
-		public ILogger Logger
-		{
-			get;
-			set;
+		public PromoterInvitationManager(IResolver resolver, IMapper mapper, ILogger logger, IEmailService emailService) : base(resolver, mapper, logger) {
+			EmailService = emailService;
 		}
 
-		[Inject]
 		public IEmailService EmailService
 		{
 			get; set;
 		}
 
 		public ResultDto<bool> SendPromoterInvitations(PromoterInvitationDto[] invitations, string baseUrl) {
+			var db = Resolver.Resolve<DbContext>();
 			// dictionary to store the businesses businessFriendlyId -> business
 			Dictionary<string, Business> businesses = new Dictionary<string, Business>();
 			// final list of invitations to be sent
@@ -40,7 +38,7 @@ namespace MyVipCity.BusinessLogic {
 				// check if this is a new invitation
 				if (promoterInvitationDto.Id == 0) {
 					// check if there is already a pending invitation for this email and business
-					var existingPendingInvitation = DbContext.Set<PromoterInvitation>().FirstOrDefault(pi => pi.ClubFriendlyId == promoterInvitationDto.ClubFriendlyId && pi.Status == PromoterInvitationStatus.Sent && pi.Email == promoterInvitationDto.Email);
+					var existingPendingInvitation = db.Set<PromoterInvitation>().FirstOrDefault(pi => pi.ClubFriendlyId == promoterInvitationDto.ClubFriendlyId && pi.Status == PromoterInvitationStatus.Sent && pi.Email == promoterInvitationDto.Email);
 					if (existingPendingInvitation != null) {
 						existingEmails.Add(promoterInvitationDto.Email);
 						// do not send this invitation
@@ -54,7 +52,7 @@ namespace MyVipCity.BusinessLogic {
 				businesses.TryGetValue(promoterInvitationDto.ClubFriendlyId, out business);
 				// not in the dictionary, then get it from the database
 				if (business == null)
-					business = DbContext.Set<Business>().FirstOrDefault(b => b.FriendlyId == promoterInvitationDto.ClubFriendlyId);
+					business = db.Set<Business>().FirstOrDefault(b => b.FriendlyId == promoterInvitationDto.ClubFriendlyId);
 				// if the club was not found, then return false and log it
 				if (business == null) {
 					var msg = $"Business with [FriendlyId={promoterInvitationDto.ClubFriendlyId}] not found.";
@@ -67,7 +65,7 @@ namespace MyVipCity.BusinessLogic {
 				}
 
 				// there must not exist a promoter associated to the business with the same email of the invitation
-				var promoterWithSameEmail = DbContext.Set<PromoterProfile>().FirstOrDefault(p => p.Business.Id == business.Id && p.Email == promoterInvitationDto.Email);
+				var promoterWithSameEmail = db.Set<PromoterProfile>().FirstOrDefault(p => p.Business.Id == business.Id && p.Email == promoterInvitationDto.Email);
 				if (promoterWithSameEmail != null) {
 					existingEmails.Add(promoterInvitationDto.Email);
 					// do not send this invitation
@@ -97,15 +95,15 @@ namespace MyVipCity.BusinessLogic {
 			// convert from dto to model
 			var modelInvitations = Mapper.Map<PromoterInvitationDto[], PromoterInvitation[]>(invitationsToSend.ToArray());
 			// add the new invitations
-			DbContext.Set<PromoterInvitation>().AddRange(modelInvitations.Where(i => i.Id == 0));
+			db.Set<PromoterInvitation>().AddRange(modelInvitations.Where(i => i.Id == 0));
 			// find the existing invitations
 			var existingInvitations = modelInvitations.Where(i => i.Id > 0).ToList();
 			// add the existing invitations to the EF tracker
 			foreach (var existingInvitation in existingInvitations) {
-				DbContext.Entry(existingInvitation).State = EntityState.Modified;
+				db.Entry(existingInvitation).State = EntityState.Modified;
 			}
 			// save the changes
-			DbContext.SaveChanges();
+			db.SaveChanges();
 			var result =  new ResultDto<bool> {
 				Error = false,
 				Result = true
@@ -117,25 +115,28 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		public PromoterInvitationDto[] GetPendingPromoterInvitations(string businessFriendlyId) {
-			var pendingInvitations = DbContext.Set<PromoterInvitation>().Where(i => i.ClubFriendlyId == businessFriendlyId && i.Status == PromoterInvitationStatus.Sent).ToArray();
+			var db = Resolver.Resolve<DbContext>();
+			var pendingInvitations = db.Set<PromoterInvitation>().Where(i => i.ClubFriendlyId == businessFriendlyId && i.Status == PromoterInvitationStatus.Sent).ToArray();
 			var pendingInvitationsDto = Mapper.Map<PromoterInvitation[], PromoterInvitationDto[]>(pendingInvitations);
 			return pendingInvitationsDto;
 		}
 
 		public void DeletePromoterInvitation(int id) {
+			var db = Resolver.Resolve<DbContext>();
 			// get the set of promoters
-			var promotersInvitations = DbContext.Set<PromoterInvitation>();
+			var promotersInvitations = db.Set<PromoterInvitation>();
 			// find the invitation with the given id
 			var invitation = promotersInvitations.Find(id);
 			// make sure the invitation exists, and if so, remove it
 			if (invitation != null)
 				promotersInvitations.Remove(invitation);
 			// save changes
-			DbContext.SaveChanges();
+			db.SaveChanges();
 		}
 
 		public PromoterInvitationDto GetPendingInvitation(string businessFriendlyId, string userEmail) {
-			var invitation = DbContext.Set<PromoterInvitation>().FirstOrDefault(i => i.Status == PromoterInvitationStatus.Sent && i.ClubFriendlyId == businessFriendlyId && i.Email == userEmail);
+			var db = Resolver.Resolve<DbContext>();
+			var invitation = db.Set<PromoterInvitation>().FirstOrDefault(i => i.Status == PromoterInvitationStatus.Sent && i.ClubFriendlyId == businessFriendlyId && i.Email == userEmail);
 			if (invitation == null)
 				return null;
 			var invitationDto = ToDto<PromoterInvitationDto, PromoterInvitation>(invitation);
@@ -147,13 +148,14 @@ namespace MyVipCity.BusinessLogic {
 				throw new ArgumentNullException(nameof(businessFriendlyId));
 			if (string.IsNullOrWhiteSpace(userEmail))
 				throw new ArgumentNullException(nameof(userEmail));
+			var db = Resolver.Resolve<DbContext>();
 			// find the invitation
-			var invitation = DbContext.Set<PromoterInvitation>().FirstOrDefault(i => i.Status == PromoterInvitationStatus.Sent && i.ClubFriendlyId == businessFriendlyId && i.Email == userEmail);
+			var invitation = db.Set<PromoterInvitation>().FirstOrDefault(i => i.Status == PromoterInvitationStatus.Sent && i.ClubFriendlyId == businessFriendlyId && i.Email == userEmail);
 			// invitation must exists
 			if (invitation == null)
 				throw new Exception($"Pending invitation for user='{userEmail}' and business='{businessFriendlyId}' not found");
 			// find the business
-			var business = DbContext.Set<Business>().FirstOrDefault(b => b.FriendlyId == businessFriendlyId);
+			var business = db.Set<Business>().FirstOrDefault(b => b.FriendlyId == businessFriendlyId);
 			// business must exists
 			if (business == null)
 				throw new Exception($"Business with friendlyId='{businessFriendlyId}' not found");
@@ -173,9 +175,9 @@ namespace MyVipCity.BusinessLogic {
 				CreatedOn = DateTimeOffset.UtcNow
 			};
 			// add it to the corresponding db set
-			DbContext.Set<PromoterProfile>().Add(profile);
+			db.Set<PromoterProfile>().Add(profile);
 			// persist changes
-			DbContext.SaveChanges();
+			db.SaveChanges();
 			// map to dto
 			var profileDto = ToDto<PromoterProfileDto, PromoterProfile>(profile);
 			// return result

@@ -5,36 +5,33 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Threading;
+using AutoMapper;
 using Censored;
 using Microsoft.AspNet.Identity;
 using MyVipCity.BusinessLogic.Contracts;
+using MyVipCity.Common;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.DataTransferObjects.Social;
 using MyVipCity.Domain;
 using MyVipCity.Mailing.Contracts;
 using MyVipCity.Mailing.Contracts.EmailModels;
-using Ninject;
 using Ninject.Extensions.Logging;
 
 namespace MyVipCity.BusinessLogic {
 
 	public class PromoterProfileManager: AbstractEntityManager, IPromoterProfileManager {
 
-		[Inject]
-		public ILogger Logger
-		{
-			get;
-			set;
+		public PromoterProfileManager(IResolver resolver, IMapper mapper, ILogger logger, IEmailService emailService, IPostsEntityManager postsEntityManager) : base(resolver, mapper, logger) {
+			EmailService = emailService;
+			PostsEntityManager = postsEntityManager;
 		}
 
-		[Inject]
 		public IEmailService EmailService
 		{
 			get;
 			set;
 		}
 
-		[Inject]
 		public IPostsEntityManager PostsEntityManager
 		{
 			get;
@@ -42,14 +39,16 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		public PromoterProfileDto[] GetPromoterProfiles(string userId) {
-			var promoterProfiles = DbContext.Set<PromoterProfile>().Where(p => p.UserId == userId).ToArray();
+			var db = Resolver.Resolve<DbContext>();
+			var promoterProfiles = db.Set<PromoterProfile>().Where(p => p.UserId == userId).ToArray();
 			var promoterProfileDtos = ToDto<PromoterProfileDto[], PromoterProfile[]>(promoterProfiles);
 			return promoterProfileDtos;
 		}
 
 		public PromoterProfileDto GetProfileById(int id) {
+			var db = Resolver.Resolve<DbContext>();
 			// find the profile with the given id
-			var promoterProfile = DbContext.Set<PromoterProfile>().Find(id);
+			var promoterProfile = db.Set<PromoterProfile>().Find(id);
 			// check if the profile was not found
 			if (promoterProfile == null) {
 				Logger.Warn($"PromoterProfile with id={id} not found");
@@ -64,14 +63,15 @@ namespace MyVipCity.BusinessLogic {
 				Logger.Error("Promoter profile Id cannot be 0");
 				throw new InvalidOperationException("Promoter profile Id cannot be 0");
 			}
+			var db = Resolver.Resolve<DbContext>();
 			// only the owner of the profile can edit it
 			ValidateCurrentUserIsOwnerOfPromoterProfile(promoterProfileDto.Id);
 			// find the profile
-			var promoterProfile = DbContext.Set<PromoterProfile>().Find(promoterProfileDto.Id);
+			var promoterProfile = db.Set<PromoterProfile>().Find(promoterProfileDto.Id);
 			// convert from dto to model
 			var promoterProfileToUpdate = ToModel(promoterProfileDto, promoterProfile);
 			// persist changes
-			DbContext.SaveChanges();
+			db.SaveChanges();
 			// convert back to dto
 			var result = ToDto<PromoterProfileDto, PromoterProfile>(promoterProfileToUpdate);
 
@@ -79,23 +79,25 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		public string GetPromoterEmail(int id) {
-			var promoter = DbContext.Set<PromoterProfile>().Find(id);
+			var db = Resolver.Resolve<DbContext>();
+			var promoter = db.Set<PromoterProfile>().Find(id);
 			if (promoter == null) {
 				Logger.Warn($"Promoter with id: {id} not found");
 				return null;
 			}
 
-			var email = DbContext.Database.SqlQuery<string>($"select Email from AspNetUsers where Id='{promoter.UserId}'").ToArray();
+			var email = db.Database.SqlQuery<string>($"select Email from AspNetUsers where Id='{promoter.UserId}'").ToArray();
 
 			return email.Length == 0 ? null : email[0];
 		}
 
 		public void Delete(int id) {
-			var promoters = DbContext.Set<PromoterProfile>();
+			var db = Resolver.Resolve<DbContext>();
+			var promoters = db.Set<PromoterProfile>();
 			var promoter = promoters.Find(id);
 			if (promoter != null)
 				promoters.Remove(promoter);
-			DbContext.SaveChanges();
+			db.SaveChanges();
 		}
 
 		public ResultDto<bool> AddReview(int id, ReviewDto review) {
@@ -108,8 +110,8 @@ namespace MyVipCity.BusinessLogic {
 					Messages = new[] { "Review requires a reviewer email" }
 				};
 			}
-
-			var profile = DbContext.Set<PromoterProfile>().Find(id);
+			var db = Resolver.Resolve<DbContext>();
+			var profile = db.Set<PromoterProfile>().Find(id);
 			if (profile == null) {
 				Logger.Warn("Promoter not found");
 				return new ResultDto<bool> {
@@ -144,7 +146,7 @@ namespace MyVipCity.BusinessLogic {
 
 			var reviewModel = Mapper.Map<Review>(review);
 			profile.Reviews.Add(reviewModel);
-			DbContext.SaveChanges();
+			db.SaveChanges();
 
 			// notify the promoter by email about the review
 			EmailService.SendPromoterReviewNotificationEmailAsync(new PromoterReviewNotificationEmailModel {
@@ -160,15 +162,16 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		public ResultDto<bool> RemoveReview(int id) {
+			var db = Resolver.Resolve<DbContext>();
 			// find the review
-			var review = DbContext.Set<Review>().Find(id);
+			var review = db.Set<Review>().Find(id);
 			// check if the review does not exist
 			if (review == null)
 				return new ResultDto<bool>(false) { Messages = new[] { "Review not found" } };
 			// remove the review
-			DbContext.Set<Review>().Remove(review);
+			db.Set<Review>().Remove(review);
 			// save the changes
-			DbContext.SaveChanges();
+			db.SaveChanges();
 			// return
 			return new ResultDto<bool>(true);
 		}
@@ -203,7 +206,8 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		private ReviewDto[] GetReviews(int id, int top, Expression<Func<Review, bool>> whereExpression) {
-			var profile = DbContext.Set<PromoterProfile>().Find(id);
+			var db = Resolver.Resolve<DbContext>();
+			var profile = db.Set<PromoterProfile>().Find(id);
 			if (profile == null)
 				return null;
 			IQueryable<Review> reviewsQueryable = profile.Reviews.AsQueryable();
@@ -217,7 +221,8 @@ namespace MyVipCity.BusinessLogic {
 
 		private void ValidateCurrentUserIsOwnerOfPromoterProfile(int promoterProfileId) {
 			var userId = ValidateUserIsAuthenticatedAndPromoterProfileExists(promoterProfileId);
-			var promoterProfile = DbContext.Set<PromoterProfile>().Find(promoterProfileId);
+			var db = Resolver.Resolve<DbContext>();
+			var promoterProfile = db.Set<PromoterProfile>().Find(promoterProfileId);
 			// only the user associated to the profile can edit it
 			if (promoterProfile.UserId != userId) {
 				var msg = $"User with id: {userId} tried to edit Promoter Profile with Id: {promoterProfileId} which is associated to user: {promoterProfile.UserId}";
@@ -228,7 +233,8 @@ namespace MyVipCity.BusinessLogic {
 
 		private void ValidateCurrentUserIsNotOwnerOfPromoterProfile(int promoterProfileId) {
 			var userId = ValidateUserIsAuthenticatedAndPromoterProfileExists(promoterProfileId);
-			var promoterProfile = DbContext.Set<PromoterProfile>().Find(promoterProfileId);
+			var db = Resolver.Resolve<DbContext>();
+			var promoterProfile = db.Set<PromoterProfile>().Find(promoterProfileId);
 
 			if (promoterProfile.UserId == userId) {
 				var msg = $"User with id: {userId} tried to perform an unauthorized operation on self promoter profile with id {promoterProfileId}";
@@ -245,8 +251,9 @@ namespace MyVipCity.BusinessLogic {
 			// get the id of the currently authenticated user
 			var userIdentity = (ClaimsIdentity)Thread.CurrentPrincipal.Identity;
 			var userId = userIdentity.GetUserId();
+			var db = Resolver.Resolve<DbContext>();
 			// find the promoter profile with the given id
-			var promoterProfile = DbContext.Set<PromoterProfile>().Find(promoterProfileId);
+			var promoterProfile = db.Set<PromoterProfile>().Find(promoterProfileId);
 			// check if it does not exist
 			if (promoterProfile == null) {
 				var msg = $"Promoter profile with Id: {promoterProfileId} not found";

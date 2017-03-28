@@ -4,28 +4,15 @@ using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using MyVipCity.BusinessLogic.Contracts;
-using Ninject;
-using Ninject.Extensions.Logging;
 
 namespace MyVipCity.Controllers {
 
 	public class ConfigurationController: VipControllerBase {
 
-		[Inject]
-		public ILogger Logger
-		{
-			get;
-			set;
+		public ConfigurationController(IPromoterProfileManager promoterProfileManager) {
+			PromoterProfileManager = promoterProfileManager;
 		}
 
-		[Inject]
-		public ApplicationUserManager ApplicationUserManager
-		{
-			get;
-			set;
-		}
-
-		[Inject]
 		public IPromoterProfileManager PromoterProfileManager
 		{
 			get;

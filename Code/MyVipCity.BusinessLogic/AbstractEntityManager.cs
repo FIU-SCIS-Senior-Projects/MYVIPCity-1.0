@@ -1,23 +1,33 @@
 ﻿using System.Data.Entity;
 using AutoMapper;
+using MyVipCity.Common;
 using MyVipCity.DataTransferObjects.Contracts;
 using MyVipCity.Domain.Automapper.MappingContext;
-using Ninject;
+using Ninject.Extensions.Logging;
 
 namespace MyVipCity.BusinessLogic {
 
 	public class AbstractEntityManager {
 
+		public AbstractEntityManager(IResolver resolver, IMapper mapper, ILogger logger) {
+			Resolver = resolver;
+			Mapper = mapper;
+			Logger = logger;
+		}
 
-		[Inject]
-		public DbContext DbContext
+		public IResolver Resolver
+		{
+			get;
+			set;
+		}
+		
+		public IMapper Mapper
 		{
 			get;
 			set;
 		}
 
-		[Inject]
-		public IMapper Mapper
+		public ILogger Logger
 		{
 			get;
 			set;
@@ -35,17 +45,19 @@ namespace MyVipCity.BusinessLogic {
 		protected TModel ToModel<TModel, TDto>(TDto dto)
 			where TDto : class, IIdentifiableDto
 			where TModel : class, new() {
-			var model = dto.Id == 0 ? new TModel() : DbContext.Set<TModel>().Find(dto.Id);
+			var db = Resolver.Resolve<DbContext>();
+			var model = dto.Id == 0 ? new TModel() : db.Set<TModel>().Find(dto.Id);
 			return ToModel(dto, model);
 		}
 
 		protected TModel ToModel<TModel, TDto>(TDto dto, TModel model)
 			where TDto : class, IIdentifiableDto
 			where TModel : class {
+			var db = Resolver.Resolve<DbContext>();
 			var result = Mapper.Map<TDto, TModel>(dto, model,
 				opts => {
 					opts.Items.Add(typeof(DtoToModelContext).Name, new DtoToModelContext());
-					opts.Items.Add(typeof(DbContext).Name, DbContext);
+					opts.Items.Add(typeof(DbContext).Name, db);
 				});
 			return result;
 		}

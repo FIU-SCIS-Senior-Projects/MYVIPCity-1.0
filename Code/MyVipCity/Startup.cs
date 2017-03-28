@@ -12,7 +12,7 @@ namespace MyVipCity
 			// configure authentication
 			ConfigureAuth(app);
 			// configure Ninject
-	        ConfigureNinject(app);
+	        // ConfigureNinject(app);
         }
     }
 }

@@ -36,9 +36,13 @@ namespace MyVipCity {
 		}
 
 		private void RegisterServices(StandardKernel kernel) {
-			kernel.Bind<ApplicationDbContext>().ToMethod(context => HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>()).InRequestScope();
+			//kernel.Bind<ApplicationDbContext>().ToMethod(context => HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>()).InRequestScope();
+			//kernel.Bind<DbContext>().ToMethod(context => {
+			//	return HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
+			//}).InRequestScope();
+			kernel.Bind<ApplicationDbContext>().ToMethod(context => ApplicationDbContext.Create()).InRequestScope();
 			kernel.Bind<DbContext>().ToMethod(context => {
-				return HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
+				return kernel.Get<ApplicationDbContext>();
 			}).InRequestScope();
 			kernel.Bind<ApplicationUserManager>().ToMethod(context => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()).InRequestScope();
 

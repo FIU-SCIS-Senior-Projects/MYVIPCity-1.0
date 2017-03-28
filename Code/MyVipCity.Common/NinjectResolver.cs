@@ -10,7 +10,7 @@ namespace MyVipCity.Common {
 			this.kernel = kernel;
 		}
 
-		public T Resolve<T>() {
+		public T Resolve<T>() where T : class {
 			return kernel.Get<T>();
 		}
 	}

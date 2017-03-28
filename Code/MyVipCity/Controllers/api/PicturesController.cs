@@ -11,7 +11,6 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.Models;
-using Ninject;
 using Ninject.Extensions.Logging;
 
 namespace MyVipCity.Controllers.api {
@@ -19,14 +18,17 @@ namespace MyVipCity.Controllers.api {
 	[RoutePrefix("api/Pictures")]
 	public class PicturesController: ApiController {
 
-		[Inject]
+		public PicturesController(ILogger logger, ApplicationDbContext dbContext) {
+			Logger = logger;
+			DbContext = dbContext;
+		}
+
 		public ILogger Logger
 		{
 			get;
 			set;
 		}
 
-		[Inject]
 		public ApplicationDbContext DbContext
 		{
 			get;

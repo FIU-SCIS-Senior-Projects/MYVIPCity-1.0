@@ -95,6 +95,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyVipCity.Common\MyVipCity.Common.csproj">
+      <Project>{6b3e1992-2e32-4320-bb9c-979e54461cdf}</Project>
+      <Name>MyVipCity.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyVipCity.DataTransferObjects\MyVipCity.DataTransferObjects.csproj">
       <Project>{56335850-5df9-4c56-812c-21574d1b9ebf}</Project>
       <Name>MyVipCity.DataTransferObjects</Name>

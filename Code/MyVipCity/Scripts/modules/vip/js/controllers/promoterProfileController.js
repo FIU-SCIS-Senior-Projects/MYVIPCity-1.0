@@ -186,7 +186,7 @@
 				swal({
 					type: 'success',
 					title: 'Welcome to your new profile for ' + promoter.Business.Name + '!',
-					html: '<br/><p>Please add an awesome profile picture and some information about yourself. <i>That is what user will see</i>.</p>' +
+					html: '<br/><p>Please add an awesome profile picture and some information about yourself. <i>That is what users will see</i>.</p>' +
 						'<p>You can also start posting your activity under the <strong>POST</strong> section.</p>'
 				});
 			}

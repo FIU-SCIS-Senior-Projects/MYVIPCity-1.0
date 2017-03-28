@@ -4,20 +4,16 @@ using Microsoft.AspNet.Identity;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.DataTransferObjects.Social;
-using Ninject;
 
 namespace MyVipCity.Controllers.api {
 
 	[RoutePrefix("api/Business")]
 	public class BusinessController: ApiController {
 
-		[Inject]
-		public IKernel Kernel
-		{
-			get; set;
+		public BusinessController(IBusinessManager businessManager) {
+			BusinessManager = businessManager;
 		}
 
-		[Inject]
 		public IBusinessManager BusinessManager
 		{
 			get;

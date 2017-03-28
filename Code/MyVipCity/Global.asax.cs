@@ -18,6 +18,9 @@ namespace MyVipCity {
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
 
 			log4net.Config.XmlConfigurator.Configure();
+
+			// configure IoC container
+			SimpleInjectorConfig.RegisterContainer(this);			
 		}
 	}
 }

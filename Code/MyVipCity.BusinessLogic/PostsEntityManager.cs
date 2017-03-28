@@ -1,22 +1,20 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using AutoMapper;
 using MyVipCity.BusinessLogic.Contracts;
+using MyVipCity.Common;
 using MyVipCity.DataTransferObjects.Social;
 using MyVipCity.Domain.Contracts;
 using MyVipCity.Domain.Social;
-using Ninject;
 using Ninject.Extensions.Logging;
 
 namespace MyVipCity.BusinessLogic {
 
 	public class PostsEntityManager: AbstractEntityManager, IPostsEntityManager {
 
-		[Inject]
-		public ILogger Logger
-		{
-			get;
-			set;
+		public PostsEntityManager(IResolver resolver, IMapper mapper, ILogger logger) : base(resolver, mapper, logger) {
 		}
 
 		public PostDto AddPost<T>(int entityId, PostDto postDto) where T : class, IPostsEntity {
@@ -26,8 +24,9 @@ namespace MyVipCity.BusinessLogic {
 				Logger.Error(msg);
 				throw new InvalidOperationException(msg);
 			}
+			var db = Resolver.Resolve<DbContext>();
 			// find the entity with the given id
-			var entity = DbContext.Set<T>().Find(entityId);
+			var entity = db.Set<T>().Find(entityId);
 			// check if the entity does not exist
 			if (entity == null) {
 				var msg = $"[AddPost] Entity with Id={entityId} not found";
@@ -41,13 +40,14 @@ namespace MyVipCity.BusinessLogic {
 			// add the post to the collection of posts
 			entity.Posts.Add(post);
 			// save changes
-			DbContext.SaveChanges();
+			db.SaveChanges();
 			postDto = ToDto<PostDto, Post>(post);
 			// return success
 			return postDto;
 		}
 
 		public PostDto UpdatePost<T>(int entityId, PostDto postDto) where T : class, IPostsEntity {
+			var db = Resolver.Resolve<DbContext>();
 			// check the post has a valid id
 			if (postDto.Id == 0) {
 				var msg = $"[UpdatePost] Expected post with Id <> 0. Received post with Id=0";
@@ -55,7 +55,7 @@ namespace MyVipCity.BusinessLogic {
 				throw new InvalidOperationException(msg);
 			}
 			// find the entity with the given id
-			var entity = DbContext.Set<T>().Find(entityId);
+			var entity = db.Set<T>().Find(entityId);
 			// check if the entity does not exist
 			if (entity == null) {
 				var msg = $"[UpdatePost] Entity with Id={entityId} not found";
@@ -71,7 +71,7 @@ namespace MyVipCity.BusinessLogic {
 				throw new InvalidOperationException(msg);
 			}
 			var updatedModel = ToModel(postDto, existingPost);
-			DbContext.SaveChanges();
+			db.SaveChanges();
 			postDto = ToDto<PostDto, Post>(updatedModel);
 			return postDto;
 		}
@@ -81,8 +81,9 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		public ResultDto<bool> DeletePost<T>(int entityId, int postId) where T : class, IPostsEntity {
+			var db = Resolver.Resolve<DbContext>();
 			// find the entity with the given id
-			var entity = DbContext.Set<T>().Find(entityId);
+			var entity = db.Set<T>().Find(entityId);
 			// check if the entity does not exist
 			if (entity == null) {
 				var msg = $"[DeletePost] Entity with Id={entityId} not found";
@@ -94,8 +95,8 @@ namespace MyVipCity.BusinessLogic {
 
 			var existingPost = entity.Posts.AsQueryable().FirstOrDefault(p => p.Id == postId);
 			if (existingPost != null)
-				DbContext.Set<Post>().Remove(existingPost);
-			DbContext.SaveChanges();
+				db.Set<Post>().Remove(existingPost);
+			db.SaveChanges();
 			return new ResultDto<bool>(true);
 		}
 
@@ -108,8 +109,9 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		private PostDto[] GetPosts<T>(int entityId, int top, Expression<Func<Post, bool>> whereExpression) where T : class, IPostsEntity {
+			var db = Resolver.Resolve<DbContext>();
 			// find the entity
-			var entity = DbContext.Set<T>().Find(entityId);
+			var entity = db.Set<T>().Find(entityId);
 			// if the entity does not exists, then return null
 			if (entity == null)
 				return null;

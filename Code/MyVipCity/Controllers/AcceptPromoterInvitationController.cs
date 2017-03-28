@@ -1,42 +1,40 @@
-﻿using System.Security.Claims;
-using System.Web;
+﻿using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
-using Ninject;
 
 namespace MyVipCity.Controllers {
 
 	public class AcceptPromoterInvitationController: VipControllerBase {
 
-		[Inject]
+		public AcceptPromoterInvitationController(IPromoterInvitationManager promoterInvitationManager, IBusinessManager businessManager, ApplicationUserManager applicationUserManager) {
+			PromoterInvitationManager = promoterInvitationManager;
+			BusinessManager = businessManager;
+			ApplicationUserManager = applicationUserManager;
+			ViewBag.HideNgView = true;
+		}
+
 		public IPromoterInvitationManager PromoterInvitationManager
 		{
 			get;
 			set;
 		}
 
-		[Inject]
 		public IBusinessManager BusinessManager
 		{
 			get;
 			set;
 		}
 
-		[Inject]
 		public ApplicationUserManager ApplicationUserManager
 		{
 			get;
 			set;
 		}
-
-		public AcceptPromoterInvitationController() {
-			ViewBag.HideNgView = true;
-		}
-
+		
 		// GET: AcceptPromoterInvitation
 		public ActionResult Index(string friendlyId) {
 			// check if the user is not authenticated
@@ -70,8 +68,8 @@ namespace MyVipCity.Controllers {
 			var user = ApplicationUserManager.FindById(UserId);
 			var identity = ApplicationUserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
 			authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
-			
-			
+
+
 			return Redirect($"#/promoter-profile/{profileDto.Id}");
 		}
 	}

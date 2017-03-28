@@ -4,20 +4,16 @@ using Microsoft.AspNet.Identity;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.DataTransferObjects.Social;
-using Ninject;
 
 namespace MyVipCity.Controllers.api {
 
 	[RoutePrefix("api/PromoterProfile")]
 	public class PromoterProfileController: ApiController {
 
-		[Inject]
-		public IKernel Kernel
-		{
-			get; set;
+		public PromoterProfileController(IPromoterProfileManager promoterProfileManager) {
+			PromoterProfileManager = promoterProfileManager;
 		}
 
-		[Inject]
 		public IPromoterProfileManager PromoterProfileManager
 		{
 			get;

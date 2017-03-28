@@ -11,7 +11,6 @@ using Microsoft.Owin.Security;
 using MyVipCity.Mailing.Contracts;
 using MyVipCity.Mailing.Contracts.EmailModels;
 using MyVipCity.Models;
-using Ninject;
 
 namespace MyVipCity.Controllers {
 
@@ -21,16 +20,18 @@ namespace MyVipCity.Controllers {
 		private ApplicationSignInManager _signInManager;
 		private ApplicationUserManager _userManager;
 
-		public AccountController() {
+		//public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmailService emailService) {
+		//	UserManager = userManager;
+		//	SignInManager = signInManager;
+		//	EmailService = emailService;
+		//	ViewBag.HideNgView = true;
+		//}
+
+		public AccountController(IEmailService emailService) {
+			EmailService = emailService;
 			ViewBag.HideNgView = true;
 		}
 
-		public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) : this() {
-			UserManager = userManager;
-			SignInManager = signInManager;
-		}
-
-		[Inject]
 		public IEmailService EmailService
 		{
 			get;
