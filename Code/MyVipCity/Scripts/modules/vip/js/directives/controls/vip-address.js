@@ -16,7 +16,7 @@
 
 				scope._address = {};
 
-				var clearMapAndHideElement = function() {
+				var clearMapAndHideElement = function () {
 					jQuery(element.find('.vip-map')).empty().hide();
 				};
 
@@ -34,14 +34,15 @@
 					}
 				};
 
-				var getAddressComponentByType = function (googResponse, type) {
+				var getAddressComponentByType = function (googResponse, type, propertyName) {
+					propertyName = propertyName || 'short_name';
 					var addressComponents = googResponse.address_components;
-					var component =  _.find(addressComponents, function (addComp) {
+					var component = _.find(addressComponents, function (addComp) {
 						return _.indexOf(addComp.types, type) > -1;
 					});
-					if (!component || !component.short_name)
+					if (!component || !component[propertyName])
 						return '';
-					return component.short_name;
+					return component[propertyName];
 				};
 
 				var getStreetFromGoogleResponse = function (googResponse) {
@@ -56,8 +57,18 @@
 					return cityComponent;
 				};
 
+				var getNeighborhoodFromGoogleResponse = function (googResponse) {
+					var cityComponent = getAddressComponentByType(googResponse, 'neighborhood', 'long_name');
+					return cityComponent;
+				};
+
 				var getStateFromGoogleResponse = function (googResponse) {
 					var stateComponent = getAddressComponentByType(googResponse, 'administrative_area_level_1');
+					return stateComponent;
+				};
+
+				var getFullStateNameFromGoogleResponse = function (googResponse) {
+					var stateComponent = getAddressComponentByType(googResponse, 'administrative_area_level_1', 'long_name');
 					return stateComponent;
 				};
 
@@ -71,13 +82,21 @@
 					return zipCodeComponent;
 				};
 
+				var getFullCountryNameFromGoogleResponse = function (googResponse) {
+					var zipCodeComponent = getAddressComponentByType(googResponse, 'country', 'long_name');
+					return zipCodeComponent;
+				};
+
 				var setNgModelValueFromGoogleResponse = function (googResponse) {
 					var modelValue = {
 						Street: getStreetFromGoogleResponse(googResponse),
 						City: getCityFromGoogleResponse(googResponse),
+						Neighborhood: getNeighborhoodFromGoogleResponse(googResponse),
 						State: getStateFromGoogleResponse(googResponse),
+						StateFullName: getFullStateNameFromGoogleResponse(googResponse),
 						ZipCode: getZipCodeFromGoogleResponse(googResponse),
 						Country: getCountryFromGoogleResponse(googResponse),
+						CountryFullName: getFullCountryNameFromGoogleResponse(googResponse),
 						Longitude: googResponse.geometry.location.lng,
 						Latitude: googResponse.geometry.location.lat,
 						FormattedAddress: googResponse.formatted_address
