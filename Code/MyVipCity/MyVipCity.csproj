@@ -60,8 +60,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject.Extensions.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -5812,6 +5812,10 @@
     <ProjectReference Include="..\MyVipCity.Domain\MyVipCity.Domain.csproj">
       <Project>{3b9c5906-0331-43f0-895f-f49f428fe1a5}</Project>
       <Name>MyVipCity.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyVipCity.IpGeolocation\MyVipCity.IpGeolocation.csproj">
+      <Project>{ac139b54-ef97-4d0d-a1e2-f20976cff4da}</Project>
+      <Name>MyVipCity.IpGeolocation</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyVipCity.Mailing.Contracts\MyVipCity.Mailing.Contracts.csproj">
       <Project>{e3055c1a-8f62-439c-b904-eeb04261feeb}</Project>

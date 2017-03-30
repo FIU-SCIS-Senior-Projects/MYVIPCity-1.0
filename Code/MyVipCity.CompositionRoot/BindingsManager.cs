@@ -5,6 +5,7 @@ using MyVipCity.BusinessLogic;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.Common;
 using MyVipCity.Domain.Automapper;
+using MyVipCity.IpGeolocation;
 using MyVipCity.Mailing.Contracts;
 using MyVipCity.Mailing.Sendgrid;
 using Ninject.Extensions.Logging;
@@ -16,6 +17,7 @@ namespace MyVipCity.CompositionRoot {
 	public static class BindingsManager {
 
 		public static void RegisterServices(Container container, NameValueCollection appSettings) {
+			container.RegisterSingleton<IIpGeolocator>(new IpInfoDbIpGeoLocator(appSettings["myvipcity:ip-info-db-api-key"]));
 			container.RegisterSingleton<IResolver>(new SimpleInjectorResolver(container));
 			container.RegisterSingleton<IEmailService>(new SendGridEmailService(appSettings["myvipcity:send-grid-api"]));
 			container.RegisterSingleton<IMapper>(() => {
