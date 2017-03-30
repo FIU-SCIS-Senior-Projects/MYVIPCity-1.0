@@ -12,3 +12,4 @@ obj
 /Code/Logs
 /Code/.vs/config/applicationhost.config
 /Code/MyVipCity/Properties/PublishProfiles
+/Code/AppSettingsSecrets.config

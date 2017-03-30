@@ -10,6 +10,8 @@ namespace MyVipCity.Controllers {
 		}
 
 		public ActionResult Home() {
+			var t = Request.GetType().FullName;
+			var r = Request;
 			return View("Index");
 		}
 	}

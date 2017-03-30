@@ -7,4 +7,5 @@
   &lt;Assembly Path="C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\packages\Ninject.Extensions.Logging.Log4net.3.2.3.0\lib\net45-full\Ninject.Extensions.Logging.Log4Net.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\packages\Ninject.Extensions.Logging.3.2.0.0\lib\net45-full\Ninject.Extensions.Logging.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\Angel\Source\Repos\MYVIPCity-1.0\Code\packages\Ninject.Extensions.NamedScope.3.2.0.0\lib\net45-full\Ninject.Extensions.NamedScope.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Web.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>
