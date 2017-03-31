@@ -191,6 +191,11 @@
                         <div vip-numeric-select ng-model="attendingRequest.PartyCount" name="PartyCount" required min="1" max="20" ng-change="partyCountChanged()"></div>
                         <label>How Many in your party?</label>
                         <i class="form-group__bar"></i>
+                        <div ng-messages="wantToGoForm.PartyCount.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
+                            <div ng-message="required">
+                                <small class="pull-right">Required</small>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -198,6 +203,11 @@
                                 <div vip-numeric-select ng-model="attendingRequest.MaleCount" name="MaleCount" required min="1" max="20" ng-change="maleCountChanged()"></div>
                                 <label>How many Males?</label>
                                 <i class="form-group__bar"></i>
+                                <div ng-messages="wantToGoForm.MaleCount.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
+                                    <div ng-message="required">
+                                        <small class="pull-right">Required</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -205,6 +215,11 @@
                                 <div vip-numeric-select ng-model="attendingRequest.FemaleCount" name="FemaleCount" required min="1" max="20" ng-change="femaleCountChanged()"></div>
                                 <label>How many Females?</label>
                                 <i class="form-group__bar"></i>
+                                <div ng-messages="wantToGoForm.FemaleCount.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
+                                    <div ng-message="required">
+                                        <small class="pull-right">Required</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
