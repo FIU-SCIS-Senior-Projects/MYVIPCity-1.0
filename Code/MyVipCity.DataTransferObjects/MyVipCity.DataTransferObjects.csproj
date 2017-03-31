@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressDto.cs" />
+    <Compile Include="AttendingRequestDto.cs" />
+    <Compile Include="AttendingRequestDeclineDto.cs" />
     <Compile Include="BusinessDto.cs" />
     <Compile Include="Contracts\IIdentifiableDto.cs" />
     <Compile Include="DayHoursDto.cs" />

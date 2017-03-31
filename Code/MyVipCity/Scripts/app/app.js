@@ -276,27 +276,25 @@
 		/*--------------------------------------------
         Text Fields - Blue Bar when focus
     ---------------------------------------------*/
-		if ($('.form-group--float')[0]) {
-			$('.form-group--float').each(function() {
-				var p = $(this).find('.form-control').val()
+		$('body').on('change', '.form-group--float .form-control', function () {
+			var p = $(this).val();
 
-				if (!p.length == 0) {
-					$(this).addClass('form-group--active');
-				}
-			});
+			if (!p.length == 0) {
+				$(this).closest('.form-group--float').addClass('form-group--active');
+			}
+		});
 
-			$('body').on('blur', '.form-group--float .form-control', function() {
-				var i = $(this).val();
-				var p = $(this).parent();
+		$('body').on('blur', '.form-group--float .form-control', function () {
+			var i = $(this).val();
+			var p = $(this).closest('.form-group--float');
 
-				if (i.length == 0) {
-					p.removeClass('form-group--active');
-				}
-				else {
-					p.addClass('form-group--active');
-				}
-			});
-		}
+			if (i.length == 0) {
+				p.removeClass('form-group--active');
+			}
+			else {
+				p.addClass('form-group--active');
+			}
+		});
 
 		/*--------------------------------------------
         Light Gallery - Lightbox

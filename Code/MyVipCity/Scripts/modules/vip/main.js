@@ -15,6 +15,7 @@
 	'vip/js/controllers/promoterProfileController',
 	'vip/js/controllers/registerFormController',
 	'vip/js/controllers/viewBusinessController',
+	'vip/js/controllers/wantToGoFormController',
 	// directives
 	'vip/js/directives/controls/vip-address',
 	'vip/js/directives/controls/vip-checkbox',
@@ -43,6 +44,7 @@
 	'vip/js/directives/vip-mvc-antiforgery-token',
 	'vip/js/directives/vip-navigation-menu',
 	'vip/js/directives/vip-new-promoters',
+	'vip/js/directives/vip-numeric-select',
 	'vip/js/directives/vip-random-bg-color',
 	// services
 	'vip/js/services/factories/business-posts-manager',
