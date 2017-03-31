@@ -4381,3 +4381,10 @@ div[vip-post] div[vip-video] {
   margin-left: -14px;
   margin-right: -14px;
 }
+/* vip-promoter-dropdown*/
+.vip-promoter-dropdown__dropdown-item td {
+  padding-right: 5px;
+}
+.vip-want-to-go .card__body {
+  padding: 30px 30px;
+}

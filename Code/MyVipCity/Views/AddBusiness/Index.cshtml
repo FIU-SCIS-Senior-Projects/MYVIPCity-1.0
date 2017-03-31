@@ -154,7 +154,7 @@
             <div vip-posts posts-manager-id="business-posts-manager" entity-id="model.Id" vip-read-only="!userIsAdmin"></div>
         </div>
     </div>
-    <div id="inquire" class="col-md-4 rmd-sidebar-mobile">
+    <div id="inquire" class="col-md-4 rmd-sidebar-mobile vip-want-to-go">
         <div ng-controller="vip.wantToGoFormController">
             <form class="card hidden-print" name="wantToGoForm">
                 <div class="card__header">
@@ -222,6 +222,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <div vip-promoter-dropdown business-id="model.Id" ng-model="attendingRequest.Promoter" placeholder="Select a VIP host"></div>
                     </div>
                     <small class="text-muted">By sending us your information, you agree to MyVipCity’s Terms of Use & Privacy Policy.</small>
                 </div>

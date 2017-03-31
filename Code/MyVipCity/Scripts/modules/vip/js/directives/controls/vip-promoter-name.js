@@ -21,9 +21,9 @@
 					var tag = attrs.wrapWith || 'span';
 					// create the read mode element
 					var readElement = angular.element(
-						'<' + tag + ' class="vip-promoter-name__name-part vip-promoter-name__first-name">{{' + attrs.ngModel + '.FirstName}}</' + tag + '>' +
-						'<' + tag + ' class="vip-promoter-name__name-part vip-promoter-name__nick-name" ng-show="' + attrs.ngModel + '.NickName">{{' + attrs.ngModel + '.NickName}}</' + tag + '>' +
-						'<' + tag + ' class="vip-promoter-name__name-part vip-promoter-name__last-name" ng-show="' + attrs.ngModel + '.LastName">{{' + attrs.ngModel + '.LastName}}</' + tag + '>'
+						'<' + tag + ' class="vip-promoter-name__name-part vip-promoter-name__first-name" ng-cloak>{{' + attrs.ngModel + '.FirstName}}</' + tag + '>' +
+						'<' + tag + ' class="vip-promoter-name__name-part vip-promoter-name__nick-name" ng-show="' + attrs.ngModel + '.NickName" ng-cloak>{{' + attrs.ngModel + '.NickName}}</' + tag + '>' +
+						'<' + tag + ' class="vip-promoter-name__name-part vip-promoter-name__last-name" ng-show="' + attrs.ngModel + '.LastName" ng-cloak>{{' + attrs.ngModel + '.LastName}}</' + tag + '>'
 					);
 					// add css class
 					if (attrs.readModeClass)

@@ -418,6 +418,8 @@
     <Content Include="Scripts\modules\vip\js\controllers\registerFormController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\wantToGoFormController.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-address.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-promoter-dropdown.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-promoter-picture.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-video.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-video-control.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-existing-promoters.js" />
@@ -431,7 +433,7 @@
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-textarea.js" />
     <Content Include="Scripts\modules\vip\js\directives\validators\vip-non-empty-array.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-hosts-card.js" />
-    <Content Include="Scripts\modules\vip\js\directives\vip-numeric-select.js" />
+    <Content Include="Scripts\modules\vip\js\directives\controls\vip-numeric-select.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-random-bg-color.js" />
     <Content Include="Scripts\modules\vip\js\directives\vip-new-promoters.js" />
     <Content Include="Scripts\modules\vip\js\directives\controls\vip-week-hours.js" />

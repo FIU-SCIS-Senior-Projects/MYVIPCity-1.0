@@ -13,8 +13,7 @@
 					'<i ng-show="renderingMode == 2" class="zmdi zmdi-close vip-existing-promoters__delete" ng-click="removePromoter($event, promoter)"></i>' +
 
 					'<a class="list-group-item media" href="#/promoter-profile/{{promoter.Id}}">' +
-						'<div class="vip-existing-promoters__img-container pull-left" style="width:70px !important; height: 70px !important; overflow: hidden !important; border-radius:50% !important;">' +
-							'<img alt="" class="list-group__img img-circle vip-existing-promoters__img" ng-src="api/Pictures/{{promoter.ProfilePicture.BinaryDataId}}" style="{{::getStyle(promoter, $element)}}">' +
+						'<div vip-promoter-picture ng-model="promoter" class="vip-existing-promoters__img-container pull-left" img-class="list-group__img img-circle vip-existing-promoters__img">' +
 						'</div>' +
 						'<div class="media-body">' +
 							'<div vip-promoter-name ng-model="promoter" wrap-with="strong" vip-read-only></div>' +
@@ -73,7 +72,7 @@
 						showCancelButton: true
 					}).then(function () {
 						$http.delete('api/PromoterProfile/' + promoter.Id).then(function () {
-							_.remove(scope.promoters, function(p) {
+							_.remove(scope.promoters, function (p) {
 								return p.Id === promoter.Id;
 							});
 						}, function () {
@@ -90,7 +89,7 @@
 						// make a request to bring all the promoters associated to this business
 						$http.get('/api/Business/' + id + '/Promoters').then(function (response) {
 							scope.promoters = response.data;
-							
+
 							// watch for changes in rendering mode
 							var unregister = scope.$watch('renderingMode', function (value) {
 								// check edit
