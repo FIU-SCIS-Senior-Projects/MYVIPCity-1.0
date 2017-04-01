@@ -31,7 +31,7 @@ namespace MyVipCity.Domain.Automapper.CustomResolvers {
 		/// </returns>
 		public ICollection<TItemModel> Resolve(TDto source, TModel destination, ICollection<TItemModel> destMember, ResolutionContext context) {
 			DtoToModelContext dtoToModelContext = GetDtoToModelContextFromResolutionContext(context);
-			var dbContext = GetDbContextResolutionContext(context);
+			var dbContext = GetDbContextFromResolutionContext(context);
 			IMapper mapper = context.Mapper;
 
 			// get the collection from the dto

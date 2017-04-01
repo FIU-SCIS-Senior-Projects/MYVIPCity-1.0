@@ -1,4 +1,6 @@
-﻿namespace MyVipCity.Mailing.Contracts.EmailModels {
+﻿using System.Collections.Generic;
+
+namespace MyVipCity.Mailing.Contracts.EmailModels {
 
 	public class BasicEmailModel {
 
@@ -21,6 +23,12 @@
 		}
 
 		public string Body
+		{
+			get;
+			set;
+		}
+
+		public ICollection<string> Bccs
 		{
 			get;
 			set;

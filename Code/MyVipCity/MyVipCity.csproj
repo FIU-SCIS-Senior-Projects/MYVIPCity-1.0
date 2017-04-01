@@ -228,6 +228,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AcceptPromoterInvitationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\api\AttendingRequestController.cs" />
     <Compile Include="Controllers\api\PromoterProfileController.cs" />
     <Compile Include="Controllers\api\PromoterInvitationController.cs" />
     <Compile Include="Controllers\PromoterProfileController.cs" />

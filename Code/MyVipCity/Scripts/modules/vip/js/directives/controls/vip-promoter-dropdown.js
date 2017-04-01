@@ -33,7 +33,7 @@
 						// add id and text properties to each data item
 						angular.forEach(data, function (item) {
 							// Dont care about the business in this context
-							item.getBusinessHoursEvents = null
+							item.Business = null;
 							item.id = item.Id;
 							item.text = item.FirstName + (item.NickName ? ' "' + item.NickName + '"' : '') + (item.LastName ? ' ' + item.LastName : '');
 						});

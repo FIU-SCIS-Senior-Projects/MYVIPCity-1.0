@@ -80,7 +80,7 @@
     <section class="section">
         <div class="container">
             @if (ViewBag.HideNgView == null || ViewBag.HideNgView != true) {
-                <div ng-view></div>}
+                <div ng-view autoscroll="true"></div>}
             <div class="mvc-body-container">
                 @RenderBody()
             </div>

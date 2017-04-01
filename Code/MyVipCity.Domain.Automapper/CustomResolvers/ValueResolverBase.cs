@@ -9,7 +9,7 @@ namespace MyVipCity.Domain.Automapper.CustomResolvers {
 
 	public abstract class ValueResolverBase {
 
-		protected DbContext GetDbContextResolutionContext(ResolutionContext context) {
+		protected DbContext GetDbContextFromResolutionContext(ResolutionContext context) {
 			object dbContext;
 			context.Options.Items.TryGetValue(typeof(DbContext).Name, out dbContext);
 			return (DbContext)dbContext;
@@ -29,9 +29,20 @@ namespace MyVipCity.Domain.Automapper.CustomResolvers {
 			TModel model;
 			// check if the reference property is new
 			model = dto.Id == 0 ? Activator.CreateInstance<TModel>() : existingModelFinder(dto);
+			if (model == null) {
+				throw new Exception($"{typeof(TModel).Name} with Id = {dto.Id} not found");
+			}
 			// store the mapped instance in the context
 			dtoToModelContext.SetMappedObjectInContext(dto, model);
 			// map from the dto property to the model property
+			return MapDtoToModel(dto, model, dtoToModelContext, dbContext, mapper);
+		}
+
+		protected TModel MapDtoToModel<TDto, TModel>(TDto dto, TModel model, DtoToModelContext dtoToModelContext, DbContext dbContext, IMapper mapper) {
+			if (model == null)
+				throw new ArgumentNullException(nameof(model));
+			if (dto == null)
+				throw new ArgumentNullException(nameof(dto));
 			var result = mapper.Map(dto, model,
 				opts => {
 					opts.Items.Add(typeof(DtoToModelContext).Name, dtoToModelContext);

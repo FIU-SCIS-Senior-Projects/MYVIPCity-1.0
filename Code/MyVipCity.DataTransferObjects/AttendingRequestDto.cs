@@ -43,9 +43,9 @@ namespace MyVipCity.DataTransferObjects {
 		}
 
 		/// <summary>
-		/// Id of the user account making the request.
+		/// Name of the user making the request.
 		/// </summary>
-		public string UserId
+		public string Name
 		{
 			get;
 			set;

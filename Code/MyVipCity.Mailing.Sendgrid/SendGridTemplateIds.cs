@@ -10,7 +10,6 @@
 
 		public const string PromoterReviewNotificationTemplateId = "565e54d2-3883-4fa9-9aba-562fc1c60c12";
 
-		public const string TestTemplateId = "865015c4-f2ae-4e17-84fe-20f41e06045f";
-
+		public const string NewAttendingRequestNotificationForPromoterTemplateId = "eb0e8e1a-127b-478e-8230-7ad7302bc324";
 	}
 }

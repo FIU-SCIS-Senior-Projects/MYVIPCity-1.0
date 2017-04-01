@@ -40,6 +40,7 @@ namespace MyVipCity.CompositionRoot {
 		}
 
 		private static void BusinessLayerServices(Container container) {
+			container.RegisterSingleton<IAttentingRequestManager, AttentingRequestManager>();
 			container.RegisterSingleton<IPostsEntityManager, PostsEntityManager>();
 			container.RegisterSingleton<IBusinessManager, BusinessManager>();
 			container.RegisterSingleton<IPromoterInvitationManager, PromoterInvitationManager>();
