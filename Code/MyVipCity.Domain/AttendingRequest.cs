@@ -4,8 +4,8 @@ using MyVipCity.Domain.Contracts;
 namespace MyVipCity.Domain {
 
 	public enum AttendingRequestService {
-		VipTableService,
-		PriorityGeneralEntry
+		VipTableService = 1,
+		PriorityGeneralEntry = 2
 	}
 
 	public enum AttendingRequestStatus {

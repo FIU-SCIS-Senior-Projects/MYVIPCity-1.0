@@ -4,8 +4,8 @@ using MyVipCity.DataTransferObjects.Contracts;
 namespace MyVipCity.DataTransferObjects {
 
 	public enum AttendingRequestServiceDto {
-		VipTableService,
-		PriorityGeneralEntry
+		VipTableService = 1,
+		PriorityGeneralEntry = 2
 	}
 
 	public enum AttendingRequestStatusDto {

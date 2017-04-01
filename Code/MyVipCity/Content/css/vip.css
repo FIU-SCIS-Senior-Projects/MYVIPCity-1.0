@@ -4388,3 +4388,6 @@ div[vip-post] div[vip-video] {
 .vip-want-to-go .card__body {
   padding: 0px 30px 30px 30px;
 }
+.vip-want-to-go .radio label {
+  padding-left: 2px;
+}

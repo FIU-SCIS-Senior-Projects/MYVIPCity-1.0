@@ -183,11 +183,6 @@
                         </div>
                     </div>
                     <div class="form-group form-group--float">
-                        <textarea class="form-control textarea-autoheight" ng-model="attendingRequest.Message" maxlength="1000"></textarea>
-                        <label>Message (Optional)</label>
-                        <i class="form-group__bar"></i>
-                    </div>
-                    <div class="form-group form-group--float">
                         <div vip-numeric-select ng-model="attendingRequest.PartyCount" name="PartyCount" required min="1" max="20" ng-change="partyCountChanged()"></div>
                         <label>How Many in your party?</label>
                         <i class="form-group__bar"></i>
@@ -224,7 +219,26 @@
                         </div>
                     </div>
                     <div class="form-group form-group--float">
+                        <div class="radio radio-inline">
+                            <label>
+                                <input type="radio" value="1" name="Service" ng-model="attendingRequest.DesiredService">
+                                <i class="input-helper"></i>VIP Table Service
+                            </label>
+                        </div>
+                        <div class="radio radio-inline">
+                            <label>
+                                <input type="radio" value="2" name="Service" ng-model="attendingRequest.DesiredService">
+                                <i class="input-helper"></i>Priority General Entry
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group form-group--float">
                         <div vip-promoter-dropdown business-id="model.Id" ng-model="attendingRequest.Promoter" placeholder="Select a VIP host"></div>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <textarea class="form-control textarea-autoheight" ng-model="attendingRequest.Message" maxlength="1000"></textarea>
+                        <label>Message (Optional)</label>
+                        <i class="form-group__bar"></i>
                     </div>
                     <small class="text-muted">By sending us your information, you agree to MyVipCity’s Terms of Use & Privacy Policy.</small>
                 </div>
