@@ -155,7 +155,7 @@
         </div>
     </div>
     <div id="inquire" class="col-md-4 rmd-sidebar-mobile vip-want-to-go">
-        <div ng-controller="vip.wantToGoFormController">
+        <div ng-controller="vip.wantToGoFormController as ctrl">
             <form class="card hidden-print" name="wantToGoForm">
                 <div class="card__header">
                     <h2>Want to go?</h2>
@@ -180,6 +180,17 @@
                             <div ng-message="required">
                                 <small class="pull-right">Contact Number is required</small>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group--float">
+                        <span>When? </span>
+                        <vip-datepicker ng-model="attendingRequest.Date" name="dateField" vip-min-date="ctrl.minDate" vip-max-date="ctrl.maxDate" required></vip-datepicker>
+
+                        <div ng-messages="wantToGoForm.dateField.$error"  class="mdc-text-red-500 animated fadeIn">
+                            <div ng-message="valid">That's not a date</div>
+                            <div ng-message="required">Date is required</div>
+                            <div ng-message="mindate">Date is too early!</div>
+                            <div ng-message="maxdate">Date is too late!</div>
                         </div>
                     </div>
                     <div class="form-group form-group--float">

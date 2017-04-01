@@ -104,6 +104,12 @@ namespace MyVipCity.Domain {
 			set;
 		}
 
+		public DateTimeOffset SubmittedOn
+		{
+			get;
+			set;
+		}
+
 		/// <summary>
 		/// The number of members in the party.
 		/// </summary>

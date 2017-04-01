@@ -1,8 +1,12 @@
-﻿define(['vip/js/vip', 'sweet-alert'], function (vip) {
+﻿define(['vip/js/vip', 'moment', 'sweet-alert'], function (vip, moment) {
 	'use strict';
 
 	vip.controller('vip.wantToGoFormController', ['$scope', '$http', function ($scope, $http) {
 		var listeners = [];
+
+		this.minDate = new Date();
+		this.maxDate = moment(this.minDate).add(60, 'd').toDate();
+		// TODO: filter dates so that it is not possible to select a day where the business is closed
 
 		$scope.attendingRequest = {};
 

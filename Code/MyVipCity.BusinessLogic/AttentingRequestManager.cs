@@ -25,12 +25,24 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		public async Task<ResultDto<bool>> SubmitRequestAsync(AttendingRequestDto attendingRequestDto) {
+			// make sure Id = 0
 			if (attendingRequestDto.Id != 0) {
 				var msg = $"SubmitRequest - If of {typeof(AttendingRequestDto).Name} must be 0";
 				Logger.Error(msg);
 				throw new InvalidOperationException(msg);
 			}
-
+			// check date is not in the past
+			if (attendingRequestDto.Date < DateTime.Today) {
+				var msg = $"SubmitRequest - Date cannot be in the past";
+				Logger.Error(msg);
+				throw new InvalidOperationException(msg);
+			}
+			// check business is not null
+			if (attendingRequestDto.Business == null) {
+				var msg = $"SubmitRequest - Business cannot be null";
+				Logger.Error(msg);
+				throw new InvalidOperationException(msg);
+			}
 			if (Thread.CurrentPrincipal == null) {
 				Logger.Error("There is no current principal");
 				throw new InvalidOperationException();
@@ -41,13 +53,8 @@ namespace MyVipCity.BusinessLogic {
 
 			// set the status of this request to pending
 			attendingRequestDto.Status = AttendingRequestStatusDto.Pending;
-
-			// check business is not null
-			if (attendingRequestDto.Business == null) {
-				var msg = $"SubmitRequest - Business cannot be null";
-				Logger.Error(msg);
-				throw new InvalidOperationException(msg);
-			}
+			// set submited on time
+			attendingRequestDto.SubmittedOn = DateTimeOffset.Now;
 			// set desired promoter to null
 			attendingRequestDto.DesiredPromoter = null;
 			// map to model
@@ -56,18 +63,11 @@ namespace MyVipCity.BusinessLogic {
 			attendingRequest.UserId = userId;
 			// set the desired promoter as the same promoter
 			attendingRequest.DesiredPromoter = attendingRequest.Promoter;
-			// TODOO Validate date
-			attendingRequest.Date = DateTime.Now;
 			// get access to the db
 			var db = Resolver.Resolve<DbContext>();
 			// save the attending request
 			db.Set<AttendingRequest>().Add(attendingRequest);
-			try {
-				await db.SaveChangesAsync();
-			}
-			catch (Exception e) {
-				
-			}
+			await db.SaveChangesAsync();
 
 			return new ResultDto<bool>(true);
 		}

@@ -26,39 +26,6 @@
 			link: function (scope, element, attrs) {
 				var listeners = [];
 
-				// get style for the image
-				scope.getStyle = function (promoter) {
-					if (!promoter.ProfilePicture)
-						return "";
-					// container W and H can me made dynamic and configurable
-					var containerWidth = 70, containerHeight = 70;
-					var cropData = JSON.parse(promoter.ProfilePicture.CropData);
-					// check if the picture has a rotation of (2x+1)*90 degrees
-					if (cropData.rotate && (cropData.rotate / 90) % 2 === 1) {
-						var tmp = cropData.x;
-						cropData.x = cropData.y;
-						cropData.y = tmp;
-					}
-					// get ration between destination container and crop dimensions
-					var rw = (containerWidth * 1.0) / cropData.width;
-					var rh = (containerHeight * 1.0) / cropData.height;
-					// create style dictionary
-					var style = {};
-					// set styles
-					style.width = cropData.naturalWidth * rw + 'px';
-					style.height = cropData.naturalHeight * rw + 'px';
-					style.transform = 'translateX(' + (-cropData.x * rw) + 'px) translateY(' + (-cropData.y * rh) + 'px) rotate(' + (cropData.rotate || 0) + 'deg)';
-					// convert style to string
-					var result = '';
-					angular.forEach(style, function (value, key) {
-						if (style.hasOwnProperty(key)) {
-							result += key + ':' + value + ' !important;';
-						}
-					});
-
-					return result;
-				};
-
 				var showErrorPopup = function (title, errorMsg) {
 					swal(title || 'Oops', errorMsg || 'An error has occurred', 'error');
 				};
