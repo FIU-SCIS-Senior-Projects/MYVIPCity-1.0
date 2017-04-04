@@ -53,22 +53,19 @@
                 </tr>
             </table>
         </div>
-        <div class="vip-attending-request-card__actions">
-            @using (Html.BeginForm("AcceptRequest", "AttendingRequest")) {
-                @Html.AntiForgeryToken();
-                @Html.HiddenFor(m => m.Id);
-                <button class="btn btn-primary" type="submit">Accept</button>  }
+        <div class="vip-attending-request-card__actions" ng-controller="vip.acceptDeclineAttendingRequestController" ng-init="requestId = @Model.Id">
+            @*@using (Html.BeginForm("AcceptRequest", "AttendingRequest")) {
+                    @Html.AntiForgeryToken();
+                    @Html.HiddenFor(m => m.Id);
+                    <button class="btn btn-primary" type="submit">Accept</button>  }
 
-            @using (Html.BeginForm("DeclineRequest", "AttendingRequest")) {
-                @Html.AntiForgeryToken();
-                @Html.HiddenFor(m => m.Id);
-                <button class="btn btn-secondary" type="submit">Decline</button>  }
+                @using (Html.BeginForm("DeclineRequest", "AttendingRequest")) {
+                    @Html.AntiForgeryToken();
+                    @Html.HiddenFor(m => m.Id);
+                    <button class="btn btn-secondary" type="submit">Decline</button>  }*@
+
+            <button class="btn btn-primary" type="submit" ng-click="acceptAttendingRequest()">Accept</button>
+            <button class="btn btn-secondary" type="submit" ng-click="declineAttendingRequest">Decline</button>
         </div>
-        @*@using (Html.BeginForm("AcceptInvitation", "AcceptPromoterInvitation")) {
-                @Html.AntiForgeryToken();
-                @Html.HiddenFor(m => m.FriendlyId);
-                <button class="btn btn-primary" type="submit">Accept Invitation</button>
-            }*@
     </div>
 </div>
-

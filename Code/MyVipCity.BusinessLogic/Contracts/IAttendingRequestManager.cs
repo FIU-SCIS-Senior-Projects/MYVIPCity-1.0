@@ -12,5 +12,9 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		Task<AttendingRequestDto> GetPendingRequestForPromoterAsync(int attendingRequestId, string promoterUserId);
 
 		AttendingRequestDto GetPendingRequestForPromoter(int attendingRequestId, string promoterUserId);
+
+		Task<bool> AcceptRequestAsync(int attendingRequestId, string promoterUserId, string promoterProfileUrl);
+
+		bool AcceptRequest(int attendingRequestId, string promoterUserId, string promoterProfileUrl);
 	}
 }

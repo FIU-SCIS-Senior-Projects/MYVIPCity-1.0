@@ -22,5 +22,8 @@ namespace MyVipCity.Mailing.Contracts {
 
 		// Sends an email to a promoter to notifying he/she has been selected as the VIP host for an attending request.
 		Task SendAttendigRequestNotificationToPromoter(NewAttendingRequestPromoterNotificationEmailModel model);
+
+		// Sends an email to the user who made an attending request notifying the request has been approved by the promoter.
+		Task SendAcceptedAttendingRequestNotificationToUser(AcceptedAttendingRequestNotificationEmailModel model);
 	}
 }

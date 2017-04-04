@@ -409,6 +409,7 @@
     <Content Include="Scripts\modules\main.js" />
     <Content Include="Scripts\modules\vip\js\config\vipConfig.js" />
     <Content Include="Scripts\modules\vip\js\config\vipRouteConfig.js" />
+    <Content Include="Scripts\modules\vip\js\controllers\acceptDeclineAttendingRequestController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\clubListController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\businessPromotersController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\mainController.js" />

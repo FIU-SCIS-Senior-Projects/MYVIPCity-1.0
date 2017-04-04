@@ -89,5 +89,9 @@ namespace MyVipCity.Domain {
 			get { return posts; }
 			protected set { posts = value; }
 		}
+
+		public string FullName() {
+			return FirstName + (!string.IsNullOrWhiteSpace(NickName) ? " \"" + NickName + "\"" : "") + (!string.IsNullOrWhiteSpace(LastName) ? " " + LastName : "");
+		}
 	}
 }

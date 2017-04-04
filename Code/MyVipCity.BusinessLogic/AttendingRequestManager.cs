@@ -83,7 +83,7 @@ namespace MyVipCity.BusinessLogic {
 		public async Task<AttendingRequestDto> GetPendingRequestForPromoterAsync(int attendingRequestId, string promoterUserId) {
 			var db = Resolver.Resolve<DbContext>();
 			var request = await db.Set<AttendingRequest>().FindAsync(attendingRequestId);
-			if (request?.Status != AttendingRequestStatus.Pending || request.Promoter == null || request.Promoter.UserId != promoterUserId)
+			if (request == null || request.Status != AttendingRequestStatus.Pending || request.Promoter == null || request.Promoter.UserId != promoterUserId)
 				return null;
 			var requestDto = ToDto<AttendingRequestDto, AttendingRequest>(request);
 			return requestDto;
@@ -93,10 +93,54 @@ namespace MyVipCity.BusinessLogic {
 			return GetPendingRequestForPromoterAsync(attendingRequestId, promoterUserId).Result;
 		}
 
+		public async Task<bool> AcceptRequestAsync(int attendingRequestId, string promoterUserId, string promoterProfileUrl) {
+			// get access to the db
+			var db = Resolver.Resolve<DbContext>();
+			// find the specified attending request
+			var request = await db.Set<AttendingRequest>().FindAsync(attendingRequestId);
+			// check if it is ok to accept this request
+			if (request == null || request.Status != AttendingRequestStatus.Pending || request.Promoter == null || request.Promoter.UserId != promoterUserId) {
+				var msg = $"Condition to accept attendingRequest with Id = {attendingRequestId} not met";
+				Logger.Error(msg);
+				return false;
+			}
+			// change the status to accepted
+			request.Status = AttendingRequestStatus.Accepted;
+			// persist changes
+			await db.SaveChangesAsync();
+			// send email to user notifying the request has been accepted
+			await SendEmailForAcceptedRequest(request, promoterProfileUrl);
+			// indicate the request was accepted succesfully
+			return true;
+		}
+
+		public bool AcceptRequest(int attendingRequestId, string promoterUserId, string promoterProfileUrl) {
+			return AcceptRequestAsync(attendingRequestId, promoterUserId, promoterProfileUrl).Result;
+		}
+
+		private async Task SendEmailForAcceptedRequest(AttendingRequest request, string promoterProfileUrl) {
+			var adminEmails = userManager.GetAdminsEmail();
+			var emailModel = new AcceptedAttendingRequestNotificationEmailModel {
+				Name = request.Name,
+				From = "hello@myvipcity.com",
+				Subject = "Confirmation for " + request.Business.Name,
+				To = request.Email,
+				BusinessName = request.Business.Name,
+				Date = request.Date.ToString("D", CultureInfo.CurrentCulture),
+				Bccs = adminEmails,
+				PartyCount = request.PartyCount,
+				VipHostName = request.Promoter.FullName(),
+				VipHostPageLink = string.Format(promoterProfileUrl, request.Promoter.Id)
+			};
+			await emailService.SendAcceptedAttendingRequestNotificationToUser(emailModel);
+		}
+
 		private async Task SendEmailsForNewAttendingRequest(AttendingRequest attendingRequest, string acceptUrl) {
 			var adminEmails = userManager.GetAdminsEmail();
 			if (attendingRequest.Promoter != null)
 				await SendNewAttendingRequestEmailToPromoter(attendingRequest, adminEmails, acceptUrl);
+
+			// TODO Send email when there is no default promoter selected
 		}
 
 		private async Task SendNewAttendingRequestEmailToPromoter(AttendingRequest attendingRequest, ICollection<string> adminEmails, string acceptUrl) {

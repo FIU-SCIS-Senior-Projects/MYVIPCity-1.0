@@ -20,6 +20,16 @@ namespace MyVipCity.Mailing.Sendgrid {
 			return response;
 		}
 
+		private void AddBccs(BasicEmailModel emailModel, Mail mail) {
+			if (emailModel.Bccs == null)
+				return;
+			foreach (var bccEmail in emailModel.Bccs) {
+				if (mail.Personalization[0].Tos.FirstOrDefault(email => email.Address == bccEmail) != null)
+					continue;
+				mail.Personalization[0].AddBcc(new Email(bccEmail));
+			}
+		}
+
 		public async Task SendBasicEmailAsync(BasicEmailModel model) {
 			await Task.Run(async () => {
 				Content content = new Content("text/html", model.Body);
@@ -102,13 +112,28 @@ namespace MyVipCity.Mailing.Sendgrid {
 				mail.Personalization[0].AddSubstitution("-date-", model.Date);
 				mail.Personalization[0].AddSubstitution("-message-", model.Message);
 				mail.Personalization[0].AddSubstitution("-service-", model.Service);
+				
+				AddBccs(model, mail);
 
-				// check if there is a Bcc defined
-				if (model.Bccs != null) {
-					foreach (var bccEmail in model.Bccs) {
-						mail.Personalization[0].AddBcc(new Email(bccEmail));
-					}
-				}
+				await SendEmail(mail);
+			});
+		}
+
+		public async Task SendAcceptedAttendingRequestNotificationToUser(AcceptedAttendingRequestNotificationEmailModel model) {
+			await Task.Run(async () => {
+				Content content = new Content("text/html", model.Body ?? "!");
+				Email to = new Email(model.To);
+				Email from = new Email(model.From);
+				Mail mail = new Mail(from, model.Subject, to, content) { TemplateId = SendGridTemplateIds.AcceptedAttendingRequestNotificationTemplateId };
+				// add substitutions
+				mail.Personalization[0].AddSubstitution("-name-", model.Name);
+				mail.Personalization[0].AddSubstitution("-businessName-", model.BusinessName);
+				mail.Personalization[0].AddSubstitution("-date-", model.Date);
+				mail.Personalization[0].AddSubstitution("-partyCount-", model.PartyCount.ToString());
+				mail.Personalization[0].AddSubstitution("-vipHost-", model.VipHostName);
+				mail.Personalization[0].AddSubstitution("-vipHostPageLink-", model.VipHostPageLink);
+
+				AddBccs(model, mail);
 
 				await SendEmail(mail);
 			});

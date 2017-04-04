@@ -4419,12 +4419,9 @@ div[vip-post] div[vip-video] {
 .vip-attending-request-card .vip-attending-request-card__actions {
   margin-top: 20px;
 }
-.vip-attending-request-card .vip-attending-request-card__actions form {
+.vip-attending-request-card .vip-attending-request-card__actions button {
   margin: 5px;
   display: inline-block;
   width: 20%;
   min-width: 70px;
-}
-.vip-attending-request-card .vip-attending-request-card__actions form button {
-  width: 100%;
 }

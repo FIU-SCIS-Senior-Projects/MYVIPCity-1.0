@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailModels\AcceptedAttendingRequestNotificationEmailModel.cs" />
     <Compile Include="EmailModels\BasicEmailModel.cs" />
     <Compile Include="EmailModels\NewAttendingRequestPromoterNotificationEmailModel.cs" />
     <Compile Include="EmailModels\PromoterInvitationEmailModel.cs" />

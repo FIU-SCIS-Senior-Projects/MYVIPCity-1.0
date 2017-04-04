@@ -6,6 +6,7 @@
 	'vip/js/config/vipConfig',
 	'vip/js/config/vipRouteConfig',
 	// controllers
+	'vip/js/controllers/acceptDeclineAttendingRequestController',
 	'vip/js/controllers/addBusinessController',
 	'vip/js/controllers/businessPromotersController',
 	'vip/js/controllers/clubListController',
@@ -65,7 +66,7 @@
 	'vip/js/services/vipUserService',
 	'vip/js/services/vipUtilsService',
 	'vip/js/services/vipVideoService'
-], function(require, angular, vip) {
+], function (require, angular, vip) {
 	return vip;
 });
 
