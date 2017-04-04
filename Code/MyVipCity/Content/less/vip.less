@@ -581,14 +581,65 @@ div[vip-post] {
     }
 }
 
-.vip-want-to-go{
-    .card__body{
+.vip-want-to-go {
+    .card__body {
         padding: 0px 30px 30px 30px;
     }
 
-    .radio{
-        label{
+    .radio {
+        label {
             padding-left: 2px;
+        }
+    }
+}
+
+
+.vip-attending-request-card {
+    text-align: center;
+
+    .vip-attending-request-card__business-name {
+        color: @mdc-blue-500;
+    }
+
+    img {
+        max-width: 70%;
+        max-height: 250px;
+    }
+
+    .vip-attending-request-card__request-details {
+        table {
+            text-align: left;
+            margin: auto;
+            font-size: larger;
+
+            tr {
+                td {
+                    padding-top: 10px;
+                    &:first-child {
+                        padding-right: 5px;
+                        font-weight: bold;
+
+                        &:after {
+                            content: ':';
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .vip-attending-request-card__actions {
+        margin-top: 20px;
+
+        form {
+            margin: 5px;
+            display: inline-block;
+            width: 20%;
+            min-width: 70px;
+
+            button {
+                width: 100%;
+            }
         }
     }
 }

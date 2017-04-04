@@ -38,8 +38,10 @@ namespace MyVipCity.Controllers {
 		// GET: AcceptPromoterInvitation
 		public ActionResult Index(string friendlyId) {
 			// check if the user is not authenticated
-			if (!Request.IsAuthenticated)
+			if (!Request.IsAuthenticated) {
+				ViewBag.CustomMessage = "To accept an invitation to join a business you need to log in first. Please make sure you use the same em@il address where you received the invitation.";
 				return View("NeedAuthentication");
+			}
 			// find the invitation for this user for the given friendlyId
 			var invitation = PromoterInvitationManager.GetPendingInvitation(friendlyId, UserEmail);
 			// if there is no pending invitation, then redirect to home page

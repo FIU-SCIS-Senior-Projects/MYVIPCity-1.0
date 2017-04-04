@@ -56,6 +56,12 @@
 			set;
 		}
 
+		public string Service
+		{
+			get;
+			set;
+		}
+
 		public string Message
 		{
 			get;

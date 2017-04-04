@@ -4391,3 +4391,40 @@ div[vip-post] div[vip-video] {
 .vip-want-to-go .radio label {
   padding-left: 2px;
 }
+.vip-attending-request-card {
+  text-align: center;
+}
+.vip-attending-request-card .vip-attending-request-card__business-name {
+  color: #2196F3;
+}
+.vip-attending-request-card img {
+  max-width: 70%;
+  max-height: 250px;
+}
+.vip-attending-request-card .vip-attending-request-card__request-details table {
+  text-align: left;
+  margin: auto;
+  font-size: larger;
+}
+.vip-attending-request-card .vip-attending-request-card__request-details table tr td {
+  padding-top: 10px;
+}
+.vip-attending-request-card .vip-attending-request-card__request-details table tr td:first-child {
+  padding-right: 5px;
+  font-weight: bold;
+}
+.vip-attending-request-card .vip-attending-request-card__request-details table tr td:first-child:after {
+  content: ':';
+}
+.vip-attending-request-card .vip-attending-request-card__actions {
+  margin-top: 20px;
+}
+.vip-attending-request-card .vip-attending-request-card__actions form {
+  margin: 5px;
+  display: inline-block;
+  width: 20%;
+  min-width: 70px;
+}
+.vip-attending-request-card .vip-attending-request-card__actions form button {
+  width: 100%;
+}

@@ -227,6 +227,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AcceptPromoterInvitationController.cs" />
+    <Compile Include="Controllers\AttendingRequestController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\api\AttendingRequestController.cs" />
     <Compile Include="Controllers\api\PromoterProfileController.cs" />
@@ -5751,7 +5752,7 @@
     <Content Include="Scripts\vendors\bower_components\lodash\vendor\backbone\LICENSE" />
     <Content Include="Scripts\vendors\bower_components\lodash\vendor\underscore\LICENSE" />
     <Content Include="Scripts\vendors\bower_components\lodash\yarn.lock" />
-    <Content Include="Views\AcceptPromoterInvitation\NeedAuthentication.cshtml" />
+    <Content Include="Views\Shared\NeedAuthentication.cshtml" />
     <Content Include="Views\AcceptPromoterInvitation\Index.cshtml" />
     <Content Include="Scripts\vendors\bower_components\cropper\.bower.json" />
     <Content Include="Scripts\vendors\bower_components\cropper\bower.json" />
@@ -5769,6 +5770,7 @@
     <Content Include="Scripts\vendors\ng-on\.npmignore" />
     <Content Include="Scripts\vendors\ng-on\package.json" />
     <Content Include="Scripts\vendors\ng-on\README.md" />
+    <Content Include="Views\AttendingRequest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

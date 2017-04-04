@@ -65,13 +65,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractEntityManager.cs" />
-    <Compile Include="AttentingRequestManager.cs" />
-    <Compile Include="Contracts\IAttentingRequestManager.cs" />
+    <Compile Include="AttendingRequestManager.cs" />
+    <Compile Include="Contracts\IAttendingRequestManager.cs" />
+    <Compile Include="Contracts\IUserManager.cs" />
     <Compile Include="PostsEntityManager.cs" />
     <Compile Include="Contracts\IPostsEntityManager.cs" />
     <Compile Include="Contracts\IPromoterInvitationManager.cs" />
     <Compile Include="Contracts\IPromoterProfileManager.cs" />
     <Compile Include="Contracts\ResultDto.cs" />
+    <Compile Include="UserManager.cs" />
     <Compile Include="PromoterProfileManager.cs" />
     <Compile Include="PromoterInvitationManager.cs" />
     <Compile Include="BusinessManager.cs" />

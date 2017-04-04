@@ -1,0 +1,74 @@
+﻿@using System.Globalization
+@using MyVipCity.DataTransferObjects
+@model MyVipCity.DataTransferObjects.AttendingRequestDto
+
+@{
+    ViewBag.Title = "Attending Request";
+}
+
+<div class="card vip-attending-request-card">
+    <div class="card__header">
+        <h2>You have been selected as the VIP Host for a request to attend <span class="vip-attending-request-card__business-name">@Model.Business.Name</span></h2>
+    </div>
+    <div class="card__body">
+        <div class="vip-attending-request-card__business-image-container">
+            <a href="#/view-business/@Model.Business.FriendlyId">
+                @if (Model.Business.Pictures != null && Model.Business.Pictures.Any()) {
+                    <img src="api/Pictures/@Model.Business.Pictures.OrderBy(p => p.Index).ElementAt(0).BinaryDataId" />}
+                <p>@Model.Business.Address.FormattedAddress</p>
+            </a>
+        </div>
+        <div class="vip-attending-request-card__request-details">
+            <h3>Request Details</h3>
+            <table>
+                <tr>
+                    <td>Date</td>
+                    <td>@Model.Date.ToString("D", CultureInfo.CurrentCulture)</td>
+                </tr>
+                <tr>
+                    <td>User Name</td>
+                    <td>@Model.Name</td>
+                </tr>
+                <tr>
+                    <td>User Email</td>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <td>User Phone</td>
+                    <td>@Model.ContactNumber</td>
+                </tr>
+                <tr>
+                    <td>Party of</td>
+                    <td>@Model.PartyCount people ( <strong>@Model.FemaleCount</strong> female(s) and <strong>@Model.MaleCount</strong> male(s) )</td>
+                </tr>
+                <tr>
+                    <td>Service</td>
+                    <td>@(Model.DesiredService == AttendingRequestServiceDto.PriorityGeneralEntry ? "Priority General Entry" : "VIP Table Service")</td>
+                </tr>
+                <tr>
+                    <td>Message</td>
+                    <td>
+                        <p>@Model.Message</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="vip-attending-request-card__actions">
+            @using (Html.BeginForm("AcceptRequest", "AttendingRequest")) {
+                @Html.AntiForgeryToken();
+                @Html.HiddenFor(m => m.Id);
+                <button class="btn btn-primary" type="submit">Accept</button>  }
+
+            @using (Html.BeginForm("DeclineRequest", "AttendingRequest")) {
+                @Html.AntiForgeryToken();
+                @Html.HiddenFor(m => m.Id);
+                <button class="btn btn-secondary" type="submit">Decline</button>  }
+        </div>
+        @*@using (Html.BeginForm("AcceptInvitation", "AcceptPromoterInvitation")) {
+                @Html.AntiForgeryToken();
+                @Html.HiddenFor(m => m.FriendlyId);
+                <button class="btn btn-primary" type="submit">Accept Invitation</button>
+            }*@
+    </div>
+</div>
+

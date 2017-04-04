@@ -21,9 +21,15 @@ namespace MyVipCity.BusinessLogic {
 
 	public class PromoterProfileManager: AbstractEntityManager, IPromoterProfileManager {
 
-		public PromoterProfileManager(IResolver resolver, IMapper mapper, ILogger logger, IEmailService emailService, IPostsEntityManager postsEntityManager) : base(resolver, mapper, logger) {
+		public PromoterProfileManager(IResolver resolver, IMapper mapper, ILogger logger, IEmailService emailService, IPostsEntityManager postsEntityManager, IUserManager userManager) : base(resolver, mapper, logger) {
 			EmailService = emailService;
 			PostsEntityManager = postsEntityManager;
+			UserManager = userManager;
+		}
+
+		public IUserManager UserManager {
+			get;
+			set;
 		}
 
 		public IEmailService EmailService
@@ -86,9 +92,7 @@ namespace MyVipCity.BusinessLogic {
 				return null;
 			}
 
-			var email = db.Database.SqlQuery<string>($"select Email from AspNetUsers where Id='{promoter.UserId}'").ToArray();
-
-			return email.Length == 0 ? null : email[0];
+			return UserManager.GetEmail(promoter.UserId);
 		}
 
 		public void Delete(int id) {

@@ -87,7 +87,7 @@ namespace MyVipCity.Mailing.Sendgrid {
 				Content content = new Content("text/html", model.Body ?? "!");
 				Email to = new Email(model.To);
 				Email from = new Email(model.From);
-				Mail mail = new Mail(from, model.Subject, to, content) { TemplateId = SendGridTemplateIds.PromoterReviewNotificationTemplateId };
+				Mail mail = new Mail(from, model.Subject, to, content) { TemplateId = SendGridTemplateIds.NewAttendingRequestNotificationForPromoterTemplateId };
 				// add substitutions
 				mail.Personalization[0].AddSubstitution("-promoterName-", model.PromoterName);
 				mail.Personalization[0].AddSubstitution("-businessName-", model.BusinessName);
@@ -100,6 +100,8 @@ namespace MyVipCity.Mailing.Sendgrid {
 				mail.Personalization[0].AddSubstitution("-acceptLink-", model.AcceptLink);
 				mail.Personalization[0].AddSubstitution("-declineLink-", model.DeclineLink);
 				mail.Personalization[0].AddSubstitution("-date-", model.Date);
+				mail.Personalization[0].AddSubstitution("-message-", model.Message);
+				mail.Personalization[0].AddSubstitution("-service-", model.Service);
 
 				// check if there is a Bcc defined
 				if (model.Bccs != null) {
@@ -107,7 +109,7 @@ namespace MyVipCity.Mailing.Sendgrid {
 						mail.Personalization[0].AddBcc(new Email(bccEmail));
 					}
 				}
-				
+
 				await SendEmail(mail);
 			});
 		}
