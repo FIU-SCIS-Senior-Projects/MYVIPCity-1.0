@@ -18,9 +18,9 @@
 					swal({
 						type: 'success',
 						title: 'Success',
-						text: 'A notification email has been sent to the selected promoter with the details of the request.',
+						text: 'The selected promoter has been assigned to this request, and a notification email has been sent to the promoter with the details. You will receive an email once the promoter either accepts or decline the request.',
 						confirmButtonText: "Ok",
-						showCancelButton: true
+						showCancelButton: false
 					}).then(function () {
 						$window.location = $window.location.origin;
 					}, angular.noop);

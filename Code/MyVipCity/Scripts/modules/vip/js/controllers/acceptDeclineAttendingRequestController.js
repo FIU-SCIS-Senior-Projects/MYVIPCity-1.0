@@ -17,9 +17,9 @@
 					swal({
 						type: 'success',
 						title: 'Success',
-						text: 'Thank you for accepting the request. An email has been sent to the user.',
+						text: 'Thank you! An email has ben sent to the user notifying that the request has been accepted.',
 						confirmButtonText: "Ok",
-						showCancelButton: true
+						showCancelButton: false
 					}).then(function () {
 						$window.location = $window.location.origin;
 					}, angular.noop);
