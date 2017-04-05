@@ -410,6 +410,7 @@
     <Content Include="Scripts\modules\vip\js\config\vipConfig.js" />
     <Content Include="Scripts\modules\vip\js\config\vipRouteConfig.js" />
     <Content Include="Scripts\modules\vip\js\controllers\acceptDeclineAttendingRequestController.js" />
+    <Content Include="Scripts\modules\vip\js\controllers\assignPromoterToAttendingRequestController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\clubListController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\businessPromotersController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\mainController.js" />
@@ -5772,6 +5773,7 @@
     <Content Include="Scripts\vendors\ng-on\package.json" />
     <Content Include="Scripts\vendors\ng-on\README.md" />
     <Content Include="Views\AttendingRequest\Index.cshtml" />
+    <Content Include="Views\AttendingRequest\AssignPromoter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

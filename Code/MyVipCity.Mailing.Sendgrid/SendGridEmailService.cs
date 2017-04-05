@@ -92,7 +92,7 @@ namespace MyVipCity.Mailing.Sendgrid {
 			});
 		}
 
-		public async Task SendAttendigRequestNotificationToPromoter(NewAttendingRequestPromoterNotificationEmailModel model) {
+		public async Task SendAttendigRequestNotificationToPromoterAsync(NewAttendingRequestPromoterNotificationEmailModel model) {
 			await Task.Run(async () => {
 				Content content = new Content("text/html", model.Body ?? "!");
 				Email to = new Email(model.To);
@@ -100,18 +100,10 @@ namespace MyVipCity.Mailing.Sendgrid {
 				Mail mail = new Mail(from, model.Subject, to, content) { TemplateId = SendGridTemplateIds.NewAttendingRequestNotificationForPromoterTemplateId };
 				// add substitutions
 				mail.Personalization[0].AddSubstitution("-promoterName-", model.PromoterName);
-				mail.Personalization[0].AddSubstitution("-businessName-", model.BusinessName);
-				mail.Personalization[0].AddSubstitution("-name-", model.Name);
-				mail.Personalization[0].AddSubstitution("-email-", model.Email);
-				mail.Personalization[0].AddSubstitution("-phone-", model.Phone);
-				mail.Personalization[0].AddSubstitution("-partyCount-", model.PartyCount.ToString());
-				mail.Personalization[0].AddSubstitution("-femaleCount-", model.FemaleCount.ToString());
-				mail.Personalization[0].AddSubstitution("-maleCount-", model.MaleCount.ToString());
 				mail.Personalization[0].AddSubstitution("-acceptLink-", model.AcceptLink);
 				mail.Personalization[0].AddSubstitution("-declineLink-", model.DeclineLink);
-				mail.Personalization[0].AddSubstitution("-date-", model.Date);
-				mail.Personalization[0].AddSubstitution("-message-", model.Message);
-				mail.Personalization[0].AddSubstitution("-service-", model.Service);
+
+				AddSubstitutionsForNewAttendingRequestEmail(model, mail);
 				
 				AddBccs(model, mail);
 
@@ -119,7 +111,38 @@ namespace MyVipCity.Mailing.Sendgrid {
 			});
 		}
 
-		public async Task SendAcceptedAttendingRequestNotificationToUser(AcceptedAttendingRequestNotificationEmailModel model) {
+		public async Task SendAttendigRequestNotificationToAdminAsync(NewAttendingRequestAdminNotificationEmailModel model) {
+			await Task.Run(async () => {
+				Content content = new Content("text/html", model.Body ?? "!");
+				Email to = new Email(model.To);
+				Email from = new Email(model.From);
+				Mail mail = new Mail(from, model.Subject, to, content) { TemplateId = SendGridTemplateIds.NewAttendingRequestWithoutPromoterNotificationTemplateId };
+				// add substitutions
+				mail.Personalization[0].AddSubstitution("-adminName-", model.AdminName);
+				mail.Personalization[0].AddSubstitution("-assignVipHostUrl-", model.AssignVipHostUrl);
+
+				AddSubstitutionsForNewAttendingRequestEmail(model, mail);
+
+				AddBccs(model, mail);
+
+				await SendEmail(mail);
+			});
+		}
+
+		private void AddSubstitutionsForNewAttendingRequestEmail(NewAttendingRequestNotificationEmailModel model, Mail mail) {
+			mail.Personalization[0].AddSubstitution("-businessName-", model.BusinessName);
+			mail.Personalization[0].AddSubstitution("-name-", model.Name);
+			mail.Personalization[0].AddSubstitution("-email-", model.Email);
+			mail.Personalization[0].AddSubstitution("-phone-", model.Phone);
+			mail.Personalization[0].AddSubstitution("-partyCount-", model.PartyCount.ToString());
+			mail.Personalization[0].AddSubstitution("-femaleCount-", model.FemaleCount.ToString());
+			mail.Personalization[0].AddSubstitution("-maleCount-", model.MaleCount.ToString());
+			mail.Personalization[0].AddSubstitution("-date-", model.Date);
+			mail.Personalization[0].AddSubstitution("-message-", model.Message);
+			mail.Personalization[0].AddSubstitution("-service-", model.Service);
+		}
+
+		public async Task SendAcceptedAttendingRequestNotificationToUserAsync(AcceptedAttendingRequestNotificationEmailModel model) {
 			await Task.Run(async () => {
 				Content content = new Content("text/html", model.Body ?? "!");
 				Email to = new Email(model.To);

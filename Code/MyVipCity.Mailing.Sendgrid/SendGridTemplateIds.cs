@@ -13,5 +13,7 @@
 		public const string NewAttendingRequestNotificationForPromoterTemplateId = "eb0e8e1a-127b-478e-8230-7ad7302bc324";
 
 		public const string AcceptedAttendingRequestNotificationTemplateId = "9d62c6bd-b729-4021-a53a-0bfcedced6c7";
+
+		public const string NewAttendingRequestWithoutPromoterNotificationTemplateId = "adaba06d-ba85-4b7c-944c-2c8f505cffd5";
 	}
 }

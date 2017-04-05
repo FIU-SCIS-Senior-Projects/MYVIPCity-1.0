@@ -40,5 +40,25 @@ namespace MyVipCity.Controllers {
 
 			return View(attendingRequestDto);
 		}
+
+
+		public async Task<ActionResult> AssignPromoter(int requestId) {
+			// check if the user is not authenticated
+			if (!Request.IsAuthenticated) {
+				ViewBag.CustomMessage = "To assign a promoter to an attending request you must log in first with your administrator account";
+				return View("NeedAuthentication");
+			}
+
+			// The user must be an admin to assign a promoter to an existing attending request
+			if (!IsUserInRole("Admin"))
+				return Redirect("/");
+
+			var attendingRequestDto = await attentingRequestManager.GetPendingRequestAsync(requestId);
+
+			if (attendingRequestDto == null)
+				return Redirect("/");
+
+			return View(attendingRequestDto);
+		}
 	}
 }

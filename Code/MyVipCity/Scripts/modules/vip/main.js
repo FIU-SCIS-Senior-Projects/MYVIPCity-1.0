@@ -8,6 +8,7 @@
 	// controllers
 	'vip/js/controllers/acceptDeclineAttendingRequestController',
 	'vip/js/controllers/addBusinessController',
+	'vip/js/controllers/assignPromoterToAttendingRequestController',
 	'vip/js/controllers/businessPromotersController',
 	'vip/js/controllers/clubListController',
 	'vip/js/controllers/forgotPasswordFormController',

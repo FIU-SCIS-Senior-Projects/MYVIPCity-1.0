@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Security.Claims;
@@ -27,7 +26,7 @@ namespace MyVipCity.BusinessLogic {
 			this.userManager = userManager;
 		}
 
-		public async Task<ResultDto<bool>> SubmitRequestAsync(AttendingRequestDto attendingRequestDto, string acceptUrl) {
+		public async Task<ResultDto<bool>> SubmitRequestAsync(AttendingRequestDto attendingRequestDto, string acceptUrl, string assignVipHostUrl) {
 			// make sure Id = 0
 			if (attendingRequestDto.Id != 0) {
 				var msg = $"SubmitRequest - If of {typeof(AttendingRequestDto).Name} must be 0";
@@ -71,13 +70,14 @@ namespace MyVipCity.BusinessLogic {
 			// save the attending request
 			db.Set<AttendingRequest>().Add(attendingRequest);
 			await db.SaveChangesAsync();
-			await SendEmailsForNewAttendingRequest(attendingRequest, acceptUrl);
+			// send notification emails about this attending request 
+			await SendEmailsForAttendingRequest(attendingRequest, acceptUrl, assignVipHostUrl);
 
 			return new ResultDto<bool>(true);
 		}
 
-		public ResultDto<bool> SubmitRequest(AttendingRequestDto attendingRequestDto, string acceptUrl) {
-			return SubmitRequestAsync(attendingRequestDto, acceptUrl).Result;
+		public ResultDto<bool> SubmitRequest(AttendingRequestDto attendingRequestDto, string acceptUrl, string assignVipHostUrl) {
+			return SubmitRequestAsync(attendingRequestDto, acceptUrl, assignVipHostUrl).Result;
 		}
 
 		public async Task<AttendingRequestDto> GetPendingRequestForPromoterAsync(int attendingRequestId, string promoterUserId) {
@@ -91,6 +91,44 @@ namespace MyVipCity.BusinessLogic {
 
 		public AttendingRequestDto GetPendingRequestForPromoter(int attendingRequestId, string promoterUserId) {
 			return GetPendingRequestForPromoterAsync(attendingRequestId, promoterUserId).Result;
+		}
+
+		public async Task<AttendingRequestDto> GetPendingRequestAsync(int attendingRequestId) {
+			var db = Resolver.Resolve<DbContext>();
+			var request = await db.Set<AttendingRequest>().FindAsync(attendingRequestId);
+			if (request == null || request.Status != AttendingRequestStatus.Pending)
+				return null;
+			var requestDto = ToDto<AttendingRequestDto, AttendingRequest>(request);
+			return requestDto;
+		}
+
+		public AttendingRequestDto GetPendingRequest(int attendingRequestId) {
+			return GetPendingRequestAsync(attendingRequestId).Result;
+		}
+
+		public async Task<ResultDto<bool>> AssignPromoterToRequestAsync(int attendingRequestId, int promoterId, string acceptUrl) {
+			var db = Resolver.Resolve<DbContext>();
+			var request = await db.Set<AttendingRequest>().FindAsync(attendingRequestId);
+			if (request == null || request.Status != AttendingRequestStatus.Pending || request.Promoter != null) {
+				return new ResultDto<bool>(false) { Error = true, Messages = new[] { $"Invalid state for request with Id = {attendingRequestId}" } };
+			}
+			var promoter = await db.Set<PromoterProfile>().FindAsync(promoterId);
+			if (promoter.Business.Id != request.Business.Id) {
+				return new ResultDto<bool>(false) { Error = true, Messages = new[] { $"Promoter Profile with Id = {promoterId} does not belong to the business of the request" } };
+			}
+
+			// assign promoter to request
+			request.Promoter = promoter;
+			// save changes made to the request
+			await db.SaveChangesAsync();
+			// send notification to assigned promoter
+			await SendAttendingRequestEmailToPromoterAsync(request, acceptUrl);
+
+			return new ResultDto<bool>(true);
+		}
+
+		public ResultDto<bool> AssignPromoterToRequest(int attendingRequestId, int promoterId, string acceptUrl) {
+			return AssignPromoterToRequestAsync(attendingRequestId, promoterId, acceptUrl).Result;
 		}
 
 		public async Task<bool> AcceptRequestAsync(int attendingRequestId, string promoterUserId, string promoterProfileUrl) {
@@ -132,42 +170,65 @@ namespace MyVipCity.BusinessLogic {
 				VipHostName = request.Promoter.FullName(),
 				VipHostPageLink = string.Format(promoterProfileUrl, request.Promoter.Id)
 			};
-			await emailService.SendAcceptedAttendingRequestNotificationToUser(emailModel);
+			await emailService.SendAcceptedAttendingRequestNotificationToUserAsync(emailModel);
 		}
 
-		private async Task SendEmailsForNewAttendingRequest(AttendingRequest attendingRequest, string acceptUrl) {
-			var adminEmails = userManager.GetAdminsEmail();
+		private async Task SendEmailsForAttendingRequest(AttendingRequest attendingRequest, string acceptUrl, string assignVipHostUrl) {
+			// check if the request has a promoter associated to it
 			if (attendingRequest.Promoter != null)
-				await SendNewAttendingRequestEmailToPromoter(attendingRequest, adminEmails, acceptUrl);
-
-			// TODO Send email when there is no default promoter selected
+				await SendAttendingRequestEmailToPromoterAsync(attendingRequest, acceptUrl);
+			else
+				await SendAttendingRequestEmailToAdminsAsync(attendingRequest, assignVipHostUrl);
 		}
 
-		private async Task SendNewAttendingRequestEmailToPromoter(AttendingRequest attendingRequest, ICollection<string> adminEmails, string acceptUrl) {
+		private async Task SendAttendingRequestEmailToAdminsAsync(AttendingRequest attendingRequest, string assignVipHostUrl) {
+			var url = string.Format(assignVipHostUrl, attendingRequest.Id);
+			var adminEmails = userManager.GetAdminsEmail();
+			await Task.Factory.StartNew(() => {
+				Parallel.ForEach(adminEmails, async adminEmail => {
+					var emailModel = new NewAttendingRequestAdminNotificationEmailModel {
+						AdminName = adminEmail,
+						AssignVipHostUrl = url,
+						To = adminEmail,
+						Subject = $"New attending request for {attendingRequest.Business.Name} without a promoter."
+					};
 
+					FillNewAttendingRequestNotificationEmailModel(emailModel, attendingRequest);
+
+					await emailService.SendAttendigRequestNotificationToAdminAsync(emailModel);
+				});
+			});
+		}
+
+		private async Task SendAttendingRequestEmailToPromoterAsync(AttendingRequest attendingRequest, string acceptUrl) {
 			var url = string.Format(acceptUrl, attendingRequest.Id);
-
+			var adminEmails = userManager.GetAdminsEmail();
 			var emailModel = new NewAttendingRequestPromoterNotificationEmailModel {
-				Email = attendingRequest.Email,
 				Name = attendingRequest.Name,
-				From = "hello@myvipcity.com",
-				Subject = $"New attending request for {attendingRequest.Business.Name}",
-				To = attendingRequest.Promoter.Email,
-				Message = attendingRequest.Message,
-				BusinessName = attendingRequest.Business.Name,
-				Date = attendingRequest.Date.ToString("D", CultureInfo.CurrentCulture),
-				FemaleCount = attendingRequest.FemaleCount,
-				MaleCount = attendingRequest.MaleCount,
-				PartyCount = attendingRequest.PartyCount,
-				Phone = attendingRequest.ContactNumber,
-				PromoterName = attendingRequest.Promoter.FirstName,
-				Bccs = adminEmails,
 				DeclineLink = url,
 				AcceptLink = url,
-				Service = attendingRequest.DesiredService == AttendingRequestService.PriorityGeneralEntry ? "Priority General Entry" : "VIP Table Service"
+				Bccs = adminEmails,
+				Subject = $"New attending request for {attendingRequest.Business.Name}",
+				PromoterName = attendingRequest.Promoter.FirstName,
+				To = attendingRequest.Promoter.Email
 			};
 
-			await emailService.SendAttendigRequestNotificationToPromoter(emailModel);
+			FillNewAttendingRequestNotificationEmailModel(emailModel, attendingRequest);
+
+			await emailService.SendAttendigRequestNotificationToPromoterAsync(emailModel);
+		}
+
+		private void FillNewAttendingRequestNotificationEmailModel(NewAttendingRequestNotificationEmailModel model, AttendingRequest attendingRequest) {
+			model.Email = attendingRequest.Email;
+			model.From = "hello@myvipcity.com";
+			model.Message = attendingRequest.Message;
+			model.BusinessName = attendingRequest.Business.Name;
+			model.Date = attendingRequest.Date.ToString("D", CultureInfo.CurrentCulture);
+			model.FemaleCount = attendingRequest.FemaleCount;
+			model.MaleCount = attendingRequest.MaleCount;
+			model.PartyCount = attendingRequest.PartyCount;
+			model.Phone = attendingRequest.ContactNumber;
+			model.Service = attendingRequest.DesiredService == AttendingRequestService.PriorityGeneralEntry ? "Priority General Entry" : "VIP Table Service";
 		}
 	}
 }

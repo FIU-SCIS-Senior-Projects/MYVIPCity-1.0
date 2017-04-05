@@ -3,12 +3,12 @@
 @model MyVipCity.DataTransferObjects.AttendingRequestDto
 
 @{
-    ViewBag.Title = "Attending Request";
+    ViewBag.Title = "Assign Promoter";
 }
 
 <div class="card vip-attending-request-card">
     <div class="card__header">
-        <h2>You have been selected as the VIP Host for a request to attend <span class="vip-attending-request-card__business-name">@Model.Business.Name</span></h2>
+        <h2>Please assign a promoter for this request to attend <span class="vip-attending-request-card__business-name">@Model.Business.Name</span></h2>
     </div>
     <div class="card__body">
         <div class="vip-attending-request-card__business-image-container">
@@ -53,9 +53,15 @@
                 </tr>
             </table>
         </div>
-        <div class="vip-attending-request-card__actions" ng-controller="vip.acceptDeclineAttendingRequestController" ng-init="requestId = @Model.Id">
-            <button class="btn btn-primary" type="submit" ng-click="acceptAttendingRequest()">Accept</button>
-            <button class="btn btn-secondary" type="submit" ng-click="declineAttendingRequest">Decline</button>
+        <div ng-controller="vip.assignPromoterToAttendingRequestController" ng-init="requestId = @Model.Id; businessId = @Model.Business.Id">
+            <div>
+                <h3>Select VIP Host</h3>
+                <div vip-promoter-dropdown business-id="businessId" ng-model="promoter" placeholder="Select a VIP host"></div>
+            </div>
+            <div class="vip-attending-request-card__actions">
+                <button class="btn btn-primary" type="submit" ng-click="assignPromoter()">Assign Promoter</button>
+                <button class="btn btn-secondary" type="submit" ng-click="declineAttendingRequest">Decline</button>
+            </div>
         </div>
     </div>
 </div>

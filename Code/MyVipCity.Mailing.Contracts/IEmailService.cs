@@ -20,10 +20,13 @@ namespace MyVipCity.Mailing.Contracts {
 		// Sends an email to notify a new review has been submitted.
 		Task SendPromoterReviewNotificationEmailAsync(PromoterReviewNotificationEmailModel model);
 
-		// Sends an email to a promoter to notifying he/she has been selected as the VIP host for an attending request.
-		Task SendAttendigRequestNotificationToPromoter(NewAttendingRequestPromoterNotificationEmailModel model);
+		// Sends an email to a promoter notifying he/she has been selected as the VIP host for an attending request.
+		Task SendAttendigRequestNotificationToPromoterAsync(NewAttendingRequestPromoterNotificationEmailModel model);
+
+		// Sends an email to an adminnotifying he/she a new attending request without a selected promoter has been submitted.
+		Task SendAttendigRequestNotificationToAdminAsync(NewAttendingRequestAdminNotificationEmailModel model);
 
 		// Sends an email to the user who made an attending request notifying the request has been approved by the promoter.
-		Task SendAcceptedAttendingRequestNotificationToUser(AcceptedAttendingRequestNotificationEmailModel model);
+		Task SendAcceptedAttendingRequestNotificationToUserAsync(AcceptedAttendingRequestNotificationEmailModel model);
 	}
 }

@@ -33,5 +33,11 @@ namespace MyVipCity.Mailing.Contracts.EmailModels {
 			get;
 			set;
 		}
+
+		public ICollection<string> Tos
+		{
+			get;
+			set;
+		}
 	}
 }
