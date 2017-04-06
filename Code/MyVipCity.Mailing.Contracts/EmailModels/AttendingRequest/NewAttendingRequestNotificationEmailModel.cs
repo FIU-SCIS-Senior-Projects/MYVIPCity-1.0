@@ -1,4 +1,4 @@
-﻿namespace MyVipCity.Mailing.Contracts.EmailModels {
+﻿namespace MyVipCity.Mailing.Contracts.EmailModels.AttendingRequest {
 
 	public class NewAttendingRequestNotificationEmailModel : BasicEmailModel {
 

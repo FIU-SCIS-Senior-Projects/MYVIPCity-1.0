@@ -36,6 +36,16 @@ namespace MyVipCity.Controllers.api {
 			return Ok(result);
 		}
 
+
+		[HttpPost]
+		[Authorize(Roles = "Promoter")]
+		[Route("DeclineByPromoter/{requestId:int}")]
+		public async Task<IHttpActionResult> DeclineByPromoter(int requestId) {
+			var assignVipHostUrl = new Uri(Request.RequestUri, RequestContext.VirtualPathRoot) + "AttendingRequest/AssignPromoter?requestId={0}";
+			var result = await attendingRequestManager.DeclineByPromoterAsync(requestId, User.Identity.GetUserId(), assignVipHostUrl);
+			return Ok(result);
+		}
+
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
 		[Route("AssignPromoter/{requestId:int}/{promoterId:int}")]

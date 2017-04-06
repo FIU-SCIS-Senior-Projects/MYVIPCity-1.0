@@ -40,10 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailModels\AcceptedAttendingRequestNotificationEmailModel.cs" />
+    <Compile Include="EmailModels\AttendingRequest\DeclinedAttendingRequestAdminNotificationEmailModel.cs" />
     <Compile Include="EmailModels\BasicEmailModel.cs" />
-    <Compile Include="EmailModels\NewAttendingRequestAdminNotificationEmailModel.cs" />
-    <Compile Include="EmailModels\NewAttendingRequestNotificationEmailModel.cs" />
-    <Compile Include="EmailModels\NewAttendingRequestPromoterNotificationEmailModel.cs" />
+    <Compile Include="EmailModels\AttendingRequest\NewAttendingRequestAdminNotificationEmailModel.cs" />
+    <Compile Include="EmailModels\AttendingRequest\NewAttendingRequestNotificationEmailModel.cs" />
+    <Compile Include="EmailModels\AttendingRequest\NewAttendingRequestPromoterNotificationEmailModel.cs" />
     <Compile Include="EmailModels\PromoterInvitationEmailModel.cs" />
     <Compile Include="EmailModels\ForgotPasswordEmailModel.cs" />
     <Compile Include="EmailModels\ConfirmationEmailModel.cs" />

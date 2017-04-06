@@ -12,6 +12,7 @@ using MyVipCity.DataTransferObjects;
 using MyVipCity.Domain;
 using MyVipCity.Mailing.Contracts;
 using MyVipCity.Mailing.Contracts.EmailModels;
+using MyVipCity.Mailing.Contracts.EmailModels.AttendingRequest;
 using Ninject.Extensions.Logging;
 
 namespace MyVipCity.BusinessLogic {
@@ -93,24 +94,24 @@ namespace MyVipCity.BusinessLogic {
 			return GetPendingRequestForPromoterAsync(attendingRequestId, promoterUserId).Result;
 		}
 
-		public async Task<AttendingRequestDto> GetPendingRequestAsync(int attendingRequestId) {
+		public async Task<AttendingRequestDto> GetRequestAsync(int attendingRequestId) {
 			var db = Resolver.Resolve<DbContext>();
 			var request = await db.Set<AttendingRequest>().FindAsync(attendingRequestId);
-			if (request == null || request.Status != AttendingRequestStatus.Pending)
+			if (request == null)
 				return null;
 			var requestDto = ToDto<AttendingRequestDto, AttendingRequest>(request);
 			return requestDto;
 		}
 
-		public AttendingRequestDto GetPendingRequest(int attendingRequestId) {
-			return GetPendingRequestAsync(attendingRequestId).Result;
+		public AttendingRequestDto GetRequest(int attendingRequestId) {
+			return GetRequestAsync(attendingRequestId).Result;
 		}
 
 		public async Task<ResultDto<bool>> AssignPromoterToRequestAsync(int attendingRequestId, int promoterId, string acceptUrl) {
 			var db = Resolver.Resolve<DbContext>();
 			var request = await db.Set<AttendingRequest>().FindAsync(attendingRequestId);
-			if (request == null || request.Status != AttendingRequestStatus.Pending || request.Promoter != null) {
-				return new ResultDto<bool>(false) { Error = true, Messages = new[] { $"Invalid state for request with Id = {attendingRequestId}" } };
+			if (request == null) {
+				return new ResultDto<bool>(false) { Error = true, Messages = new[] { $"Request with Id = {attendingRequestId} not found" } };
 			}
 			var promoter = await db.Set<PromoterProfile>().FindAsync(promoterId);
 			if (promoter.Business.Id != request.Business.Id) {
@@ -119,6 +120,8 @@ namespace MyVipCity.BusinessLogic {
 
 			// assign promoter to request
 			request.Promoter = promoter;
+			// set request to pending
+			request.Status = AttendingRequestStatus.Pending;
 			// save changes made to the request
 			await db.SaveChangesAsync();
 			// send notification to assigned promoter
@@ -138,7 +141,7 @@ namespace MyVipCity.BusinessLogic {
 			var request = await db.Set<AttendingRequest>().FindAsync(attendingRequestId);
 			// check if it is ok to accept this request
 			if (request == null || request.Status != AttendingRequestStatus.Pending || request.Promoter == null || request.Promoter.UserId != promoterUserId) {
-				var msg = $"Condition to accept attendingRequest with Id = {attendingRequestId} not met";
+				var msg = $"Condition to accept attendingRequest with Id = {attendingRequestId} was not met";
 				Logger.Error(msg);
 				return false;
 			}
@@ -154,6 +157,28 @@ namespace MyVipCity.BusinessLogic {
 
 		public bool AcceptRequest(int attendingRequestId, string promoterUserId, string promoterProfileUrl) {
 			return AcceptRequestAsync(attendingRequestId, promoterUserId, promoterProfileUrl).Result;
+		}
+
+		public async Task<bool> DeclineByPromoterAsync(int attendingRequestId, string promoterUserId, string assignVipHostUrl) {
+			// get access to the db
+			var db = Resolver.Resolve<DbContext>();
+			// find the specified attending request
+			var request = await db.Set<AttendingRequest>().FindAsync(attendingRequestId);
+			// check if it is ok to accept this request
+			if (request == null || request.Status != AttendingRequestStatus.Pending || request.Promoter == null || request.Promoter.UserId != promoterUserId) {
+				var msg = $"Condition to decline attendingRequest with Id = {attendingRequestId} was not met";
+				Logger.Error(msg);
+				return false;
+			}
+			request.Status = AttendingRequestStatus.Declined;
+			await db.SaveChangesAsync();
+			await SendDeclinedAttendingRequestEmailToAdminsAsync(request, assignVipHostUrl);
+
+			return true;
+		}
+
+		public bool DeclineByPromoter(int attendingRequestId, string promoterUserId, string assignVipHostUrl) {
+			return DeclineByPromoterAsync(attendingRequestId, promoterUserId, assignVipHostUrl).Result;
 		}
 
 		private async Task SendEmailForAcceptedRequest(AttendingRequest request, string promoterProfileUrl) {
@@ -196,6 +221,26 @@ namespace MyVipCity.BusinessLogic {
 					FillNewAttendingRequestNotificationEmailModel(emailModel, attendingRequest);
 
 					await emailService.SendAttendigRequestNotificationToAdminAsync(emailModel);
+				});
+			});
+		}
+
+		private async Task SendDeclinedAttendingRequestEmailToAdminsAsync(AttendingRequest attendingRequest, string assignVipHostUrl) {
+			var url = string.Format(assignVipHostUrl, attendingRequest.Id);
+			var adminEmails = userManager.GetAdminsEmail();
+			await Task.Factory.StartNew(() => {
+				Parallel.ForEach(adminEmails, async adminEmail => {
+					var emailModel = new DeclinedAttendingRequestAdminNotificationEmailModel {
+						AdminName = adminEmail,
+						AssignVipHostUrl = url,
+						To = adminEmail,
+						Subject = $"Attending request for {attendingRequest.Business.Name} has been declined by VIP host {attendingRequest.Promoter.FullName()}",
+						VipHostName = attendingRequest.Promoter.FullName()
+					};
+
+					FillNewAttendingRequestNotificationEmailModel(emailModel, attendingRequest);
+
+					await emailService.SendDeclinedAttendingRequestNotificationToAdminAsync(emailModel);
 				});
 			});
 		}

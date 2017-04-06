@@ -53,7 +53,7 @@ namespace MyVipCity.Controllers {
 			if (!IsUserInRole("Admin"))
 				return Redirect("/");
 
-			var attendingRequestDto = await attentingRequestManager.GetPendingRequestAsync(requestId);
+			var attendingRequestDto = await attentingRequestManager.GetRequestAsync(requestId);
 
 			if (attendingRequestDto == null)
 				return Redirect("/");

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MyVipCity.Mailing.Contracts.EmailModels;
+using MyVipCity.Mailing.Contracts.EmailModels.AttendingRequest;
 
 namespace MyVipCity.Mailing.Contracts {
 
@@ -23,10 +24,13 @@ namespace MyVipCity.Mailing.Contracts {
 		// Sends an email to a promoter notifying he/she has been selected as the VIP host for an attending request.
 		Task SendAttendigRequestNotificationToPromoterAsync(NewAttendingRequestPromoterNotificationEmailModel model);
 
-		// Sends an email to an adminnotifying he/she a new attending request without a selected promoter has been submitted.
+		// Sends an email to an admin notifying he/she a new attending request without a selected promoter has been submitted.
 		Task SendAttendigRequestNotificationToAdminAsync(NewAttendingRequestAdminNotificationEmailModel model);
 
 		// Sends an email to the user who made an attending request notifying the request has been approved by the promoter.
 		Task SendAcceptedAttendingRequestNotificationToUserAsync(AcceptedAttendingRequestNotificationEmailModel model);
+
+		// Sends an email to an admin notifying about a declined attending request by a promoter. 
+		Task SendDeclinedAttendingRequestNotificationToAdminAsync(DeclinedAttendingRequestAdminNotificationEmailModel model);
 	}
 }
