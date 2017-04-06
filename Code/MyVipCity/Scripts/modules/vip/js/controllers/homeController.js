@@ -6,7 +6,19 @@
 
 		var location = $cookies.getObject('ipLocation');
 
+		var processBusinesses = function(businesses) {
+			angular.forEach(businesses, function (b) {
+				// sort the pictures by Index and take the first one
+				b.Pictures.sort(function (a, b) {
+					return a.Index - b.Index;
+				});
+				b.firstPictureUrl = 'api/Pictures/' + b.Pictures[0].BinaryDataId;
+			});
 
+			return businesses;
+		};
+
+		// executes a search
 		var search = function () {
 			var searchCriteria = {};
 
@@ -18,8 +30,9 @@
 				searchCriteria.criteria = $scope.textCriteria;
 			}
 
-			vipBusinessService.search(searchCriteria).then(function (business) {
-				$scope.clubs = business;
+			vipBusinessService.search(searchCriteria).then(function (businesses) {
+
+				$scope.businesses = processBusinesses(businesses);
 			});
 		};
 

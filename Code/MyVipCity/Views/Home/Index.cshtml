@@ -1,22 +1,70 @@
-﻿@model IpLocation
+﻿@using MyVipCity.IpGeolocation
+@model IpLocation
 @{
-    Layout = null;    
+    Layout = null;
 }
-@using Microsoft.AspNet.Identity
-@using MyVipCity.IpGeolocation
-@using MyVipCity.Utils.Extensions
-<header class="section__title">
-    @if (Request.IsAuthenticated) {
-        <h2>Hello @User.Identity.GetUserName()</h2>
-    }
-    <h2>Welcome to MyVIPCity</h2>
-    <small>Site under construction, check back soon!</small>
-    <div style="white-space: pre-wrap">@Model.ToString()</div>
 
-</header>
+@*<header class="section__title">
+        @if (Request.IsAuthenticated) {
+            <h2>Hello @User.Identity.GetUserName()</h2>
+        }
+        <h2>Welcome to MyVIPCity</h2>
+        <small>Site under construction, check back soon!</small>
+        <div style="white-space: pre-wrap">@Model.ToString()</div>
 
-
+    </header>*@
 <div ng-controller="vip.homeController">
+    
+    <div class="header__search container">
+        <form>
+            <div class="search">
+                <div class="search__type dropdown">
+                    <a href="" data-toggle="dropdown">Search</a>
+                </div>
+                <div class="search__body">
+                    <input type="text" class="search__input" placeholder="Enter any Name, Address, City, Zip Code" data-rmd-action="advanced-search-open">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="header__recommended">
+        <div class="my-location">
+            <div class="my-location__title">Properties nearby your location</div>
+            <div class="dropdown my-location__location hidden-xs">
+                <a href="" data-toggle="dropdown"><i class="zmdi zmdi-pin"></i> San Francisco County, CA</a>
+                <div class="dropdown-menu pull-right stop-propagate">
+                    <strong>Change Location</strong>
+                    <small>Set your location to get list of properties nearby you</small>
+                    <form>
+                        <div class="form-group form-group--float">
+                            <input type="email" class="form-control" placeholder="Enter City, State, Zip">
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div class="my-location__map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d84147.43307199534!2d-74.15863267618451!3d40.71380993356828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2slk!4v1465216708326" style="border:0; width: 100%; height: 250px;" allowfullscreen></iframe>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="listings-grid vip-home-search-result-container">
+            <div class="listings-grid__item vip-home-search-result-item" ng-repeat="business in businesses track by business.Id" style="display: inline-block;">
+                <a href="#/view-business/{{::business.FriendlyId}}">
+                    <div class="listings-grid__main">
+                        <img ng-src="{{::business.firstPictureUrl}}" alt="">
+                    </div>
+                    <div class="listings-grid__body">
+                        <h5>{{::business.Name}}</h5>
+                        <small title="{{::business.Address.FormattedAddress}}">{{::business.Address.FormattedAddress}}</small>
+                        @*<h5>{{::business.Phrase}}</h5>*@
+                    </div>
+                   
+                </a>
+            </div>
+        </div>
+    </div>
+
     <ul>
         <li ng-repeat="club in clubs">
             <a href="#/view-business/{{club.FriendlyId}}">{{club.Name}}</a>
