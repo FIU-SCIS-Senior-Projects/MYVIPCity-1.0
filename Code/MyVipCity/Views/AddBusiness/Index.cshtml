@@ -186,7 +186,7 @@
                         <span>When? </span>
                         <vip-datepicker ng-model="attendingRequest.Date" name="dateField" vip-min-date="ctrl.minDate" vip-max-date="ctrl.maxDate" required></vip-datepicker>
 
-                        <div ng-messages="wantToGoForm.dateField.$error"  class="mdc-text-red-500 animated fadeIn">
+                        <div ng-messages="wantToGoForm.dateField.$error" class="mdc-text-red-500 animated fadeIn">
                             <div ng-message="valid">That's not a date</div>
                             <div ng-message="required">Date is required</div>
                             <div ng-message="mindate">Date is too early!</div>
@@ -307,3 +307,7 @@
         </div>
     </div>
 </div>
+<button class="btn btn--action btn--circle hidden-md hidden-lg" data-rmd-action="block-open" data-rmd-target="#inquire">
+    <i class="zmdi zmdi-menu"></i>
+</button>
+

@@ -1,6 +1,6 @@
 ﻿namespace MyVipCity.Mailing.Contracts.EmailModels.AttendingRequest {
 
-	public class NewAttendingRequestPromoterNotificationEmailModel: NewAttendingRequestNotificationEmailModel {
+	public class AttendingRequestPromoterNotificationEmailModel: AttendingRequestNotificationEmailModel {
 
 		public string PromoterName
 		{

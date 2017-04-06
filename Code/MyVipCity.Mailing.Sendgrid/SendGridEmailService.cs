@@ -81,7 +81,7 @@ namespace MyVipCity.Mailing.Sendgrid {
 			});
 		}
 
-		public async Task SendAttendigRequestNotificationToPromoterAsync(NewAttendingRequestPromoterNotificationEmailModel model) {
+		public async Task SendAttendigRequestNotificationToPromoterAsync(AttendingRequestPromoterNotificationEmailModel model) {
 			await Task.Run(async () => {
 				Mail mail = GetMailFromBasicModel(model, SendGridTemplateIds.NewAttendingRequestNotificationForPromoterTemplateId);
 				// add substitutions
@@ -97,7 +97,7 @@ namespace MyVipCity.Mailing.Sendgrid {
 			});
 		}
 
-		public async Task SendAttendigRequestNotificationToAdminAsync(NewAttendingRequestAdminNotificationEmailModel model) {
+		public async Task SendAttendigRequestNotificationToAdminAsync(AttendingRequestAdminNotificationEmailModel model) {
 			await Task.Run(async () => {
 				Mail mail = GetMailFromBasicModel(model, SendGridTemplateIds.NewAttendingRequestWithoutPromoterNotificationTemplateId);
 				// add substitutions
@@ -112,7 +112,7 @@ namespace MyVipCity.Mailing.Sendgrid {
 			});
 		}
 
-		private void AddSubstitutionsForNewAttendingRequestEmail(NewAttendingRequestNotificationEmailModel model, Mail mail) {
+		private void AddSubstitutionsForNewAttendingRequestEmail(AttendingRequestNotificationEmailModel model, Mail mail) {
 			mail.Personalization[0].AddSubstitution("-businessName-", model.BusinessName);
 			mail.Personalization[0].AddSubstitution("-name-", model.Name);
 			mail.Personalization[0].AddSubstitution("-email-", model.Email);
@@ -149,6 +149,15 @@ namespace MyVipCity.Mailing.Sendgrid {
 			mail.Personalization[0].AddSubstitution("-assignVipHostUrl-", model.AssignVipHostUrl);
 			mail.Personalization[0].AddSubstitution("-vipHostName-", model.VipHostName);
 			AddSubstitutionsForNewAttendingRequestEmail(model, mail);
+			AddBccs(model, mail);
+			await SendEmail(mail);
+		}
+
+		public async Task SendDeclinedAttendingRequestNotificationToUserAsync(AttendingRequestNotificationEmailModel model) {
+			Mail mail = GetMailFromBasicModel(model, SendGridTemplateIds.AttendingRequestDeclinedNotificationToUserTemplateId);
+			mail.Personalization[0].AddSubstitution("-businessName-", model.BusinessName);
+			mail.Personalization[0].AddSubstitution("-userName-", model.Name);
+			mail.Personalization[0].AddSubstitution("-date-", model.Date);
 			AddBccs(model, mail);
 			await SendEmail(mail);
 		}

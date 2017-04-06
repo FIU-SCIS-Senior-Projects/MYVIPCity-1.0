@@ -1,6 +1,6 @@
 ﻿namespace MyVipCity.Mailing.Contracts.EmailModels.AttendingRequest {
 
-	public class NewAttendingRequestAdminNotificationEmailModel : NewAttendingRequestNotificationEmailModel {
+	public class AttendingRequestAdminNotificationEmailModel : AttendingRequestNotificationEmailModel {
 
 		public string AdminName
 		{

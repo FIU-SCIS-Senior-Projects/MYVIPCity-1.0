@@ -28,5 +28,9 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		Task<bool> DeclineByPromoterAsync(int attendingRequestId, string promoterUserId, string assignVipHostUrl);
 
 		bool DeclineByPromoter(int attendingRequestId, string promoterUserId, string assignVipHostUrl);
+
+		Task<bool> DeclineByAdminAsync(int attendingRequestId);
+
+		bool DeclineByAdmin(int attendingRequestId);
 	}
 }

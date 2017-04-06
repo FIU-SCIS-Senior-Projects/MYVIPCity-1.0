@@ -29,7 +29,25 @@
 		};
 
 		$scope.declineAttendingRequest = function () {
-
+			$http.post('api/AttendingRequest/DeclineByAdmin/' + $scope.requestId).then(function (response) {
+				var result = response.data;
+				if (!result) {
+					showErrorPopup();
+				}
+				else {
+					swal({
+						type: 'success',
+						title: 'Success',
+						text: 'The request has been declined and an email sent to the user.',
+						confirmButtonText: "Ok",
+						showCancelButton: false
+					}).then(function () {
+						$window.location = $window.location.origin;
+					}, angular.noop);
+				}
+			}, function () {
+				showErrorPopup();
+			});
 		};
 	}]);
 });

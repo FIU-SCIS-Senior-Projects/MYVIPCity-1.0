@@ -1,6 +1,6 @@
 ﻿namespace MyVipCity.Mailing.Contracts.EmailModels.AttendingRequest {
 
-	public class NewAttendingRequestNotificationEmailModel : BasicEmailModel {
+	public class AttendingRequestNotificationEmailModel : BasicEmailModel {
 
 		public string BusinessName
 		{
@@ -61,6 +61,5 @@
 			get;
 			set;
 		}
-
 	}
 }

@@ -1,4 +1,4 @@
-﻿define(['vip/js/vip', 'moment', 'sweet-alert'], function (vip, moment) {
+﻿define(['vip/js/vip', 'moment', 'sweet-alert'], function (vip, moment, swal) {
 	'use strict';
 
 	vip.controller('vip.wantToGoFormController', ['$scope', '$http', function ($scope, $http) {
@@ -27,9 +27,29 @@
 			$scope.attendingRequest.MaleCount = $scope.attendingRequest.PartyCount - $scope.attendingRequest.FemaleCount;
 		};
 
+		var showErrorPopup = function (title, errorMsg) {
+			swal(title || 'Oops', errorMsg || 'An error has occurred', 'error');
+		};
+
 		$scope.submitRequest = function () {
 			$http.post('api/AttendingRequest', $scope.attendingRequest).then(function (response) {
-				var x = 1;
+				var result = response.data;
+				if (!result || !result.Result) {
+					showErrorPopup();
+				}
+				else {
+					swal({
+						type: 'success',
+						title: 'Success',
+						text: 'Your request has been submitted. You will receive an email as soon as we process your request.',
+						confirmButtonText: "Ok",
+						showCancelButton: false
+					}).then(function () {
+						$scope.$applyAsync(function () {
+							$scope.attendingRequest = {};
+						});
+					}, angular.noop);
+				}
 			});
 		};
 

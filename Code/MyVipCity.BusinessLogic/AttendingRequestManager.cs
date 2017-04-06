@@ -181,6 +181,33 @@ namespace MyVipCity.BusinessLogic {
 			return DeclineByPromoterAsync(attendingRequestId, promoterUserId, assignVipHostUrl).Result;
 		}
 
+		public async Task<bool> DeclineByAdminAsync(int attendingRequestId) {
+			// get access to the db
+			var db = Resolver.Resolve<DbContext>();
+			// find the specified attending request
+			var request = await db.Set<AttendingRequest>().FindAsync(attendingRequestId);
+			if (request == null)
+				return false;
+
+			request.Status = AttendingRequestStatus.Declined;
+			await db.SaveChangesAsync();
+
+			var emailModel = new AttendingRequestNotificationEmailModel {
+				To = request.Email,
+				Subject = $"Request for {request.Business.Name} has been declined"
+			};
+
+			FillNewAttendingRequestNotificationEmailModel(emailModel, request);
+
+			await emailService.SendDeclinedAttendingRequestNotificationToUserAsync(emailModel);
+
+			return true;
+		}
+
+		public bool DeclineByAdmin(int attendingRequestId) {
+			return DeclineByAdminAsync(attendingRequestId).Result;
+		}
+
 		private async Task SendEmailForAcceptedRequest(AttendingRequest request, string promoterProfileUrl) {
 			var adminEmails = userManager.GetAdminsEmail();
 			var emailModel = new AcceptedAttendingRequestNotificationEmailModel {
@@ -211,7 +238,7 @@ namespace MyVipCity.BusinessLogic {
 			var adminEmails = userManager.GetAdminsEmail();
 			await Task.Factory.StartNew(() => {
 				Parallel.ForEach(adminEmails, async adminEmail => {
-					var emailModel = new NewAttendingRequestAdminNotificationEmailModel {
+					var emailModel = new AttendingRequestAdminNotificationEmailModel {
 						AdminName = adminEmail,
 						AssignVipHostUrl = url,
 						To = adminEmail,
@@ -226,15 +253,16 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		private async Task SendDeclinedAttendingRequestEmailToAdminsAsync(AttendingRequest attendingRequest, string assignVipHostUrl) {
-			var url = string.Format(assignVipHostUrl, attendingRequest.Id);
-			var adminEmails = userManager.GetAdminsEmail();
 			await Task.Factory.StartNew(() => {
+				var url = string.Format(assignVipHostUrl, attendingRequest.Id);
+				var adminEmails = userManager.GetAdminsEmail();
+				var businessName = attendingRequest.Business.Name;
 				Parallel.ForEach(adminEmails, async adminEmail => {
 					var emailModel = new DeclinedAttendingRequestAdminNotificationEmailModel {
 						AdminName = adminEmail,
 						AssignVipHostUrl = url,
 						To = adminEmail,
-						Subject = $"Attending request for {attendingRequest.Business.Name} has been declined by VIP host {attendingRequest.Promoter.FullName()}",
+						Subject = $"Attending request for {businessName} has been declined by VIP host {attendingRequest.Promoter.FullName()}",
 						VipHostName = attendingRequest.Promoter.FullName()
 					};
 
@@ -248,7 +276,7 @@ namespace MyVipCity.BusinessLogic {
 		private async Task SendAttendingRequestEmailToPromoterAsync(AttendingRequest attendingRequest, string acceptUrl) {
 			var url = string.Format(acceptUrl, attendingRequest.Id);
 			var adminEmails = userManager.GetAdminsEmail();
-			var emailModel = new NewAttendingRequestPromoterNotificationEmailModel {
+			var emailModel = new AttendingRequestPromoterNotificationEmailModel {
 				Name = attendingRequest.Name,
 				DeclineLink = url,
 				AcceptLink = url,
@@ -263,7 +291,7 @@ namespace MyVipCity.BusinessLogic {
 			await emailService.SendAttendigRequestNotificationToPromoterAsync(emailModel);
 		}
 
-		private void FillNewAttendingRequestNotificationEmailModel(NewAttendingRequestNotificationEmailModel model, AttendingRequest attendingRequest) {
+		private void FillNewAttendingRequestNotificationEmailModel(AttendingRequestNotificationEmailModel model, AttendingRequest attendingRequest) {
 			model.Email = attendingRequest.Email;
 			model.From = "hello@myvipcity.com";
 			model.Message = attendingRequest.Message;

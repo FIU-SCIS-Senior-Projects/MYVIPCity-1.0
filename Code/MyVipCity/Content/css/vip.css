@@ -4425,3 +4425,8 @@ div[vip-post] div[vip-video] {
   width: 20%;
   min-width: 70px;
 }
+/*@media(max-width: @screen-md-min){
+    .rmd-sidebar-mobile{
+        width: 50%;
+    }
+}*/

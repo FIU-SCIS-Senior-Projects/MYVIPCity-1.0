@@ -23,8 +23,8 @@ namespace MyVipCity.Controllers.api {
 			attendingRequest.Email = User.Identity.Name;
 			var acceptUrl = new Uri(Request.RequestUri, RequestContext.VirtualPathRoot) + "AttendingRequest?requestId={0}";
 			var assignVipHostUrl = new Uri(Request.RequestUri, RequestContext.VirtualPathRoot) + "AttendingRequest/AssignPromoter?requestId={0}";
-			await attendingRequestManager.SubmitRequestAsync(attendingRequest, acceptUrl, assignVipHostUrl);
-			return Ok();
+			var result = await attendingRequestManager.SubmitRequestAsync(attendingRequest, acceptUrl, assignVipHostUrl);
+			return Ok(result);
 		}
 
 		[HttpPost]
@@ -43,6 +43,14 @@ namespace MyVipCity.Controllers.api {
 		public async Task<IHttpActionResult> DeclineByPromoter(int requestId) {
 			var assignVipHostUrl = new Uri(Request.RequestUri, RequestContext.VirtualPathRoot) + "AttendingRequest/AssignPromoter?requestId={0}";
 			var result = await attendingRequestManager.DeclineByPromoterAsync(requestId, User.Identity.GetUserId(), assignVipHostUrl);
+			return Ok(result);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		[Route("DeclineByAdmin/{requestId:int}")]
+		public async Task<IHttpActionResult> DeclineByAdmin(int requestId) {
+			var result = await attendingRequestManager.DeclineByAdminAsync(requestId);
 			return Ok(result);
 		}
 
