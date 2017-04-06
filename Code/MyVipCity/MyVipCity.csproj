@@ -482,6 +482,9 @@
     <Content Include="Scripts\vendors\bower_components\angular-aria\angular-aria.js" />
     <Content Include="Scripts\vendors\bower_components\angular-aria\angular-aria.min.js" />
     <Content Include="Scripts\vendors\bower_components\angular-aria\index.js" />
+    <Content Include="Scripts\vendors\bower_components\angular-cookies\angular-cookies.js" />
+    <Content Include="Scripts\vendors\bower_components\angular-cookies\angular-cookies.min.js" />
+    <Content Include="Scripts\vendors\bower_components\angular-cookies\index.js" />
     <Content Include="Scripts\vendors\bower_components\angular-material\angular-material-mocks.js" />
     <Content Include="Scripts\vendors\bower_components\angular-material\angular-material.css" />
     <Content Include="Scripts\vendors\bower_components\angular-material\angular-material.js" />
@@ -5776,6 +5779,12 @@
     <Content Include="Scripts\vendors\ng-on\README.md" />
     <Content Include="Views\AttendingRequest\Index.cshtml" />
     <Content Include="Views\AttendingRequest\AssignPromoter.cshtml" />
+    <Content Include="Scripts\vendors\bower_components\angular-cookies\.bower.json" />
+    <Content Include="Scripts\vendors\bower_components\angular-cookies\angular-cookies.min.js.map" />
+    <Content Include="Scripts\vendors\bower_components\angular-cookies\bower.json" />
+    <Content Include="Scripts\vendors\bower_components\angular-cookies\LICENSE.md" />
+    <Content Include="Scripts\vendors\bower_components\angular-cookies\package.json" />
+    <Content Include="Scripts\vendors\bower_components\angular-cookies\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
