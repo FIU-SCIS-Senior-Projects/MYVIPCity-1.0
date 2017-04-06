@@ -8,8 +8,14 @@
 			vipPageLoaderService.showPageLoader();
 		}));
 
-		listeners.push($scope.$on('$routeChangeSuccess', function (e) {
+		listeners.push($scope.$on('$routeChangeSuccess', function (e, current) {
 			vipPageLoaderService.hidePageLoader();
+			if (current.$$route.originalPath === '/home') {
+				$scope.mainContainerCssClass = 'vip-home-container';
+			}
+			else {
+				$scope.mainContainerCssClass = '';
+			}
 		}));
 
 		listeners.push($scope.$on('$destroy', function () {
@@ -19,5 +25,9 @@
 		}));
 
 		$scope.userIsAdmin = vipUserService.isAdmin();
+
+		$scope.setMainContainerCssClass = function(cssClass) {
+			$scope.mainContainerCssClass = cssClass;
+		};
 	}]);
 });
