@@ -8,9 +8,7 @@
 
 
 		var search = function () {
-			var searchCriteria = {
-
-			};
+			var searchCriteria = {};
 
 			if (location) {
 				searchCriteria.longitude = location.Longitude;

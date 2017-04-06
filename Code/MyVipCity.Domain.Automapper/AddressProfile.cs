@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Data.Entity.Spatial;
+using AutoMapper;
 using MyVipCity.DataTransferObjects;
 
 namespace MyVipCity.Domain.Automapper {
@@ -15,7 +16,8 @@ namespace MyVipCity.Domain.Automapper {
 		}
 
 		private void DtoToModel() {
-			CreateMap<AddressDto, Address>();
+			CreateMap<AddressDto, Address>()
+				.ForMember(dest => dest.Location, opts => opts.MapFrom(src => DbGeography.FromText($"POINT({src.Longitude} {src.Latitude})")));
 		}
 	}
 }

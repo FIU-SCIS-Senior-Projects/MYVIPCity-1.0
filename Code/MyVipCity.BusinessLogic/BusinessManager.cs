@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -100,7 +101,49 @@ namespace MyVipCity.BusinessLogic {
 		}
 
 		public async Task<BusinessDto[]> SearchAsync(BusinessSearchCriteriaDto searchCriteria) {
-			return GetAllBusiness();
+			DbGeography refLocation = null;
+			if (searchCriteria.ReferenceLatitude != 0 || searchCriteria.ReferenceLongitude != 0)
+				refLocation = DbGeography.FromText($"POINT({searchCriteria.ReferenceLongitude} {searchCriteria.ReferenceLatitude})");
+
+			// prepare top, skip and criteria values
+			var top = searchCriteria.Top >= 0 ? searchCriteria.Top : 20;
+			var skip = searchCriteria.Skip >= 0 ? searchCriteria.Skip : 0;
+			var criteria = searchCriteria.Criteria;
+
+			// get access to the db
+			var db = Resolver.Resolve<DbContext>();
+			// get the business as an IQueryable
+			var allBusiness = db.Set<Business>().AsQueryable();
+			// check if there is a text search criteria
+			if (!string.IsNullOrWhiteSpace(criteria)) {
+				allBusiness = allBusiness.Where(b =>
+				b.Name.Contains(criteria) ||
+				b.Address.FormattedAddress.Contains(criteria) ||
+				b.Address.StateFullName.Contains(criteria) ||
+				b.Address.Neighborhood.Contains(criteria) ||
+				b.Address.CountryFullName.Contains(criteria));
+			}
+			// apply reference location sorting
+			if (refLocation != null) {
+				allBusiness = allBusiness.OrderBy(b => b.Address.Location == null ? 1 : 0).ThenBy(b => b.Address.Location.Distance(refLocation));
+			}
+			else {
+				allBusiness = allBusiness.OrderBy(b => b.Id);
+			}
+
+			// apply skip
+			allBusiness = allBusiness.Skip(skip);
+
+			// apply take
+			allBusiness = allBusiness.Take(top);
+
+			//get results as an array
+			var businessList = await allBusiness.ToArrayAsync();
+
+			// map the results to dto
+			var allBusinessDtos = Mapper.Map<BusinessDto[]>(businessList);
+
+			return allBusinessDtos;
 		}
 
 		private void BuildFriendlyIdForBusiness(Business business) {

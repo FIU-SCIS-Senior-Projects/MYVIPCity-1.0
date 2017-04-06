@@ -1,4 +1,6 @@
-﻿namespace MyVipCity.Domain {
+﻿using System.Data.Entity.Spatial;
+
+namespace MyVipCity.Domain {
 
 	public class Address {
 
@@ -63,6 +65,12 @@
 		}
 
 		public decimal Latitude
+		{
+			get;
+			set;
+		}
+
+		public DbGeography Location
 		{
 			get;
 			set;
