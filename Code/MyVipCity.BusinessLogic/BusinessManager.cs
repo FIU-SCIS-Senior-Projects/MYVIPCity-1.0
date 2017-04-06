@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.Common;
 using MyVipCity.DataTransferObjects;
+using MyVipCity.DataTransferObjects.Search;
 using MyVipCity.DataTransferObjects.Social;
 using MyVipCity.Domain;
 using Ninject.Extensions.Logging;
@@ -95,6 +97,10 @@ namespace MyVipCity.BusinessLogic {
 
 		public PostDto[] GetPosts(int id, int top, int afterPostId) {
 			return PostsEntityManager.GetPosts<Business>(id, top, afterPostId);
+		}
+
+		public async Task<BusinessDto[]> SearchAsync(BusinessSearchCriteriaDto searchCriteria) {
+			return GetAllBusiness();
 		}
 
 		private void BuildFriendlyIdForBusiness(Business business) {

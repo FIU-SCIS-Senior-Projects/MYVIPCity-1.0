@@ -53,6 +53,7 @@
     <Compile Include="PromoterProfileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReviewDto.cs" />
+    <Compile Include="Search\BusinessSearchCriteriaDto.cs" />
     <Compile Include="Social\CommentPostDto.cs" />
     <Compile Include="Social\PicturePostDto.cs" />
     <Compile Include="Social\PostDto.cs" />

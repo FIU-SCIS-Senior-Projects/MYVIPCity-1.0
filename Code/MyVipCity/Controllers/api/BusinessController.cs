@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data.Entity.Core.Common.CommandTrees;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using MyVipCity.BusinessLogic.Contracts;
 using MyVipCity.DataTransferObjects;
+using MyVipCity.DataTransferObjects.Search;
 using MyVipCity.DataTransferObjects.Social;
 
 namespace MyVipCity.Controllers.api {
@@ -22,11 +24,16 @@ namespace MyVipCity.Controllers.api {
 
 		[HttpGet]
 		[Route("")]
-		public async Task<IHttpActionResult> Index() {
-			return await Task<IHttpActionResult>.Factory.StartNew(() => {
-				var dtos = BusinessManager.GetAllBusiness();
-				return Ok(dtos);
-			});
+		public async Task<IHttpActionResult> Index(string criteria = null, int top = -1, int skip = 0, decimal longitude = 0, decimal latitude = 0) {
+			var searchCriteria = new BusinessSearchCriteriaDto {
+				Skip = skip,
+				Top = top,
+				Criteria = criteria,
+				ReferenceLatitude = latitude,
+				ReferenceLongitude = longitude
+			};
+			var result = await BusinessManager.SearchAsync(searchCriteria);
+			return Ok(result);
 		}
 
 		[HttpGet]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
+using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 
@@ -41,6 +42,15 @@ namespace MyVipCity.Controllers {
 				var userIdentity = (ClaimsIdentity)User.Identity;
 				return userIdentity.GetUserId();
 			}
+		}
+
+		protected void AddCookie(string name, string value) {
+			Response.Cookies.Add(new HttpCookie(name, value));
+		}
+
+		protected string GetCookie(string name) {
+			var cookie = Request.Cookies[name];
+			return cookie?.Value;
 		}
 	}
 }

@@ -271,6 +271,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Extensions\HttpRequestBaseExtensions.cs" />
+    <Compile Include="Utils\MyVipCityCookies.cs" />
     <Compile Include="Utils\SqlDataReaderReadOnlyStream.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -411,7 +412,7 @@
     <Content Include="Scripts\modules\vip\js\config\vipRouteConfig.js" />
     <Content Include="Scripts\modules\vip\js\controllers\acceptDeclineAttendingRequestController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\assignPromoterToAttendingRequestController.js" />
-    <Content Include="Scripts\modules\vip\js\controllers\clubListController.js" />
+    <Content Include="Scripts\modules\vip\js\controllers\homeController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\businessPromotersController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\mainController.js" />
     <Content Include="Scripts\modules\vip\js\controllers\promoterProfileController.js" />
@@ -462,6 +463,7 @@
     <Content Include="Scripts\modules\vip\js\services\vipFactoryService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipNavigationService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipPageLoaderService.js" />
+    <Content Include="Scripts\modules\vip\js\services\vipBusinessService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipUserService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipVideoService.js" />
     <Content Include="Scripts\modules\vip\js\services\vipUtilsService.js" />

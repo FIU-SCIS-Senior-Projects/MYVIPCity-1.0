@@ -1,4 +1,6 @@
-﻿using MyVipCity.DataTransferObjects;
+﻿using System.Threading.Tasks;
+using MyVipCity.DataTransferObjects;
+using MyVipCity.DataTransferObjects.Search;
 using MyVipCity.DataTransferObjects.Social;
 
 namespace MyVipCity.BusinessLogic.Contracts {
@@ -24,5 +26,7 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		PostDto[] GetPosts(int id, int top);
 
 		PostDto[] GetPosts(int id, int top, int afterPostId);
+
+		Task<BusinessDto[]> SearchAsync(BusinessSearchCriteriaDto searchCriteria);
 	}
 }
