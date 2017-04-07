@@ -60,7 +60,7 @@
                     <div class="listings-grid__body">
                         <h5 md-highlight-text="searchText" md-highlight-flags="gi">{{::business.Name}}</h5>
                         <small md-highlight-text="searchText" md-highlight-flags="gi" title="{{::business.Address.FormattedAddress}}">{{::business.Address.FormattedAddress}}</small>
-                        <span><i class="zmdi zmdi-pin"></i> {{::business.distanceToReferencePoint * 0.000621371 | number:2}} miles</span>
+                        <span><i class="zmdi zmdi-pin"></i> {{business.distanceToReferencePoint * 0.000621371 | number:2}} miles</span>
                         @*<h5>{{::business.Phrase}}</h5>*@
                     </div>
                 </a>
