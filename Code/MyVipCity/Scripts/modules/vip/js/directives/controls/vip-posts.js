@@ -35,7 +35,7 @@
 				'</div>' +
 				// existing posts
 				'<div class="vip-posts__posts">' +
-					'<div class="card {{::post.PostType}}" ng-repeat="post in posts track by post.Id" vip-random-bg-color>' +
+					'<div class="card hvr-glow {{::post.PostType}}" ng-repeat="post in posts track by post.Id" vip-random-bg-color>' +
 						'<div class="card__body">' +
 							'<div vip-post ng-model="post"></div>' +
 						'</div>' +

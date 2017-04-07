@@ -12,7 +12,7 @@
 				'<div ng-repeat="promoter in promoters" >' +
 					'<i ng-show="renderingMode == 2" class="zmdi zmdi-close vip-existing-promoters__delete" ng-click="removePromoter($event, promoter)"></i>' +
 
-					'<a class="list-group-item media" href="#/promoter-profile/{{promoter.Id}}">' +
+					'<a class="list-group-item media hvr-glow" href="#/promoter-profile/{{promoter.Id}}">' +
 						'<div vip-promoter-picture ng-model="promoter" class="vip-existing-promoters__img-container pull-left" img-class="list-group__img img-circle vip-existing-promoters__img">' +
 						'</div>' +
 						'<div class="media-body">' +

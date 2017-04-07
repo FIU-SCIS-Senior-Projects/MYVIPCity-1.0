@@ -43,10 +43,18 @@
 
 			// excute the search
 			vipBusinessService.search(searchCriteria).then(function (businesses) {
+				// process the results
 				var searchResult = processBusinesses(businesses);
+				// check if we are loading more data, and therefore it needs to be appended to the existing list
 				if (loadMore) {
+					// only add items not already in the list
+					var map = {};
+					angular.forEach($scope.businesses, function (b) {
+						map[b.Id] = true;
+					});
 					angular.forEach(searchResult, function (result) {
-						$scope.businesses.push(result);
+						if (!map[result.Id])
+							$scope.businesses.push(result);
 					});
 				}
 				else {

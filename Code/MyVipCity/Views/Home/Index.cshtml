@@ -29,7 +29,7 @@
     <div class="header__recommended">
         <div class="my-location">
             <!--
-            <div class="my-location__title">Properties nearby your location</div>
+            <div class="my-location__title">Nearby your location</div>
             <div class="dropdown my-location__location hidden-xs">
                 <a href="" data-toggle="dropdown"><i class="zmdi zmdi-pin"></i> San Francisco County, CA</a>
                 <div class="dropdown-menu pull-right stop-propagate">
@@ -49,7 +49,7 @@
                 -->
         </div>
         <div class="listings-grid vip-home-search-result-container">
-            <div class="listings-grid__item vip-home-search-result-item" ng-repeat="business in businesses track by $index" style="display: inline-block;">
+            <div class="listings-grid__item vip-home-search-result-item" ng-repeat="business in businesses track by business.Id" style="display: inline-block;">
                 <a href="#/view-business/{{::business.FriendlyId}}">
                     <div class="listings-grid__main">
                         <img ng-src="{{::business.firstPictureUrl}}" alt="{{::business.Name}}">

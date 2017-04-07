@@ -4479,6 +4479,10 @@ div[vip-post] div[vip-video] {
   }
 }
 .vip-home-search-result-container .vip-home-search-result-item img {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
   width: 100%;
   height: 180px;
   object-fit: cover;
@@ -4488,4 +4492,11 @@ div[vip-post] div[vip-video] {
     max-height: 350px;
     height: 100%;
   }
+}
+.vip-home-search-result-container .vip-home-search-result-item:hover img {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.vip-home-search-result-container .vip-home-search-result-item .listings-grid__main {
+  overflow: hidden;
 }

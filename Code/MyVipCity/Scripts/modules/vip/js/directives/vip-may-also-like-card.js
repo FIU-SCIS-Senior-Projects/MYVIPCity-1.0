@@ -16,7 +16,7 @@
 						'<small>Check out these other great places</small>' +
 					'</div>' +
 					'<div class="list-group">' +
-						'<a ng-repeat="business in suggestions" href="#/view-business/{{::business.FriendlyId}}" class="list-group-item media">' +
+						'<a ng-repeat="business in suggestions" href="#/view-business/{{::business.FriendlyId}}" class="hvr-glow list-group-item media">' +
 							'<div class="pull-left">' +
 								'<img ng-src="{{::business.firstPictureUrl}}" alt="{{::business.Name}}" class="list-group__img" width="65">' +
 							'</div>' +
