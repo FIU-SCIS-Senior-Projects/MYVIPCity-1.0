@@ -4460,6 +4460,11 @@ div[vip-post] div[vip-video] {
 .vip-home-container.container .search .search__body input {
   flex: 1;
 }
+@media (max-width: 767px) {
+  .vip-home-container .search__body input {
+    padding: 1px 10px;
+  }
+}
 .vip-home-search-result-container {
   padding: 0px 20px !important;
   text-align: center;
