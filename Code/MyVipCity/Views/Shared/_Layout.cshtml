@@ -77,15 +77,15 @@
             </div>
         </div>
     </header>
-    <section class="section">
-        <div class="container vip-main-container" ng-class="mainContainerCssClass">
-            @if (ViewBag.HideNgView == null || ViewBag.HideNgView != true) {
-                <div ng-view autoscroll="true"></div>}
-            <div class="mvc-body-container">
-                @RenderBody()
-            </div>
+<section class="section">
+    <div class="container vip-main-container" ng-class="mainContainerCssClass">
+        @if (ViewBag.HideNgView == null || ViewBag.HideNgView != true) {
+            <div ng-view autoscroll="true"></div>}
+        <div class="mvc-body-container">
+            @RenderBody()
         </div>
-    </section>
+    </div>
+</section>
     <footer id="footer" class="footer">
         <div class="container hidden-xs">
             <div class="row">
