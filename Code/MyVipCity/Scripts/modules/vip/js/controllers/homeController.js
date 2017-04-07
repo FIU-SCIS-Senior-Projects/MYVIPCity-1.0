@@ -2,7 +2,7 @@
 	'use strict';
 
 	vip.controller('vip.homeController', ['$scope', '$http', '$cookies', '$timeout', 'vipBusinessService', function ($scope, $http, $cookies, $timeout, vipBusinessService) {
-		var top = 10;
+		var top = 12;
 
 		$scope.businesses = [];
 		$scope.loading = false;
