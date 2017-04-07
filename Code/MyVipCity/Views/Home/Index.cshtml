@@ -19,8 +19,8 @@
         <form>
             <div class="search">
                 <div class="search__body">
-                    <input ng-model="textCriteria" ng-change="criteriaChanged()" type="text" class="search__input" placeholder="Enter Name, Address, City, or Zip Code">
-                    <button class="btn btn-primary" ng-click="search()" ng-disabled="!textCriteria || loading">Search</button>
+                    <input ng-model="searchText" ng-change="criteriaChanged()" type="text" class="search__input" placeholder="Enter Name, Address, City, or Zip Code">
+                    <button class="btn btn-primary" ng-click="search()" ng-disabled="!searchText || loading">Search</button>
                 </div>
             </div>
         </form>
@@ -58,8 +58,8 @@
                         <img ng-src="{{::business.firstPictureUrl}}" alt="{{::business.Name}}">
                     </div>
                     <div class="listings-grid__body">
-                        <h5 md-highlight-text="textCriteria">{{::business.Name}}</h5>
-                        <small md-highlight-text="textCriteria" title="{{::business.Address.FormattedAddress}}">{{::business.Address.FormattedAddress}}</small>
+                        <h5 md-highlight-text="searchText" md-highlight-flags="gi">{{::business.Name}}</h5>
+                        <small md-highlight-text="searchText" md-highlight-flags="gi" title="{{::business.Address.FormattedAddress}}">{{::business.Address.FormattedAddress}}</small>
                         <span><i class="zmdi zmdi-pin"></i> {{::business.distanceToReferencePoint * 0.000621371 | number:2}} miles</span>
                         @*<h5>{{::business.Phrase}}</h5>*@
                     </div>

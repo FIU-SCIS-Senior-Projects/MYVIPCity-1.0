@@ -4469,6 +4469,10 @@ div[vip-post] div[vip-video] {
   padding: 0px 20px !important;
   text-align: center;
 }
+.vip-home-search-result-container .highlight {
+  color: #2196F3;
+  font-weight: bold;
+}
 @media (max-width: 767px) {
   .vip-home-search-result-container {
     padding: 0 !important;

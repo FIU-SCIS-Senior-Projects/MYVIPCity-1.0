@@ -34,8 +34,8 @@
 				searchCriteria.latitude = location.Latitude;
 			}
 			// include text search criteri
-			if ($scope.textCriteria) {
-				searchCriteria.criteria = $scope.textCriteria;
+			if ($scope.searchText) {
+				searchCriteria.criteria = $scope.searchText;
 			}
 			// check if we are loading more
 			if (loadMore)
@@ -73,7 +73,7 @@
 		$scope.criteriaChanged = function () {
 			if (timeoutPromise)
 				$timeout.cancel(timeoutPromise);
-			var timeoutTime = $scope.textCriteria ? 5000 : 700;
+			var timeoutTime = $scope.searchText ? 5000 : 700;
 			timeoutPromise = $timeout(function () {
 				$scope.search();
 			}, timeoutTime);
