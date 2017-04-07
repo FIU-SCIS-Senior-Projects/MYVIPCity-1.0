@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using MyVipCity.BusinessLogic.Contracts;
+using MyVipCity.BusinessLogic.Utils;
 using MyVipCity.Common;
 using MyVipCity.DataTransferObjects;
 using MyVipCity.DataTransferObjects.Search;
@@ -100,7 +101,7 @@ namespace MyVipCity.BusinessLogic {
 			return PostsEntityManager.GetPosts<Business>(id, top, afterPostId);
 		}
 
-		public async Task<BusinessDto[]> SearchAsync(BusinessSearchCriteriaDto searchCriteria) {
+		public async Task<BusinessSearchResultDto> SearchAsync(BusinessSearchCriteriaDto searchCriteria) {
 			DbGeography refLocation = null;
 			if (searchCriteria.ReferenceLatitude != 0 || searchCriteria.ReferenceLongitude != 0)
 				refLocation = DbGeography.FromText($"POINT({searchCriteria.ReferenceLongitude} {searchCriteria.ReferenceLatitude})");
@@ -140,10 +141,25 @@ namespace MyVipCity.BusinessLogic {
 			//get results as an array
 			var businessList = await allBusiness.ToArrayAsync();
 
+			// set up the result dto
+			var result = new BusinessSearchResultDto {
+				SearchCriteria = searchCriteria
+			};
+
+			if (refLocation != null) {
+				try {
+					result.DistancesToReferenceCoordinate = businessList.Select(b => GeoUtils.DistanceBetweenCoordinates(refLocation.Latitude.Value, refLocation.Longitude.Value, b.Address.Location.Latitude.Value, b.Address.Location.Longitude.Value)).ToArray();
+				}
+				catch (Exception exception) {
+					Logger.Error(exception, "Exception calculating distances");
+				}
+			}
 			// map the results to dto
 			var allBusinessDtos = Mapper.Map<BusinessDto[]>(businessList);
 
-			return allBusinessDtos;
+			result.Businesses = allBusinessDtos;
+
+			return result;
 		}
 
 		private void BuildFriendlyIdForBusiness(Business business) {

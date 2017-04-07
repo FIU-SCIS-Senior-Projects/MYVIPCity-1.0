@@ -27,6 +27,6 @@ namespace MyVipCity.BusinessLogic.Contracts {
 
 		PostDto[] GetPosts(int id, int top, int afterPostId);
 
-		Task<BusinessDto[]> SearchAsync(BusinessSearchCriteriaDto searchCriteria);
+		Task<BusinessSearchResultDto> SearchAsync(BusinessSearchCriteriaDto searchCriteria);
 	}
 }

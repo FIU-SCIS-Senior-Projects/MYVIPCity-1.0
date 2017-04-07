@@ -11,8 +11,15 @@
 				
 				$http.get('api/Business', {
 					params: params
-				}).then(function(response) {
-					deferred.resolve(response.data);
+				}).then(function (response) {
+					var result = response.data;
+					var businesses = result.Businesses;
+					if (businesses && result.DistancesToReferenceCoordinate && result.DistancesToReferenceCoordinate.length=== businesses.length) {
+						for (var i = 0; i < businesses.length; i++) {
+							businesses[i].distanceToReferencePoint = result.DistancesToReferenceCoordinate[i];
+						}
+					}
+					deferred.resolve(businesses);
 				}, function(error) {
 					deferred.reject(error);
 				});
