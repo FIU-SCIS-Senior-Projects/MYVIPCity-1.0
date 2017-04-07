@@ -2,6 +2,26 @@
 @import '../../Scripts/vendors/bower_components/bootstrap/less/variables.less';
 @import 'inc/variables.less';
 
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 body {
     height: unset;
 }
@@ -723,4 +743,18 @@ div[vip-post] {
             overflow: hidden;
         }
     }
+}
+
+.vip-loader-mixin(@size) {
+    border: 5px solid white; /* Light grey */
+    border-top: 5px solid @mdc-blue-500; /* Blue */
+    border-radius: 50%;
+    width: @size;
+    height: @size;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+.vip-loader {
+    .vip-loader-mixin(40px);
 }

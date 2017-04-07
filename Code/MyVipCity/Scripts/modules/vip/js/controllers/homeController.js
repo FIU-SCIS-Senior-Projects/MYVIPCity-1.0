@@ -60,7 +60,6 @@
 				else {
 					$scope.businesses = searchResult;
 				}
-
 			})['finally'](function () {
 				// indicate loading has finished
 				$scope.loading = false;

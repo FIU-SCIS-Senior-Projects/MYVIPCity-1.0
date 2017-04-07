@@ -26,6 +26,8 @@
         </form>
     </div>
 
+    <div style="margin: auto; position: fixed; top: 50%; left: 50%; z-index: 100;" class="vip-loader" ng-class="{'ng-hide': !loading} "></div>
+
     <div class="header__recommended">
         <div class="my-location">
             <!--
@@ -60,7 +62,6 @@
                         <span><i class="zmdi zmdi-pin"></i> {{::business.distanceToReferencePoint * 0.000621371 | number:2}} miles</span>
                         @*<h5>{{::business.Phrase}}</h5>*@
                     </div>
-
                 </a>
             </div>
         </div>

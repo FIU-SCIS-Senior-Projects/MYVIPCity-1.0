@@ -3936,6 +3936,22 @@ a.mdc-text-black-darker:hover,
 a.mdc-text-black-darker:focus {
   color: black;
 }
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 body {
   height: unset;
 }
@@ -4499,4 +4515,15 @@ div[vip-post] div[vip-video] {
 }
 .vip-home-search-result-container .vip-home-search-result-item .listings-grid__main {
   overflow: hidden;
+}
+.vip-loader {
+  border: 5px solid white;
+  /* Light grey */
+  border-top: 5px solid #2196F3;
+  /* Blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
 }
