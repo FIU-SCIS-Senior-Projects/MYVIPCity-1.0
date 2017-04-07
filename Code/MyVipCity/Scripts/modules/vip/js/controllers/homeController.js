@@ -10,14 +10,7 @@
 		var location = $cookies.getObject('ipLocation');
 
 		var processBusinesses = function (businesses) {
-			angular.forEach(businesses, function (b) {
-				// sort the pictures by Index and take the first one
-				b.Pictures.sort(function (a, b) {
-					return a.Index - b.Index;
-				});
-				b.firstPictureUrl = 'api/Pictures/' + b.Pictures[0].BinaryDataId;
-			});
-
+			vipBusinessService.addFirstPictureUrl(businesses);
 			return businesses;
 		};
 

@@ -1,4 +1,4 @@
-﻿define(['vip/js/vip'], function (vip) {
+﻿define(['vip/js/vip', 'angular'], function (vip, angular) {
 	'use strict';
 
 	vip.factory('vipBusinessService', ['$q', '$http', function ($q, $http) {
@@ -18,6 +18,20 @@
 				});
 
 				return deferred.promise;
+			},
+
+			addFirstPictureUrl: function(business) {
+				var array = angular.isArray(business) ? business : [business];
+
+				angular.forEach(array, function (b) {
+					// sort the pictures by Index and take the first one
+					b.Pictures.sort(function (a, b) {
+						return a.Index - b.Index;
+					});
+					b.firstPictureUrl = 'api/Pictures/' + b.Pictures[0].BinaryDataId;
+				});
+
+				return business;
 			}
 		};
 	}]);

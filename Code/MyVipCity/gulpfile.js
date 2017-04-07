@@ -6,6 +6,7 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var less = require('gulp-less');
 var minifyCSS = require('gulp-csso');
+var requireJsOptimize = require('gulp-requirejs-optimize');
 
 // task to minify app.js file
 gulp.task('appMinify', function() {
@@ -27,3 +28,9 @@ gulp.task('css', function() {
 		.pipe(gulp.dest('Content/css'));
 });
 
+gulp.task('require-optimize', function () {
+	return gulp
+		.src('Scripts/modules/vip/main.js')
+        .pipe(requireJsOptimize())
+        .pipe(gulp.dest('Scripts/modules/dist'));
+});

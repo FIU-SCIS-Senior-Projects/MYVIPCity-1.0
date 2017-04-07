@@ -52,7 +52,7 @@
             <div class="listings-grid__item vip-home-search-result-item" ng-repeat="business in businesses track by $index" style="display: inline-block;">
                 <a href="#/view-business/{{::business.FriendlyId}}">
                     <div class="listings-grid__main">
-                        <img ng-src="{{::business.firstPictureUrl}}" alt="">
+                        <img ng-src="{{::business.firstPictureUrl}}" alt="{{::business.Name}}">
                     </div>
                     <div class="listings-grid__body">
                         <h5 md-highlight-text="textCriteria">{{::business.Name}}</h5>

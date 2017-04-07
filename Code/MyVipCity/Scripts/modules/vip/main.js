@@ -47,6 +47,7 @@
 	'vip/js/directives/vip-auto-grow-input',
 	'vip/js/directives/vip-hosts-card',
 	'vip/js/directives/vip-match',
+	'vip/js/directives/vip-may-also-like-card',
 	'vip/js/directives/vip-mvc-antiforgery-token',
 	'vip/js/directives/vip-navigation-menu',
 	'vip/js/directives/vip-new-promoters',
