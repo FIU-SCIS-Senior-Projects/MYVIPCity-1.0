@@ -18,11 +18,9 @@
     <div class="header__search container">
         <form>
             <div class="search">
-                <div class="search__type dropdown">
-                    <a href="" data-toggle="dropdown">Search</a>
-                </div>
                 <div class="search__body">
-                    <input type="text" class="search__input" placeholder="Enter any Name, Address, City, Zip Code" data-rmd-action="advanced-search-open">
+                    <input ng-model="textCriteria" ng-change="criteriaChanged()" type="text" class="search__input" placeholder="Enter any Name, Address, City, Zip Code" data-rmd-action="advanced-search-open">
+                    <button class="btn btn-primary" ng-click="search()" ng-disabled="!textCriteria">Search</button>
                 </div>
             </div>
         </form>
@@ -30,6 +28,7 @@
 
     <div class="header__recommended">
         <div class="my-location">
+            <!--
             <div class="my-location__title">Properties nearby your location</div>
             <div class="dropdown my-location__location hidden-xs">
                 <a href="" data-toggle="dropdown"><i class="zmdi zmdi-pin"></i> San Francisco County, CA</a>
@@ -47,6 +46,7 @@
                     </form>
                 </div>
             </div>
+                -->
         </div>
         <div class="listings-grid vip-home-search-result-container">
             <div class="listings-grid__item vip-home-search-result-item" ng-repeat="business in businesses track by business.Id" style="display: inline-block;">
@@ -55,8 +55,8 @@
                         <img ng-src="{{::business.firstPictureUrl}}" alt="">
                     </div>
                     <div class="listings-grid__body">
-                        <h5>{{::business.Name}}</h5>
-                        <small title="{{::business.Address.FormattedAddress}}">{{::business.Address.FormattedAddress}}</small>
+                        <h5 md-highlight-text="textCriteria">{{::business.Name}}</h5>
+                        <small md-highlight-text="textCriteria" title="{{::business.Address.FormattedAddress}}">{{::business.Address.FormattedAddress}}</small>
                         @*<h5>{{::business.Phrase}}</h5>*@
                     </div>
                    

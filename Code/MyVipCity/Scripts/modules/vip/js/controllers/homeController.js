@@ -6,7 +6,7 @@
 
 		var location = $cookies.getObject('ipLocation');
 
-		var processBusinesses = function(businesses) {
+		var processBusinesses = function (businesses) {
 			angular.forEach(businesses, function (b) {
 				// sort the pictures by Index and take the first one
 				b.Pictures.sort(function (a, b) {
@@ -18,8 +18,12 @@
 			return businesses;
 		};
 
+		var timeoutPromise = null;
+
 		// executes a search
-		var search = function () {
+		$scope.search = function () {
+			if (timeoutPromise)
+				$timeout.cancel(timeoutPromise);
 			var searchCriteria = {};
 
 			if (location) {
@@ -31,14 +35,22 @@
 			}
 
 			vipBusinessService.search(searchCriteria).then(function (businesses) {
-
 				$scope.businesses = processBusinesses(businesses);
 			});
 		};
 
-		var timeoutPromise = $timeout(function () {
-			search();
-		}, 2000);
+		timeoutPromise = $timeout(function () {
+			$scope.search();
+		}, 1000);
+
+		$scope.criteriaChanged = function () {
+			if (timeoutPromise)
+				$timeout.cancel(timeoutPromise);
+			var timeoutTime = $scope.textCriteria ? 5000 : 700;
+			timeoutPromise = $timeout(function () {
+				$scope.search();
+			}, timeoutTime);
+		};
 
 		// check if there is geolocation functionality available in the browser
 		if (navigator.geolocation) {
@@ -52,7 +64,7 @@
 
 				$timeout.cancel(timeoutPromise);
 
-				search();
+				$scope.search();
 			});
 		}
 	}]);

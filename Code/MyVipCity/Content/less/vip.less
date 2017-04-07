@@ -649,11 +649,13 @@ div[vip-post] {
         text-align: left;
 
         @media(max-width: @screen-md-max) {
-            width: 27%;
+            width: 30%;
+            min-width: 270px;
         }
 
         @media(max-width: @screen-sm-max) {
             width: 40%;
+            min-width: 295px;
         }
 
         @media(max-width: @screen-xs-max) {
@@ -678,4 +680,17 @@ div[vip-post] {
 
 .vip-home-container.container {
     width: 100%;
+
+    .search{
+        .search__body{
+            display: flex;
+            padding-left:0;
+            input{
+                flex: 1;
+            }
+            button{
+                font-size: 16px;
+            }
+        }
+    }
 }
