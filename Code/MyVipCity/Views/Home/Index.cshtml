@@ -14,13 +14,13 @@
 
     </header>*@
 <div ng-controller="vip.homeController">
-    
+
     <div class="header__search container">
         <form>
             <div class="search">
                 <div class="search__body">
-                    <input ng-model="textCriteria" ng-change="criteriaChanged()" type="text" class="search__input" placeholder="Enter Name, Address, City, or Zip Code" data-rmd-action="advanced-search-open">
-                    <button class="btn btn-primary" ng-click="search()" ng-disabled="!textCriteria">Search</button>
+                    <input ng-model="textCriteria" ng-change="criteriaChanged()" type="text" class="search__input" placeholder="Enter Name, Address, City, or Zip Code">
+                    <button class="btn btn-primary" ng-click="search()" ng-disabled="!textCriteria || loading">Search</button>
                 </div>
             </div>
         </form>
@@ -49,7 +49,7 @@
                 -->
         </div>
         <div class="listings-grid vip-home-search-result-container">
-            <div class="listings-grid__item vip-home-search-result-item" ng-repeat="business in businesses track by business.Id" style="display: inline-block;">
+            <div class="listings-grid__item vip-home-search-result-item" ng-repeat="business in businesses track by $index" style="display: inline-block;">
                 <a href="#/view-business/{{::business.FriendlyId}}">
                     <div class="listings-grid__main">
                         <img ng-src="{{::business.firstPictureUrl}}" alt="">
@@ -59,9 +59,12 @@
                         <small md-highlight-text="textCriteria" title="{{::business.Address.FormattedAddress}}">{{::business.Address.FormattedAddress}}</small>
                         @*<h5>{{::business.Phrase}}</h5>*@
                     </div>
-                   
+
                 </a>
             </div>
+        </div>
+        <div class="load-more" ng-show="businesses.length">
+            <a href="" ng-click="search(true)" ng-disabled="loading"><i class="zmdi zmdi-refresh-alt"></i> Load more</a>
         </div>
     </div>
 

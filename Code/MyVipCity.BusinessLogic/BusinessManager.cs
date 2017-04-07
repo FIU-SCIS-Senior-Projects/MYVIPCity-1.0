@@ -125,7 +125,7 @@ namespace MyVipCity.BusinessLogic {
 			}
 			// apply reference location sorting
 			if (refLocation != null) {
-				allBusiness = allBusiness.OrderBy(b => b.Address.Location == null ? 1 : 0).ThenBy(b => b.Address.Location.Distance(refLocation));
+				allBusiness = allBusiness.OrderBy(b => b.Address.Location == null ? 1000000000 : b.Address.Location.Distance(refLocation)).ThenBy(b => b.Id);
 			}
 			else {
 				allBusiness = allBusiness.OrderBy(b => b.Id);

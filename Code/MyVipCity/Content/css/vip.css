@@ -3936,6 +3936,9 @@ a.mdc-text-black-darker:hover,
 a.mdc-text-black-darker:focus {
   color: black;
 }
+body {
+  height: unset;
+}
 .inline-block {
   display: inline-block;
 }

@@ -2,7 +2,10 @@
 	'use strict';
 
 	vip.controller('vip.homeController', ['$scope', '$http', '$cookies', '$timeout', 'vipBusinessService', function ($scope, $http, $cookies, $timeout, vipBusinessService) {
-		$scope.clubs = [];
+		var top = 10;
+
+		$scope.businesses = [];
+		$scope.loading = false;
 
 		var location = $cookies.getObject('ipLocation');
 
@@ -21,21 +24,45 @@
 		var timeoutPromise = null;
 
 		// executes a search
-		$scope.search = function () {
+		$scope.search = function (loadMore) {
+			// indicate that data is being loaded
+			$scope.loading = true;
+			// if there is a timeout promise, cancel it
 			if (timeoutPromise)
 				$timeout.cancel(timeoutPromise);
-			var searchCriteria = {};
+			// build the search criteria
+			var searchCriteria = {
+				top: top
+			};
 
+			// if we know the location of the user, include it in the search
 			if (location) {
 				searchCriteria.longitude = location.Longitude;
 				searchCriteria.latitude = location.Latitude;
 			}
+			// include text search criteri
 			if ($scope.textCriteria) {
 				searchCriteria.criteria = $scope.textCriteria;
 			}
+			// check if we are loading more
+			if (loadMore)
+				searchCriteria.skip = $scope.businesses.length;
 
+			// excute the search
 			vipBusinessService.search(searchCriteria).then(function (businesses) {
-				$scope.businesses = processBusinesses(businesses);
+				var searchResult = processBusinesses(businesses);
+				if (loadMore) {
+					angular.forEach(searchResult, function (result) {
+						$scope.businesses.push(result);
+					});
+				}
+				else {
+					$scope.businesses = searchResult;
+				}
+
+			})['finally'](function () {
+				// indicate loading has finished
+				$scope.loading = false;
 			});
 		};
 

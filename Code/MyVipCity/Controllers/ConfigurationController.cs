@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Web.Mvc;
@@ -31,8 +32,13 @@ namespace MyVipCity.Controllers {
 				config.Name = User.Identity.GetUserName();
 				config.Roles = roles;
 			}
-			config.Menu = GetNavigationMenu();
-			config.Routes = GetRoutes();
+			try {
+				config.Menu = GetNavigationMenu();
+				config.Routes = GetRoutes();
+			}
+			catch (Exception e) {
+				var x = 1;
+			}
 
 			if (roles != null && roles.Contains("Promoter")) {
 				var promoterProfiles = PromoterProfileManager.GetPromoterProfiles(UserId);
