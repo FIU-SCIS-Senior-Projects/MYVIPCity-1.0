@@ -15,12 +15,14 @@
 			link: function (scope, element, attrs, ngModelCtrl) {
 				var listeners = [];
 				var businessId, innerScope;
+				var selectElement;
 
 				var destroyInnerScope = function () {
 					if (innerScope) {
 						innerScope.$destroy();
 						innerScope = null;
 						element.empty();
+						selectElement = undefined;
 					}
 				};
 
@@ -38,7 +40,7 @@
 							item.text = item.FirstName + (item.NickName ? ' "' + item.NickName + '"' : '') + (item.LastName ? ' ' + item.LastName : '');
 						});
 						// create select element
-						var selectElement = angular.element('<select style="width: 100%"></select>');
+						selectElement = angular.element('<select style="width: 100%"></select>');
 						// append it to the parent
 						element.append(selectElement);
 						// create select2 widget
@@ -76,6 +78,12 @@
 							ngModelCtrl.$setViewValue(value);
 						});
 					});
+				};
+
+				ngModelCtrl.$render = function() {
+					if (!ngModelCtrl.$modelValue && selectElement) {
+						jQuery(selectElement).val(null).trigger("change");
+					}
 				};
 
 				// watches for business id

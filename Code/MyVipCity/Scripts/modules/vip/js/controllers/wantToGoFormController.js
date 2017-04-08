@@ -6,6 +6,7 @@
 
 		this.minDate = new Date();
 		this.maxDate = moment(this.minDate).add(60, 'd').toDate();
+		var businessId;
 		// TODO: filter dates so that it is not possible to select a day where the business is closed
 
 		$scope.attendingRequest = {};
@@ -46,7 +47,7 @@
 						showCancelButton: false
 					}).then(function () {
 						$scope.$applyAsync(function () {
-							$scope.attendingRequest = {};
+							$scope.attendingRequest = { Business: { Id: businessId } };
 						});
 					}, angular.noop);
 				}
@@ -54,8 +55,9 @@
 		};
 
 		listeners.push($scope.$watch('model', function (business) {
+			businessId = business.Id;
 			// only store the business Id
-			$scope.attendingRequest.Business = { Id: business.Id };
+			$scope.attendingRequest.Business = { Id: businessId };
 		}));
 
 		listeners.push($scope.$on('$destroy', function () {
