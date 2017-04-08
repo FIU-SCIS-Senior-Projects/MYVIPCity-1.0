@@ -59,208 +59,214 @@
     </div>
 </header>
 <div class="row">
-<div class="col-md-@columnsCount">
-    <div class="card">
-        <div class="detail-media">
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="detail-media-images">
-                    <div vip-images-control ng-model="model.Pictures"></div>
-                </div>
-                <div class="tab-pane fade light-gallery" id="detail-media-floorplan">
-                    <a href="img/demo/floor-plan.png">
-                        <img src="https://placeholdit.imgix.net/~text?&w=1000&h=464" alt="">
-                    </a>
-                </div>
-                <div class="tab-pane fade" id="detail-media-map">
-                    <div id="listing-map"></div>
-                </div> 
-            </div>
-            <ul class="detail-media__nav hidden-print">
-                <li class="active"><a href="#detail-media-images" data-toggle="tab"><i class="zmdi zmdi-collection-image"></i></a></li>
-                <li><a href="#detail-media-floorplan" data-toggle="tab"><i class="zmdi zmdi-view-dashboard"></i></a></li>
-                <li><a href="#detail-media-map" data-toggle="tab"><i class="zmdi zmdi-map"></i></a></li>
-            </ul>
-        </div>
-        <div class="detail-info vip-business-info">
-            <div class="detail-info__header clearfix">
-                <strong>Information</strong>
-                @if (ViewBag.NewBusiness != true) {
-                    <span>OPEN NOW</span>
-                }
-            </div>
-            <ul class="detail-info__list clearfix vip-business-info__list">
-                <li>
-                    <span class="vip-business-info__list-hours-label pull-left">Hours</span>
-                    <div class="inline-block">
-                        <div vip-week-hours ng-model="model.WeekHours"></div>
+    <div class="col-md-@columnsCount">
+        <div class="card">
+            <div class="detail-media">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="detail-media-images">
+                        <div vip-images-control ng-model="model.Pictures"></div>
                     </div>
-                </li>
-                <li>
-                    <span>Ambiance</span>
-                    <div vip-textbox class="inline-block" ng-model="model.Ambiance" placeholder="Ambiance details" wrap-with="span" edit-mode-class="span"></div>
-                </li>
-                <li>
-                    <span>Good for Dancing</span>
-                    <div vip-checkbox class="inline-block" ng-model="model.GoodForDancing" wrap-with="span"></div>
-                </li>
-                <li>
-                    <span>Parking</span>
-                    <div vip-textbox class="inline-block" ng-model="model.Parking" placeholder="Parking details" wrap-with="span" edit-mode-class="span"></div>
-                </li>
-                <li>
-                    <span>Alcohol</span>
-                    <div vip-textbox class="inline-block" ng-model="model.Alcohol" placeholder="Alcohol details" wrap-with="span" edit-mode-class="span"></div>
-                </li>
-                <li>
-                    <span>Phone</span>
-                    <div vip-textbox class="inline-block" ng-model="model.Phone" type="phone" placeholder="Phone number" wrap-with="span" edit-mode-class="span"></div>
-                </li>
-                <li>
-                    <span>Website</span>
-                    <div vip-link class="inline-block" ng-model="model.WebsiteUrl" placeholder="Website URL" edit-mode-class="span"></div>
-                </li>
-            </ul>
-            <div class="card__body vip-address-info">
-                <span>Address</span>
-                <div vip-address ng-model="model.Address"></div>
+                    <div class="tab-pane fade light-gallery" id="detail-media-floorplan">
+                        <a href="img/demo/floor-plan.png">
+                            <img src="https://placeholdit.imgix.net/~text?&w=1000&h=464" alt="">
+                        </a>
+                    </div>
+                    <div class="tab-pane fade" id="detail-media-map">
+                        <div id="listing-map"></div>
+                    </div>
+                </div>
+                <ul class="detail-media__nav hidden-print">
+                    <li class="active"><a href="#detail-media-images" data-toggle="tab"><i class="zmdi zmdi-collection-image"></i></a></li>
+                    <li><a href="#detail-media-floorplan" data-toggle="tab"><i class="zmdi zmdi-view-dashboard"></i></a></li>
+                    <li><a href="#detail-media-map" data-toggle="tab"><i class="zmdi zmdi-map"></i></a></li>
+                </ul>
+            </div>
+            <div class="detail-info vip-business-info">
+                <div class="detail-info__header clearfix">
+                    <strong>Information</strong>
+                    @if (ViewBag.NewBusiness != true) {
+                        <span>OPEN NOW</span>}
+                </div>
+                <ul class="detail-info__list clearfix vip-business-info__list">
+                    <li>
+                        <span class="vip-business-info__list-hours-label pull-left">Hours</span>
+                        <div class="inline-block">
+                            <div vip-week-hours ng-model="model.WeekHours"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <span>Ambiance</span>
+                        <div vip-textbox class="inline-block" ng-model="model.Ambiance" placeholder="Ambiance details" wrap-with="span" edit-mode-class="span"></div>
+                    </li>
+                    <li>
+                        <span>Good for Dancing</span>
+                        <div vip-checkbox class="inline-block" ng-model="model.GoodForDancing" wrap-with="span"></div>
+                    </li>
+                    <li>
+                        <span>Parking</span>
+                        <div vip-textbox class="inline-block" ng-model="model.Parking" placeholder="Parking details" wrap-with="span" edit-mode-class="span"></div>
+                    </li>
+                    <li>
+                        <span>Alcohol</span>
+                        <div vip-textbox class="inline-block" ng-model="model.Alcohol" placeholder="Alcohol details" wrap-with="span" edit-mode-class="span"></div>
+                    </li>
+                    <li>
+                        <span>Phone</span>
+                        <div vip-textbox class="inline-block" ng-model="model.Phone" type="phone" placeholder="Phone number" wrap-with="span" edit-mode-class="span"></div>
+                    </li>
+                    <li>
+                        <span>Website</span>
+                        <div vip-link class="inline-block" ng-model="model.WebsiteUrl" placeholder="Website URL" edit-mode-class="span"></div>
+                    </li>
+                </ul>
+                <div class="card__body vip-address-info">
+                    <span>Address</span>
+                    <div vip-address ng-model="model.Address"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card detail-amenities">
-        <div class="card__header">
-            <h2>Amenities</h2>
-            <!--Amenities Phrase-->
-            <div vip-textbox ng-model="model.AmenitiesPhrase" placeholder="Amenties Phrase" wrap-with="small" edit-mode-class="small text-center" auto-grow="true"></div>
+        <div class="card detail-amenities">
+            <div class="card__header">
+                <h2>Amenities</h2>
+                <!--Amenities Phrase-->
+                <div vip-textbox ng-model="model.AmenitiesPhrase" placeholder="Amenties Phrase" wrap-with="small" edit-mode-class="small text-center" auto-grow="true"></div>
 
+            </div>
+            <div class="card__body">
+                <!--Amenities-->
+                <div vip-tags ng-model="model.Amenities" read-mode-class="detail-amenities__list" placeholder="Add an amenity..."></div>
+            </div>
         </div>
-        <div class="card__body">
-            <!--Amenities-->
-            <div vip-tags ng-model="model.Amenities" read-mode-class="detail-amenities__list" placeholder="Add an amenity..."></div>
+        <div class="card">
+            <div class="card__header">
+                <h2>Details</h2>
+            </div>
+            <div class="card__body">
+                <div vip-wysiwyg ng-model="model.Details" placeholder="Write details here..."></div>
+            </div>
         </div>
-    </div>
-    <div class="card">
-        <div class="card__header">
-            <h2>Details</h2>
+        <div class="vip-save-button-container">
+            <button class="btn btn-primary" ng-show="showSaveButton" ng-click="save()">Save</button>
         </div>
-        <div class="card__body">
-            <div vip-wysiwyg ng-model="model.Details" placeholder="Write details here..."></div>
-        </div>
-    </div>
-    <div class="vip-save-button-container">
-        <button class="btn btn-primary" ng-show="showSaveButton" ng-click="save()">Save</button>
-    </div>
-    <!--VIP Hosts for small screens-->
-    <div vip-hosts-card class="hidden-md hidden-lg hidden-print"></div>
+        <!--VIP Hosts for small screens-->
+        <div vip-hosts-card class="hidden-md hidden-lg hidden-print"></div>
 
-    <!--Social Posts, show only for existing businesses-->
-    <div ng-if="model.Id">
-        <div vip-posts posts-manager-id="business-posts-manager" entity-id="model.Id" vip-read-only="!userIsAdmin"></div>
+        <!--Social Posts, show only for existing businesses-->
+        <div ng-if="model.Id">
+            <div vip-posts posts-manager-id="business-posts-manager" entity-id="model.Id" vip-read-only="!userIsAdmin"></div>
+        </div>
     </div>
-</div>
     @if (ViewBag.NewBusiness != true) {
         <div id="inquire" class="col-md-4 rmd-sidebar-mobile vip-want-to-go">
             <div ng-controller="vip.wantToGoFormController as ctrl">
                 <form class="card hidden-print" name="wantToGoForm">
                     <div class="card__header">
                         <h2>Want to go?</h2>
-                        <small>Fill this form and we will get in contact with you.</small>
+                        @if (Request.IsAuthenticated) {
+                            <small>Fill this form and we will get in contact with you.</small>
+}
+                        else {
+                            <small>Please <a href="javascript:$('#login-link').dropdown('toggle')">log in</a> first so that you can send us your request.</small>
+}
                     </div>
-                    <div class="card__body">
-                        <div class="form-group form-group--float">
-                            <input type="text" class="form-control" ng-model="attendingRequest.Name" name="Name" required>
-                            <label>Name</label>
-                            <i class="form-group__bar"></i>
-                            <div ng-messages="wantToGoForm.Name.$error" ng-show="wantToGoForm.Name.$touched" class="mdc-text-red-500 animated fadeIn">
-                                <div ng-message="required">
-                                    <small class="pull-right">Name is required</small>
+                    @if (Request.IsAuthenticated) {
+                        <div class="card__body">
+                            <div class="form-group form-group--float">
+                                <input type="text" class="form-control" ng-model="attendingRequest.Name" name="Name" required>
+                                <label>Name</label>
+                                <i class="form-group__bar"></i>
+                                <div ng-messages="wantToGoForm.Name.$error" ng-show="wantToGoForm.Name.$touched" class="mdc-text-red-500 animated fadeIn">
+                                    <div ng-message="required">
+                                        <small class="pull-right">Name is required</small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group form-group--float">
-                            <input type="text" class="form-control" ng-model="attendingRequest.ContactNumber" name="ContactNumber" required>
-                            <label>Contact Number</label>
-                            <i class="form-group__bar"></i>
-                            <div ng-messages="wantToGoForm.ContactNumber.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
-                                <div ng-message="required">
-                                    <small class="pull-right">Contact Number is required</small>
+                            <div class="form-group form-group--float">
+                                <input type="text" class="form-control" ng-model="attendingRequest.ContactNumber" name="ContactNumber" required>
+                                <label>Contact Number</label>
+                                <i class="form-group__bar"></i>
+                                <div ng-messages="wantToGoForm.ContactNumber.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
+                                    <div ng-message="required">
+                                        <small class="pull-right">Contact Number is required</small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group form-group--float">
-                            <span>When? </span>
-                            <vip-datepicker ng-model="attendingRequest.Date" name="dateField" vip-min-date="ctrl.minDate" vip-max-date="ctrl.maxDate" required></vip-datepicker>
+                            <div class="form-group form-group--float">
+                                <span>When? </span>
+                                <vip-datepicker ng-model="attendingRequest.Date" name="dateField" vip-min-date="ctrl.minDate" vip-max-date="ctrl.maxDate" required></vip-datepicker>
 
-                            <div ng-messages="wantToGoForm.dateField.$error" class="mdc-text-red-500 animated fadeIn">
-                                <div ng-message="valid">That's not a date</div>
-                                <div ng-message="required">Date is required</div>
-                                <div ng-message="mindate">Date is too early!</div>
-                                <div ng-message="maxdate">Date is too late!</div>
-                            </div>
-                        </div>
-                        <div class="form-group form-group--float">
-                            <div vip-numeric-select ng-model="attendingRequest.PartyCount" name="PartyCount" required min="1" max="20" ng-change="partyCountChanged()"></div>
-                            <label>How Many in your party?</label>
-                            <i class="form-group__bar"></i>
-                            <div ng-messages="wantToGoForm.PartyCount.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
-                                <div ng-message="required">
-                                    <small class="pull-right">Required</small>
+                                <div ng-messages="wantToGoForm.dateField.$error" class="mdc-text-red-500 animated fadeIn">
+                                    <div ng-message="valid">That's not a date</div>
+                                    <div ng-message="required">Date is required</div>
+                                    <div ng-message="mindate">Date is too early!</div>
+                                    <div ng-message="maxdate">Date is too late!</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group form-group--float">
-                                    <div vip-numeric-select ng-model="attendingRequest.MaleCount" name="MaleCount" required min="1" max="20" ng-change="maleCountChanged()"></div>
-                                    <label>How many Males?</label>
-                                    <i class="form-group__bar"></i>
-                                    <div ng-messages="wantToGoForm.MaleCount.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
-                                        <div ng-message="required">
-                                            <small class="pull-right">Required</small>
+                            <div class="form-group form-group--float">
+                                <div vip-numeric-select ng-model="attendingRequest.PartyCount" name="PartyCount" required min="1" max="20" ng-change="partyCountChanged()"></div>
+                                <label>How Many in your party?</label>
+                                <i class="form-group__bar"></i>
+                                <div ng-messages="wantToGoForm.PartyCount.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
+                                    <div ng-message="required">
+                                        <small class="pull-right">Required</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group--float">
+                                        <div vip-numeric-select ng-model="attendingRequest.MaleCount" name="MaleCount" required min="1" max="20" ng-change="maleCountChanged()"></div>
+                                        <label>How many Males?</label>
+                                        <i class="form-group__bar"></i>
+                                        <div ng-messages="wantToGoForm.MaleCount.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
+                                            <div ng-message="required">
+                                                <small class="pull-right">Required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-group--float">
+                                        <div vip-numeric-select ng-model="attendingRequest.FemaleCount" name="FemaleCount" required min="1" max="20" ng-change="femaleCountChanged()"></div>
+                                        <label>How many Females?</label>
+                                        <i class="form-group__bar"></i>
+                                        <div ng-messages="wantToGoForm.FemaleCount.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
+                                            <div ng-message="required">
+                                                <small class="pull-right">Required</small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group form-group--float">
-                                    <div vip-numeric-select ng-model="attendingRequest.FemaleCount" name="FemaleCount" required min="1" max="20" ng-change="femaleCountChanged()"></div>
-                                    <label>How many Females?</label>
-                                    <i class="form-group__bar"></i>
-                                    <div ng-messages="wantToGoForm.FemaleCount.$error" ng-show="wantToGoForm.ContactNumber.$touched" class="mdc-text-red-500 animated fadeIn">
-                                        <div ng-message="required">
-                                            <small class="pull-right">Required</small>
-                                        </div>
-                                    </div>
+                            <div class="form-group form-group--float">
+                                <div class="radio radio-inline">
+                                    <label>
+                                        <input type="radio" value="1" name="Service" ng-model="attendingRequest.DesiredService">
+                                        <i class="input-helper"></i>VIP Table Service
+                                    </label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label>
+                                        <input type="radio" value="2" name="Service" ng-model="attendingRequest.DesiredService">
+                                        <i class="input-helper"></i>Priority General Entry
+                                    </label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group form-group--float">
-                            <div class="radio radio-inline">
-                                <label>
-                                    <input type="radio" value="1" name="Service" ng-model="attendingRequest.DesiredService">
-                                    <i class="input-helper"></i>VIP Table Service
-                                </label>
+                            <div class="form-group form-group--float">
+                                <div vip-promoter-dropdown business-id="model.Id" ng-model="attendingRequest.Promoter" placeholder="Select a VIP host"></div>
                             </div>
-                            <div class="radio radio-inline">
-                                <label>
-                                    <input type="radio" value="2" name="Service" ng-model="attendingRequest.DesiredService">
-                                    <i class="input-helper"></i>Priority General Entry
-                                </label>
+                            <div class="form-group form-group--float">
+                                <textarea class="form-control textarea-autoheight" ng-model="attendingRequest.Message" maxlength="1000"></textarea>
+                                <label>Message (Optional)</label>
+                                <i class="form-group__bar"></i>
                             </div>
+                            <small class="text-muted">By sending us your information, you agree to MyVipCity’s Terms of Use & Privacy Policy.</small>
                         </div>
-                        <div class="form-group form-group--float">
-                            <div vip-promoter-dropdown business-id="model.Id" ng-model="attendingRequest.Promoter" placeholder="Select a VIP host"></div>
+                        <div class="card__footer">
+                            <button class="btn btn-primary" ng-disabled="wantToGoForm.$invalid" ng-click="submitRequest()">Submit</button>
+                            <button class="btn btn-link hidden-lg hidden-md" data-rmd-action="block-close" data-rmd-target="#inquire">Cancel</button>
                         </div>
-                        <div class="form-group form-group--float">
-                            <textarea class="form-control textarea-autoheight" ng-model="attendingRequest.Message" maxlength="1000"></textarea>
-                            <label>Message (Optional)</label>
-                            <i class="form-group__bar"></i>
-                        </div>
-                        <small class="text-muted">By sending us your information, you agree to MyVipCity’s Terms of Use & Privacy Policy.</small>
-                    </div>
-                    <div class="card__footer">
-                        <button class="btn btn-primary" ng-disabled="wantToGoForm.$invalid" ng-click="submitRequest()">Submit</button>
-                        <button class="btn btn-link hidden-lg hidden-md" data-rmd-action="block-close" data-rmd-target="#inquire">Cancel</button>
-                    </div>
+}
                 </form>
             </div>
             <div vip-hosts-card class="hidden-xs hidden-sm hidden-print"></div>
