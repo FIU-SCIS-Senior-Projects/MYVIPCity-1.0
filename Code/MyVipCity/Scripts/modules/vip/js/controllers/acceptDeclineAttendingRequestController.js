@@ -17,7 +17,7 @@
 					swal({
 						type: 'success',
 						title: 'Success',
-						text: 'Thank you! An email has ben sent to the user notifying that the request has been accepted.',
+						text: 'Thank you! An email has been sent to the user notifying that the request has been accepted.',
 						confirmButtonText: "Ok",
 						showCancelButton: false
 					}).then(function () {
