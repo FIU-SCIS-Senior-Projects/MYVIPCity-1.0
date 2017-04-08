@@ -6,8 +6,8 @@ namespace MyVipCity.Controllers
     public class AddBusinessController : Controller
     {
         // GET: AddBusiness
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
+	        ViewBag.NewBusiness = true;
             return View();
         }
     }

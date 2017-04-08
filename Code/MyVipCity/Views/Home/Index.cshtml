@@ -19,7 +19,7 @@
         <form>
             <div class="search">
                 <div class="search__body">
-                    <input ng-model="searchText" ng-change="criteriaChanged()" type="text" class="search__input" placeholder="Enter Name, Address, City, or Zip Code">
+                    <input ng-model="searchText" ng-change="criteriaChanged()" type="search" class="search__input" placeholder="Enter Name, Address, City, or Zip Code">
                     <button class="btn btn-primary" ng-click="search()" ng-disabled="!searchText || loading">Search</button>
                 </div>
             </div>
