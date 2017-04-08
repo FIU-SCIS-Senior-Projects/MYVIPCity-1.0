@@ -37,12 +37,12 @@
 						top: 6
 					}
 
-					vipBusinessService.search(searchCriteria).then(function(suggestedBussineses) {
-						vipBusinessService.addFirstPictureUrl(suggestedBussineses);
-						_.remove(suggestedBussineses, function(b) {
+					vipBusinessService.search(searchCriteria).then(function (suggestedBusinesses) {
+						vipBusinessService.addFirstPictureUrl(suggestedBusinesses);
+						_.remove(suggestedBusinesses, function (b) {
 							return b.Id === business.Id;
 						});
-						scope.suggestions = suggestedBussineses;
+						scope.suggestions = suggestedBusinesses;
 					});
 				};
 
