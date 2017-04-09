@@ -216,7 +216,7 @@
         line-height: 20px;
         color: #fff;
     }
-    
+
     &:hover,
     &:focus {
         color: darken(@text-muted, 20%);
@@ -237,7 +237,7 @@
         font-weight: normal;
         margin: 25px 0 15px;
     }
-    
+
     & > p {
         color: @text-muted;
     }
@@ -258,7 +258,7 @@
 .submit-ticker {
     color: #fff;
     text-align: center;
-    background: @mdc-yellow-700  url(../img/patterns/header_pattern_2.png) center left repeat-x;
+    background: @mdc-yellow-700 url(../img/patterns/header_pattern_2.png) center left repeat-x;
 
 
     & > p {
@@ -474,17 +474,20 @@ a.text-muted {
     width: 100%;
     top: 0;
     left: 0;
-    background-color: @mdc-indigo-500;
+    background-color: @mdc-indigo-900;
     z-index: 100;
     text-align: center;
     position: fixed;
-
-    &:before {
-        content: '';
-        width: 1px;
-        height: 100%;
-        display: inline-block;
+    .page-loader__container{
+        position: fixed;
+        top: 43%;
+        left: 46%;
+    }
+    
+    img {
         vertical-align: middle;
+        width: 80px;
+        height: 80px;
     }
 }
 
@@ -493,7 +496,8 @@ html:not(.ie9) {
         box-sizing: border-box;
         height: 30px;
         width: 30px;
-        display: inline-block;
+        // display: inline-block;
+        margin: auto;
         border-radius: 50%;
         box-shadow: 0 -10px 0 13px rgba(255,255,255,0.5) inset;
         animation: rotate 1s infinite linear;
@@ -517,6 +521,7 @@ html:not(.ie9) {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }

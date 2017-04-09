@@ -10359,7 +10359,7 @@ a {
 /* Headers */
 #header {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  background-color: #3F51B5;
+  background-color: #1A237E;
 }
 #header.affix {
   position: static;
@@ -10378,7 +10378,8 @@ a {
   }
 }
 .header__top {
-  background-color: #3949AB;
+  /*background-color: @mdc-indigo-800;*/
+  background-color: rgba(0, 0, 0, 0.1);
 }
 @media (max-width: 767px) {
   .header__top .dropdown {
@@ -11640,7 +11641,7 @@ a {
 }
 /* Footer */
 #footer {
-  background-color: #3949AB;
+  background-color: #1A237E;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   color: rgba(255, 255, 255, 0.8);
 }
@@ -12607,23 +12608,26 @@ a.text-muted:focus {
   width: 100%;
   top: 0;
   left: 0;
-  background-color: #3F51B5;
+  background-color: #1A237E;
   z-index: 100;
   text-align: center;
   position: fixed;
 }
-#page-loader:before {
-  content: '';
-  width: 1px;
-  height: 100%;
-  display: inline-block;
+#page-loader .page-loader__container {
+  position: fixed;
+  top: 43%;
+  left: 46%;
+}
+#page-loader img {
   vertical-align: middle;
+  width: 80px;
+  height: 80px;
 }
 html:not(.ie9) .page-loader__spinner {
   box-sizing: border-box;
   height: 30px;
   width: 30px;
-  display: inline-block;
+  margin: auto;
   border-radius: 50%;
   box-shadow: 0 -10px 0 13px rgba(255, 255, 255, 0.5) inset;
   animation: rotate 1s infinite linear;
