@@ -4536,3 +4536,9 @@ div[vip-post] div[vip-video] {
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
+.my-location__title {
+  color: unset;
+}
+.my-location__title span {
+  color: #2196F3;
+}

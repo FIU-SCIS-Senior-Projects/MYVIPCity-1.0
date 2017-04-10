@@ -1,11 +1,29 @@
-﻿define(['vip/js/vip', 'angular'], function (vip, angular) {
+﻿define(['vip/js/vip', 'angular', 'lodash'], function (vip, angular, _) {
 	'use strict';
 
-	vip.controller('vip.homeController', ['$scope', '$http', '$cookies', '$timeout', 'vipBusinessService', function ($scope, $http, $cookies, $timeout, vipBusinessService) {
+	vip.controller('vip.homeController', ['$scope', '$http', '$cookies', '$timeout', 'vipBusinessService', 'vipLocationService', function ($scope, $http, $cookies, $timeout, vipBusinessService, vipLocationService) {
 		var top = 12;
 
 		$scope.businesses = [];
 		$scope.loading = false;
+		$scope.locationString = null;
+
+		var setUserCityAndState = function (location) {
+			$scope.locationString = null;
+
+			if (location) {
+				vipLocationService.locateByCoordinates(location.Latitude, location.Longitude).then(function (data) {
+					var locationResults = data.results;
+					var locationSelectedResult = _.find(locationResults, function (locResult) {
+						return _.indexOf(locResult.types, 'locality') > -1;
+					});
+
+					if (locationSelectedResult)
+						$scope.locationString = locationSelectedResult.formatted_address;
+				});
+			}
+		}
+
 
 		var location = $cookies.getObject('ipLocation');
 
@@ -67,6 +85,7 @@
 		};
 
 		timeoutPromise = $timeout(function () {
+			setUserCityAndState(location);
 			$scope.search();
 		}, 1000);
 
@@ -91,6 +110,7 @@
 
 				$timeout.cancel(timeoutPromise);
 
+				setUserCityAndState(location);
 				$scope.search();
 			});
 		}
