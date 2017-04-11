@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MyVipCity.Domain.Address" Collapsed="true">
+    <Position X="5.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAIIAIIAIAIAAIAAAABgAIABAAAAAA=</HashCode>
+      <FileName>Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyVipCity.Domain.AttendingRequest" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACABAEAGBAAAJAAAAAAAwAAAgAAgABAACAIAAAAAA=</HashCode>
+      <FileName>AttendingRequest.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MyVipCity.Domain.AttendingRequestDecline" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAACAAAIAAAAAAAAAAAAAAAEAAAAAAACAAAA=</HashCode>
+      <FileName>AttendingRequestDecline.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MyVipCity.Domain.Business" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQSAABGQAAFAEAARAAAAAQQAAAAYAACAAAAIAAAAQA=</HashCode>
+      <FileName>Business.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MyVipCity.Domain.DayHours" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAIACAAAAAAgAAAAAAAAAAAAAAAAAAIACAAAA=</HashCode>
+      <FileName>DayHours.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MyVipCity.Domain.File" Collapsed="true">
+    <Position X="1.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQAABAAAA=</HashCode>
+      <FileName>File.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MyVipCity.Domain.IndexedPicture" Collapsed="true">
+    <Position X="2.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>IndexedPicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyVipCity.Domain.Picture" Collapsed="true">
+    <Position X="1.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Picture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyVipCity.Domain.ProfilePicture" Collapsed="true">
+    <Position X="0.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProfilePicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyVipCity.Domain.PromoterInvitation" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAkACAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PromoterInvitation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MyVipCity.Domain.PromoterProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAEAAAGAEAIEABAAAAAgAAAACAAEABAAAAAAAAAg=</HashCode>
+      <FileName>PromoterProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MyVipCity.Domain.Review" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAACAAEBAAAACAAAAAA=</HashCode>
+      <FileName>Review.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MyVipCity.Domain.WeekHours" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAASAAIAACAAAAAAAAAAACAAIACAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WeekHours.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Enum Name="MyVipCity.Domain.AttendingRequestService" Collapsed="true">
+    <Position X="5.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAEA=</HashCode>
+      <FileName>AttendingRequest.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MyVipCity.Domain.AttendingRequestStatus" Collapsed="true">
+    <Position X="7" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>AttendingRequest.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MyVipCity.Domain.WeekDay" Collapsed="true">
+    <Position X="5.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAIAACAAAAAAAAAAACAAIACAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DayHours.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MyVipCity.Domain.PromoterInvitationStatus" Collapsed="true">
+    <Position X="8.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAKAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PromoterInvitation.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
