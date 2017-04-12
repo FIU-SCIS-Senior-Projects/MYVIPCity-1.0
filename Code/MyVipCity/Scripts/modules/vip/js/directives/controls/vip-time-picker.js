@@ -1,7 +1,7 @@
 ﻿define(['vip/js/vip', 'jquery', 'angular', 'moment', 'jtTimePicker'], function (vip, jQuery, angular, moment) {
 	'use strict';
 
-	vip.directive('vipTimePicker', ['vipControlRenderingService', function (vipControlRenderingService) {
+	vip.directive('vipTimePicker', ['vipControlRenderingService', '$filter', function (vipControlRenderingService, $filter) {
 		return {
 			restrict: 'ACE',
 
@@ -42,8 +42,8 @@
 							var time = jQuery(e.target).timepicker('getTime');
 							scope._time = time;
 							if (time) {
-								var isoDate = moment(time).toISOString();
-								// TODO: fix UTC
+								// var isoDate = moment(time).toISOString();
+								var isoDate = $filter('date')(time, 'yyyy-MM-ddTHH:mm:ss');
 								ngModelCtrl.$setViewValue(isoDate);
 							}
 							else {
