@@ -42,3 +42,7 @@ In this project we define the configuration for Automapper; that is, we define h
 ### MyVipCity.Domain.Mappings.EF
 
 We use Entity Framework as out Object-relational mapping (ORM) tool. Here we define how the domain classes map into the corresponding tables in the database. We also define the relationships between this tables. i.e One-To-Many, Many-To-Many.
+
+### MyVipCity.IpGeolocation
+
+In this project, we define some interfaces and classes that allow us to approximate where a given IP address is located in the map; that is, to find the latitude and longitude of a given IP address. For this, we use [IPInfoDB API](http://ipinfodb.com/ip_location_api.php)
