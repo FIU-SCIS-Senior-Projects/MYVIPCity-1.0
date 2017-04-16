@@ -86,5 +86,5 @@ There is an important file that must exists at the same level of the folder **My
 	<add key="myvipcity:ip-info-db-api-key" value="<value here>" />
 </appSettings>  
 ```
-**Important**: never upload this file into a public repository, after all what you have here is a secret. SendGrid, for example, has a GitHub crawler that search for keys they have issued, and if they find one, they will lock your key and you won't be able to send emails anymore until you: 1) Remove the key from the repo 2) Change the key 3) Communicate with them
+**Important**: never upload this file into a public repository, after all what you have here is a secret. SendGrid, for example, has a GitHub crawler that search for keys they have issued, and if they find one, they will lock your key and you won't be able to send emails anymore until you: 1) Remove the key from the repo 2) Change the key 3) Communicate with them (*it happened to me, and trust me, you don't want to go through this.*)
 
