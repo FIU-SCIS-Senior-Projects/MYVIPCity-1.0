@@ -63,7 +63,7 @@ If you need or want to use another service to sent the emails in the application
 
 There is an important file that must exists at the same level of the folder **MyVipCity**. This file must be named **AppSettingsSecrets.config** and it contains all the secrets used in the application, like API keys. See [Best practices for deploying passwords and other sensitive data to ASP.NET and Azure App Service](https://docs.microsoft.com/en-us/aspnet/identity/overview/features-api/best-practices-for-deploying-passwords-and-other-sensitive-data-to-aspnet-and-azure)
 
-
+```
 <appSettings>  
 	<!-- Google OAuth: External login -->
 	<add key="myvipcity:google-client-id" value="<value here>" />	
@@ -84,4 +84,5 @@ There is an important file that must exists at the same level of the folder **My
 	
 	<!-- Send Grid: email service -->
 	<add key="myvipcity:ip-info-db-api-key" value="<value here>" />
-</appSettings>  		`
+</appSettings>  
+```
