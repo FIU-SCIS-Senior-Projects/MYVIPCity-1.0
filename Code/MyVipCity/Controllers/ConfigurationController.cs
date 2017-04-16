@@ -57,66 +57,26 @@ namespace MyVipCity.Controllers {
 			var menu = new List<object> {
 				new {
 					Title = "Home",
-					Path ="#/",
-					Submenu = new object[] {
-						new {
-							Title = "After Login",
-							Path = "#/Testing"
-						},
-						new {
-							Title = "Example",
-							Path = "Example"
-						},
-						new {
-							Title = "Dashboard",
-							Path = "/"
-						}
-					}
+					Path ="#/"
 				},
-				new {
-					Title = "Listings",
-					Path ="/",
-					Submenu = new object[] {
-						new {
-							Title = "Grid view",
-							Path = "/"
-						},
-						new {
-							Title = "List view",
-							Path = "/"
-						},
-						new {
-							Title = "Map view",
-							Path = "/"
-						},
-						new {
-							Title = "Listing Detail",
-							Path = "/"
-						}
-					}
-				},
-				new {
-					Title = "Submit",
-					Path ="/"
-				},
-				new {
-					Title = "Restaurants",
-					Path ="/",
-					Submenu = new object[] {
-						new {
-							Title = "Restaurant Detail",
-							Path = "/"
-						},
-						new {
-							Title = "Restaurant Reviews",
-							Path = "/"
-						},
-						new {
-							Title = "Restaurant Disclaimer",
-							Path = "/"
-						}
-					}
-				}
+				//new {
+				//	Title = "Restaurants",
+				//	Path ="/",
+				//	Submenu = new object[] {
+				//		new {
+				//			Title = "Restaurant Detail",
+				//			Path = "/"
+				//		},
+				//		new {
+				//			Title = "Restaurant Reviews",
+				//			Path = "/"
+				//		},
+				//		new {
+				//			Title = "Restaurant Disclaimer",
+				//			Path = "/"
+				//		}
+				//	}
+				//}
 			};
 
 			if (Request.IsAuthenticated) {

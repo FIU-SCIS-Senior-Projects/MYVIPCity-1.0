@@ -78,7 +78,7 @@
 			swal({
 				type: 'question',
 				title: 'Resend invitation?',
-				text: 'Are you sure you want to resend and invitation to ' + invitation.Name + ' at ' + invitation.Email + '?',
+				text: 'Are you sure you want to resend an invitation to ' + invitation.Name + ' at ' + invitation.Email + '?',
 				confirmButtonText: "Yes",
 				showCancelButton: true
 			}).then(function () {
