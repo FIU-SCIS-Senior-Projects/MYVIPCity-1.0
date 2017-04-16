@@ -45,7 +45,9 @@ We use Entity Framework as out Object-relational mapping (ORM) tool. Here we def
 
 ### MyVipCity.IpGeolocation
 
-In this project, we define some interfaces and classes that allow us to approximate where a given IP address is located in the map; that is, to find the latitude and longitude of a given IP address. For this, we use [IPInfoDB API](http://ipinfodb.com/ip_location_api.php).
+In this project, we define some interfaces and classes that allow us to approximate where a given IP address is located in the map; that is, to find the latitude and longitude of a given IP address. 
+
+The key interface here is **IpGeolocator**. At this moment, we use [IPInfoDB API](http://ipinfodb.com/ip_location_api.php) as a service to locate the user given the IP address, so we defined the class **IpInfoDbGeoLocator**. If you want to use another service to accomplish this task, you just need to create a new class that implements **IpGeolocator** and then in the CompositionRoot project change the configuration of the IoC container to user your new class.
 
 ### MyVipCity.Mailing.Contracts
 
@@ -53,4 +55,34 @@ Here we define an interface for each transactional email that we need to send as
 
 ### MyVipCity.Mailing.Sendgrid
 
-In this class library we provide a concrete implementation for each interface defined in **MyVipCity.Mailing.Contracts**. Emails are sent using [SendGrid API](https://sendgrid.com/)
+In this class library we provide a concrete implementation for each interface defined in **MyVipCity.Mailing.Contracts**. Emails are sent using [SendGrid API](https://sendgrid.com/), so we have the class **SendGridEmailService** that implements all those interfaces.
+
+If you need or want to use another service to sent the emails in the application, you just need to create a class that implements all the interfaces in **MyVipCity.Mailing.Contracts** and modify the configuration of the IoC container in the CompositionRoot project.
+
+## Secrets##
+
+There is an important file that must exists at the same level of the folder **MyVipCity**. This file must be named **AppSettingsSecrets.config** and it contains all the secrets used in the application, like API keys.
+
+<appSettings>  
+	<!-- Google OAuth: External login -->
+	<add key="myvipcity:google-client-id" value="<value here>" />	
+	<add key="myvipcity:google-client-secret" value="<value here>" />
+	
+	<!-- Google Geocoding Api: Converts address into geographic coordinates -->
+	<add key="myvipcity:google-geocoding-api-key" value="<value here>" />
+	
+	<!-- Google Javascript Maps Api: Show maps and add markers -->
+	<add key="myvipcity:google-maps-api-key" value="<value here>" />
+	
+	<!-- Facebook OAuth: External login -->
+	<add key="myvipcity:fb-app-id" value="<value here>" />
+	<add key="myvipcity:fb-app-secret" value="<value here>" />
+	
+	<!-- Send Grid: email service -->
+	<add key="myvipcity:send-grid-api" value="<value here>" />
+	
+	<!-- Send Grid: email service -->
+	<add key="myvipcity:ip-info-db-api-key" value="<value here>" />
+</appSettings>  		
+
+
