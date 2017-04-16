@@ -27,8 +27,16 @@ This is the project where the IoC container used in this project, [SimpleInjecto
 
 ### MyVipCity.DataTransferObjects
 
-In this class library, we define the Data Transfer Objects (DTOs) used in the application. There is a DTO for each domain (see **MyVipCity.Domain**) class defined. i.e BusinessDto <-> Business. DTOs are used in the WebApi REST endpoints to receive/sent data from/to the client. DTOs are sent to the BusinessLogic layer for further processing.
+In this class library, we define the Data Transfer Objects (DTOs) used in the application. There is a DTO for each domain (see **MyVipCity.Domain**) class defined. i.e BusinessDto <-> Business. DTOs are used in the WebApi REST endpoints to receive/sent data from/to the client. DTOs are also sent to the BusinessLogic layer for further processing.
 
 ### MyVipCity.Domain
+
+In this project, we define all domain classes. ie. Business, PromoterProfile, AttendingRequest, Picture, ProfilePicture, Review, etc. Most of this classes have a corresponding table in the database.
+
+### MyVipCity.Domain.Automapper
+
+There is a need to convert DTOs object into domain objects before running business rules and before persisting this objects into the database. There is also a need to convert domain objects into DTOs before sending this objects back to the client. Here is where we use [Automapper](http://automapper.org/) to easily execute this conversions between objects. 
+
+In this project we define the configuration for Automapper; that is, we define how one specific object maps into another.
 
 
