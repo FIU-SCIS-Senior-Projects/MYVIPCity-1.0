@@ -20,3 +20,7 @@ This project is a Class Library that contains the contracts (interfaces) and act
 ### MyVipCity.Common
 
 The purpose of this Class Library is to add code that can be shared across all projects of the application. It currently has only one interface **IResolver** and a corresponding specific implementation **SimpleInjectorResolver**.
+
+### MyVipCity.CompositionRoot
+
+This is the project where the IoC container used in this project, **[SimpleInjector] (https://simpleinjector.org/index.html)** is configured
