@@ -39,4 +39,6 @@ There is a need to convert DTOs object into domain objects before running busine
 
 In this project we define the configuration for Automapper; that is, we define how one specific object maps into another.
 
+### MyVipCity.Domain.Mappings.EF
 
+We use Entity Framework as out Object-relational mapping (ORM) tool. Here we define how the domain classes map into the corresponding tables in the database. We also define the relationships between this tables. i.e One-To-Many, Many-To-Many.
