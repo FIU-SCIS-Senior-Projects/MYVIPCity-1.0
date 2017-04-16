@@ -91,8 +91,29 @@ There is an important file that must exists at the same level of the folder **My
 You can easily obtain your own key.
 
 [Google] (https://console.developers.google.com)
+
 [Facebook](https://developers.facebook.com/)
+
 [IP Info DB](http://ipinfodb.com/ip_location_api.php)
+
+## Getting the project up and running
+
+### Secrets file
+
+Make sure you have the secrets file as described above.
+
+### Deploying the Database
+
+We used [Entity Framework Code First](http://www.entityframeworktutorial.net/code-first/what-is-code-first.aspx), so that means that we generate our database from our Domain Classes. There are no .sql files in this project.
+
+1) Open Visual Studio
+2) Open the Web.config file under the project **MyVipCity** and change the connection string to point to your server and desired database name.
+3) Open the Package Manager Console, select MyVipCity as the default project
+4) Type **update-database** and hit ENTER. 
+
+After that, the database will be created
+
+Click RUN from inside Visual Studio and that's it. We recommend installing IIS in your development machine and adding an application for MyVipCity, that way you don't need to hit the RUN button every time you make a change.
 
 
 
