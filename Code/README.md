@@ -24,3 +24,11 @@ The purpose of this Class Library is to add code that can be shared across all p
 ### MyVipCity.CompositionRoot
 
 This is the project where the IoC container used in this project, [SimpleInjector](https://simpleinjector.org/index.html), is configured
+
+### MyVipCity.DataTransferObjects
+
+In this class library, we define the Data Transfer Objects (DTOs) used in the application. There is a DTO for each domain (see **MyVipCity.Domain**) class defined. i.e BusinessDto <-> Business. DTOs are used in the WebApi REST endpoints to receive/sent data from/to the client. DTOs are sent to the BusinessLogic layer for further processing.
+
+### MyVipCity.Domain
+
+
