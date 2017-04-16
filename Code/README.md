@@ -23,4 +23,4 @@ The purpose of this Class Library is to add code that can be shared across all p
 
 ### MyVipCity.CompositionRoot
 
-This is the project where the IoC container used in this project, **[SimpleInjector] (https://simpleinjector.org/index.html)** is configured
+This is the project where the IoC container used in this project, [SimpleInjector](https://simpleinjector.org/index.html), is configured
