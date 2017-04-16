@@ -45,4 +45,12 @@ We use Entity Framework as out Object-relational mapping (ORM) tool. Here we def
 
 ### MyVipCity.IpGeolocation
 
-In this project, we define some interfaces and classes that allow us to approximate where a given IP address is located in the map; that is, to find the latitude and longitude of a given IP address. For this, we use [IPInfoDB API](http://ipinfodb.com/ip_location_api.php)
+In this project, we define some interfaces and classes that allow us to approximate where a given IP address is located in the map; that is, to find the latitude and longitude of a given IP address. For this, we use [IPInfoDB API](http://ipinfodb.com/ip_location_api.php).
+
+### MyVipCity.Mailing.Contracts
+
+Here we define an interface for each transactional email that we need to send as well as the corresponding EmailModel.
+
+### MyVipCity.Mailing.Sendgrid
+
+In this class library we provide a concrete implementation for each interface defined in **MyVipCity.Mailing.Contracts**. Emails are sent using [SendGrid API](https://sendgrid.com/)
