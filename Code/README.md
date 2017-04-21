@@ -35,7 +35,7 @@ In this project, we define all domain classes. ie. Business, PromoterProfile, At
 
 ### MyVipCity.Domain.Automapper
 
-There is a need to convert DTOs object into domain objects before running business rules and before persisting these objects into the database. There is also a need to convert domain objects into DTOs before sending this objects back to the client. Here is where we use [Automapper](http://automapper.org/) to easily execute this conversions between objects. 
+There is a need to convert DTOs object into domain objects before running business rules and before persisting these objects into the database. There is also a need to convert domain objects into DTOs before sending these objects back to the client. Here is where we use [Automapper](http://automapper.org/) to easily execute the conversions between objects. 
 
 In this project we define the configuration for Automapper; that is, we define how one specific object maps into another.
 
