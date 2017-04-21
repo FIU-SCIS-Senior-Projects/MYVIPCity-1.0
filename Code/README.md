@@ -47,7 +47,7 @@ We use Entity Framework as out Object-relational mapping (ORM) tool. Here we def
 
 In this project, we define some interfaces and classes that allow us to approximate where a given IP address is located in the map; that is, to find the latitude and longitude of a given IP address. 
 
-The key interface here is **IpGeolocator**. At this moment, we use [IPInfoDB API](http://ipinfodb.com/ip_location_api.php) as a service to locate the user given the IP address, so we defined the class **IpInfoDbGeoLocator**. If you want to use another service to accomplish this task, you just need to create a new class that implements **IpGeolocator** and then in the CompositionRoot project change the configuration of the IoC container to user your new class.
+The key interface here is **IpGeolocator**. At this moment, we use [IPInfoDB API](http://ipinfodb.com/ip_location_api.php) as a service to locate the user given the IP address, so we defined the class **IpInfoDbGeoLocator**. If you want to use another service to accomplish this task, you just need to create a new class that implements **IpGeolocator** and then in the CompositionRoot project change the configuration of the IoC container to use your new class.
 
 ### MyVipCity.Mailing.Contracts
 
