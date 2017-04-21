@@ -57,7 +57,7 @@ Here we define an interface for each transactional email that we need to send as
 
 In this class library we provide a concrete implementation for each interface defined in **MyVipCity.Mailing.Contracts**. Emails are sent using [SendGrid API](https://sendgrid.com/), so we have the class **SendGridEmailService** that implements all those interfaces.
 
-If you need or want to use another service to sent the emails in the application, you just need to create a class that implements all the interfaces in **MyVipCity.Mailing.Contracts** and modify the configuration of the IoC container in the CompositionRoot project.
+If you need or want to use another service to send the emails in the application, you just need to create a class that implements all the interfaces in **MyVipCity.Mailing.Contracts** and modify the configuration of the IoC container in the CompositionRoot project.
 
 ## Secrets
 
