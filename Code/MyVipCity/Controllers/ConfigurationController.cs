@@ -22,6 +22,7 @@ namespace MyVipCity.Controllers {
 
 		[HttpGet]
 		[AllowAnonymous]
+		[OutputCache(NoStore = true, Duration = 0)]
 		public ActionResult JsConfig() {
 			var roles = GetRolesFromUser();
 			// set configuration
@@ -47,7 +48,7 @@ namespace MyVipCity.Controllers {
 
 			// set the JSON string
 			ViewBag.ConfigObject = Newtonsoft.Json.JsonConvert.SerializeObject(config); // System.Web.Helpers.Json.Encode(config);
-			// set response as javascript file
+																						// set response as javascript file
 			Response.ContentType = "application/javascript";
 			// return the view
 			return View();

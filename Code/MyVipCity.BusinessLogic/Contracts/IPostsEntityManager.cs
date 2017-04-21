@@ -16,7 +16,5 @@ namespace MyVipCity.BusinessLogic.Contracts {
 		PostDto[] GetPosts<T>(int entityId, int top) where T : class, IPostsEntity;
 
 		PostDto[] GetPosts<T>(int entityId, int top, int afterPostentityId) where T : class, IPostsEntity;
-
-
 	}
 }
