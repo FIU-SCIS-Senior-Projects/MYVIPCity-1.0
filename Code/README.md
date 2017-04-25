@@ -96,7 +96,7 @@ You can easily obtain your own key.
 
 [IP Info DB](http://ipinfodb.com/ip_location_api.php)
 
-## Getting the project up and running
+## Installation Guide - Getting the project up and running
 
 ### Secrets file
 
