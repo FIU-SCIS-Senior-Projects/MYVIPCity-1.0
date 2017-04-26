@@ -12,5 +12,6 @@
 
 If you are also interested in watching the videos for the User Stories as they were completed every sprint, here are the links:
 
-[Angel's channel](https://www.youtube.com/channel/UCVzYMqGCMQ9ylxZZ9wuKj4g)
+[Angel's channel](https://www.youtube.com/channel/UCVzYMqGCMQ9ylxZZ9wuKj4g) 
+/
 [Darshana's channel](https://www.youtube.com/channel/UCuQO6eRhCLt-3SrG9m4LRFQ/videos)
