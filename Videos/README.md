@@ -1,6 +1,6 @@
 # Videos
 
-[Intro Video]https://www.youtube.com/watch?v=QI91X6SBJQ4)
+[Intro Video](https://www.youtube.com/watch?v=QI91X6SBJQ4)
 
 [Admin Actor](https://www.youtube.com/watch?v=3bADhtJKFAc)
 
