@@ -98,11 +98,24 @@ You can easily obtain your own key.
 
 ## Installation Guide - Getting the project up and running
 
-### Secrets file
+Please watch this video [Installation Guide](https://www.youtube.com/watch?v=C_DalwFaXhc)
+
+### 1) Install Visual Studio (2015 or higher is preferred)
+
+### 2) Install Internet Information Services (IIS)
+- Open Control Panel
+- Click on Programs and features
+- Click Turn Windows features on or off
+- Select Internet Information Services and click OK button.
+
+### 3) Install SQL Server
+You can user SQL Server Express if you want [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express)
+
+### 4) Secrets file
 
 Make sure you have the secrets file as described above.
 
-### Deploying the Database
+### 5) Deploying the Database
 
 We used [Entity Framework Code First](http://www.entityframeworktutorial.net/code-first/what-is-code-first.aspx), so that means that we generate our database from our Domain Classes. There are no .sql files in this project.
 
@@ -114,6 +127,13 @@ We used [Entity Framework Code First](http://www.entityframeworktutorial.net/cod
 After that, the database will be created
 
 Click RUN from inside Visual Studio and that's it. We recommend installing IIS in your development machine and adding an application for MyVipCity, that way you don't need to hit the RUN button every time you make a change.
+
+### 6) Add a new website in IIS to host the project (4:10 in Installation Video)
+Make sure you add a binding for HTTPS as explained in the video
+
+### 7) Add login account and permission in SQL server to the corresponding user from IIS
+
+For example, if the application pool you created in IIS is named *MyVipCityAppPool* then the name of the user must be *IIS APPPOOL\MyVipCityAppPool*
 
 
 
