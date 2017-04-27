@@ -10,6 +10,8 @@
 
 [Installation & Maintenance](https://youtu.be/C_DalwFaXhc)
 
+[Shortcomings/Wishlist](https://www.youtube.com/watch?v=CvJsknCk4cI)
+
 
 
 If you are also interested in watching the videos for the User Stories as they were completed every sprint, here are the links:
